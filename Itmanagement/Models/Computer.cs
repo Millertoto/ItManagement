@@ -11,12 +11,12 @@ namespace ItManagement
         #region Instance Field
         #endregion
 
-        #region Constructor
-        public Computer() : base()
+       /* #region Constructor
+        public Computer(string type, int eid)
         {
 
         }
-        #endregion
+        #endregion*/
 
         #region Properties
         #endregion

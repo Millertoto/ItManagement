@@ -13,11 +13,11 @@ namespace ItManagement
 
         #region Constructor
 
-        public Smartphone() : base()
+        /*public Smartphone(string type, int eid)
         {
 
         }
-        #endregion
+        #endregion*/
 
         #region Properties
         #endregion

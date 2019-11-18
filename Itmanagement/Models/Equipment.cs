@@ -17,11 +17,14 @@ namespace ItManagement
         #endregion
         #region Constructor
 
-        public Equipment()
+        /*public Equipment(string type, int eid)
         {
+            _type = type;
+            _eid = eid;
+            _isWorking = true;
         }
 
-        #endregion
+        #endregion*/
 
         #region Properties
 

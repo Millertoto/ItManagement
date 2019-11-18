@@ -12,12 +12,12 @@ namespace ItManagement
         #region Instance Field
         #endregion
 
-        #region Constructor
-        public Tablet() : base()
+        /*#region Constructor
+        public Tablet(string type, int eid)
         {
 
         }
-        #endregion
+        #endregion*/
 
         #region Properties
         #endregion

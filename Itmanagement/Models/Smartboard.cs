@@ -15,12 +15,12 @@ namespace ItManagement
 
         #region Constructor
 
-        public Smartboard() : base()
+        /*public Smartboard(string type, int eid, int room_id)
         {
-
+            _roomID = room_id;
         }
 
-        #endregion
+        #endregion*/
 
         #region Properties
 
