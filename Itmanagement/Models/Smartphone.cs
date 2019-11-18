@@ -11,6 +11,14 @@ namespace ItManagement
         #region Instance Field
         #endregion
 
+        #region Constructor
+
+        public Smartphone() : base()
+        {
+
+        }
+        #endregion
+
         #region Properties
         #endregion
 

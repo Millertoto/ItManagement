@@ -11,6 +11,13 @@ namespace ItManagement
         #region Instance Field
         #endregion
 
+        #region Constructor
+        public Computer() : base()
+        {
+
+        }
+        #endregion
+
         #region Properties
         #endregion
 

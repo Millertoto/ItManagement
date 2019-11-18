@@ -17,23 +17,30 @@ namespace ItManagement
         #endregion
         #region Constructor
 
+        public Equipment()
+        {
+        }
+
         #endregion
 
         #region Properties
 
         public string Type
         {
-
+            get;
+            set;
         }
 
         public int EquipmentID
         {
-
+            get;
+            set;
         }
 
         public bool IsWorking
         {
-
+            get;
+            set;
         }
 
 
