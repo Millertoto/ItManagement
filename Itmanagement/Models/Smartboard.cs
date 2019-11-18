@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Smartboard : Equipemnt
+    class Smartboard : Equipment
     {
         #region Instance Field
         #endregion

@@ -6,15 +6,42 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Equipemnt
+    class Equipment
     {
         #region Instance Field
+
+        private string _type;
+        private int _eid;
+        private bool _isWorking;
+
+        #endregion
+        #region Constructor
+
         #endregion
 
         #region Properties
+
+        public string Type
+        {
+
+        }
+
+        public int EquipmentID
+        {
+
+        }
+
+        public bool IsWorking
+        {
+
+        }
+
+
+
         #endregion
 
         #region Methods
+
         #endregion
     }
 }

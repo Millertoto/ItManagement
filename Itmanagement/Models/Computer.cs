@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Computer : Equipemnt
+    class Computer : Equipment
     {
         #region Instance Field
         #endregion
