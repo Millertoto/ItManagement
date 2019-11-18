@@ -14,40 +14,24 @@ namespace ItManagement
         private DateTime _edited;
         private bool _isRepaired;
 
-
-        public int Fid
+        public Errors(int fid, string error, DateTime created, DateTime edited, bool isRepaired)
         {
-            get { return _fid;}
-            set { _fid = value; }
-
+            _fid = fid;
+            _error = error;
+            _created = created;
+            _edited = edited;
+            _isRepaired = isRepaired;
         }
 
-        public string Error
-        {
-            get { return _error;}
-            set { _error = value; }
+        public int Fid { get; set; }
 
-        }
-        public DateTime Created
-        {
-            get { return _created;}
-            set { _created = value; }
+        public string Error { get; set; }
 
-        }
-        public DateTime Edited
-        {
-            get { return _edited;}
-            set { _edited = value; }
+        public DateTime Created { get; set; }
 
-        }
-        public bool isRepaired
-        {
-            get { return _isRepaired;}
-            set { _isRepaired = value; }
+        public DateTime Edited { get; set; }
 
-        }
-
-        
+        public bool IsRepaired { get; set; }
 
     }
 }
