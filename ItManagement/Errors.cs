@@ -14,6 +14,7 @@ namespace ItManagement
         private DateTime _edited;
         private bool _isRepaired;
 
+
         public int Fid
         {
             get { return _fid;}
@@ -45,6 +46,8 @@ namespace ItManagement
             set { _isRepaired = value; }
 
         }
+
+        
 
     }
 }
