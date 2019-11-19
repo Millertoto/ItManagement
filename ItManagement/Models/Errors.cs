@@ -14,7 +14,6 @@ namespace ItManagement
         private DateTime _created;
         private DateTime _edited;
         private bool _isRepaired;
-        private List<Equipment> _equipments;
 
         public Errors(string error, DateTime created, DateTime edited, bool isRepaired)
         {
@@ -34,10 +33,8 @@ namespace ItManagement
         public DateTime Edited { get; set; }
 
         public bool IsRepaired { get; set; }
+        
 
-        public List<Equipment> EquipmentList { get; set; }
-
-        public Employee Employee { get; set; }
 
     }
 }
