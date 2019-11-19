@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ItManagement.Models;
 
 namespace ItManagement
 {
@@ -13,6 +14,7 @@ namespace ItManagement
         private DateTime _created;
         private DateTime _edited;
         private bool _isRepaired;
+        private List<Equipment> _equipments;
 
         public Errors(int fid, string error, DateTime created, DateTime edited, bool isRepaired)
         {
@@ -32,6 +34,10 @@ namespace ItManagement
         public DateTime Edited { get; set; }
 
         public bool IsRepaired { get; set; }
+
+        public List<Equipment> EquipmentList { get; set; }
+
+        public Employee Employee { get; set; }
 
     }
 }
