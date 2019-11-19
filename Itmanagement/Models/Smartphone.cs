@@ -4,12 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ItManagement
+namespace ItManagement.Models
+
 {
-    class Smartphone : Equipemnt
+    class Smartphone : Equipment
     {
         #region Instance Field
         #endregion
+
+        /*
+        #region Constructor
+
+        /*public Smartphone(string type, int eid)
+        {
+
+        }
+        #endregion*/
 
         #region Properties
         #endregion
