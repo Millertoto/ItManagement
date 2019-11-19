@@ -32,8 +32,7 @@ namespace ItManagement
         public string Name { get; set; }
 
         public bool IsAdmin { get; set; }
-
-        public List<Errors> ErrorList { get; set; }
+        
     }
 
     
