@@ -14,6 +14,7 @@ namespace ItManagement.Models
         private string _type;
         private int _uid;
         private bool _isWorking;
+        private List<Equipment> _errors;
 
         #endregion
 
@@ -39,7 +40,6 @@ namespace ItManagement.Models
         public int EquipmentID
         {
             get { return _uid;}
-            set { _uid = value; }
         }
 
         public bool IsWorking
@@ -48,6 +48,7 @@ namespace ItManagement.Models
             set { _isWorking = value; }
         }
 
+        public List<Errors> ErrorList { get; set; }
 
 
         #endregion

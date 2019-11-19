@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    public class IT_Support : Employee
+    class ItSupport : Employee
     {
         
 
-        public IT_Support(int cpr, string userName, string password, string name, bool isAdmin)
+        public ItSupport(int cpr, string userName, string password, string name, bool isAdmin)
             : base(cpr, userName, password, name, isAdmin)
         {
             
