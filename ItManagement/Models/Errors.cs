@@ -16,16 +16,16 @@ namespace ItManagement
         private bool _isRepaired;
         private List<Equipment> _equipments;
 
-        public Errors(int fid, string error, DateTime created, DateTime edited, bool isRepaired)
+        public Errors(string error, DateTime created, DateTime edited, bool isRepaired)
         {
-            _fid = fid;
+            
             _error = error;
             _created = created;
             _edited = edited;
             _isRepaired = false;
         }
 
-        public int Fid { get; set; }
+        public int Fid { get; }
 
         public string Error { get; set; }
 

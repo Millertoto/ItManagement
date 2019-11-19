@@ -40,7 +40,6 @@ namespace ItManagement.Models
         public int EquipmentID
         {
             get { return _uid;}
-            set { _uid = value; }
         }
 
         public bool IsWorking
