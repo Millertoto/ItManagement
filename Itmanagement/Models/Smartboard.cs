@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ItManagement
+namespace ItManagement.Models
+
 {
     class Smartboard : Equipment
     {
@@ -13,6 +14,7 @@ namespace ItManagement
         private int _roomID;
         #endregion
 
+        /*
         #region Constructor
 
         /*public Smartboard(string type, int eid, int room_id)

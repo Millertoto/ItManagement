@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ItManagement
+namespace ItManagement.Models
+
 {
     class Tablet : Equipment
 

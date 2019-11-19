@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ItManagement
+namespace ItManagement.Models
+
 {
     class Equipment
     {
         #region Instance Field
 
         private string _type;
-        private int _eid;
+        private int _uid;
         private bool _isWorking;
 
         #endregion
-        #region Constructor
 
-        /*public Equipment(string type, int eid)
+        /*#region Constructor
+
+        public Equipment(string type, int eid)
         {
             _type = type;
             _eid = eid;
@@ -30,20 +32,20 @@ namespace ItManagement
 
         public string Type
         {
-            get;
-            set;
+            get { return _type; }
+            set { _type = value; }
         }
 
         public int EquipmentID
         {
-            get;
-            set;
+            get { return _uid;}
+            set { _uid = value; }
         }
 
         public bool IsWorking
         {
-            get;
-            set;
+            get { return _isWorking;}
+            set { _isWorking = value; }
         }
 
 
