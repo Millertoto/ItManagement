@@ -20,7 +20,7 @@ namespace ItManagement
             _error = error;
             _created = created;
             _edited = edited;
-            _isRepaired = isRepaired;
+            _isRepaired = false;
         }
 
         public int Fid { get; set; }
