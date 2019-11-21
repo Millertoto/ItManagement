@@ -8,13 +8,14 @@ namespace ItManagement
 {
     class ItSupport : Employee
     {
-        
+
 
         public ItSupport(int cpr, string userName, string password, string name, bool isAdmin)
             : base(cpr, userName, password, name, isAdmin)
         {
-            
+
         }
+
 
         public int ITCPR { get; set; }
 
