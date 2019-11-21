@@ -132,7 +132,6 @@
     <Compile Include="Models\Smartphone.cs" />
     <Compile Include="Models\Tablet.cs" />
     <Compile Include="Models\Equipment.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
