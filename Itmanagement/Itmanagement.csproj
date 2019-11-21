@@ -119,6 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ErrorPageAdmin.xaml.cs">
+      <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ErrorPageTeacher.xaml.cs">
+      <DependentUpon>ErrorPageTeacher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IT-Support.cs" />
     <Compile Include="Models\Errors.cs" />
@@ -154,6 +160,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\ErrorPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ErrorPageTeacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
