@@ -9,13 +9,13 @@ using System.Runtime.CompilerServices;
 
 namespace ItManagement.ViewModel
 {
-    class TeacherViewModel : INotifyPropertyChanged
+    public class TeacherViewModel : INotifyPropertyChanged
     {
         private Teacher _domainObjectTe;
 
         public TeacherViewModel()
         {
-            _domainObjectTe = new Teacher();
+            _domainObjectTe = new Teacher(88465348, "", "", "", false);
         }
 
         public int TeCPR

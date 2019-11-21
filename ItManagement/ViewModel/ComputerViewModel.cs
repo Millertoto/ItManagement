@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    class ComputerViewModel : INotifyPropertyChanged
+    public class ComputerViewModel : INotifyPropertyChanged
     {
         private Computer _domainObjectC;
 
         public ComputerViewModel()
         {
-            _domainObjectC = new Computer();
+            _domainObjectC = new Computer("",6841);
         }
 
         public string Type

@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace ItManagement.ViewModel
 {
-    class TabletViewModel : INotifyPropertyChanged
+    public class TabletViewModel : INotifyPropertyChanged
     {
         private Tablet  _domainObjectT;
 

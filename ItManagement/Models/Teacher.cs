@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Teacher : Employee
+    public class Teacher : Employee
     {
         public Teacher(int cpr, string userName, string password, string name, bool isAdmin)
             : base(cpr, userName, password, name, isAdmin)

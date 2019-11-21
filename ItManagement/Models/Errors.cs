@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,21 +7,27 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Errors
+    public class Errors
     {
         private int _fid;
         private string _error;
         private DateTime _created;
         private DateTime _edited;
         private bool _isRepaired;
+        private int _equipmentID;
+        private int _employeeID;
 
-        public Errors(int fid, string error, DateTime created, DateTime edited, bool isRepaired)
+        public Errors(int fid, string error, Equipment equipment, Employee employee)
         {
             _fid = fid;
             _error = error;
-            _created = created;
-            _edited = edited;
+            _created = DateTime.Now;
+            _edited = DateTime.Now;
             _isRepaired = false;
+            _equipmentID = equipment.EquipmentID;
+            _employeeID = employee.CPR;
+            
+
         }
 
         public int Fid { get; set; }

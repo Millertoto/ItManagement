@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    class ITSupportViewModel : INotifyPropertyChanged
+    public class ITSupportViewModel : INotifyPropertyChanged
     {
-        private Teacher _domainObjectITS;
+        private IT_Support _domainObjectITS;
 
         public ITSupportViewModel()
         {
-            _domainObjectITS = new IT_Support();
+            _domainObjectITS = new IT_Support(22, "", "", "", true);
         }
 
         public int ITSCPR

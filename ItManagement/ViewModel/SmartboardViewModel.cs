@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    class SmartboardViewModel : INotifyPropertyChanged
+    public class SmartboardViewModel : INotifyPropertyChanged
     {
 
         private Smartboard _domainObejctSB;

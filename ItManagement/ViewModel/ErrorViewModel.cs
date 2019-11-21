@@ -6,54 +6,67 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace ItManagement.ViewModel
 {
-    class ErrorViewModel : INotifyPropertyChanged
+    public class ErrorViewModel : INotifyPropertyChanged
     {
-        private Errors _domainObjectErr;
+        private ErrorsCatalogSingleton singleton;
+        private ObservableCollection<Errors> _errors;
+        private Errors _selected;
 
         public ErrorViewModel()
         {
-            _domainObjectErr = new Errors();
+            _selected = new Errors();
 
         }
 
+        private int _id;
         public int FID
         {
-            get { return _domainObjectErr.Fid; }
+            get { return _id; }
 
             set
-            { _domainObjectErr.Fid = value;
+            { _id = value;
                 OnPropertyChanged();
             }
         }
 
+        private string _error;
         public string Error
         {
-            get { return _domainObjectErr.Error; }
+            get { return _error; }
 
             set
             {
-                _domainObjectErr.Error = value;
+                _error = value;
                 OnPropertyChanged();
             }
         }
 
-        public DateTime Created
+        public Errors Selected
         {
-            get { return _domainObjectErr.Created; }
-
+            get { return _selected; }
             set
             {
-                _domainObjectErr.Created = value;
+                _selected = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool IsRepaired
+        public int ErrorsCount
         {
-            get { return _domainObjectErr.IsRepaired; }
+            get { return singleton.Count; }
+        }
+
+        public ObservableCollection<Errors> All_Errors
+        {
+            get
+            {
+                _errors = new ObservableCollection<Errors>(singleton);
+                return _errors;
+            }
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged

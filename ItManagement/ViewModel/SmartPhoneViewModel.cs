@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    class SmartPhoneViewModel : INotifyPropertyChanged
+    public class SmartPhoneViewModel : INotifyPropertyChanged
     {
         private Smartphone _domainObjectSP;
 
