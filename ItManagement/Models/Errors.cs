@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ItManagement.Models;
 
 namespace ItManagement
 {
@@ -17,9 +18,11 @@ namespace ItManagement
         private int _equipmentID;
         private int _employeeID;
 
+
         public Errors(int fid, string error, Equipment equipment, Employee employee)
+
         {
-            _fid = fid;
+            
             _error = error;
             _created = DateTime.Now;
             _edited = DateTime.Now;
@@ -30,7 +33,7 @@ namespace ItManagement
 
         }
 
-        public int Fid { get; set; }
+        public int Fid { get; }
 
         public string Error { get; set; }
 
@@ -39,6 +42,8 @@ namespace ItManagement
         public DateTime Edited { get; set; }
 
         public bool IsRepaired { get; set; }
+        
+
 
     }
 }

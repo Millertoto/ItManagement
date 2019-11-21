@@ -1,0 +1,3 @@
+﻿CREATE TABLE dbo.SmartPhone (
+[Uid] INT PRIMARY KEY FOREIGN KEY REFERENCES Equipment(Uid) NOT NULL,
+[IsBorrowed] BIT NOT NULL, );

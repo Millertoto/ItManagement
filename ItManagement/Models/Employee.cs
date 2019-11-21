@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    public class Employee
+    class Employee
     {
         private int _cpr;
         private string _userName;
@@ -32,6 +32,7 @@ namespace ItManagement
         public string Name { get; set; }
 
         public bool IsAdmin { get; set; }
+        
     }
 
     

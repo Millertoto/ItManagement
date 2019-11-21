@@ -39,7 +39,6 @@ namespace ItManagement.Models
         public int EquipmentID
         {
             get { return _uid;}
-            set { _uid = value; }
         }
 
         public bool IsWorking
@@ -47,7 +46,7 @@ namespace ItManagement.Models
             get { return _isWorking;}
             set { _isWorking = value; }
         }
-
+        
 
 
         #endregion
