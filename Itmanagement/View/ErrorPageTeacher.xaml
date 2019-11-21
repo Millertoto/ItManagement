@@ -19,30 +19,43 @@
                 <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0" Click="HamburgerButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </RelativePanel>
-            <SplitView Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="650" Opacity="0.7" Margin="0,0,10,29" Grid.RowSpan="2" Height="207" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch">
+            <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
                 <SplitView.Pane>
-                    <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0.4,-632.8" VerticalAlignment="Stretch">
-                        <Button Click="Rum1_OnClick" Background="CornflowerBlue" FontSize="55" Margin="20,20,20,3" HorizontalAlignment="Stretch" VerticalAlignment="Center"   >Udstyr</Button>
+                    <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
+                        <Button Click="Rum1_OnClick" Background="CornflowerBlue" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
 
                     </StackPanel>
-
                 </SplitView.Pane>
-            </SplitView>
-            <StackPanel Margin="132,50,825,200">
-                <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
-                    <TextBlock Text="Udstyrs ID:" FontSize="53" Margin="0,0,9.2,0" HorizontalAlignment="Right" Width="354"/>
-                    <TextBox Margin="0,0,0,0" Height="71" FontSize="44" Text=""  />
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="50,0,130,10" >
-                    <TextBlock Text="Hardware Type:" FontSize="53" Margin="0,0,-27.8,0"  HorizontalAlignment="Right" Width="391"/>
-                    <TextBox Margin="0,0,0,0" Height="71"  />
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="50,0,130,10">
-                    <TextBlock Text="Dato:" FontSize="53" Margin="0,0,32.2,0" />
-                    <CalendarDatePicker FontSize="54" Height="71" Margin="0,0,0,0"  Width="363" />
-                </StackPanel>
-            </StackPanel>
+                <SplitView.Content>
+                    <StackPanel Margin="32,50,0,300" >
+                        <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
+                            <TextBlock Text="Udstyrs ID:" FontSize="53" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
+                            <TextBox Margin="0,0,0,0" Height="71" FontSize="44"   />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="50,0,130,10" >
+                            <TextBlock Text="Hardware Type:" FontSize="53" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
+                            <TextBox Margin="0,0,0,0" Height="71" FontSize="44"/>
+                        </StackPanel>
+                        <!--<StackPanel Orientation="Vertical" Margin="50,0,130,10">
+                            <TextBlock Text="Dato:" FontSize="53" Margin="0,0,32.2,0" />
+                            <CalendarDatePicker FontSize="44" Height="71" Margin="0,0,0,0"  Width="448" HorizontalAlignment="Center"  />
+                        </StackPanel>-->
+                    </StackPanel>
 
+                </SplitView.Content>
+            </SplitView>
+            <StackPanel Margin="640,-795,150,220">
+                <StackPanel Orientation="Vertical" Margin="0,0,170.4,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
+                    <TextBlock Text="Beskrivelse af fejl" FontSize="53" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
+                    <TextBox Margin="0,5,9.4,99" Height="230" FontSize="20" HorizontalAlignment="Stretch" />
+
+                </StackPanel>
+                <StackPanel Margin="50,0,180,33" Orientation="Horizontal" Height="60" VerticalAlignment="Stretch">
+                    <Button Content="Opret" Margin="0,0,5,10" HorizontalAlignment="Left" Height="52" FontSize="30" Width="152" Background="CornflowerBlue"></Button>
+
+                </StackPanel>
+
+            </StackPanel>
         </StackPanel>
 
     </Grid>
