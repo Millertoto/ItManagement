@@ -28,12 +28,12 @@
                 </SplitView.Pane>
                 <SplitView.Content>
                     <StackPanel Margin="32,50,0,300" >
-                        <StackPanel Orientation="Vertical" Margin="50,0,130.2,30"  >
-                            <TextBlock Text="Udstyrs ID:" FontSize="43" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
+                        <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
+                            <TextBlock Text="Udstyrs ID:" FontSize="53" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
                             <TextBox Margin="0,0,0,0" Height="71" FontSize="44"   />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="50,0,130,10" >
-                            <TextBlock Text="Hardware Type:" FontSize="43" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
+                            <TextBlock Text="Hardware Type:" FontSize="53" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
                             <TextBox Margin="0,0,0,0" Height="71" FontSize="44"/>
                         </StackPanel>
                         <!--<StackPanel Orientation="Vertical" Margin="50,0,130,10">
@@ -46,7 +46,7 @@
             </SplitView>
             <StackPanel Margin="640,-795,150,220">
                 <StackPanel Orientation="Vertical" Margin="0,0,170.4,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
-                    <TextBlock Text="Beskrivelse af fejl" FontSize="43" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
+                    <TextBlock Text="Beskrivelse af fejl" FontSize="53" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
                     <TextBox Margin="0,5,9.4,99" Height="230" FontSize="20" HorizontalAlignment="Stretch" />
 
                 </StackPanel>
