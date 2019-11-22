@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\ErrorsCatalogSingleton.cs" />
     <Compile Include="Models\IT-Support.cs" />
     <Compile Include="Models\Errors.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -132,6 +133,13 @@
     <Compile Include="Models\Smartphone.cs" />
     <Compile Include="Models\Tablet.cs" />
     <Compile Include="Models\Equipment.cs" />
+    <Compile Include="ViewModel\ComputerViewModel.cs" />
+    <Compile Include="ViewModel\ErrorViewModel.cs" />
+    <Compile Include="ViewModel\ITSupportViewModel.cs" />
+    <Compile Include="ViewModel\SmartboardViewModel.cs" />
+    <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
+    <Compile Include="ViewModel\TabletViewModel.cs" />
+    <Compile Include="ViewModel\TeacherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

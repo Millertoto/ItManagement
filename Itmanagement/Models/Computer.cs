@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Models
 {
-    class Computer : Equipment
+    public class Computer : Equipment
     {
         #region Instance Field
         #endregion
 
-       /* #region Constructor
+        #region Constructor
         public Computer(string type, int eid)
         {
 
         }
-        #endregion*/
+        #endregion
 
         #region Properties
         #endregion

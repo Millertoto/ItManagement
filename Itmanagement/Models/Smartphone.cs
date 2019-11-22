@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ItManagement.Models
 
 {
-    class Smartphone : Equipment
+    public class Smartphone : Equipment
     {
         #region Instance Field
         #endregion

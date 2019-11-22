@@ -12,7 +12,7 @@ namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
-        private ErrorsCatalogSingleton singleton;
+        private ErrorCatalogSingleton singleton;
         private ObservableCollection<Errors> _errors;
         private Errors _selected;
 
