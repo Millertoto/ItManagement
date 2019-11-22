@@ -188,6 +188,9 @@
     <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
     <Compile Include="ViewModel\TabletViewModel.cs" />
     <Compile Include="ViewModel\TeacherViewModel.cs" />
+    <Compile Include="View\ErrorPageAdmin.xaml.cs">
+      <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorPageTeacher.xaml.cs">
       <DependentUpon>ErrorPageTeacher.xaml</DependentUpon>
     </Compile>
@@ -467,6 +470,10 @@
     <Page Include="obj\x86\Debug\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ErrorPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ErrorPageTeacher.xaml">
       <Generator>MSBuild:Compile</Generator>
