@@ -1,5 +1,4 @@
 ﻿using System;
-using ItManagement.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
@@ -9,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    public class ITSupportViewModel : INotifyPropertyChanged
+    /*public class ITSupportViewModel : INotifyPropertyChanged
     {
-        private IT_Support _domainObjectITS;
+        private Employee _domainObjectITS;
 
         public ITSupportViewModel()
         {
-            _domainObjectITS = new IT_Support(22, "", "", "", true);
+            _domainObjectITS = new Employee(22, "", "", "", true);
         }
 
         public int ITSCPR
@@ -71,5 +70,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }
