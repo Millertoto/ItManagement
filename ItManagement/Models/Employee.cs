@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement
 {
-    class Employee
+    public class Employee
     {
         private int _cpr;
         private string _userName;

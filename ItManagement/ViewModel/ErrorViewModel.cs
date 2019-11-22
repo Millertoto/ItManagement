@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using ItManagement.Commands;
 
 namespace ItManagement.ViewModel
 {
@@ -19,7 +20,11 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _selected = new Errors();
-
+            singleton = ErrorCatalogSingleton.Instance;
+            _errors = new ObservableCollection<Errors>();
+            AddCommand = new RelayCommand(toAddNewError);
+            DeleteCommand = new RelayCommand(toDelete);
+            UpdateCommand = new RelayCommand(toUpdate);
         }
 
         private int _id;
@@ -67,6 +72,44 @@ namespace ItManagement.ViewModel
                 _errors = new ObservableCollection<Errors>(singleton);
                 return _errors;
             }
+        }
+
+        public RelayCommand AddCommand
+        {
+            get; set;
+        }
+
+        public RelayCommand DeleteCommand
+        {
+            get; set;
+        }
+
+        public RelayCommand UpdateCommand
+        {
+            get; set;
+        }
+
+        public void toDelete()
+        {
+            singleton.DeleteError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toUpdate()
+        {
+            singleton.UpdateError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toAddNewError()
+        {
+            Errors NewStudent = new Errors(FID, "error", , );
+            singleton.AddError(NewStudent);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
