@@ -1,4 +1,4 @@
-﻿using ItManagement.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    public class ComputerViewModel : INotifyPropertyChanged
+    /*public class ComputerViewModel : INotifyPropertyChanged
     {
         private Computer _domainObjectC;
 
@@ -55,7 +55,7 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }
         
 

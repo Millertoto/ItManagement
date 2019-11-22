@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
-    public partial class Tablet
+    public partial class Accesory
     {
-        public int Uid { get; set; }
+        public int Tid { get; set; }
         public bool IsBorrowed { get; set; }
-
-        public virtual Equipment U { get; set; }
+        public string Type { get; set; }
     }
 }

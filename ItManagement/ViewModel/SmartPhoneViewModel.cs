@@ -1,5 +1,5 @@
 ﻿using System;
-using ItManagement.Models;
+using ItManagement;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    public class SmartPhoneViewModel : INotifyPropertyChanged
+    /*public class SmartPhoneViewModel : INotifyPropertyChanged
     {
         private Smartphone _domainObjectSP;
 
@@ -52,5 +52,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }

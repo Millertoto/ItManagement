@@ -1,4 +1,4 @@
-﻿using ItManagement.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.ViewModel
 {
-    public class SmartboardViewModel : INotifyPropertyChanged
+    /*public class SmartboardViewModel : INotifyPropertyChanged
     {
 
         private Smartboard _domainObejctSB;
@@ -65,5 +65,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }
