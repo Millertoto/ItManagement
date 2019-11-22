@@ -11,11 +11,11 @@ namespace ItManagement.ViewModel
 {
     public class ITSupportViewModel : INotifyPropertyChanged
     {
-        private IT_Support _domainObjectITS;
+        private ItSupport _domainObjectITS;
 
         public ITSupportViewModel()
         {
-            _domainObjectITS = new IT_Support(22, "", "", "", true);
+            _domainObjectITS = new ItSupport(22, "", "", "", true);
         }
 
         public int ITSCPR

@@ -19,7 +19,7 @@ namespace ItManagement
         private int _employeeID;
 
 
-        public Errors(int fid, string error, Equipment equipment, Employee employee)
+        public Errors(string error, Equipment equipment, Employee employee)
 
         {
             
