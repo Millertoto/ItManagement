@@ -17,7 +17,10 @@ namespace ItManagement.ViewModel
 
         public ErrorViewModel()
         {
-            _selected = new Errors();
+            var e1 = new Employee(68486, "", "", "", false);
+            var eq1 = new Computer("", 897);
+            _selected = new Errors("",eq1,e1);
+            singleton = ErrorsCatalogSingleton.Instance;
 
         }
 
@@ -63,7 +66,7 @@ namespace ItManagement.ViewModel
         {
             get
             {
-                _errors = new ObservableCollection<Errors>(singleton);
+                _errors = new ObservableCollection<Errors>(singleton.ErrorsList);
                 return _errors;
             }
         }
