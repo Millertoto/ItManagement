@@ -1,5 +1,4 @@
 ﻿using System;
-using ItManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace ItManagement.ViewModel
 {
-    public class ErrorViewModel : INotifyPropertyChanged
+    /*public class ErrorViewModel : INotifyPropertyChanged
     {
         private ErrorsCatalogSingleton singleton;
         private ObservableCollection<Errors> _errors;
@@ -78,5 +77,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }
