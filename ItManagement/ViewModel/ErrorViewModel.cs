@@ -1,52 +1,58 @@
 ﻿using System;
 using ItManagement.Models;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
 using ItManagement.Commands;
-
 
 namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
+        private ErrorCatalogSingleton singleton;
+        private ObservableCollection<Errors> _errors;
+        private Errors _selected;
 
-
-        #region Instance Field
-        /*private ErrorsCatalogSingleton singleton;
-        private ObservableCollection<Errors> _errors;*/
-        private Error _selected;
-        private List<Error> _listOfErrors;
-        private int _uID;
-        private string _errorText;
-        private Employee _creatorOfError;
-        private RelayCommand _addErrorButton;
-        private RelayCommand _getErrors;
-
-        
-        /*private SkoledbContext _dbcontext;*/
-        
-
-        #endregion
-
-
-        #region Constructor
-        public ErrorViewModel(Employee SessionUser)
+        public ErrorViewModel()
         {
-            _creatorOfError = SessionUser;
-
+            _selected = new Errors();
+            singleton = ErrorCatalogSingleton.Instance;
+            _errors = new ObservableCollection<Errors>();
+            AddCommand = new RelayCommand(toAddNewError);
+            DeleteCommand = new RelayCommand(toDelete);
+            UpdateCommand = new RelayCommand(toUpdate);
         }
-        #endregion
 
-        #region Properties
+        private int _id;
+        public int FID
+        {
+            get { return _id; }
 
+            set
+            { _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public Error SelectedError
+        private string _error;
+        public string Error
+        {
+            get { return _error; }
+
+            set
+            {
+                _error = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Errors Selected
         {
             get { return _selected; }
-
             set
             {
                 _selected = value;
@@ -54,133 +60,57 @@ namespace ItManagement.ViewModel
             }
         }
 
-        public int UidForCreation
-        {
-            get { return _uID; }
-            set
-            {
-                _uID = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Employee CreatorOfError
-        {
-            get { return _creatorOfError ;}
-            set
-            {
-                _creatorOfError = value ;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ErrorDescription
-        {
-            get
-            {
-               return _errorText;
-            }
-            set
-            {
-                _errorText = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public List<Error> ListofErrors
-        {
-            get { return _listOfErrors; }
-            set { _listOfErrors = value; }
-
-
-
-
-        }
-
-
-
-        /*public int ErrorsCount
+        public int ErrorsCount
         {
             get { return singleton.Count; }
-        }*/
+        }
 
-        /*public ObservableCollection<Error> All_Errors
+        public ObservableCollection<Errors> All_Errors
         {
             get
             {
-                _errors = new ObservableCollection<Error>(singleton.ErrorsList);
-                return _error;
-            }
-        }*/
-
-        #endregion
-
-        #region RelayCommands
-
-        public ICommand AddErrorButton
-        {
-            get
-            {
-                if (_addErrorButton == null)
-                {
-                    _addErrorButton = new RelayCommand(AddError);
-                }
-
-                return _addErrorButton;
-            }
-            
-                
-        }
-
-        public ICommand GetErrorButton
-        {
-            get
-            {
-                if (_getErrors == null)
-                {
-                    _getErrors = new RelayCommand(GetErrors);
-                }
-
-                return _getErrors;
-            }
-
-
-        }
-        #endregion
-
-        #region Methods
-
-        public void AddError()
-        {
-            Error e1 = new Error
-            {
-                Uid = _uID, Cpr = CreatorOfError.Cpr, ErrorMessage = _errorText, Create = DateTime.Now,
-                Update = DateTime.Now, IsRepaired = false
-            };
-
-            using (var db = new SkoledbContext())
-            {
-                db.Add(e1);
-                db.SaveChanges();
+                _errors = new ObservableCollection<Errors>(singleton);
+                return _errors;
             }
         }
 
-        public void GetErrors()
+        public RelayCommand AddCommand
         {
-            _listOfErrors.Clear();
-
-            using (var db = new SkoledbContext())
-            {
-                foreach (Error e in db.Errors)
-                {
-                    _listOfErrors.Add(e);
-                }
-            }
+            get; set;
         }
-        #endregion
 
-        #region PropertyChanged
+        public RelayCommand DeleteCommand
+        {
+            get; set;
+        }
 
+        public RelayCommand UpdateCommand
+        {
+            get; set;
+        }
+
+        public void toDelete()
+        {
+            singleton.DeleteError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toUpdate()
+        {
+            singleton.UpdateError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toAddNewError()
+        {
+            Errors NewStudent = new Errors(FID, "error", , );
+            singleton.AddError(NewStudent);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
             ([CallerMemberName] string propertyName = null)
@@ -188,8 +118,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-
-        #endregion
-
     }
 }
