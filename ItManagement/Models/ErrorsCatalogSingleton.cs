@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Models
 {
-     public class ErrorsCatalogSingleton
+     public class ErrorCatalogSingleton 
     {
         private const string url = "api/Errors/";
         private List<Errors> _errors;
-        private ErrorsCatalogSingleton()
+        private ErrorCatalogSingleton()
         {
             _errors = new List<Errors>();
             var e1 = new Employee(68486, "", "", "", false);
@@ -21,14 +21,14 @@ namespace ItManagement.Models
             _errors.Add(new Errors("Lars", eq2, e1));
         }
 
-        private static ErrorsCatalogSingleton _instance;
-        public static ErrorsCatalogSingleton Instance
+        private static ErrorCatalogSingleton _instance;
+        public static ErrorCatalogSingleton Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ErrorsCatalogSingleton();
+                    _instance = new ErrorCatalogSingleton();
                 }
                 return _instance;
             }
