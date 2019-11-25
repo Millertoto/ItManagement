@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -116,23 +116,71 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Computer.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Equipment.cs" />
-    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\IT-Support.cs" />
+    <Compile Include="Models\Errors.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="obj\ARM64\Debug\App.g.cs" />
+    <Compile Include="obj\ARM64\Debug\App.g.i.cs" />
+    <Compile Include="obj\ARM64\Debug\MainPage.g.cs" />
+    <Compile Include="obj\ARM64\Debug\MainPage.g.i.cs" />
+    <Compile Include="obj\ARM64\Debug\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\ARM64\Release\App.g.cs" />
+    <Compile Include="obj\ARM64\Release\App.g.i.cs" />
+    <Compile Include="obj\ARM64\Release\MainPage.g.cs" />
+    <Compile Include="obj\ARM64\Release\MainPage.g.i.cs" />
+    <Compile Include="obj\ARM64\Release\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\ARM\Debug\App.g.cs" />
+    <Compile Include="obj\ARM\Debug\App.g.i.cs" />
+    <Compile Include="obj\ARM\Debug\MainPage.g.cs" />
+    <Compile Include="obj\ARM\Debug\MainPage.g.i.cs" />
+    <Compile Include="obj\ARM\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\ARM\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\ARM\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\ARM\Debug\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\ARM\Release\App.g.cs" />
+    <Compile Include="obj\ARM\Release\App.g.i.cs" />
+    <Compile Include="obj\ARM\Release\MainPage.g.cs" />
+    <Compile Include="obj\ARM\Release\MainPage.g.i.cs" />
+    <Compile Include="obj\ARM\Release\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\x64\Debug\App.g.cs" />
+    <Compile Include="obj\x64\Debug\App.g.i.cs" />
+    <Compile Include="obj\x64\Debug\MainPage.g.cs" />
+    <Compile Include="obj\x64\Debug\MainPage.g.i.cs" />
+    <Compile Include="obj\x64\Debug\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\x64\Release\App.g.cs" />
+    <Compile Include="obj\x64\Release\App.g.i.cs" />
+    <Compile Include="obj\x64\Release\MainPage.g.cs" />
+    <Compile Include="obj\x64\Release\MainPage.g.i.cs" />
+    <Compile Include="obj\x64\Release\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\x86\Debug\App.g.cs" />
+    <Compile Include="obj\x86\Debug\App.g.i.cs" />
+    <Compile Include="obj\x86\Debug\MainPage.g.cs" />
+    <Compile Include="obj\x86\Debug\MainPage.g.i.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\x86\Debug\View\ErrorPageTeacher.g.cs" />
+    <Compile Include="obj\x86\Debug\View\ErrorPageTeacher.g.i.cs" />
+    <Compile Include="obj\x86\Debug\XamlTypeInfo.g.cs" />
+    <Compile Include="obj\x86\Release\App.g.cs" />
+    <Compile Include="obj\x86\Release\App.g.i.cs" />
+    <Compile Include="obj\x86\Release\MainPage.g.cs" />
+    <Compile Include="obj\x86\Release\MainPage.g.i.cs" />
+    <Compile Include="obj\x86\Release\XamlTypeInfo.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Data\SkoledbContext.cs" />
-    <Compile Include="Models\SmartBoard.cs" />
-    <Compile Include="Models\SmartPhone.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\Smartboard.cs" />
+    <Compile Include="Models\Computer.cs" />
+    <Compile Include="Models\Smartphone.cs" />
     <Compile Include="Models\Tablet.cs" />
+    <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="ViewModel\ComputerViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\ITSupportViewModel.cs" />
@@ -140,6 +188,9 @@
     <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
     <Compile Include="ViewModel\TabletViewModel.cs" />
     <Compile Include="ViewModel\TeacherViewModel.cs" />
+    <Compile Include="View\ErrorPageAdmin.xaml.cs">
+      <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorPageTeacher.xaml.cs">
       <DependentUpon>ErrorPageTeacher.xaml</DependentUpon>
     </Compile>
@@ -148,10 +199,252 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="efpt.config.json" />
+    <None Include="bin\x86\Debug\App.xbf" />
+    <None Include="bin\x86\Debug\ItManagement.build.appxrecipe" />
+    <None Include="bin\x86\Debug\MainPage.xbf" />
+    <None Include="bin\x86\Debug\Microsoft.UI.Xaml.Markup.winmd" />
+    <None Include="bin\x86\Debug\resources.pri" />
     <None Include="ItManagement_TemporaryKey.pfx" />
+    <None Include="obj\ARM64\Debug\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\ARM64\Release\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\ARM\Debug\App.g.cs.backup" />
+    <None Include="obj\ARM\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\ARM\Debug\ItManagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\ARM\Release\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\ItManagement.csproj.nuget.cache" />
+    <None Include="obj\ItManagement.csproj.nuget.g.props" />
+    <None Include="obj\ItManagement.csproj.nuget.g.targets" />
+    <None Include="obj\project.assets.json" />
+    <None Include="obj\x64\Debug\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x64\Release\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x86\Debug\.winmd_cache\%24Microsoft.UI.Xaml.Markup.winmd_636758516200000000.json" />
+    <None Include="obj\x86\Debug\App.g.cs.backup" />
+    <None Include="obj\x86\Debug\App.xbf" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\embed\embed.resfiles" />
+    <None Include="obj\x86\Debug\embed\embed.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\excluded.layout.resfiles" />
+    <None Include="obj\x86\Debug\excluded.layout.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\filtered.layout.resfiles" />
+    <None Include="obj\x86\Debug\filtered.layout.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\ItManagement.csproj.CopyComplete" />
+    <None Include="obj\x86\Debug\ItManagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x86\Debug\Itmanagement.csprojAssemblyReference.cache" />
+    <None Include="obj\x86\Debug\MainPage.g.cs.backup" />
+    <None Include="obj\x86\Debug\MainPage.xbf" />
+    <None Include="obj\x86\Debug\pri.resfiles" />
+    <None Include="obj\x86\Debug\pri.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\priconfig.xml.intermediate" />
+    <None Include="obj\x86\Debug\qualifiers.txt.intermediate" />
+    <None Include="obj\x86\Debug\ResourceHandlingTask.state" />
+    <None Include="obj\x86\Debug\resources.resfiles" />
+    <None Include="obj\x86\Debug\resources.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\unfiltered.layout.resfiles" />
+    <None Include="obj\x86\Debug\unfiltered.layout.resfiles.intermediate" />
+    <None Include="obj\x86\Debug\XamlTypeInfo.g.cs.backup" />
+    <None Include="obj\x86\Release\Itmanagement.csproj.CoreCompileInputs.cache" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Xml.XmlSerializer.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Xml.XmlDocument.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Xml.XDocument.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Xml.ReaderWriter.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Threading.Tasks.Parallel.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Threading.Tasks.Dataflow.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Threading.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Threading.Overlapped.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Text.RegularExpressions.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Text.Encoding.CodePages.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Cryptography.X509Certificates.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Cryptography.Primitives.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Cryptography.Encoding.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Cryptography.Cng.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Cryptography.Algorithms.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Security.Claims.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.WindowsRuntime.UI.Xaml.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.WindowsRuntime.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.Serialization.Primitives.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.Numerics.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.InteropServices.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Runtime.Extensions.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Reflection.Metadata.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Reflection.DispatchProxy.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Private.Uri.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Private.ServiceModel.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Private.DataContractSerialization.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.ObjectModel.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Numerics.Vectors.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.WebSockets.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.WebSockets.Client.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.WebHeaderCollection.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.Sockets.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.Requests.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.Primitives.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.NetworkInformation.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.NameResolution.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Net.Http.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Linq.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Linq.Queryable.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Linq.Parallel.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Linq.Expressions.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.UnmanagedMemoryStream.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.IsolatedStorage.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.FileSystem.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.Compression.ZipFile.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.IO.Compression.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Globalization.Extensions.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Dynamic.Runtime.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Diagnostics.Debug.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Data.Common.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.ComponentModel.EventBasedAsync.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.ComponentModel.Annotations.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Collections.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Collections.Specialized.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Collections.NonGeneric.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Collections.Immutable.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Collections.Concurrent.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.System.Buffers.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.Microsoft.VisualBasic.SR.resw" />
+    <PRIResource Include="obj\x86\Debug\FxResources.Microsoft.CSharp.SR.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\x86\Debug\AppxManifest.xml" />
+    <Content Include="bin\x86\Debug\clrcompression.dll" />
+    <Content Include="bin\x86\Debug\clrjit.dll" />
+    <Content Include="bin\x86\Debug\Core\AppxManifest.xml" />
+    <Content Include="bin\x86\Debug\Core\ItManagement.exe" />
+    <Content Include="bin\x86\Debug\ItManagement.exe" />
+    <Content Include="bin\x86\Debug\ItManagement.pdb" />
+    <Content Include="bin\x86\Debug\ItManagement.xr.xml" />
+    <Content Include="bin\x86\Debug\Microsoft.CSharp.dll" />
+    <Content Include="bin\x86\Debug\Microsoft.VisualBasic.dll" />
+    <Content Include="bin\x86\Debug\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.AppContext.dll" />
+    <Content Include="bin\x86\Debug\System.Buffers.dll" />
+    <Content Include="bin\x86\Debug\System.Collections.Concurrent.dll" />
+    <Content Include="bin\x86\Debug\System.Collections.dll" />
+    <Content Include="bin\x86\Debug\System.Collections.Immutable.dll" />
+    <Content Include="bin\x86\Debug\System.Collections.NonGeneric.dll" />
+    <Content Include="bin\x86\Debug\System.Collections.Specialized.dll" />
+    <Content Include="bin\x86\Debug\System.ComponentModel.Annotations.dll" />
+    <Content Include="bin\x86\Debug\System.ComponentModel.DataAnnotations.dll" />
+    <Content Include="bin\x86\Debug\System.ComponentModel.dll" />
+    <Content Include="bin\x86\Debug\System.ComponentModel.EventBasedAsync.dll" />
+    <Content Include="bin\x86\Debug\System.Core.dll" />
+    <Content Include="bin\x86\Debug\System.Data.Common.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.Contracts.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.Debug.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.Tools.dll" />
+    <Content Include="bin\x86\Debug\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\x86\Debug\System.dll" />
+    <Content Include="bin\x86\Debug\System.Dynamic.Runtime.dll" />
+    <Content Include="bin\x86\Debug\System.Globalization.Calendars.dll" />
+    <Content Include="bin\x86\Debug\System.Globalization.dll" />
+    <Content Include="bin\x86\Debug\System.Globalization.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.IO.Compression.dll" />
+    <Content Include="bin\x86\Debug\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\x86\Debug\System.IO.dll" />
+    <Content Include="bin\x86\Debug\System.IO.FileSystem.dll" />
+    <Content Include="bin\x86\Debug\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.IO.IsolatedStorage.dll" />
+    <Content Include="bin\x86\Debug\System.IO.UnmanagedMemoryStream.dll" />
+    <Content Include="bin\x86\Debug\System.Linq.dll" />
+    <Content Include="bin\x86\Debug\System.Linq.Expressions.dll" />
+    <Content Include="bin\x86\Debug\System.Linq.Parallel.dll" />
+    <Content Include="bin\x86\Debug\System.Linq.Queryable.dll" />
+    <Content Include="bin\x86\Debug\System.Net.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.Rtc.dll" />
+    <Content Include="bin\x86\Debug\System.Net.NameResolution.dll" />
+    <Content Include="bin\x86\Debug\System.Net.NetworkInformation.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Requests.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Sockets.dll" />
+    <Content Include="bin\x86\Debug\System.Net.WebHeaderCollection.dll" />
+    <Content Include="bin\x86\Debug\System.Net.WebSockets.Client.dll" />
+    <Content Include="bin\x86\Debug\System.Net.WebSockets.dll" />
+    <Content Include="bin\x86\Debug\System.Numerics.dll" />
+    <Content Include="bin\x86\Debug\System.Numerics.Vectors.dll" />
+    <Content Include="bin\x86\Debug\System.Numerics.Vectors.WindowsRuntime.dll" />
+    <Content Include="bin\x86\Debug\System.ObjectModel.dll" />
+    <Content Include="bin\x86\Debug\System.Private.DataContractSerialization.dll" />
+    <Content Include="bin\x86\Debug\System.Private.ServiceModel.dll" />
+    <Content Include="bin\x86\Debug\System.Private.Uri.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Context.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.DispatchProxy.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Emit.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Emit.ILGeneration.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Emit.Lightweight.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Metadata.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.Reflection.TypeExtensions.dll" />
+    <Content Include="bin\x86\Debug\System.Resources.ResourceManager.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Handles.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.InteropServices.WindowsRuntime.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Numerics.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Serialization.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Serialization.Json.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Serialization.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.Serialization.Xml.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.WindowsRuntime.dll" />
+    <Content Include="bin\x86\Debug\System.Runtime.WindowsRuntime.UI.Xaml.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Claims.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Cryptography.Cng.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\x86\Debug\System.Security.Principal.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.Duplex.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.Http.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.NetTcp.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.Security.dll" />
+    <Content Include="bin\x86\Debug\System.ServiceModel.Web.dll" />
+    <Content Include="bin\x86\Debug\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\x86\Debug\System.Text.Encoding.dll" />
+    <Content Include="bin\x86\Debug\System.Text.Encoding.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Overlapped.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Tasks.Dataflow.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Tasks.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Tasks.Parallel.dll" />
+    <Content Include="bin\x86\Debug\System.Threading.Timer.dll" />
+    <Content Include="bin\x86\Debug\System.Windows.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.Linq.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.Serialization.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.XDocument.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\x86\Debug\System.Xml.XmlSerializer.dll" />
+    <Content Include="obj\ARM64\Debug\XamlSaveStateFile.xml" />
+    <Content Include="obj\ARM64\Release\XamlSaveStateFile.xml" />
+    <Content Include="obj\ARM\Debug\XamlSaveStateFile.xml" />
+    <Content Include="obj\ARM\Release\XamlSaveStateFile.xml" />
+    <Content Include="obj\x64\Debug\XamlSaveStateFile.xml" />
+    <Content Include="obj\x64\Release\XamlSaveStateFile.xml" />
+    <Content Include="obj\x86\Debug\intermediatexaml\ItManagement.exe" />
+    <Content Include="obj\x86\Debug\intermediatexaml\ItManagement.pdb" />
+    <Content Include="obj\x86\Debug\ItManagement.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\ItManagement.exe" />
+    <Content Include="obj\x86\Debug\ItManagement.pdb" />
+    <Content Include="obj\x86\Debug\ItManagement.xr.xml" />
+    <Content Include="obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt" />
+    <Content Include="obj\x86\Debug\priconfig.xml" />
+    <Content Include="obj\x86\Debug\ProjectArchitectures.txt" />
+    <Content Include="obj\x86\Debug\qualifiers.txt" />
+    <Content Include="obj\x86\Debug\XamlSaveStateFile.xml" />
+    <Content Include="obj\x86\Release\XamlSaveStateFile.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -170,6 +463,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="obj\x86\Debug\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="obj\x86\Debug\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ErrorPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ErrorPageTeacher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -179,22 +484,28 @@
     <PackageReference Include="EntityFramework">
       <Version>6.3.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore">
-      <Version>2.2.6</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer">
-      <Version>2.2.6</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
-      <Version>2.2.6</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.7</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\ARM64\Debug\" />
+    <Folder Include="bin\ARM64\Release\" />
+    <Folder Include="bin\ARM\Debug\" />
+    <Folder Include="bin\ARM\Release\" />
+    <Folder Include="bin\x64\Debug\" />
+    <Folder Include="bin\x64\Release\" />
+    <Folder Include="bin\x86\Release\" />
+    <Folder Include="obj\ARM64\Debug\intermediatexaml\" />
+    <Folder Include="obj\ARM64\Release\intermediatexaml\" />
+    <Folder Include="obj\ARM\Debug\intermediatexaml\" />
+    <Folder Include="obj\ARM\Debug\TempPE\" />
+    <Folder Include="obj\ARM\Release\intermediatexaml\" />
+    <Folder Include="obj\x64\Debug\intermediatexaml\" />
+    <Folder Include="obj\x64\Release\intermediatexaml\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
+    <Folder Include="obj\x86\Release\intermediatexaml\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

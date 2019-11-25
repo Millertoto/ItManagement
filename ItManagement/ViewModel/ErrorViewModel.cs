@@ -1,13 +1,18 @@
 ﻿using System;
+using ItManagement.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using ItManagement.Commands;
+
 
 namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
+
 
         #region Instance Field
         /*private ErrorsCatalogSingleton singleton;
@@ -30,7 +35,6 @@ namespace ItManagement.ViewModel
         #region Constructor
         public ErrorViewModel(Employee SessionUser)
         {
-
             _creatorOfError = SessionUser;
 
         }
@@ -176,6 +180,7 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region PropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
             ([CallerMemberName] string propertyName = null)
@@ -183,6 +188,8 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
+
     }
 }
