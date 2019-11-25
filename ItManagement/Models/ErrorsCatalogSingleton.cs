@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Models
 {
-     public class ErrorCatalogSingleton 
+     /*public class ErrorCatalogSingleton 
     {
         private const string url = "api/Errors/";
         private List<Errors> _errors;
@@ -71,5 +71,5 @@ namespace ItManagement.Models
         {
 
         }
-    }
+    }*/
 }
