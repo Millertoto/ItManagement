@@ -1,5 +1,5 @@
 ﻿using System;
-using ItManagement.Models;
+using ItManagement;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace ItManagement.ViewModel
 {
-    public class TabletViewModel : INotifyPropertyChanged
+    /*public class TabletViewModel : INotifyPropertyChanged
     {
         private Tablet  _domainObjectT;
 
@@ -53,5 +53,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }

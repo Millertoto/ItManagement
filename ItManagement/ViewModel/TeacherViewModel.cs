@@ -1,5 +1,5 @@
 ﻿using System;
-using ItManagement.Models;
+using ItManagement;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace ItManagement.ViewModel
 {
-    public class TeacherViewModel : INotifyPropertyChanged
+    /*public class TeacherViewModel : INotifyPropertyChanged
     {
         private Teacher _domainObjectTe;
 
@@ -71,5 +71,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }
+    }*/
 }

@@ -17,8 +17,8 @@ namespace ItManagement.Models
             var e2 = new Employee(68483, "", "", "", false);
             var eq1 = new Computer("", 897);
             var eq2 = new Computer("", 54168);
-            _errors.Add(new Errors(1, "Omar",eq1, e2 ));
-            _errors.Add(new Errors(2, "Lars", eq2, e1));
+            _errors.Add(new Errors( "Omar",eq1, e2 ));
+            _errors.Add(new Errors("Lars", eq2, e1));
         }
 
         private static ErrorCatalogSingleton _instance;
@@ -43,20 +43,17 @@ namespace ItManagement.Models
                 _count = value;
             }
         }
-        //public List<Errors> ErrorsList
-        //{
-        //    //get { return  _students; }
+        public List<Errors> ErrorsList
+        {
+            //get { return  _students; }
 
-        //    get
-        //    {
-        //        return Persistencies.Persistency.getErrors();
-        //    }
-        //    set
-        //    {
-        //        _errors = value;
+            get { return _errors; }
+            set
+            {
+                _errors = value;
 
-        //    }
-        //}
+            }
+        }
 
 
         public void AddError(Errors error)
