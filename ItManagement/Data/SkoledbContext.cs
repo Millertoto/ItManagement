@@ -50,17 +50,17 @@ namespace ItManagement
             modelBuilder.Entity<Computer>(entity =>
             {
                 entity.HasKey(e => e.Uid)
-                    .HasName("PK__Computer__C5B69A4AD5175971");
+                    .HasName("PK__tmp_ms_x__C5B69A4AA3DA42E1");
 
                 entity.ToTable("Computer");
 
-                entity.Property(e => e.Uid).ValueGeneratedOnAdd();
+                entity.Property(e => e.Uid).ValueGeneratedNever();
 
                 entity.HasOne(d => d.U)
                     .WithOne(p => p.Computer)
                     .HasForeignKey<Computer>(d => d.Uid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Computer__Uid__2E1BDC42");
+                    .HasConstraintName("FK__Computer__Uid__49C3F6B7");
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -123,49 +123,49 @@ namespace ItManagement
             modelBuilder.Entity<SmartBoard>(entity =>
             {
                 entity.HasKey(e => e.Uid)
-                    .HasName("PK__SmartBoa__C5B69A4A5704465F");
+                    .HasName("PK__tmp_ms_x__C5B69A4A8921AC7D");
 
                 entity.ToTable("SmartBoard");
 
-                entity.Property(e => e.Uid).ValueGeneratedOnAdd();
+                entity.Property(e => e.Uid).ValueGeneratedNever();
 
                 entity.HasOne(d => d.U)
                     .WithOne(p => p.SmartBoard)
                     .HasForeignKey<SmartBoard>(d => d.Uid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SmartBoard__Uid__30F848ED");
+                    .HasConstraintName("FK__SmartBoard__Uid__4CA06362");
             });
 
             modelBuilder.Entity<SmartPhone>(entity =>
             {
                 entity.HasKey(e => e.Uid)
-                    .HasName("PK__SmartPho__C5B69A4A009A70D5");
+                    .HasName("PK__tmp_ms_x__C5B69A4A042B485B");
 
                 entity.ToTable("SmartPhone");
 
-                entity.Property(e => e.Uid).ValueGeneratedOnAdd();
+                entity.Property(e => e.Uid).ValueGeneratedNever();
 
                 entity.HasOne(d => d.U)
                     .WithOne(p => p.SmartPhone)
                     .HasForeignKey<SmartPhone>(d => d.Uid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SmartPhone__Uid__36B12243");
+                    .HasConstraintName("FK__SmartPhone__Uid__5165187F");
             });
 
             modelBuilder.Entity<Tablet>(entity =>
             {
                 entity.HasKey(e => e.Uid)
-                    .HasName("PK__Tablet__C5B69A4A6C63D802");
+                    .HasName("PK__tmp_ms_x__C5B69A4A27B6F892");
 
                 entity.ToTable("Tablet");
 
-                entity.Property(e => e.Uid).ValueGeneratedOnAdd();
+                entity.Property(e => e.Uid).ValueGeneratedNever();
 
                 entity.HasOne(d => d.U)
                     .WithOne(p => p.Tablet)
                     .HasForeignKey<Tablet>(d => d.Uid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Tablet__Uid__33D4B598");
+                    .HasConstraintName("FK__Tablet__Uid__52593CB8");
             });
 
             OnModelCreatingPartial(modelBuilder);
