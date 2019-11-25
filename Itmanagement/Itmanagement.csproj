@@ -119,6 +119,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\RelayCommands.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\ErrorsCatalogSingleton.cs" />
     <Compile Include="Models\IT-Support.cs" />
