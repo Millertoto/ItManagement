@@ -85,8 +85,8 @@ namespace ItManagement.ViewModel
 
         public List<Error> ListofErrors
         {
-            get { return _listOfErros; }
-            set { _listOfErros = value; }
+            get { return _listOfErrors; }
+            set { _listOfErrors = value; }
 
 
 
@@ -163,13 +163,13 @@ namespace ItManagement.ViewModel
 
         public void GetErrors()
         {
-            _listOfErros.Clear();
+            _listOfErrors.Clear();
 
             using (var db = new SkoledbContext())
             {
                 foreach (Error e in db.Errors)
                 {
-                    _listOfErros.Add(e);
+                    _listOfErrors.Add(e);
                 }
             }
         }
