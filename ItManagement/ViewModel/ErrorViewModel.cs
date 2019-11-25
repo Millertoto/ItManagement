@@ -1,4 +1,5 @@
 ﻿using System;
+using ItManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,22 +7,24 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using ItManagement.Commands;
 
 namespace ItManagement.ViewModel
 {
-    /*public class ErrorViewModel : INotifyPropertyChanged
+    public class ErrorViewModel : INotifyPropertyChanged
     {
-        private ErrorsCatalogSingleton singleton;
+        private ErrorCatalogSingleton singleton;
         private ObservableCollection<Errors> _errors;
         private Errors _selected;
 
         public ErrorViewModel()
         {
-            var e1 = new Employee(68486, "", "", "", false);
-            var eq1 = new Computer("", 897);
-            _selected = new Errors("",eq1,e1);
-            singleton = ErrorsCatalogSingleton.Instance;
-
+            _selected = new Errors();
+            singleton = ErrorCatalogSingleton.Instance;
+            _errors = new ObservableCollection<Errors>();
+            AddCommand = new RelayCommand(toAddNewError);
+            DeleteCommand = new RelayCommand(toDelete);
+            UpdateCommand = new RelayCommand(toUpdate);
         }
 
         private int _id;
@@ -66,9 +69,47 @@ namespace ItManagement.ViewModel
         {
             get
             {
-                _errors = new ObservableCollection<Errors>(singleton.ErrorsList);
+                _errors = new ObservableCollection<Errors>(singleton);
                 return _errors;
             }
+        }
+
+        public RelayCommand AddCommand
+        {
+            get; set;
+        }
+
+        public RelayCommand DeleteCommand
+        {
+            get; set;
+        }
+
+        public RelayCommand UpdateCommand
+        {
+            get; set;
+        }
+
+        public void toDelete()
+        {
+            singleton.DeleteError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toUpdate()
+        {
+            singleton.UpdateError(Selected);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+        }
+
+        public void toAddNewError()
+        {
+            Errors NewStudent = new Errors(FID, "error", , );
+            singleton.AddError(NewStudent);
+            OnPropertyChanged(nameof(All_Errors));
+            OnPropertyChanged(nameof(ErrorsCount));
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
@@ -77,5 +118,5 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
-    }*/
+    }
 }
