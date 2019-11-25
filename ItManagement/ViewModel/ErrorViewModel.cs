@@ -13,7 +13,7 @@ namespace ItManagement.ViewModel
         /*private ErrorsCatalogSingleton singleton;
         private ObservableCollection<Errors> _errors;*/
         private Error _selected;
-        private List<Error> _listOfErros;
+        private List<Error> _listOfErrors;
         private int _uID;
         private string _errorText;
         private Employee _creatorOfError;
