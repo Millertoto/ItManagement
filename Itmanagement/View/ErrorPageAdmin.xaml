@@ -16,13 +16,14 @@
 
         <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0" Click="HamburgerButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
+                <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </RelativePanel>
             <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
                 <SplitView.Pane>
                     <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
-                        <Button Click="Rum1_OnClick" Background="CornflowerBlue" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
+                        
+                        <Button  Background="CornflowerBlue" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
 
                     </StackPanel>
                 </SplitView.Pane>
