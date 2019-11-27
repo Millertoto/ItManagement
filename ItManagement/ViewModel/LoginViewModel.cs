@@ -58,7 +58,7 @@ namespace ItManagement.ViewModel
 
         public void LoginButtonMethod()
         {
-            if (LoginCheck(UserName, Password) == true)
+            if (LoginCheck(UserName, Password))
             {
                 using (var db = new SkoledbContext())
                 {
@@ -67,13 +67,13 @@ namespace ItManagement.ViewModel
                         if ((UserName == e.Username) && (Password == e.Password))
                         {
                             _CurrentUser = e;
-                            break;
-                        }
+                            
+                        }   
 
                         break;
                     }
 
-                    if (AdminCheck(UserName, Password) == true)
+                    if (AdminCheck(CurrentUser))
                     {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageAdmin));
@@ -92,14 +92,36 @@ namespace ItManagement.ViewModel
 
         }
 
-        public bool AdminCheck(string username, string password)
+        public bool AdminCheck(Employee currentUser)
         {
-            return true;
+            if (CurrentUser.IsAdmin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+                
+            
         }
 
         public bool LoginCheck(string username, string password)
         {
-            return true;
+            bool c = false;
+
+            using (var db = new SkoledbContext())
+            {
+                foreach (Employee e in db.Employees)
+                {
+                    if (username == e.Username && password == e.Password)
+                    {
+                        c = true;
+                    }
+                    
+                }
+            }
+            return c;
         }
         #endregion
 

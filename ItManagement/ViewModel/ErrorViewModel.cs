@@ -21,7 +21,7 @@ using ItManagement.Commands;
         private ObservableCollection<Errors> _errors;*/
         private Error _selected;
         private List<Error> _listOfErrors;
-        private int _uID;
+        private int _uid;
         private string _errorText;
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
@@ -35,9 +35,9 @@ using ItManagement.Commands;
 
 
         #region Constructor
-        public ErrorViewModel(Employee SessionUser)
+        public ErrorViewModel()
         {
-            _creatorOfError = SessionUser;
+           /* _creatorOfError = Singleton.User*/;
 
         }
         #endregion
@@ -58,10 +58,10 @@ using ItManagement.Commands;
 
         public int UidForCreation
         {
-            get { return _uID; }
+            get { return _uid; }
             set
             {
-                _uID = value;
+                _uid = value;
                 OnPropertyChanged();
             }
         }
@@ -156,7 +156,7 @@ using ItManagement.Commands;
         {
             Error e1 = new Error
             {
-                Uid = _uID,
+                Uid = _uid,
                 Cpr = CreatorOfError.Cpr,
                 ErrorMessage = _errorText,
                 Create = DateTime.Now,
