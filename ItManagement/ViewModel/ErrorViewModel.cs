@@ -33,7 +33,7 @@ using ItManagement.Commands;
 
         #endregion
 
-            public ErrorViewModel() { }
+           
         #region Constructor
         public ErrorViewModel()
         {
