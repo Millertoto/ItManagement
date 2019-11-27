@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
@@ -20,7 +21,7 @@ namespace ItManagement.ViewModel
         private string _userName;
         private string _password;
         private RelayCommand _enter;
-        private Employee _CurrentUser;
+        private Employee _currentUser;
 
 
         #endregion
@@ -28,7 +29,6 @@ namespace ItManagement.ViewModel
 
         public LoginViewModel()
         {
-            RelayCommand Enter = new RelayCommand(LoginButtonMethod);
         }
         
         #endregion
@@ -48,11 +48,26 @@ namespace ItManagement.ViewModel
 
         public Employee CurrentUser
         {
-            get { return _CurrentUser; }
-            set { _CurrentUser = value; }
+            get { return _currentUser; }
+            set { _currentUser = value; }
         }
         #endregion
         #region RelayCommands
+
+        public ICommand EnterCommand
+        {
+            get
+            {
+                if (_enter == null)
+                {
+                    _enter = new RelayCommand(LoginButtonMethod);
+                }
+
+                return _enter;
+            }
+
+
+        }
         #endregion
         #region Methods
 
@@ -66,7 +81,7 @@ namespace ItManagement.ViewModel
                     {
                         if ((UserName == e.Username) && (Password == e.Password))
                         {
-                            _CurrentUser = e;
+                            _currentUser = e;
                             
                         }   
 
@@ -98,6 +113,8 @@ namespace ItManagement.ViewModel
             {
                 return true;
             }
+
+            /*removable*/
             else
             {
                 return false;
