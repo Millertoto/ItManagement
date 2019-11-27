@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ItManagement.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,25 @@ namespace ItManagement.View
     /// </summary>
     public sealed partial class ErrorPageAdmin : Page
     {
+        ErrorViewModel evm = new ErrorViewModel();
+
         public ErrorPageAdmin()
         {
             this.InitializeComponent();
+
+            this.DataContext = evm;
+
+           
+            //}
+            //public ViewModel.ErrorViewModel evm = new ErrorViewModel();
+        }
+        private void HamburgerButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.mySplitView.IsPaneOpen = !this.mySplitView.IsPaneOpen;
+        }
+        private void Rum1_OnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -17,8 +17,8 @@ using ItManagement.Commands;
 
 
         #region Instance Field
-        /*private ErrorsCatalogSingleton singleton;
-        private ObservableCollection<Errors> _errors;*/
+        //private ErrorsCatalogSingleton singleton;
+        //private ObservableCollection<Errors> _errors;
         private Error _selected;
         private List<Error> _listOfErrors;
         private int _uID;
@@ -28,12 +28,12 @@ using ItManagement.Commands;
         private RelayCommand _getErrors;
 
 
-        /*private SkoledbContext _dbcontext;*/
+        //private SkoledbContext _dbcontext;
 
 
         #endregion
 
-
+            public ErrorViewModel() { }
         #region Constructor
         public ErrorViewModel(Employee SessionUser)
         {

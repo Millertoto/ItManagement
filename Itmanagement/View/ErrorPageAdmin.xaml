@@ -2,11 +2,15 @@
     x:Class="ItManagement.View.ErrorPageAdmin"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ItManagement.View"
+    xmlns:local="using:Itmanagement"
+    xmlns:myviewmodel="using:ItManagement.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--<Page.DataContext>
+        <myviewmodel:ErrorViewModel></myviewmodel:ErrorViewModel>
+    </Page.DataContext>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,13 +20,13 @@
 
         <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0" Click="HamburgerButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
+                <Button Name="HamburgerButton" Click="HamburgerButton_OnClick" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </RelativePanel>
             <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
                 <SplitView.Pane>
                     <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
-                        <Button Click="Rum1_OnClick" Background="CornflowerBlue" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
+                        <Button  Background="CornflowerBlue" Click="Rum1_OnClick" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
 
                     </StackPanel>
                 </SplitView.Pane>
@@ -30,7 +34,7 @@
                     <StackPanel Margin="32,50,0,300" >
                         <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
                             <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                            <TextBox Margin="0,0,0,0" Height="71" FontSize="44"   />
+                            <TextBox Margin="0,0,0,0"  Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44"   />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="50,0,130,10" >
                             <TextBlock Text="Hardware Type:" FontSize="44" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
