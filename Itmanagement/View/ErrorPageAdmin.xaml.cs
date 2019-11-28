@@ -43,5 +43,10 @@ namespace ItManagement.View
         {
 
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
