@@ -9,7 +9,9 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
+using ItManagement.Folder;
 using ItManagement.View;
+using ItManagement.Models;
 
 namespace ItManagement.ViewModel
 {
@@ -82,13 +84,14 @@ namespace ItManagement.ViewModel
                         if ((UserName == e.Username) && (Password == e.Password))
                         {
                             _currentUser = e;
-                            
+                            EmployeeSingleton.Instance.CurrentUser = e;
+
                         }   
 
                         break;
                     }
 
-                    if (AdminCheck(CurrentUser))
+                    if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
                     {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageAdmin));
