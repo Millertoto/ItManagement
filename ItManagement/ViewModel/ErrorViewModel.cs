@@ -10,9 +10,10 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
 using ItManagement.Commands;
+using ItManagement.Folder;
 
 
-    namespace ItManagement.ViewModel
+namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
@@ -43,7 +44,7 @@ using ItManagement.Commands;
         #region Constructor
         public ErrorViewModel()
         {
-           /* _creatorOfError = Singleton.User*/
+            _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
         }
         #endregion
 

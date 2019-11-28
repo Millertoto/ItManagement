@@ -118,7 +118,7 @@
   <ItemGroup>
     <Compile Include="Commands\RelayCommands.cs" />
     <Compile Include="Folder\IWebApiAsync.cs" />
-    <Compile Include="Folder\Singleton.cs" />
+    <Compile Include="Folder\EmployeeSingleton.cs" />
     <Compile Include="Folder\WebApiAsync.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
@@ -132,9 +132,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-
-<Compile Include="Persistencies\Persistency.cs" />
-
+    <Compile Include="Persistencies\Persistency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\SkoledbContext.cs" />
     <Compile Include="Models\SmartBoard.cs" />
