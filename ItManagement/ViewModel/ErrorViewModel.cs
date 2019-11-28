@@ -79,6 +79,8 @@ using ItManagement.Commands;
                 _creatorOfError = value;
                 OnPropertyChanged();
             }
+
+            //text="{binding path}=creatoroferror.name, mode=oneway"
         }
 
         public string ErrorDescription
