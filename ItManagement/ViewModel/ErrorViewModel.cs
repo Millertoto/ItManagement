@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Input;
 using ItManagement.Commands;
+
 
     namespace ItManagement.ViewModel
 {
@@ -41,8 +43,7 @@ using ItManagement.Commands;
         #region Constructor
         public ErrorViewModel()
         {
-           /* _creatorOfError = Singleton.User*/;
-
+           /* _creatorOfError = Singleton.User*/
         }
         #endregion
 
