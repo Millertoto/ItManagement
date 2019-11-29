@@ -119,6 +119,7 @@
     <Compile Include="Commands\RelayCommands.cs" />
     <Compile Include="Folder\IWebApiAsync.cs" />
     <Compile Include="Folder\EmployeeSingleton.cs" />
+    <Compile Include="Folder\SingletonDatabase.cs" />
     <Compile Include="Folder\WebApiAsync.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">

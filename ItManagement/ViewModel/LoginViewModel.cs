@@ -24,6 +24,7 @@ namespace ItManagement.ViewModel
         private string _password;
         private RelayCommand _enter;
         private Employee _currentUser;
+        private List<Employee> _employees;
 
 
         #endregion
@@ -31,6 +32,7 @@ namespace ItManagement.ViewModel
 
         public LoginViewModel()
         {
+            _enter = new RelayCommand(LoginButtonMethod);
         }
         
         #endregion
@@ -52,30 +54,55 @@ namespace ItManagement.ViewModel
         {
             get { return _currentUser; }
             set { _currentUser = value; }
+
+            
+        }
+
+        public List<Employee> Employees
+        {
+            get { return _employees; }
+            set { _employees = value; }
         }
         #endregion
         #region RelayCommands
 
-        public ICommand EnterCommand
+        public RelayCommand Enter
         {
-            get
-            {
-                if (_enter == null)
-                {
-                    _enter = new RelayCommand(LoginButtonMethod);
-                }
-
-                return _enter;
-            }
+            get { return _enter; }
+            set { _enter = value; }
 
 
         }
         #endregion
         #region Methods
 
-        public void LoginButtonMethod()
+        public async void LoginButtonMethod()
         {
-            if (LoginCheck(UserName, Password))
+            const string serverURL = "http://localhost:52667/";
+            const string EmployeeURI = "Employees";
+            const string apiPrefix = "api";
+
+            WebApiAsync<Employee> employeeWebApi = new WebApiAsync<Employee>(serverURL, apiPrefix, EmployeeURI);
+
+            Employees = await employeeWebApi.Load();
+            
+
+            if (LoginCheck(UserName, Password, Employees))
+            {
+                if (AdminCheck(CurrentUser))
+                {
+                    Frame currentFrame = Window.Current.Content as Frame;
+                    currentFrame.Navigate(typeof(ErrorPageAdmin));
+
+                }
+                else
+                {
+                    Frame currentFrame = Window.Current.Content as Frame;
+                    currentFrame.Navigate(typeof(ErrorPageTeacher));
+                }
+            }
+
+            /*if (LoginCheck(UserName, Password))
             {
                 using (var db = new SkoledbContext())
                 {
@@ -102,7 +129,7 @@ namespace ItManagement.ViewModel
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
                     }
                 }
-            }
+            }*/
             /*else
             {
             some kind of error
@@ -126,9 +153,27 @@ namespace ItManagement.ViewModel
             
         }
 
-        public bool LoginCheck(string username, string password)
+
+        public bool LoginCheck(string username, string password, List<Employee> employees)
         {
             bool c = false;
+            foreach (Employee e in employees)
+            {
+                if (username == e.Username && password == e.Password)
+                {
+                    CurrentUser = e;
+                    c = true;
+                    break;
+
+                }
+                
+
+            }
+
+            return c;
+
+
+            /*bool c = false;
 
             using (var db = new SkoledbContext())
             {
@@ -141,7 +186,7 @@ namespace ItManagement.ViewModel
                     
                 }
             }
-            return c;
+            return c;*/
         }
         #endregion
 
