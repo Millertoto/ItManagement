@@ -12,6 +12,7 @@ using ItManagement.Commands;
 using ItManagement.Folder;
 using ItManagement.View;
 using ItManagement.Models;
+using ItManagement.Persistencies;
 
 namespace ItManagement.ViewModel
 {
@@ -24,6 +25,7 @@ namespace ItManagement.ViewModel
         private string _password;
         private RelayCommand _enter;
         private Employee _currentUser;
+        private List<Employee> _employees;
 
 
         #endregion
@@ -36,6 +38,12 @@ namespace ItManagement.ViewModel
         
         #endregion
         #region Properties
+
+        public List<Employee> Employees
+        {
+            get { return _employees; }
+            set { _employees = value; }
+        }
 
         public string UserName
         {
@@ -70,35 +78,26 @@ namespace ItManagement.ViewModel
         public void LoginButtonMethod()
         {
 
-            Frame currentFrame = Window.Current.Content as Frame;
-            currentFrame.Navigate(typeof(ErrorPageAdmin));
-            /*if (LoginCheck(UserName, Password))
+            Employees = WebApiEmployee.GetEmployees("api/Employees/");
+
+
+            if (LoginCheck(UserName, Password, Employees))
             {
-                using (var db = new SkoledbContext())
+                if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
                 {
-                    foreach (Employee e in db.Employees)
-                    {
-                        if ((UserName == e.Username) && (Password == e.Password))
-                        {
-                            _currentUser = e;
-                            EmployeeSingleton.Instance.CurrentUser = e;
+                    Frame currentFrame = Window.Current.Content as Frame;
+                    currentFrame.Navigate(typeof(ErrorPageAdmin));
+                }
 
-                        }   
-
-                        break;
-                    }
-
-                    if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
-                    {
-                        Frame currentFrame = Window.Current.Content as Frame;
-                        currentFrame.Navigate(typeof(ErrorPageAdmin));
-                    }
-                    else
+                else
                     {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
                     }
-                }
+
+
+
+                
             }
             /*else
             {
@@ -109,7 +108,7 @@ namespace ItManagement.ViewModel
 
         public bool AdminCheck(Employee currentUser)
         {
-            if (CurrentUser.IsAdmin)
+            if (currentUser.IsAdmin)
             {
                 return true;
             }
@@ -123,23 +122,23 @@ namespace ItManagement.ViewModel
             
         }
 
-        /*public bool LoginCheck(string username, string password)
+        public bool LoginCheck(string username, string password, List<Employee> employees)
         {
             bool c = false;
 
-            using (var db = new SkoledbContext())
-            {
-                foreach (Employee e in db.Employees)
+                foreach (Employee e in employees)
                 {
                     if (username == e.Username && password == e.Password)
                     {
                         c = true;
+                        EmployeeSingleton.Instance.CurrentUser = e;
+                        break;
                     }
                     
                 }
-            }
             return c;
-        }*/
+
+        }
         #endregion
 
         #region INotifyPropertyChanged
