@@ -23,68 +23,6 @@ namespace ItManagement.ViewModel
 
 
 
-        public ICommand AddEmployeeButton
-        {
-            get
-            {
-                if (_addEmployeeButton == null)
-                {
-                    _addEmployeeButton = new RelayCommand(AddEmployee);
-                }
-
-                return _addEmployeeButton;
-            }
-
-
-        }
-
-        public ICommand GetEmployeeButton
-        {
-            get
-            {
-                if (_getEmployee == null)
-                {
-                    _getEmployee = new RelayCommand(GetEmployees);
-                }
-
-                return _getEmployee;
-            }
-
-
-        }
-
-        public void AddEmployee()
-        {
-            Employee ep1 = new Employee
-            {
-                Cpr = _cpr,
-                Username = _userName,
-                Password = _password,
-                Name = _name,
-                IsAdmin = false,
-
-            };
-
-            using (var db = new SkoledbContext())
-            {
-                db.Add(ep1);
-                db.SaveChanges();
-            }
-        }
-
-        public void GetEmployees()
-        {
-            _listOfEmployees.Clear();
-
-            using (var db = new SkoledbContext())
-            {
-                foreach (Employee e in db.Employees)
-                {
-                    _listOfEmployees.Add(e);
-                }
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged
