@@ -31,6 +31,7 @@ namespace ItManagement.ViewModel
 
         public LoginViewModel()
         {
+            _enter = new RelayCommand(LoginButtonMethod);
         }
         
         #endregion
@@ -56,17 +57,10 @@ namespace ItManagement.ViewModel
         #endregion
         #region RelayCommands
 
-        public ICommand EnterCommand
+        public RelayCommand Enter
         {
-            get
-            {
-                if (_enter == null)
-                {
-                    _enter = new RelayCommand(LoginButtonMethod);
-                }
-
-                return _enter;
-            }
+            get { return _enter; }
+            set { _enter = value; }
 
 
         }
@@ -75,7 +69,10 @@ namespace ItManagement.ViewModel
 
         public void LoginButtonMethod()
         {
-            if (LoginCheck(UserName, Password))
+
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(ErrorPageAdmin));
+            /*if (LoginCheck(UserName, Password))
             {
                 using (var db = new SkoledbContext())
                 {
@@ -126,7 +123,7 @@ namespace ItManagement.ViewModel
             
         }
 
-        public bool LoginCheck(string username, string password)
+        /*public bool LoginCheck(string username, string password)
         {
             bool c = false;
 
@@ -142,7 +139,7 @@ namespace ItManagement.ViewModel
                 }
             }
             return c;
-        }
+        }*/
         #endregion
 
         #region INotifyPropertyChanged
