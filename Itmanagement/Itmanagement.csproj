@@ -130,7 +130,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Persistencies\Persistency.cs" />
+    <Compile Include="Persistencies\WebApiEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />

@@ -1,0 +1,54 @@
+﻿{
+   "ContextClassName": "SkoledbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "SkoleDBWebService",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Accesories]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Computer]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Employees]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Equipment]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Errors]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[SmartBoard]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[SmartPhone]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Tablet]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}
