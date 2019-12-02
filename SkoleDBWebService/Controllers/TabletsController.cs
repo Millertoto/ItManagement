@@ -17,16 +17,16 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Tablets
-        public IQueryable<Tablet> GetTablets()
+        public IQueryable<Tablet> GetTablet()
         {
-            return db.Tablets;
+            return db.Tablet;
         }
 
         // GET: api/Tablets/5
         [ResponseType(typeof(Tablet))]
         public IHttpActionResult GetTablet(int id)
         {
-            Tablet tablet = db.Tablets.Find(id);
+            Tablet tablet = db.Tablet.Find(id);
             if (tablet == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace SkoleDBWebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Tablets.Add(tablet);
+            db.Tablet.Add(tablet);
 
             try
             {
@@ -104,13 +104,13 @@ namespace SkoleDBWebService.Controllers
         [ResponseType(typeof(Tablet))]
         public IHttpActionResult DeleteTablet(int id)
         {
-            Tablet tablet = db.Tablets.Find(id);
+            Tablet tablet = db.Tablet.Find(id);
             if (tablet == null)
             {
                 return NotFound();
             }
 
-            db.Tablets.Remove(tablet);
+            db.Tablet.Remove(tablet);
             db.SaveChanges();
 
             return Ok(tablet);
@@ -127,7 +127,7 @@ namespace SkoleDBWebService.Controllers
 
         private bool TabletExists(int id)
         {
-            return db.Tablets.Count(e => e.Uid == id) > 0;
+            return db.Tablet.Count(e => e.Uid == id) > 0;
         }
     }
 }

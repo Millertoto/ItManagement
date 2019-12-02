@@ -6,7 +6,7 @@ namespace SkoleDBWebService
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Accesory
+    public partial class Accesories
     {
         [Key]
         public int Tid { get; set; }
