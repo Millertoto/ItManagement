@@ -126,71 +126,10 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region RelayCommands
-
-        public ICommand AddErrorButton
-        {
-            get
-            {
-                if (_addErrorButton == null)
-                {
-                    _addErrorButton = new RelayCommand(AddError);
-                }
-
-                return _addErrorButton;
-            }
-
-
-        }
-
-        public ICommand GetErrorButton
-        {
-            get
-            {
-                if (_getErrors == null)
-                {
-                    _getErrors = new RelayCommand(GetErrors);
-                }
-
-                return _getErrors;
-            }
-
-
-        }
         #endregion
 
         #region Methods
 
-        public void AddError()
-        {
-            Error e1 = new Error
-            {
-                Uid = _uid,
-                Cpr = CreatorOfError.Cpr,
-                ErrorMessage = _errorText,
-                Create = DateTime.Now,
-                Update = DateTime.Now,
-                IsRepaired = false
-            };
-
-            using (var db = new SkoledbContext())
-            {
-                db.Add(e1);
-                db.SaveChanges();
-            }
-        }
-
-        public void GetErrors()
-        {
-            _listOfErrors.Clear();
-
-            using (var db = new SkoledbContext())
-            {
-                foreach (Error e in db.Errors)
-                {
-                    _listOfErrors.Add(e);
-                }
-            }
-        }
         #endregion
 
         #region PropertyChanged
