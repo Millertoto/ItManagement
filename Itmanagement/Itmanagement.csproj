@@ -134,8 +134,11 @@
     <Compile Include="Persistencies\ErrorPersistency.cs" />
     <Compile Include="Persistencies\IwebAPIAsync.cs" />
     <Compile Include="Persistencies\WebAPIAsync.cs" />
-    <Compile Include="Persistencies\WebApi.cs" />
+    <Compile Include="Persistencies\WebApiEquipment.cs" />
+    <Compile Include="Persistencies\WebApiError.cs" />
+    <Compile Include="Persistencies\WebApiEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Persistencies\WebApi.cs" />
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
