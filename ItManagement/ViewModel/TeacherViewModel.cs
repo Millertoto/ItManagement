@@ -13,7 +13,7 @@ namespace ItManagement.ViewModel
 {
     public class TeacherViewModel : INotifyPropertyChanged
     {
-        private string _name;
+        /*private string _name;
         private string _password;
         private string _username;
         private int _cpr;
@@ -85,7 +85,11 @@ namespace ItManagement.ViewModel
         public List<Employee> Employees
         {
             get { return _employees; }
-            set { _employees = value; }
+            set
+            {
+                _employees = value;
+                OnPropertyChanged();
+            }
 
         }
 
@@ -179,7 +183,7 @@ namespace ItManagement.ViewModel
 
 
 
-        
+        */
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
             ([CallerMemberName] string propertyName = null)

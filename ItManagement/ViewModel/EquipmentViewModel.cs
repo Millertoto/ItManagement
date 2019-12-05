@@ -38,4 +38,7 @@ namespace ItManagement.ViewModel
     #region Tablet Methods
     #endregion
     #endregion
+
+    #region Inotify
+    #endregion
 }

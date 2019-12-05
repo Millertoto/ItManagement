@@ -48,7 +48,7 @@ namespace ItManagement.ViewModel
         {
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
-            _listOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
+            _listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");
         }
         #endregion
 
@@ -102,7 +102,11 @@ namespace ItManagement.ViewModel
         public List<Equipment> ListOfEquipment
         {
             get { return _listOfEquipment; }
-            set { _listOfEquipment = value; }
+            set
+            {
+                _listOfEquipment = value;
+                OnPropertyChanged();
+            }
 
 
 
@@ -131,7 +135,7 @@ namespace ItManagement.ViewModel
             if (EquipmentCheck(uid))
             {
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
-                await WebApiError.PostError("api/Errors/", _toBeCreated);
+                await WebApi<Error>.Post("api/Errors/", _toBeCreated);
             }
             
 
@@ -142,7 +146,7 @@ namespace ItManagement.ViewModel
         {
             
             bool c = false;
-            ListOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
+            ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");
 
             foreach (Equipment e in ListOfEquipment)
             {

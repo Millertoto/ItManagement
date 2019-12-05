@@ -26,6 +26,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _enter;
         private Employee _currentUser;
         private List<Employee> _employees;
+        private const string _employeeurl = "api/Employees/";
 
 
         #endregion
@@ -78,7 +79,7 @@ namespace ItManagement.ViewModel
         public void LoginButtonMethod()
         {
 
-            Employees = WebApiEmployee.GetEmployees("api/Employees/");
+            Employees = WebApi<Employee>.GetList(_employeeurl);
 
 
             if (LoginCheck(UserName, Password, Employees))
@@ -86,7 +87,7 @@ namespace ItManagement.ViewModel
                 if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
                 {
                     Frame currentFrame = Window.Current.Content as Frame;
-                    currentFrame.Navigate(typeof(EmployeePageAdmin));
+                    currentFrame.Navigate(typeof(ErrorPageAdmin));
                 }
 
                 else
