@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace ItManagement.Persistencies
 {
-    class WebApiEmployee
+    public class WebApiEmployee
     {
 
         private const string ServerUrl = "http://localhost:52667";
