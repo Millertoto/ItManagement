@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ItManagement.Folder;
 using ItManagement.Persistencies;
 
 namespace ItManagement.ViewModel
@@ -95,7 +96,8 @@ namespace ItManagement.ViewModel
 
         public async void GetEmployeeList()
         {
-            Employees = WebApi<Employee>.GetList("api/Employees/");
+            Employees = EmployeeSingleton.Instance.EP.GetEmployees().Result;
+            /*Employees = WebApi<Employee>.GetList("api/Employees/");*/
         }
 
         public RelayCommand GetEmployeeCommand
@@ -113,8 +115,11 @@ namespace ItManagement.ViewModel
                 && PasswordCheck(Password)
                 && NameCheck(Name))
             {
-                Employee Emp = new Employee(Username, CPR, Password, Name, true);
-                await WebApi<Employee>.Post("api/Employees/", Emp);
+                Employee Emp = new Employee(Username, CPR, Password, Name, IsAdmin);
+                /*await WebApi<Employee>.Post("api/Employees/", Emp);*/
+                await EmployeeSingleton.Instance.EP.CreateEmployee(Emp);
+
+
             }
 
         }

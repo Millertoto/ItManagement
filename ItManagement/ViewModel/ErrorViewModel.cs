@@ -48,7 +48,9 @@ namespace ItManagement.ViewModel
         {
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
-            _listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");
+            /*_listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
+            _listOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipment().Result;
+
             _uid = default(int);
 
 
@@ -138,7 +140,9 @@ namespace ItManagement.ViewModel
             if (EquipmentCheck(uid) && uid != 0)
             {
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
-                await WebApi<Error>.Post("api/Errors/", _toBeCreated);
+
+                /*await WebApi<Error>.Post("api/Errors/", _toBeCreated);*/
+                await EmployeeSingleton.Instance.ERP.CreateError(_toBeCreated);
             }
             
 
@@ -149,7 +153,8 @@ namespace ItManagement.ViewModel
         {
             
             bool c = false;
-            ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");
+            /*ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
+             ListOfEquipment = EmployeeSingleton.Instance.EP.GetEquipment().Result;
 
             foreach (Equipment e in ListOfEquipment)
             {

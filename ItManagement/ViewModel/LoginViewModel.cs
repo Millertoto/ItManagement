@@ -26,7 +26,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _enter;
         private Employee _currentUser;
         private List<Employee> _employees;
-        private const string _employeeurl = "api/Employees/";
+        /*private const string _employeeurl = "api/Employees/";*/
 
 
         #endregion

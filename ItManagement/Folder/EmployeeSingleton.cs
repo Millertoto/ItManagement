@@ -14,6 +14,8 @@ namespace ItManagement.Folder
         private Employee _currentUser;
         private static EmployeeSingleton _instance;
         public EmployeePersistency EP = new EmployeePersistency();
+        public EquipmentPersistency EQP = new EquipmentPersistency();
+        public ErrorPersistency ERP = new ErrorPersistency();
 
 
         #endregion
