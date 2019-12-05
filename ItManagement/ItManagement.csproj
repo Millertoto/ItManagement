@@ -130,7 +130,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+
+
+     <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
+    <Compile Include="Persistencies\EquipmentPersistency.cs" />
     <Compile Include="Persistencies\ErrorPersistency.cs" />
     <Compile Include="Persistencies\IwebAPIAsync.cs" />
     <Compile Include="Persistencies\WebAPIAsync.cs" />
