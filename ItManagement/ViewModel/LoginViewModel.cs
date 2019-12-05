@@ -89,12 +89,20 @@ namespace ItManagement.ViewModel
                 {
                     Frame currentFrame = Window.Current.Content as Frame;
                     currentFrame.Navigate(typeof(ErrorPageAdmin));
+
+                    var messageDialogue = new MessageDialog($"Welcome Back, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
                 }
 
                 else
                 {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
+
+                        var messageDialogue = new MessageDialog($"Welcome, {CurrentUser.Name}");
+                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        await messageDialogue.ShowAsync();
                 }
 
 

@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using ItManagement.Commands;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
@@ -154,6 +155,9 @@ namespace ItManagement.ViewModel
                 await Singleton.Instance.ERP.CreateError(_toBeCreated);
                 CurrentEquipment.IsWorking = false;
                 await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
 
             }
             

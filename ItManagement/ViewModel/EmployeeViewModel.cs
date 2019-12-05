@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 
@@ -119,7 +120,16 @@ namespace ItManagement.ViewModel
                 /*await WebApi<Employee>.Post("api/Employees/", Emp);*/
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
+                var messageDialogue = new MessageDialog($"The Account, {Username}, has been created");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
 
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"Failure");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
             }
 
         }
