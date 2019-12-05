@@ -131,6 +131,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Persistencies\ComputerPersistency.cs" />
+     <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
     <Compile Include="Persistencies\EquipmentPersistency.cs" />
     <Compile Include="Persistencies\ErrorPersistency.cs" />
