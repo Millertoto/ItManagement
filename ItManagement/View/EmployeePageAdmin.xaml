@@ -32,16 +32,16 @@
                         <Frame x:Name="myFrame" Margin="0,0,0,0"/>
                         <StackPanel Margin="0,0,1000,-50" Orientation="Vertical" Height="524">
                             <TextBlock Text="ID:" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Margin="0,0,0.8,0" FontSize="15"/>
+                            <TextBox Height="30" Text="{Binding Path=CPR, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15"/>
                             <TextBlock Text="Brugernavn:" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Margin="0,0,1.8,0" FontSize="15"/>
+                            <TextBox Height="30" Text="{Binding Path=Username, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15"/>
                             <TextBlock Text="Password:" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <TextBox Height="30" Text="{Binding Path=Password, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             <TextBlock Text="Navn:" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Margin="0,0,2,0" FontSize="15"/>
+                            <TextBox Height="30" Text="{Binding Path=Name, Mode=TwoWay}" Margin="0,0,2,0" FontSize="15"/>
                             <TextBlock Text="Admin" FontSize="30"></TextBlock>
-                            <TextBox Height="30" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" Width="239"/>
-                            <Button Content="Opret" FontSize="20" Width="120" Margin="0,10"></Button>
+                            <TextBox Height="30"  Text="{Binding Path=IsAdmin, Mode=TwoWay}" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" Width="239"/>
+                            <Button Content="Opret" Command="{Binding Path=AddEmployeeButton}" FontSize="20" Width="120" Margin="0,10"></Button>
                             <Button Content="Slet" FontSize="20" Width="120" Margin="0,10"></Button>
                             <Button Content="Edit" FontSize="20" Width="120" Margin="0,10"></Button>
                         </StackPanel>

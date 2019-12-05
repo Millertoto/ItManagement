@@ -139,6 +139,7 @@
     <Compile Include="Models\Tablet.cs" />
     <Compile Include="ViewModel\ComputerViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\EqupimentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\ITSupportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
