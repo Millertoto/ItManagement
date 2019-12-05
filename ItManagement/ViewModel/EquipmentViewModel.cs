@@ -11,7 +11,7 @@ namespace ItManagement.ViewModel
     #endregion
     #region Constructor
 
-    class EqupimentViewModel
+    class EquipmentViewModel
     {   
     }
     #endregion
