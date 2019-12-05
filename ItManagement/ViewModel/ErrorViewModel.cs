@@ -24,6 +24,7 @@ namespace ItManagement.ViewModel
         //private ErrorsCatalogSingleton singleton;
         //private ObservableCollection<Errors> _errors;
         private Error _selected;
+        private Error _toBeCreated;
         private List<Equipment> _listOfEquipment;
         private int _uid;
         private string _errorText;
@@ -47,6 +48,7 @@ namespace ItManagement.ViewModel
         {
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
+            _listOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
         }
         #endregion
 
@@ -128,8 +130,8 @@ namespace ItManagement.ViewModel
             int uid = UidForCreation;
             if (EquipmentCheck(uid))
             {
-                Error e = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
-                await WebApiError.PostError("api/Errors/", e);
+                _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
+                await WebApiError.PostError("api/Errors/", _toBeCreated);
             }
             
 
