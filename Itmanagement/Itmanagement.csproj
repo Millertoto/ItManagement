@@ -143,7 +143,7 @@
     <Compile Include="Models\Tablet.cs" />
     <Compile Include="ViewModel\ComputerViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="ViewModel\EqupimentViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\ITSupportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -159,6 +159,9 @@
     </Compile>
     <Compile Include="View\EquipmentPageAdmin.xaml.cs">
       <DependentUpon>EquipmentPageAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentPageTeacher.xaml.cs">
+      <DependentUpon>EquipmentPageTeacher.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ErrorPageAdmin.xaml.cs">
       <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipmentPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentPageTeacher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

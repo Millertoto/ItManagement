@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class ErrorPersistency
+    public class ErrorPersistency
     {
         const string _serverURL = "http://localhost:52667";
         const string _employeeURI = "Errors";

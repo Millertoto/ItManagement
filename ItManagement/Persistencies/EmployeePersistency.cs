@@ -8,15 +8,15 @@ namespace ItManagement.Persistencies
 {
     class EmployeePersistency
     {
-        const string _serverURL = "http://localhost:52667";
-        const string _employeeURI = "Employees";
-        const string _apiPrefix = "api";
+        const string ServerUrl = "http://localhost:52667";
+        const string EmployeeUri = "Employees";
+        const string ApiPrefix = "api";
 
         private WebAPIAsync<Employee> _webApi;
 
         public EmployeePersistency()
         {
-            _webApi = new WebAPIAsync<Employee>(_serverURL, _apiPrefix, _employeeURI);
+            _webApi = new WebAPIAsync<Employee>(ServerUrl, ApiPrefix, EmployeeUri);
         }
 
         public Task<List<Employee>> GetEmployees()

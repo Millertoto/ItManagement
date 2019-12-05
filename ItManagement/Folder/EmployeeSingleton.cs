@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ItManagement.Persistencies;
 
 namespace ItManagement.Folder
 {
@@ -12,6 +13,7 @@ namespace ItManagement.Folder
 
         private Employee _currentUser;
         private static EmployeeSingleton _instance;
+        public EmployeePersistency EP = new EmployeePersistency();
 
 
         #endregion
