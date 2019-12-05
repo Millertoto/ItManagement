@@ -134,6 +134,8 @@
     <Compile Include="Persistencies\ErrorPersistency.cs" />
     <Compile Include="Persistencies\IwebAPIAsync.cs" />
     <Compile Include="Persistencies\WebAPIAsync.cs" />
+    <Compile Include="Persistencies\WebApiEquipment.cs" />
+    <Compile Include="Persistencies\WebApiError.cs" />
     <Compile Include="Persistencies\WebApiEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SmartBoard.cs" />
@@ -148,6 +150,15 @@
     <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
     <Compile Include="ViewModel\TabletViewModel.cs" />
     <Compile Include="ViewModel\TeacherViewModel.cs" />
+    <Compile Include="View\EmployeePageAdmin.xaml.cs">
+      <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeePageTeacher.xaml.cs">
+      <DependentUpon>EmployeePageTeacher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentPageAdmin.xaml.cs">
+      <DependentUpon>EquipmentPageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorPageAdmin.xaml.cs">
       <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
     </Compile>
@@ -180,6 +191,18 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EmployeePageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeePageTeacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ErrorPageAdmin.xaml">
       <Generator>MSBuild:Compile</Generator>

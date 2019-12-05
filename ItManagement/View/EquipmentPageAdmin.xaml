@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="ItManagement.View.EquipmentPageAdmin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ItManagement.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="503*"/>
+            <RowDefinition Height="497*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
+            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
+                <Button Name="HamburgerButton"  Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
+                <TextBlock Text="Udstyr" Margin="593,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </RelativePanel>
+            <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
+                <SplitView.Pane>
+                    <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
+                        <Button Background="CornflowerBlue" FontSize="55" Margin="42,40,42,40" VerticalAlignment="Top" Height="99" Content="Ansatte" HorizontalAlignment="Stretch"/>
+                        <Button Background="CornflowerBlue" FontSize="55" Content="Fejlmelddelelse" Height="99" Margin="42,0,42,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ></Button>
+
+                    </StackPanel>
+                </SplitView.Pane>
+            </SplitView>
+        </StackPanel>
+
+    </Grid>
+</Page>
