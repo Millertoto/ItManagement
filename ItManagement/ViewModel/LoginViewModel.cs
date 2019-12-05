@@ -90,10 +90,10 @@ namespace ItManagement.ViewModel
                 }
 
                 else
-                    {
+                {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
-                    }
+                }
 
 
 
