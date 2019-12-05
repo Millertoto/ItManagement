@@ -79,7 +79,7 @@ namespace ItManagement.ViewModel
         public void LoginButtonMethod()
         {
 
-            Employees = WebApi<Employee>.GetList(_employeeurl);
+            Employees = EmployeeSingleton.Instance.EP.GetEmployees().Result;
 
 
             if (LoginCheck(UserName, Password, Employees))
