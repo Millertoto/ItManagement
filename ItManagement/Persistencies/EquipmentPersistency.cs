@@ -27,6 +27,7 @@ namespace ItManagement.Persistencies
 
         #region Tasks
         public Task<List<Equipment>> GetEquipments()
+
         {
             return _webApi.Load();
         }
@@ -51,5 +52,6 @@ namespace ItManagement.Persistencies
             await _webApi.Create(obj);
         }
         #endregion
+
     }
 }
