@@ -6,6 +6,13 @@ namespace ItManagement
 {
     public partial class Computer
     {
+        private int _uid;
+        private bool _isBorrowed;
+        public Computer(int uid)
+        {
+            _uid = uid;
+            _isBorrowed = false;
+        }
         public int Uid { get; set; }
         public bool IsBorrowed { get; set; }
 

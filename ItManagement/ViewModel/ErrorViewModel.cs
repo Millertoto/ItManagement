@@ -31,6 +31,8 @@ namespace ItManagement.ViewModel
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
+        private List<Error> _allErrors;
+        private Equipment _currentEquipment;
 
 
         //private SkoledbContext _dbcontext;
@@ -49,7 +51,8 @@ namespace ItManagement.ViewModel
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
             /*_listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
-            _listOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipment().Result;
+            _listOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
+            _allErrors = EmployeeSingleton.Instance.ERP.GetErrors().Result;
 
             _uid = default(int);
 
@@ -79,6 +82,12 @@ namespace ItManagement.ViewModel
                 _uid = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Equipment CurrentEquipment
+        {
+            get { return _currentEquipment; }
+            set { _currentEquipment = value; }
         }
 
         public Employee CreatorOfError
@@ -143,6 +152,9 @@ namespace ItManagement.ViewModel
 
                 /*await WebApi<Error>.Post("api/Errors/", _toBeCreated);*/
                 await EmployeeSingleton.Instance.ERP.CreateError(_toBeCreated);
+                CurrentEquipment.IsWorking = false;
+                await EmployeeSingleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+
             }
             
 
@@ -154,13 +166,14 @@ namespace ItManagement.ViewModel
             
             bool c = false;
             /*ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
-             ListOfEquipment = EmployeeSingleton.Instance.EP.GetEquipment().Result;
+            ListOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
 
             foreach (Equipment e in ListOfEquipment)
             {
                 if (uid == e.Uid)
                 {
                     c = true;
+                    CurrentEquipment = e;
                     break;
                 }
             }

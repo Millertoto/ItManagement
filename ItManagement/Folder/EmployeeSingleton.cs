@@ -16,6 +16,10 @@ namespace ItManagement.Folder
         public EmployeePersistency EP = new EmployeePersistency();
         public EquipmentPersistency EQP = new EquipmentPersistency();
         public ErrorPersistency ERP = new ErrorPersistency();
+        public TabletPersistency TAB = new TabletPersistency();
+        public SmartboardPersistency SB = new SmartboardPersistency();
+        public ComputerPersistency COM = new ComputerPersistency();
+        public SmartphonePersistency SP = new SmartphonePersistency();
 
 
         #endregion
