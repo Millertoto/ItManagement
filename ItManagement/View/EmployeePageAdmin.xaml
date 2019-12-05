@@ -40,7 +40,7 @@
                             <TextBlock Text="Navn:" FontSize="30"></TextBlock>
                             <TextBox Height="30" Text="{Binding Path=Name, Mode=TwoWay}" Margin="0,0,2,0" FontSize="15"/>
                             <TextBlock Text="Admin" FontSize="30"></TextBlock>
-                            <TextBox Height="30"  Text="{Binding Path=IsAdmin, Mode=TwoWay}" Background="CornflowerBlue" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" Width="239"/>
+                            <TextBox Height="30"  Text="{Binding Path=IsAdmin, Mode=TwoWay}" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" Width="239"/>
                             <Button Content="Opret" Command="{Binding Path=AddEmployeeButton}" Background="CornflowerBlue" FontSize="20" Width="120" Margin="0,10"></Button>
                             <Button Content="Slet" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
                             <Button Content="Edit" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
@@ -67,8 +67,6 @@
                                             <TextBox></TextBox>
                                             <TextBlock Text="Admin"></TextBlock>
                                             <TextBox></TextBox>
-
-
                                         </StackPanel>
 
                                     </DataTemplate>
