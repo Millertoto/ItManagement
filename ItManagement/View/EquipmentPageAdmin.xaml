@@ -26,6 +26,9 @@
 
                     </StackPanel>
                 </SplitView.Pane>
+                <SplitView.Content>
+                    <StackPanel Margin="0,0,0,0"></StackPanel>
+                </SplitView.Content>
             </SplitView>
         </StackPanel>
 
