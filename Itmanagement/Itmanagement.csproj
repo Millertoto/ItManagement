@@ -130,6 +130,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Persistencies\EmployeePersistency.cs" />
+    <Compile Include="Persistencies\ErrorPersistency.cs" />
+    <Compile Include="Persistencies\IwebAPIAsync.cs" />
+    <Compile Include="Persistencies\WebAPIAsync.cs" />
     <Compile Include="Persistencies\WebApiEquipment.cs" />
     <Compile Include="Persistencies\WebApiError.cs" />
     <Compile Include="Persistencies\WebApiEmployee.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Models\Tablet.cs" />
     <Compile Include="ViewModel\ComputerViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\EqupimentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\ITSupportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
