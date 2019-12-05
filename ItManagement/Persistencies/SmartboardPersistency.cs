@@ -8,17 +8,23 @@ namespace ItManagement.Persistencies
 {
     class SmartboardPersistency
     {
+        #region Instance Field
         const string ServerUrl = "http://localhost:52667";
         const string EmployeeUri = "SmartBoards";
         const string ApiPrefix = "api";
 
         private WebAPIAsync<SmartBoard> _webApi;
+        #endregion
 
+        #region Constructor
         public SmartboardPersistency()
         {
             _webApi = new WebAPIAsync<SmartBoard>(ServerUrl, ApiPrefix, EmployeeUri);
         }
 
+        #endregion
+
+        #region Tasks
         public Task<List<SmartBoard>> GetSmartboards()
         {
             return _webApi.Load();
@@ -43,5 +49,6 @@ namespace ItManagement.Persistencies
         {
             await _webApi.Create(obj);
         }
+        #endregion
     }
 }

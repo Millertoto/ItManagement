@@ -41,11 +41,6 @@ namespace ItManagement.ViewModel
 
         #endregion
 
-
-
-
-        
-
         #region Constructor
         public ErrorViewModel()
         {
@@ -113,7 +108,7 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        #region Lists
         public List<Equipment> ListOfEquipment
         {
             get { return _listOfEquipment; }
@@ -127,6 +122,7 @@ namespace ItManagement.ViewModel
 
 
         }
+        #endregion
 
 
         #endregion

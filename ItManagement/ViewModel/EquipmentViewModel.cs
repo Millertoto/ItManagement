@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,7 +15,7 @@ using Type = System.Type;
 
 namespace ItManagement.ViewModel
 {
-    class EquipmentViewModel
+    class EquipmentViewModel : INotifyPropertyChanged
     {
         #region Instance Field
         private Computer _computer;
@@ -29,7 +30,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _getAllEquipment;
         private RelayCommand _createEquipment;
         private RelayCommand _getEquipmentOfType;
-
+        private INotifyPropertyChanged _notifyPropertyChangedImplementation;
 
         #endregion
 
@@ -65,11 +66,13 @@ namespace ItManagement.ViewModel
             set { _type = value; }
         }
 
+        #region Lists
         public List<Equipment> AllEquipment
         {
             get { return _listOfEquipment; }
             set { _listOfEquipment = value; }
         }
+        #endregion
 
 
         #region Computer Properties
@@ -113,6 +116,15 @@ namespace ItManagement.ViewModel
 
         #endregion
 
+        #endregion
+
+        #region RelayCommands
+
+        public RelayCommand CreateEquipment
+        {
+            get { return _createEquipment; }
+            set { _createEquipment = value; }
+        }
         #endregion
 
         #region Methods
@@ -191,6 +203,13 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Inotify
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged
+            ([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new
+                PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
     }

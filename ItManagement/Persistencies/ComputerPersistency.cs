@@ -8,16 +8,24 @@ namespace ItManagement.Persistencies
 {
     class ComputerPersistency
     {
+        #region Instance Field
         const string ServerUrl = "http://localhost:52667";
         const string EmployeeUri = "Computers";
         const string ApiPrefix = "api";
 
+
         private WebAPIAsync<Computer> _webApi;
 
+        #endregion
+
+        #region Constructor
         public ComputerPersistency()
         {
             _webApi = new WebAPIAsync<Computer>(ServerUrl, ApiPrefix, EmployeeUri);
         }
+        #endregion
+
+        #region Tasks
 
         public Task<List<Computer>> GetComputers()
         {
@@ -43,5 +51,6 @@ namespace ItManagement.Persistencies
         {
             await _webApi.Create(obj);
         }
+        #endregion
     }
 }

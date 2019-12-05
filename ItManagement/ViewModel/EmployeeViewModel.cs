@@ -15,6 +15,8 @@ namespace ItManagement.ViewModel
 {
     public class EmployeeViewModel : INotifyPropertyChanged
     {
+
+        #region Instance Field
         private string _name;
         private string _password;
         private string _username;
@@ -23,13 +25,17 @@ namespace ItManagement.ViewModel
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
+        #endregion
 
+        #region Constructor
 
         public EmployeeViewModel()
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
             _getEmployeeList = new RelayCommand(GetEmployeeList);
         }
+        #endregion
+        #region Properties
 
         public int CPR
         {
@@ -77,12 +83,25 @@ namespace ItManagement.ViewModel
             set { _isAdmin = value; }
         }
 
+        #endregion
+
+        #region RelayCommands
         public RelayCommand AddEmployeeButton
         {
             get { return _addEmployeeButton; }
             set { _addEmployeeButton = value; }
 
         }
+
+        public RelayCommand GetEmployeeCommand
+        {
+            get { return _getEmployeeList; }
+            set { _getEmployeeList = value; }
+
+        }
+        #endregion
+
+        #region Lists
 
         public List<Employee> Employees
         {
@@ -94,6 +113,9 @@ namespace ItManagement.ViewModel
             }
 
         }
+        #endregion
+
+        #region Methods
 
         public async void GetEmployeeList()
         {
@@ -101,12 +123,6 @@ namespace ItManagement.ViewModel
             /*Employees = WebApi<Employee>.GetList("api/Employees/");*/
         }
 
-        public RelayCommand GetEmployeeCommand
-        {
-            get { return _getEmployeeList; }
-            set { _getEmployeeList = value; }
-
-        }
         public async void AddEmployeeMethod()
         {
 
@@ -195,9 +211,9 @@ namespace ItManagement.ViewModel
             return false;
         }
 
+        #endregion
 
-
-
+        #region INotify
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged
@@ -206,5 +222,6 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

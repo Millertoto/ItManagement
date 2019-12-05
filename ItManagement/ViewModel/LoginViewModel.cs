@@ -31,22 +31,25 @@ namespace ItManagement.ViewModel
 
 
         #endregion
+
         #region Constructor
 
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
         }
-        
+
         #endregion
+
         #region Properties
 
+        #region Lists
         public List<Employee> Employees
         {
             get { return _employees; }
             set { _employees = value; }
         }
-
+        #endregion 
         public string UserName
         {
             get { return _userName; }
@@ -65,6 +68,7 @@ namespace ItManagement.ViewModel
             set { _currentUser = value; }
         }
         #endregion
+
         #region RelayCommands
 
         public RelayCommand Enter
@@ -75,6 +79,7 @@ namespace ItManagement.ViewModel
 
         }
         #endregion
+
         #region Methods
 
         public async void LoginButtonMethod()
