@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using ItManagement.Commands;
 using ItManagement.Folder;
+using ItManagement.Persistencies;
 
 
 namespace ItManagement.ViewModel
@@ -23,7 +24,7 @@ namespace ItManagement.ViewModel
         //private ErrorsCatalogSingleton singleton;
         //private ObservableCollection<Errors> _errors;
         private Error _selected;
-        private List<Error> _listOfErrors;
+        private List<Equipment> _listOfEquipment;
         private int _uid;
         private string _errorText;
         private Employee _creatorOfError;
@@ -45,6 +46,7 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
+            _addErrorButton = new RelayCommand(AddError);
         }
         #endregion
 
@@ -95,10 +97,10 @@ namespace ItManagement.ViewModel
             }
         }
 
-        public List<Error> ListofErrors
+        public List<Equipment> ListOfEquipment
         {
-            get { return _listOfErrors; }
-            set { _listOfErrors = value; }
+            get { return _listOfEquipment; }
+            set { _listOfEquipment = value; }
 
 
 
@@ -106,27 +108,53 @@ namespace ItManagement.ViewModel
         }
 
 
-
-        /*public int ErrorsCount
-        {
-            get { return singleton.Count; }
-        }*/
-
-        /*public ObservableCollection<Error> All_Errors
-        {
-            get
-            {
-                _errors = new ObservableCollection<Error>(singleton.ErrorsList);
-                return _error;
-            }
-        }*/
-
         #endregion
 
         #region RelayCommands
+
+        public RelayCommand AddErrorButton
+        {
+            get { return _addErrorButton; }
+            set { _addErrorButton = value; }
+        }
         #endregion
 
         #region Methods
+
+
+        public async void AddError()
+        {
+
+            int uid = UidForCreation;
+            if (EquipmentCheck(uid))
+            {
+                Error e = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
+                await WebApiError.PostError("api/Errors/", e);
+            }
+            
+
+
+        }
+
+        public bool EquipmentCheck(int uid)
+        {
+            
+            bool c = false;
+            ListOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
+
+            foreach (Equipment e in ListOfEquipment)
+            {
+                if (uid == e.Uid)
+                {
+                    c = true;
+                    break;
+                }
+            }
+
+            return c;
+
+
+        }
 
         #endregion
 
