@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
@@ -76,7 +77,7 @@ namespace ItManagement.ViewModel
         #endregion
         #region Methods
 
-        public void LoginButtonMethod()
+        public async void LoginButtonMethod()
         {
 
             Employees = Singleton.Instance.EP.GetEmployees().Result;
@@ -100,10 +101,12 @@ namespace ItManagement.ViewModel
 
                 
             }
-            /*else
+            else
             {
-            some kind of error
-            }*/
+                var messageDialogue = new MessageDialog("Nah fam, no accses for u");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
 
         }
 
@@ -140,6 +143,7 @@ namespace ItManagement.ViewModel
             return c;
 
         }
+
         #endregion
 
         #region INotifyPropertyChanged
