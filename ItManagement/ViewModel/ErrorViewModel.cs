@@ -48,11 +48,11 @@ namespace ItManagement.ViewModel
         #region Constructor
         public ErrorViewModel()
         {
-            _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
+            _creatorOfError = Singleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
             /*_listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
-            _listOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
-            _allErrors = EmployeeSingleton.Instance.ERP.GetErrors().Result;
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            _allErrors = Singleton.Instance.ERP.GetErrors().Result;
 
             _uid = default(int);
 
@@ -151,9 +151,9 @@ namespace ItManagement.ViewModel
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
 
                 /*await WebApi<Error>.Post("api/Errors/", _toBeCreated);*/
-                await EmployeeSingleton.Instance.ERP.CreateError(_toBeCreated);
+                await Singleton.Instance.ERP.CreateError(_toBeCreated);
                 CurrentEquipment.IsWorking = false;
-                await EmployeeSingleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
 
             }
             
@@ -166,7 +166,7 @@ namespace ItManagement.ViewModel
             
             bool c = false;
             /*ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
-            ListOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
+            ListOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
             foreach (Equipment e in ListOfEquipment)
             {

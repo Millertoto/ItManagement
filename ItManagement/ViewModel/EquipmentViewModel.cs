@@ -39,7 +39,7 @@ namespace ItManagement.ViewModel
             /*_getAllEquipment = new RelayCommand(GetAllEquipmentMethod);*/
             _createEquipment = new RelayCommand(AddEquipment);
             /*_getEquipmentOfType = new RelayCommand(GetEquipmentOfTypeMethod);*/
-            _listOfEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
         }
 
         #endregion
@@ -124,28 +124,28 @@ namespace ItManagement.ViewModel
                 || TypeOfEquipment == "Tablet")
             {
                 Equipment e = new Equipment(TypeOfEquipment);
-                await EmployeeSingleton.Instance.EQP.CreateEquipment(e);
+                await Singleton.Instance.EQP.CreateEquipment(e);
 
-                AllEquipment = EmployeeSingleton.Instance.EQP.GetEquipments().Result;
+                AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
                 Equipment newlyCreatedEquip = AllEquipment.Last();
 
                 switch (newlyCreatedEquip.Type)
                 {
                     case "Computer":
                         Computer pc = new Computer(newlyCreatedEquip.Uid);
-                        await EmployeeSingleton.Instance.COM.CreateComputer(pc);
+                        await Singleton.Instance.COM.CreateComputer(pc);
                         break;
                     case "Smartboard":
                         SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
-                        await EmployeeSingleton.Instance.SB.CreateSmartboard(sb);
+                        await Singleton.Instance.SB.CreateSmartboard(sb);
                         break;
                     case "Smartphone":
                         SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
-                        await EmployeeSingleton.Instance.SP.CreateSmartphone(sp);
+                        await Singleton.Instance.SP.CreateSmartphone(sp);
                         break;
                     case "Tablet":
                         Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                        await EmployeeSingleton.Instance.TAB.CreateTablet(tab);
+                        await Singleton.Instance.TAB.CreateTablet(tab);
                         break;
                     default:
                         break;

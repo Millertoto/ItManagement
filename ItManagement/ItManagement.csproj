@@ -117,7 +117,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\RelayCommands.cs" />
-    <Compile Include="Folder\EmployeeSingleton.cs" />
+    <Compile Include="Folder\Singleton.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

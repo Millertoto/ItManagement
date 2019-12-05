@@ -79,12 +79,12 @@ namespace ItManagement.ViewModel
         public void LoginButtonMethod()
         {
 
-            Employees = EmployeeSingleton.Instance.EP.GetEmployees().Result;
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
 
 
             if (LoginCheck(UserName, Password, Employees))
             {
-                if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
+                if (AdminCheck(Singleton.Instance.CurrentUser))
                 {
                     Frame currentFrame = Window.Current.Content as Frame;
                     currentFrame.Navigate(typeof(ErrorPageAdmin));
@@ -132,7 +132,7 @@ namespace ItManagement.ViewModel
                     if (username == e.Username && password == e.Password)
                     {
                         c = true;
-                        EmployeeSingleton.Instance.CurrentUser = e;
+                        Singleton.Instance.CurrentUser = e;
                         break;
                     }
                     

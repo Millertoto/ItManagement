@@ -96,7 +96,7 @@ namespace ItManagement.ViewModel
 
         public async void GetEmployeeList()
         {
-            Employees = EmployeeSingleton.Instance.EP.GetEmployees().Result;
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
             /*Employees = WebApi<Employee>.GetList("api/Employees/");*/
         }
 
@@ -117,7 +117,7 @@ namespace ItManagement.ViewModel
             {
                 Employee Emp = new Employee(Username, CPR, Password, Name, IsAdmin);
                 /*await WebApi<Employee>.Post("api/Employees/", Emp);*/
-                await EmployeeSingleton.Instance.EP.CreateEmployee(Emp);
+                await Singleton.Instance.EP.CreateEmployee(Emp);
 
 
             }
