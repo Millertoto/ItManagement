@@ -6,12 +6,16 @@ namespace ItManagement
 {
     public partial class Employee
     {
+        #region Instance Field
 
         private int _cpr;
         private string _username;
         private string _password;
         private string _name;
         private bool _isAdmin;
+        #endregion
+
+        #region Constructor
         public Employee(string username, int cpr, string password, string name, bool isadmin )
         {
             Errors = new HashSet<Error>();
@@ -21,7 +25,9 @@ namespace ItManagement
             _name = name;
             _isAdmin = isadmin;
         }
+        #endregion
 
+        #region Properties
         public int Cpr
         {
             get { return _cpr; }
@@ -55,4 +61,5 @@ namespace ItManagement
 
         public virtual ICollection<Error> Errors { get; set; }
     }
+    #endregion
 }
