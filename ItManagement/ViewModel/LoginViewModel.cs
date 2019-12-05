@@ -9,7 +9,7 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
-using ItManagement.Folder;
+using ItManagement.PersSingleton;
 using ItManagement.View;
 using ItManagement.Models;
 using ItManagement.Persistencies;

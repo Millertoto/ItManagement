@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ItManagement.Persistencies;
 
-namespace ItManagement.Folder
+namespace ItManagement.PersSingleton
 {
     class Singleton
     {

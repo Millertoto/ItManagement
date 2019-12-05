@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ItManagement.Folder;
+using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 using Type = System.Type;
 

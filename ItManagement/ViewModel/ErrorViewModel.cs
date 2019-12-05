@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
 using ItManagement.Commands;
-using ItManagement.Folder;
+using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 
 
