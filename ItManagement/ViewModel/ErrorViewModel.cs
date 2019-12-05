@@ -49,6 +49,9 @@ namespace ItManagement.ViewModel
             _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
             _listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");
+            _uid = default(int);
+
+
         }
         #endregion
 
@@ -132,7 +135,7 @@ namespace ItManagement.ViewModel
         {
 
             int uid = UidForCreation;
-            if (EquipmentCheck(uid))
+            if (EquipmentCheck(uid) && uid != 0)
             {
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
                 await WebApi<Error>.Post("api/Errors/", _toBeCreated);
