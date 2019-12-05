@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Graphics.Holographic;
+using Windows.Media.Streaming.Adaptive;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,7 +29,6 @@ namespace ItManagement.ViewModel
         private RelayCommand _enter;
         private Employee _currentUser;
         private List<Employee> _employees;
-        /*private const string _employeeurl = "api/Employees/";*/
 
 
         #endregion
@@ -37,6 +38,8 @@ namespace ItManagement.ViewModel
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
+            /*Employee e = new Employee("AAA", 1307941500, "heyssa22", "Martin Holm", true);
+            Singleton.Instance.EP.CreateEmployee(e);*/
         }
 
         #endregion
@@ -50,6 +53,7 @@ namespace ItManagement.ViewModel
             set { _employees = value; }
         }
         #endregion 
+
         public string UserName
         {
             get { return _userName; }
@@ -129,8 +133,6 @@ namespace ItManagement.ViewModel
             {
                 return true;
             }
-
-            /*removable*/
             else
             {
                 return false;

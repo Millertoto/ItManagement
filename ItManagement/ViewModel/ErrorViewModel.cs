@@ -22,8 +22,7 @@ namespace ItManagement.ViewModel
 
 
         #region Instance Field
-        //private ErrorsCatalogSingleton singleton;
-        //private ObservableCollection<Errors> _errors;
+
         private Error _selected;
         private Error _toBeCreated;
         private List<Equipment> _listOfEquipment;
@@ -34,9 +33,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _getErrors;
         private List<Error> _allErrors;
         private Equipment _currentEquipment;
-
-
-        //private SkoledbContext _dbcontext;
+        private ObservableCollection<Error> _obsErrors;
 
 
         #endregion
@@ -46,9 +43,9 @@ namespace ItManagement.ViewModel
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
-            /*_listOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _allErrors = Singleton.Instance.ERP.GetErrors().Result;
+            ConvertToObs();
 
             _uid = default(int);
 
@@ -122,6 +119,27 @@ namespace ItManagement.ViewModel
 
 
         }
+
+        public List<Error> ListOfErrors
+        {
+            get { return _allErrors; }
+            set
+            {
+                _allErrors = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+        public ObservableCollection<Error> ObsListOfErrors
+        {
+            get { return _obsErrors; }
+            set
+            {
+                _obsErrors = value; 
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
 
@@ -147,7 +165,6 @@ namespace ItManagement.ViewModel
             {
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
 
-                /*await WebApi<Error>.Post("api/Errors/", _toBeCreated);*/
                 await Singleton.Instance.ERP.CreateError(_toBeCreated);
                 CurrentEquipment.IsWorking = false;
                 await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
@@ -165,7 +182,7 @@ namespace ItManagement.ViewModel
         {
             
             bool c = false;
-            /*ListOfEquipment = WebApi<Equipment>.GetList("api/Equipments/");*/
+
             ListOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
             foreach (Equipment e in ListOfEquipment)
@@ -181,6 +198,14 @@ namespace ItManagement.ViewModel
             return c;
 
 
+        }
+
+        public void ConvertToObs()
+        {
+            foreach (Error e in ListOfErrors)
+            {
+                ObsListOfErrors.Add(e);
+            }
         }
 
         #endregion

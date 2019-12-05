@@ -24,6 +24,7 @@ namespace ItManagement.Persistencies
         }
 
         #endregion
+
         #region Tasks
         public Task<List<Equipment>> GetEquipments()
         {

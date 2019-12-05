@@ -70,7 +70,7 @@
                 </StackPanel>
                 <StackPanel Margin="50,20,183,-330" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Margin="0,0,0,-270" Background="CornflowerBlue" ItemsSource="{Binding ListofErrors}">
+                    <ListView Margin="0,0,0,-270" Background="CornflowerBlue" ItemsSource="{Binding ListOfErrors}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

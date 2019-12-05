@@ -16,6 +16,7 @@ namespace ItManagement.Persistencies
         private WebAPIAsync<Error> _webApi;
 
         #endregion
+
         #region Constructor
         public ErrorPersistency()
         {

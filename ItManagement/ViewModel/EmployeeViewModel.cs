@@ -35,6 +35,7 @@ namespace ItManagement.ViewModel
             _getEmployeeList = new RelayCommand(GetEmployeeList);
         }
         #endregion
+
         #region Properties
 
         public int CPR
@@ -120,7 +121,6 @@ namespace ItManagement.ViewModel
         public async void GetEmployeeList()
         {
             Employees = Singleton.Instance.EP.GetEmployees().Result;
-            /*Employees = WebApi<Employee>.GetList("api/Employees/");*/
         }
 
         public async void AddEmployeeMethod()
@@ -133,7 +133,6 @@ namespace ItManagement.ViewModel
                 && NameCheck(Name))
             {
                 Employee Emp = new Employee(Username, CPR, Password, Name, IsAdmin);
-                /*await WebApi<Employee>.Post("api/Employees/", Emp);*/
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
                 var messageDialogue = new MessageDialog($"The Account, {Username}, has been created");

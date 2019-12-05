@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ItManagement.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,11 @@ namespace ItManagement.View
     /// </summary>
     public sealed partial class EquipmentPageAdmin : Page
     {
+        EquipmentViewModel evm = new EquipmentViewModel();
         public EquipmentPageAdmin()
         {
             this.InitializeComponent();
+            this.DataContext = evm;
         }
     }
 }
