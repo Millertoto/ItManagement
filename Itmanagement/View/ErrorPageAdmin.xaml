@@ -31,15 +31,14 @@
                     </StackPanel>
                 </SplitView.Pane>
                 <SplitView.Content>
-                    <StackPanel Margin="32,50,0,300" >
+                    <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                         <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
                             <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
                             <TextBox Margin="0,0,0,0"  Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="52,0,130,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
-                            <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="45,0,-194.6,0"/>
-                            <TextBox Margin="45,0,0.4,0" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
-
+                            <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="65,0,6.4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <TextBox MaxLength="60" Margin="65,0,0.4,0" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
                         </StackPanel>
                         <!--<StackPanel Orientation="Vertical" Margin="50,0,130,10" >
                             <TextBlock Text="Hardware Type:" FontSize="44" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
@@ -50,27 +49,28 @@
                             <CalendarDatePicker FontSize="44" Height="71" Margin="0,0,0,0"  Width="448" HorizontalAlignment="Center"  />
                         </StackPanel>-->
                     </StackPanel>
-
                 </SplitView.Content>
             </SplitView>
-            <StackPanel Margin="640,-795,150,220">
+            <StackPanel Margin="640,-800,125,220">
                 <!--<StackPanel Orientation="Vertical" Margin="0,0,170,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
                     <TextBlock Text="Beskrivelse af fejl" FontSize="43" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
                     <TextBox Margin="2,5,7.4,99" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="230" FontSize="20" VerticalAlignment="Stretch" />
 
                 </StackPanel>-->
-                <StackPanel Margin="50,66,180,20" Orientation="Horizontal" Height="57" HorizontalAlignment="Stretch">
-                    <Button Content="Opret" Command="{Binding Path = AddErrorButton, Mode=TwoWay}" Margin="0,0,20,0" Height="51" FontSize="30" Width="142" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click"/>
-                    <Button Content="Slet" Margin="0,0,20,5"  Height="55" FontSize="30" Width="142" Background="CornflowerBlue" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
-                    <Button Content="Edit" Margin="0,0,20,5"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
+                <StackPanel Margin="0,66,560,20" Orientation="Vertical" Height="441" VerticalAlignment="Stretch">
+                    <Button Content="Opret" Command="{Binding Path = AddErrorButton, Mode=TwoWay}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
+                    <Button Content="Slet" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
+                    <Button Content="Edit" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
+                    <Button Content="Løst" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
+                    <ComboBox Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
+                        <Button Content="ja"></Button>
+                        <Button Content="nej"></Button>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="50,-12,180,-20" Orientation="Horizontal" Height="50">
-                    <Button Content="Løst" Margin="0,0,5,0"  VerticalAlignment="Center" Height="52" Width="142" FontSize="30" Background="CornflowerBlue"></Button>
 
-                </StackPanel>
-                <StackPanel Margin="50,20,183,-330" Orientation="Vertical">
+                <StackPanel Margin="175,-520,0,50" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Margin="0,0,0,-270" Background="CornflowerBlue" ItemsSource="{Binding ListofErrors}">
+                    <ListView Margin="0,0,0,0" Background="CornflowerBlue" ItemsSource="{Binding ListofErrors}" Height="407" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -79,18 +79,12 @@
                                     <TextBlock Text="Beskrivelse"></TextBlock>
                                     <TextBox Text="{Binding Path=  ErrorDescription, Mode=TwoWay}"></TextBox>
                                 </StackPanel>
-
                             </DataTemplate>
                         </ListView.ItemTemplate>
-
                     </ListView>
-
-
                 </StackPanel>
 
             </StackPanel>
         </StackPanel>
-
-
     </Grid>
 </Page>

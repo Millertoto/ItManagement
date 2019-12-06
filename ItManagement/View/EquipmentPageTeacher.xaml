@@ -27,14 +27,12 @@
                     </StackPanel>
                 </SplitView.Pane>
                 <SplitView.Content>
-
                     <StackPanel Margin="130,110,130,200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Frame x:Name="myFrame" Margin="0,0,0,0"/>
                         <StackPanel Margin="0,-50,0,0" Orientation="Horizontal">
                             <TextBlock Text="ID" FontSize="30" Margin="0,0,410,0"></TextBlock>
                             <TextBlock Text="Hardware Type" FontSize="30" Margin="0,0,410,0"></TextBlock>
                             <TextBlock Text="Funktionelitet" FontSize="30" Margin="0,0,0,0"></TextBlock>
-
                         </StackPanel>
                         <StackPanel Background="CornflowerBlue" Margin="0,0,0,-530">
                             <ListView Margin="0,0,0,0" >
@@ -49,20 +47,13 @@
                                             <TextBox/>
 
                                         </StackPanel>
-
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-
                             </ListView>
-
                         </StackPanel>
-
-
                     </StackPanel>
                 </SplitView.Content>
             </SplitView>
         </StackPanel>
-
-
     </Grid>
 </Page>
