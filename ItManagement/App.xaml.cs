@@ -64,7 +64,9 @@ namespace ItManagement
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(AdminMainpage), e.Arguments);
+
+                    rootFrame.Navigate(typeof(ErrorPageAdmin), e.Arguments);
+
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
