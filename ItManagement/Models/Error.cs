@@ -7,14 +7,18 @@ namespace ItManagement
 {
     public partial class Error
     {
+        #region Instance Field
         private int _cpr;
         private int _uid;
         private string _errorMessage;
         private DateTime _create;
         private DateTime _update;
         private bool _isRepaired;
+        #endregion
 
-        
+        #region Constructor
+
+
         public Error(int cpr, int uid, string errorMessage)
         {
             _cpr = cpr;
@@ -26,6 +30,9 @@ namespace ItManagement
 
 
         }
+        #endregion
+
+        #region Properties
         public int Fid { get; set; }
 
         public int Cpr
@@ -67,4 +74,5 @@ namespace ItManagement
         public virtual Employee CprNavigation { get; set; }
         public virtual Equipment U { get; set; }
     }
+    #endregion
 }

@@ -8,16 +8,23 @@ namespace ItManagement.Persistencies
 {
     public class ErrorPersistency
     {
+        #region Instance Field
         const string _serverURL = "http://localhost:52667";
         const string _employeeURI = "Errors";
         const string _apiPrefix = "api";
 
         private WebAPIAsync<Error> _webApi;
 
+        #endregion
+
+        #region Constructor
         public ErrorPersistency()
         {
             _webApi = new WebAPIAsync<Error>(_serverURL, _apiPrefix, _employeeURI);
         }
+        #endregion
+
+        #region Tasks
 
         public Task<List<Error>> GetErrors()
         {
@@ -43,5 +50,6 @@ namespace ItManagement.Persistencies
         {
             await _webApi.Create(obj);
         }
+        #endregion
     }
 }

@@ -6,6 +6,13 @@ namespace ItManagement
 {
     public partial class SmartPhone
     {
+        private int _uid;
+        private bool _isBorrowed;
+        public SmartPhone(int uid)
+        {
+            _uid = uid;
+            IsBorrowed = false;
+        }
         public int Uid { get; set; }
         public bool IsBorrowed { get; set; }
 

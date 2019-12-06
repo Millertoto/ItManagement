@@ -5,15 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using ItManagement.Persistencies;
 
-namespace ItManagement.Folder
+namespace ItManagement.PersSingleton
 {
-    class EmployeeSingleton
+    class Singleton
     {
         #region Instance Field
 
         private Employee _currentUser;
-        private static EmployeeSingleton _instance;
+        private static Singleton _instance;
         public EmployeePersistency EP = new EmployeePersistency();
+        public EquipmentPersistency EQP = new EquipmentPersistency();
+        public ErrorPersistency ERP = new ErrorPersistency();
+        public TabletPersistency TAB = new TabletPersistency();
+        public SmartboardPersistency SB = new SmartboardPersistency();
+        public ComputerPersistency COM = new ComputerPersistency();
+        public SmartphonePersistency SP = new SmartphonePersistency();
 
 
         #endregion
@@ -29,11 +35,11 @@ namespace ItManagement.Folder
             set { _currentUser = value; }
         }
 
-        public static EmployeeSingleton Instance
+        public static Singleton Instance
         {
             get
             {
-                if (_instance == null) _instance = new EmployeeSingleton();
+                if (_instance == null) _instance = new Singleton();
                 return _instance;
             }
         }

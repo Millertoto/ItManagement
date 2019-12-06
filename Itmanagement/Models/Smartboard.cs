@@ -4,10 +4,30 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+    
     public partial class SmartBoard
     {
+        private int _uid;
+        private int _roomID;
+        public SmartBoard(int uid)
+        {
+            _uid = uid;
+            _roomID = 0;
+        }
+
+        public SmartBoard(int uid, int roomid)
+        {
+            _uid = uid;
+            _roomID = roomid;
+        }
+
         public int Uid { get; set; }
-        public int Roomid { get; set; }
+
+        public int Roomid
+        {
+            get { return _roomID; }
+            set { _roomID = value; }
+        }
 
         public virtual Equipment U { get; set; }
     }

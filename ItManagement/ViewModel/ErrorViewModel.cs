@@ -9,8 +9,9 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using ItManagement.Commands;
-using ItManagement.Folder;
+using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 
 
@@ -21,8 +22,7 @@ namespace ItManagement.ViewModel
 
 
         #region Instance Field
-        //private ErrorsCatalogSingleton singleton;
-        //private ObservableCollection<Errors> _errors;
+
         private Error _selected;
         private Error _toBeCreated;
         private List<Equipment> _listOfEquipment;
@@ -31,24 +31,25 @@ namespace ItManagement.ViewModel
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
-
-
-        //private SkoledbContext _dbcontext;
+        private List<Error> _allErrors;
+        private Equipment _currentEquipment;
+        private ObservableCollection<Error> _obsErrors;
 
 
         #endregion
 
-
-
-
-        
-
         #region Constructor
         public ErrorViewModel()
         {
-            _creatorOfError = EmployeeSingleton.Instance.CurrentUser;
+            _creatorOfError = Singleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
-            _listOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            _allErrors = Singleton.Instance.ERP.GetErrors().Result;
+            ConvertToObs();
+
+            _uid = default(int);
+
+
         }
         #endregion
 
@@ -76,6 +77,12 @@ namespace ItManagement.ViewModel
             }
         }
 
+        public Equipment CurrentEquipment
+        {
+            get { return _currentEquipment; }
+            set { _currentEquipment = value; }
+        }
+
         public Employee CreatorOfError
         {
             get { return _creatorOfError; }
@@ -98,16 +105,42 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        #region Lists
         public List<Equipment> ListOfEquipment
         {
             get { return _listOfEquipment; }
-            set { _listOfEquipment = value; }
+            set
+            {
+                _listOfEquipment = value;
+                OnPropertyChanged();
+            }
 
 
 
 
         }
+
+        public List<Error> ListOfErrors
+        {
+            get { return _allErrors; }
+            set
+            {
+                _allErrors = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+        public ObservableCollection<Error> ObsListOfErrors
+        {
+            get { return _obsErrors; }
+            set
+            {
+                _obsErrors = value; 
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
 
         #endregion
@@ -128,10 +161,17 @@ namespace ItManagement.ViewModel
         {
 
             int uid = UidForCreation;
-            if (EquipmentCheck(uid))
+            if (EquipmentCheck(uid) && uid != 0)
             {
                 _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
-                await WebApiError.PostError("api/Errors/", _toBeCreated);
+
+                await Singleton.Instance.ERP.CreateError(_toBeCreated);
+                CurrentEquipment.IsWorking = false;
+                await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
             }
             
 
@@ -142,13 +182,15 @@ namespace ItManagement.ViewModel
         {
             
             bool c = false;
-            ListOfEquipment = WebApiEquipment.GetEquipment("api/Equipments/");
+
+            ListOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
             foreach (Equipment e in ListOfEquipment)
             {
                 if (uid == e.Uid)
                 {
                     c = true;
+                    CurrentEquipment = e;
                     break;
                 }
             }
@@ -156,6 +198,14 @@ namespace ItManagement.ViewModel
             return c;
 
 
+        }
+
+        public void ConvertToObs()
+        {
+            foreach (Error e in ListOfErrors)
+            {
+                ObsListOfErrors.Add(e);
+            }
         }
 
         #endregion

@@ -6,45 +6,46 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class EmployeePersistency
+    class SmartboardPersistency
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";
-        const string EmployeeUri = "Employees";
+        const string EmployeeUri = "SmartBoards";
         const string ApiPrefix = "api";
 
-        private WebAPIAsync<Employee> _webApi;
+        private WebAPIAsync<SmartBoard> _webApi;
         #endregion
 
         #region Constructor
-        public EmployeePersistency()
+        public SmartboardPersistency()
         {
-            _webApi = new WebAPIAsync<Employee>(ServerUrl, ApiPrefix, EmployeeUri);
+            _webApi = new WebAPIAsync<SmartBoard>(ServerUrl, ApiPrefix, EmployeeUri);
         }
+
         #endregion
 
         #region Tasks
-        public Task<List<Employee>> GetEmployees()
+        public Task<List<SmartBoard>> GetSmartboards()
         {
             return _webApi.Load();
         }
 
-        public async Task<Employee> GetEmployee(int key)
+        public async Task<SmartBoard> GetSmartboard(int key)
         {
             return await _webApi.Read(key);
         }
 
-        public async Task DeleteEmployee (int key)
+        public async Task DeleteSmartboard(int key)
         {
             await _webApi.Delete(key);
         }
 
-        public async Task UpdateEmployee(int key, Employee obj)
+        public async Task UpdateSmartboard(int key, SmartBoard obj)
         {
             await _webApi.Update(key, obj);
         }
 
-        public async Task CreateEmployee(Employee obj)
+        public async Task CreateSmartboard(SmartBoard obj)
         {
             await _webApi.Create(obj);
         }
