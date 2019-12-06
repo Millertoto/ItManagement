@@ -29,6 +29,7 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Employee> _obsEmps;
         private Employee _selectedEmployee;
         private RelayCommand _deleteEmp;
+        private RelayCommand _editButton;
         #endregion
 
         #region Constructor
@@ -39,6 +40,7 @@ namespace ItManagement.ViewModel
             _getEmployeeList = new RelayCommand(GetEmployeeList);
             _deleteEmp = new RelayCommand(DeleteEmpMethod);
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+            _editButton = new RelayCommand(EditMethod);
             ConvertToObs();
         }
         #endregion
@@ -108,6 +110,12 @@ namespace ItManagement.ViewModel
         {
             get { return _deleteEmp; }
             set { _deleteEmp = value; }
+        }
+
+        public RelayCommand EditButton
+        {
+            get { return _editButton; }
+            set { _editButton = value; }
         }
         public RelayCommand AddEmployeeButton
         {
@@ -194,6 +202,16 @@ namespace ItManagement.ViewModel
                     await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
                 }
             
+        }
+
+        public async void EditMethod()
+        {
+            SelectedEmployee.Name = Name;
+            SelectedEmployee.Password = Password;
+            SelectedEmployee.Username = Username;
+            SelectedEmployee.IsAdmin = IsAdmin;
+            await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+
         }
 
         #region Checks
