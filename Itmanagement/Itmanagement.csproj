@@ -170,6 +170,9 @@
     <Compile Include="View\ErrorPageTeacher.xaml.cs">
       <DependentUpon>ErrorPageTeacher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -222,6 +225,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ErrorPageTeacher.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
