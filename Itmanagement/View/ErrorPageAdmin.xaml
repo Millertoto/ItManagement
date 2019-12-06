@@ -25,10 +25,10 @@
             </RelativePanel>
             <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
                 <SplitView.Pane>
-                    <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
-                        <Button  Background="CornflowerBlue" Click="Rum1_OnClick" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
+                  <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
+                    <Button  Background="CornflowerBlue" Click="Rum1_OnClick" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
 
-                    </StackPanel>
+                  </StackPanel>
                 </SplitView.Pane>
                 <SplitView.Content>
                     <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
