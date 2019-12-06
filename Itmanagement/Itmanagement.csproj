@@ -117,6 +117,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\RelayCommands.cs" />
+    <Compile Include="PersSingleton\Singleton.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -129,19 +130,36 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Persistencies\ComputerPersistency.cs" />
+     <Compile Include="Persistencies\AccesoryPersistency.cs" />
+    <Compile Include="Persistencies\EmployeePersistency.cs" />
+    <Compile Include="Persistencies\EquipmentPersistency.cs" />
+    <Compile Include="Persistencies\ErrorPersistency.cs" />
+    <Compile Include="Persistencies\IwebAPIAsync.cs" />
+    <Compile Include="Persistencies\SmartboardPersistency.cs" />
+    <Compile Include="Persistencies\SmartphonePersistency.cs" />
+    <Compile Include="Persistencies\TabletPersistency.cs" />
+    <Compile Include="Persistencies\WebAPIAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\SkoledbContext.cs" />
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
-    <Compile Include="ViewModel\ComputerViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
-    <Compile Include="ViewModel\ITSupportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\SmartboardViewModel.cs" />
-    <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
-    <Compile Include="ViewModel\TabletViewModel.cs" />
-    <Compile Include="ViewModel\TeacherViewModel.cs" />
+    <Compile Include="View\EmployeePageAdmin.xaml.cs">
+      <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeePageTeacher.xaml.cs">
+      <DependentUpon>EmployeePageTeacher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentPageAdmin.xaml.cs">
+      <DependentUpon>EquipmentPageAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentPageTeacher.xaml.cs">
+      <DependentUpon>EquipmentPageTeacher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorPageAdmin.xaml.cs">
       <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
     </Compile>
@@ -175,6 +193,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\EmployeePageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeePageTeacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentPageTeacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ErrorPageAdmin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -187,6 +221,9 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework">
       <Version>6.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore">
       <Version>2.2.6</Version>

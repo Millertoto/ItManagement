@@ -7,37 +7,48 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using ItManagement.Commands;
+using ItManagement.PersSingleton;
+using ItManagement.Persistencies;
 
-    namespace ItManagement.ViewModel
+
+namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
 
 
         #region Instance Field
-        //private ErrorsCatalogSingleton singleton;
-        //private ObservableCollection<Errors> _errors;
+
         private Error _selected;
-        private List<Error> _listOfErrors;
+        private Error _toBeCreated;
+        private List<Equipment> _listOfEquipment;
         private int _uid;
         private string _errorText;
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
-
-
-        //private SkoledbContext _dbcontext;
+        private List<Error> _allErrors;
+        private Equipment _currentEquipment;
+        private ObservableCollection<Error> _obsErrors;
 
 
         #endregion
 
-           
         #region Constructor
         public ErrorViewModel()
         {
-           /* _creatorOfError = Singleton.User*/;
+            _creatorOfError = Singleton.Instance.CurrentUser;
+            _addErrorButton = new RelayCommand(AddError);
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            _allErrors = Singleton.Instance.ERP.GetErrors().Result;
+            ConvertToObs();
+
+            _uid = default(int);
+
 
         }
         #endregion
@@ -66,6 +77,12 @@ using ItManagement.Commands;
             }
         }
 
+        public Equipment CurrentEquipment
+        {
+            get { return _currentEquipment; }
+            set { _currentEquipment = value; }
+        }
+
         public Employee CreatorOfError
         {
             get { return _creatorOfError; }
@@ -88,101 +105,109 @@ using ItManagement.Commands;
                 OnPropertyChanged();
             }
         }
-
-        public List<Error> ListofErrors
+        #region Lists
+        public List<Equipment> ListOfEquipment
         {
-            get { return _listOfErrors; }
-            set { _listOfErrors = value; }
+            get { return _listOfEquipment; }
+            set
+            {
+                _listOfEquipment = value;
+                OnPropertyChanged();
+            }
 
 
 
 
         }
 
-
-
-        /*public int ErrorsCount
+        public List<Error> ListOfErrors
         {
-            get { return singleton.Count; }
-        }*/
-
-        /*public ObservableCollection<Error> All_Errors
-        {
-            get
+            get { return _allErrors; }
+            set
             {
-                _errors = new ObservableCollection<Error>(singleton.ErrorsList);
-                return _error;
+                _allErrors = value;
+                OnPropertyChanged();
             }
-        }*/
+
+        }
+
+        public ObservableCollection<Error> ObsListOfErrors
+        {
+            get { return _obsErrors; }
+            set
+            {
+                _obsErrors = value; 
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
 
         #endregion
 
         #region RelayCommands
 
-        public ICommand AddErrorButton
+        public RelayCommand AddErrorButton
         {
-            get
-            {
-                if (_addErrorButton == null)
-                {
-                    _addErrorButton = new RelayCommand(AddError);
-                }
-
-                return _addErrorButton;
-            }
-
-
-        }
-
-        public ICommand GetErrorButton
-        {
-            get
-            {
-                if (_getErrors == null)
-                {
-                    _getErrors = new RelayCommand(GetErrors);
-                }
-
-                return _getErrors;
-            }
-
-
+            get { return _addErrorButton; }
+            set { _addErrorButton = value; }
         }
         #endregion
 
         #region Methods
 
-        public void AddError()
-        {
-            Error e1 = new Error
-            {
-                Uid = _uid,
-                Cpr = CreatorOfError.Cpr,
-                ErrorMessage = _errorText,
-                Create = DateTime.Now,
-                Update = DateTime.Now,
-                IsRepaired = false
-            };
 
-            using (var db = new SkoledbContext())
+        public async void AddError()
+        {
+
+            int uid = UidForCreation;
+            if (EquipmentCheck(uid) && uid != 0)
             {
-                db.Add(e1);
-                db.SaveChanges();
+                _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
+
+                await Singleton.Instance.ERP.CreateError(_toBeCreated);
+                CurrentEquipment.IsWorking = false;
+                await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
             }
+            
+
+
         }
 
-        public void GetErrors()
+        public bool EquipmentCheck(int uid)
         {
-            _listOfErrors.Clear();
+            
+            bool c = false;
 
-            using (var db = new SkoledbContext())
+            ListOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+
+            foreach (Equipment e in ListOfEquipment)
             {
-                foreach (Error e in db.Errors)
+                if (uid == e.Uid)
                 {
-                    _listOfErrors.Add(e);
+                    c = true;
+                    CurrentEquipment = e;
+                    break;
                 }
             }
+
+            return c;
+
+
         }
+
+        public void ConvertToObs()
+        {
+            foreach (Error e in ListOfErrors)
+            {
+                ObsListOfErrors.Add(e);
+            }
+        }
+
         #endregion
 
         #region PropertyChanged

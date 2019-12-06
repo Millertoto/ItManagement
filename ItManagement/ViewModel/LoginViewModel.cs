@@ -5,10 +5,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.Graphics.Holographic;
+using Windows.Media.Streaming.Adaptive;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
+using ItManagement.PersSingleton;
 using ItManagement.View;
+using ItManagement.Models;
+using ItManagement.Persistencies;
 
 namespace ItManagement.ViewModel
 {
@@ -20,19 +27,32 @@ namespace ItManagement.ViewModel
         private string _userName;
         private string _password;
         private RelayCommand _enter;
-        private Employee _CurrentUser;
+        private Employee _currentUser;
+        private List<Employee> _employees;
 
 
         #endregion
+
         #region Constructor
 
         public LoginViewModel()
         {
-            RelayCommand Enter = new RelayCommand(LoginButtonMethod);
+            _enter = new RelayCommand(LoginButtonMethod);
+            /*Employee e = new Employee("AAA", 1307941500, "heyssa22", "Martin Holm", true);
+            Singleton.Instance.EP.CreateEmployee(e);*/
         }
-        
+
         #endregion
+
         #region Properties
+
+        #region Lists
+        public List<Employee> Employees
+        {
+            get { return _employees; }
+            set { _employees = value; }
+        }
+        #endregion 
 
         public string UserName
         {
@@ -48,53 +68,68 @@ namespace ItManagement.ViewModel
 
         public Employee CurrentUser
         {
-            get { return _CurrentUser; }
-            set { _CurrentUser = value; }
+            get { return _currentUser; }
+            set { _currentUser = value; }
         }
         #endregion
+
         #region RelayCommands
+
+        public RelayCommand Enter
+        {
+            get { return _enter; }
+            set { _enter = value; }
+
+
+        }
         #endregion
+
         #region Methods
 
-        public void LoginButtonMethod()
+        public async void LoginButtonMethod()
         {
-            if (LoginCheck(UserName, Password))
+
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
+
+
+            if (LoginCheck(UserName, Password, Employees))
             {
-                using (var db = new SkoledbContext())
+                if (AdminCheck(Singleton.Instance.CurrentUser))
                 {
-                    foreach (Employee e in db.Employees)
-                    {
-                        if ((UserName == e.Username) && (Password == e.Password))
-                        {
-                            _CurrentUser = e;
-                            
-                        }   
+                    Frame currentFrame = Window.Current.Content as Frame;
+                    currentFrame.Navigate(typeof(ErrorPageAdmin));
 
-                        break;
-                    }
+                    var messageDialogue = new MessageDialog($"Welcome Back, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
 
-                    if (AdminCheck(CurrentUser))
-                    {
-                        Frame currentFrame = Window.Current.Content as Frame;
-                        currentFrame.Navigate(typeof(AdminMainpage));
-                    }
-                    else
-                    {
+                else
+                {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
-                    }
+
+                        var messageDialogue = new MessageDialog($"Welcome, {CurrentUser.Name}");
+                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        await messageDialogue.ShowAsync();
                 }
+
+
+
+                
             }
-            /*else
+            else
             {
-            some kind of error
-            }*/
+                var messageDialogue = new MessageDialog("Nah fam, no accses for u");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
 
         }
 
         public bool AdminCheck(Employee currentUser)
         {
-            if (CurrentUser.IsAdmin)
+            if (currentUser.IsAdmin)
             {
                 return true;
             }
@@ -106,23 +141,24 @@ namespace ItManagement.ViewModel
             
         }
 
-        public bool LoginCheck(string username, string password)
+        public bool LoginCheck(string username, string password, List<Employee> employees)
         {
             bool c = false;
 
-            using (var db = new SkoledbContext())
-            {
-                foreach (Employee e in db.Employees)
+                foreach (Employee e in employees)
                 {
                     if (username == e.Username && password == e.Password)
                     {
                         c = true;
+                        Singleton.Instance.CurrentUser = e;
+                        break;
                     }
                     
                 }
-            }
             return c;
+
         }
+
         #endregion
 
         #region INotifyPropertyChanged
