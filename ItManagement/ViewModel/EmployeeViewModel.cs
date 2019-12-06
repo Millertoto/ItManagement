@@ -1,6 +1,7 @@
 ﻿using ItManagement.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -25,6 +26,9 @@ namespace ItManagement.ViewModel
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
+        private ObservableCollection<Employee> _obsEmps;
+        private Employee _selectedEmployee;
+        private RelayCommand _deleteEmp;
         #endregion
 
         #region Constructor
@@ -33,11 +37,23 @@ namespace ItManagement.ViewModel
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
             _getEmployeeList = new RelayCommand(GetEmployeeList);
+            _deleteEmp = new RelayCommand(DeleteEmpMethod);
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
+            ConvertToObs();
         }
         #endregion
 
         #region Properties
 
+        public Employee SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+        }
         public int CPR
         {
             get { return _cpr; }
@@ -87,6 +103,12 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region RelayCommands
+
+        public RelayCommand DeleteButton
+        {
+            get { return _deleteEmp; }
+            set { _deleteEmp = value; }
+        }
         public RelayCommand AddEmployeeButton
         {
             get { return _addEmployeeButton; }
@@ -114,13 +136,28 @@ namespace ItManagement.ViewModel
             }
 
         }
+
+        public ObservableCollection<Employee> ObsEmployees
+        {
+            get { return _obsEmps; }
+            set
+            {
+                _obsEmps = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods
 
-        public async void GetEmployeeList()
+        public void GetEmployeeList()
         {
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+            ObsEmployees.Clear();
+            foreach (Employee e in Employees)
+            {
+                ObsEmployees.Add(e);
+            }
         }
 
         public async void AddEmployeeMethod()
@@ -148,6 +185,18 @@ namespace ItManagement.ViewModel
             }
 
         }
+
+        public async void DeleteEmpMethod()
+        {
+            
+                if (SelectedEmployee != null)
+                {
+                    await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
+                }
+            
+        }
+
+        #region Checks
 
         public bool UsernameCheck(string username, List<Employee> list)
         {
@@ -208,6 +257,15 @@ namespace ItManagement.ViewModel
             }
 
             return false;
+        }
+        #endregion
+
+        public void ConvertToObs()
+        {
+            foreach (Employee e in Employees)
+            {
+                ObsEmployees.Add(e);
+            }
         }
 
         #endregion

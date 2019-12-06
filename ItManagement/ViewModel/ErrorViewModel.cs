@@ -34,6 +34,7 @@ namespace ItManagement.ViewModel
         private List<Error> _allErrors;
         private Equipment _currentEquipment;
         private ObservableCollection<Error> _obsErrors;
+        private RelayCommand _deleteButton;
 
 
         #endregion
@@ -43,8 +44,10 @@ namespace ItManagement.ViewModel
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
             _addErrorButton = new RelayCommand(AddError);
+            _deleteButton = new RelayCommand(DeleteMethod);
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _allErrors = Singleton.Instance.ERP.GetErrors().Result;
+
             ConvertToObs();
 
             _uid = default(int);
@@ -154,6 +157,12 @@ namespace ItManagement.ViewModel
         }
         #endregion
 
+        public RelayCommand DeleteDis
+        {
+            get { return _deleteButton;}
+            set { _deleteButton = value; }
+        }
+        
         #region Methods
 
 
@@ -176,6 +185,14 @@ namespace ItManagement.ViewModel
             
 
 
+        }
+
+        public async void DeleteMethod()
+        {
+            if (SelectedError != null)
+            {
+                await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
+            }
         }
 
         public bool EquipmentCheck(int uid)
