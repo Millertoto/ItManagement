@@ -61,21 +61,13 @@
                                             <TextBox/>
 
                                         </StackPanel>
-
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-
                             </ListView>
-
                         </StackPanel>
-
-
                     </StackPanel>
                 </SplitView.Content>
             </SplitView>
         </StackPanel>
-
-
-
     </Grid>
 </Page>
