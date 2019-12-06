@@ -62,9 +62,8 @@
                     <Button Content="Slet" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
                     <Button Content="Edit" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
                     <Button Content="Løst" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
-                    <ComboBox Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
-                        <Button Content="ja"></Button>
-                        <Button Content="nej"></Button>
+                    <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
+                      
                     </ComboBox>
                 </StackPanel>
 

@@ -105,6 +105,20 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string _selectedOption;
+        public string SelectedOption
+        {
+            get
+            {
+                return _selectedOption; ;
+            }
+            set
+            {
+                _selectedOption = value;
+                OnPropertyChanged();
+            }
+        }
         #region Lists
         public List<Equipment> ListOfEquipment
         {
@@ -114,12 +128,13 @@ namespace ItManagement.ViewModel
                 _listOfEquipment = value;
                 OnPropertyChanged();
             }
-
-
-
-
         }
 
+        public ObservableCollection<string> IsWorking
+        {
+            get { return new ObservableCollection<string>(){"true", "false"}; }
+
+        }
         public List<Error> ListOfErrors
         {
             get { return _allErrors; }
