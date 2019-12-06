@@ -6,45 +6,47 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class EmployeePersistency
+    class SmartphonePersistency
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";
-        const string EmployeeUri = "Employees";
+        const string EmployeeUri = "SmartPhones";
         const string ApiPrefix = "api";
 
-        private WebAPIAsync<Employee> _webApi;
+        private WebAPIAsync<SmartPhone> _webApi;
         #endregion
 
         #region Constructor
-        public EmployeePersistency()
+        public SmartphonePersistency()
         {
-            _webApi = new WebAPIAsync<Employee>(ServerUrl, ApiPrefix, EmployeeUri);
+            _webApi = new WebAPIAsync<SmartPhone>(ServerUrl, ApiPrefix, EmployeeUri);
         }
+
         #endregion
 
         #region Tasks
-        public Task<List<Employee>> GetEmployees()
+
+        public Task<List<SmartPhone>> GetSmartphones()
         {
             return _webApi.Load();
         }
 
-        public async Task<Employee> GetEmployee(int key)
+        public async Task<SmartPhone> GetSmartphone(int key)
         {
             return await _webApi.Read(key);
         }
 
-        public async Task DeleteEmployee (int key)
+        public async Task DeleteSmartphone(int key)
         {
             await _webApi.Delete(key);
         }
 
-        public async Task UpdateEmployee(int key, Employee obj)
+        public async Task UpdateSmartphone(int key, SmartPhone obj)
         {
             await _webApi.Update(key, obj);
         }
 
-        public async Task CreateEmployee(Employee obj)
+        public async Task CreateSmartphone(SmartPhone obj)
         {
             await _webApi.Create(obj);
         }

@@ -34,7 +34,7 @@
                     <StackPanel Margin="32,50,0,300" >
                         <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
                             <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                            <TextBox Margin="0,0,0,0"  Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
+                            <TextBox Margin="0,0,0,0"   Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="52,0,130,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
                             <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="45,0,-194.6,0"/>
@@ -70,7 +70,7 @@
                 </StackPanel>
                 <StackPanel Margin="50,20,183,-330" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Margin="0,0,0,-270" Background="CornflowerBlue" ItemsSource="{Binding ListofErrors}">
+                    <ListView Margin="0,0,0,-270" Background="CornflowerBlue" ItemsSource="{Binding ListOfErrors}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

@@ -23,7 +23,7 @@ namespace ItManagement.View
     /// </summary>
     public sealed partial class EmployeePageAdmin : Page
     {
-        TeacherViewModel evm = new TeacherViewModel();
+        EmployeeViewModel evm = new EmployeeViewModel();
         public EmployeePageAdmin()
         {
             this.InitializeComponent();

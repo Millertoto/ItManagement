@@ -117,7 +117,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\RelayCommands.cs" />
-    <Compile Include="Folder\EmployeeSingleton.cs" />
+    <Compile Include="PersSingleton\Singleton.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -130,31 +130,24 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-
-
+    <Compile Include="Persistencies\ComputerPersistency.cs" />
      <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
     <Compile Include="Persistencies\EquipmentPersistency.cs" />
     <Compile Include="Persistencies\ErrorPersistency.cs" />
     <Compile Include="Persistencies\IwebAPIAsync.cs" />
+    <Compile Include="Persistencies\SmartboardPersistency.cs" />
+    <Compile Include="Persistencies\SmartphonePersistency.cs" />
+    <Compile Include="Persistencies\TabletPersistency.cs" />
     <Compile Include="Persistencies\WebAPIAsync.cs" />
-    <Compile Include="Persistencies\WebApiEquipment.cs" />
-    <Compile Include="Persistencies\WebApiError.cs" />
-    <Compile Include="Persistencies\WebApiEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
-    <Compile Include="ViewModel\ComputerViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
-    <Compile Include="ViewModel\ITSupportViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\SmartboardViewModel.cs" />
-    <Compile Include="ViewModel\SmartPhoneViewModel.cs" />
-    <Compile Include="ViewModel\TabletViewModel.cs" />
-    <Compile Include="ViewModel\TeacherViewModel.cs" />
     <Compile Include="View\EmployeePageAdmin.xaml.cs">
       <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
     </Compile>
@@ -242,9 +235,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

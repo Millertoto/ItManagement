@@ -8,18 +8,26 @@ namespace ItManagement.Persistencies
 {
     class EquipmentPersistency
     {
-        const string _serverURL = "http://localhost:52667";
-        const string _equipmentURI = "Equipments";
-        const string _apiPrefix = "api";
+        #region Instance Field
+        const string ServerUrl = "http://localhost:52667";
+        const string EmployeeUri = "Equipments";
+        const string ApiPrefix = "api";
 
         private WebAPIAsync<Equipment> _webApi;
+        #endregion
+
+        #region Constructor
 
         public EquipmentPersistency()
         {
-            _webApi = new WebAPIAsync<Equipment>(_serverURL, _apiPrefix, _equipmentURI);
+            _webApi = new WebAPIAsync<Equipment>(ServerUrl, ApiPrefix, EmployeeUri);
         }
 
-        public Task<List<Equipment>> GetEquipment()
+        #endregion
+
+        #region Tasks
+        public Task<List<Equipment>> GetEquipments()
+
         {
             return _webApi.Load();
         }
@@ -43,5 +51,7 @@ namespace ItManagement.Persistencies
         {
             await _webApi.Create(obj);
         }
+        #endregion
+
     }
 }

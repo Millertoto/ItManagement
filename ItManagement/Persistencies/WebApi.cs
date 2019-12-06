@@ -9,12 +9,13 @@ using Newtonsoft.Json;
 
 namespace ItManagement.Persistencies
 {
-    class WebApiError
+    public class WebApi<T>
     {
 
         private const string ServerUrl = "http://localhost:52667";
+       
 
-        public static List<Error> GetErrors(string url)
+        public static List<T> GetList(string url)
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (var client = new HttpClient(handler))
@@ -28,11 +29,11 @@ namespace ItManagement.Persistencies
                     if (response.IsSuccessStatusCode)
                     {
                         var status = response.Content.ReadAsStringAsync().Result;
-                        var errorslist = JsonConvert.DeserializeObject<List<Error>>(status);
-                        return errorslist;
+                        var list = JsonConvert.DeserializeObject<List<T>>(status);
+                        return list;
                     }
 
-                    return new List<Error>();
+                    return new List<T>();
                 }
                 catch (Exception e)
                 {
@@ -43,7 +44,7 @@ namespace ItManagement.Persistencies
         }
 
 
-        public static async Task<string> PostError(string url, Error objectToPost)
+        public static async Task<string> Post(string url, T objectToPost)
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (var client = new HttpClient(handler))
@@ -72,7 +73,7 @@ namespace ItManagement.Persistencies
         }
 
 
-        public static async Task DeleteError(string url)
+        public static async Task Delete(string url)
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (var client = new HttpClient(handler))
@@ -95,7 +96,7 @@ namespace ItManagement.Persistencies
             }
         }
 
-        public async static Task PutError(string url, Error objectToPut)
+        public async static Task Put(string url, T objectToPut)
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
             using (var client = new HttpClient(handler))

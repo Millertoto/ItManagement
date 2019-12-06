@@ -34,7 +34,7 @@
                             <TextBlock Text="ID:" FontSize="30"></TextBlock>
                             <TextBox Height="30" Text="" Margin="0,0,0.8,0" FontSize="15"/>
                             <TextBlock Text="Hardware Type" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Text="" Margin="0,0,1.8,0" FontSize="15"/>
+                            <TextBox Height="30" Text="{Binding Path=TypeOfEquipment}" Margin="0,0,1.8,0" FontSize="15"/>
                             <TextBlock Text="Funktionelt" FontSize="30"></TextBlock>
                             <TextBox Height="30" Text="" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 

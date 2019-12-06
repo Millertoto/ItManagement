@@ -12,7 +12,7 @@ namespace ItManagement.Persistencies
     public class WebAPIAsync<T> : IwebAPIAsync<T> where T : class
 
     {
-        #region instace fuekds
+        #region Instance Field
 
         private string _serverURL;
         private string _apiPrefix;
@@ -36,6 +36,8 @@ namespace ItManagement.Persistencies
         }
 
         #endregion
+
+        #region Tasks
 
         public async Task Delete(int key)
         {
@@ -116,4 +118,5 @@ namespace ItManagement.Persistencies
             response.EnsureSuccessStatusCode();
         }
     }
+    #endregion
 }

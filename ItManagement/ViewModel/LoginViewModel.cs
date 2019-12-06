@@ -6,10 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Graphics.Holographic;
+using Windows.Media.Streaming.Adaptive;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
-using ItManagement.Folder;
+using ItManagement.PersSingleton;
 using ItManagement.View;
 using ItManagement.Models;
 using ItManagement.Persistencies;
@@ -29,21 +32,27 @@ namespace ItManagement.ViewModel
 
 
         #endregion
+
         #region Constructor
 
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
+            /*Employee e = new Employee("AAA", 1307941500, "heyssa22", "Martin Holm", true);
+            Singleton.Instance.EP.CreateEmployee(e);*/
         }
-        
+
         #endregion
+
         #region Properties
 
+        #region Lists
         public List<Employee> Employees
         {
             get { return _employees; }
             set { _employees = value; }
         }
+        #endregion 
 
         public string UserName
         {
@@ -63,6 +72,7 @@ namespace ItManagement.ViewModel
             set { _currentUser = value; }
         }
         #endregion
+
         #region RelayCommands
 
         public RelayCommand Enter
@@ -73,36 +83,47 @@ namespace ItManagement.ViewModel
 
         }
         #endregion
+
         #region Methods
 
-        public void LoginButtonMethod()
+        public async void LoginButtonMethod()
         {
 
-            Employees = EmployeeSingleton.Instance.EP.GetEmployees().Result;
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
 
 
             if (LoginCheck(UserName, Password, Employees))
             {
-                if (AdminCheck(EmployeeSingleton.Instance.CurrentUser))
+                if (AdminCheck(Singleton.Instance.CurrentUser))
                 {
                     Frame currentFrame = Window.Current.Content as Frame;
-                    currentFrame.Navigate(typeof(EmployeePageAdmin));
+                    currentFrame.Navigate(typeof(ErrorPageAdmin));
+
+                    var messageDialogue = new MessageDialog($"Welcome Back, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
                 }
 
                 else
                 {
                         Frame currentFrame = Window.Current.Content as Frame;
                         currentFrame.Navigate(typeof(ErrorPageTeacher));
+
+                        var messageDialogue = new MessageDialog($"Welcome, {CurrentUser.Name}");
+                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        await messageDialogue.ShowAsync();
                 }
 
 
 
                 
             }
-            /*else
+            else
             {
-            some kind of error
-            }*/
+                var messageDialogue = new MessageDialog("Nah fam, no accses for u");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
 
         }
 
@@ -112,8 +133,6 @@ namespace ItManagement.ViewModel
             {
                 return true;
             }
-
-            /*removable*/
             else
             {
                 return false;
@@ -131,7 +150,7 @@ namespace ItManagement.ViewModel
                     if (username == e.Username && password == e.Password)
                     {
                         c = true;
-                        EmployeeSingleton.Instance.CurrentUser = e;
+                        Singleton.Instance.CurrentUser = e;
                         break;
                     }
                     
@@ -139,6 +158,7 @@ namespace ItManagement.ViewModel
             return c;
 
         }
+
         #endregion
 
         #region INotifyPropertyChanged
