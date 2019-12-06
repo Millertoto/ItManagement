@@ -97,7 +97,7 @@ namespace ItManagement.ViewModel
                 if (AdminCheck(Singleton.Instance.CurrentUser))
                 {
                     Frame currentFrame = Window.Current.Content as Frame;
-                    currentFrame.Navigate(typeof(ErrorPageAdmin));
+                    currentFrame.Navigate(typeof(AdminMainpage));
 
                     var messageDialogue = new MessageDialog($"Welcome Back, {Singleton.Instance.CurrentUser.Name}");
                     messageDialogue.Commands.Add(new UICommand("Close"));

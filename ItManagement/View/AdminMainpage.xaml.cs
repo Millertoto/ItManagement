@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ItManagement.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,18 +23,14 @@ namespace ItManagement.View
     /// </summary>
     public sealed partial class AdminMainpage : Page
     {
+
+        AdminMainpage evm = new AdminMainpage();
+
         public AdminMainpage()
         {
             this.InitializeComponent();
-
-            this.GoToErrorPageAdmin.Click += GoToErrorPageAdmin_Click;
-        }
-
-
-        private void GoToErrorPageAdmin_Click(object sender, RoutedEventArgs e)
-        {
-            ErrorPageAdmin epa = new ErrorPageAdmin();
-            this.Content = epa;
+            this.DataContext = evm;
         }
     }
+
 }

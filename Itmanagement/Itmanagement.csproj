@@ -127,9 +127,6 @@
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\ErrorsCatalogSingleton.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Persistencies\ComputerPersistency.cs" />
     <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
@@ -196,10 +193,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\AdminMainpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

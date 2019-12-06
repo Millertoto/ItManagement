@@ -12,20 +12,83 @@ namespace ItManagement.ViewModel
 {
     class AdminMainpage
     {
-        private Employee _adminUser;
-
-        public Employee AdminUser
+        #region Instance Field
+        /*private Employee _adminUser;*/
+        private RelayCommand _logoutButton;
+        private RelayCommand _GoToCreateEmployee;
+        private RelayCommand _GoToCreateEquipment;
+        private RelayCommand _GoToErrorPage;
+        #endregion
+        /*public Employee AdminUser
         { 
             get { return AdminUser; }
             set { _adminUser = value; }
+        }*/
+        #region Constructor
+        public AdminMainpage()
+        {
+           _logoutButton = new RelayCommand(LogoutMethod);
+           _GoToCreateEmployee = new RelayCommand(EmployeeMethod);
+           _GoToCreateEquipment = new RelayCommand(EquipmentMethod);
+           _GoToErrorPage = new RelayCommand(ErrorMethod);
         }
 
-        //public AdminMainpage()
-        //{
-        //    RelayCommand GoTo = new RelayCommand(NextPageButtonMethod);
-        //}
+        #endregion
+        #region Properties
 
-       
+        public RelayCommand LogoutButton
+        {
+            get { return _logoutButton; }
+            set { _logoutButton = value; }
+        }
+
+        public RelayCommand EmployeeButton
+        {
+            get { return _GoToCreateEmployee; }
+            set { _GoToCreateEmployee = value; }
+
+        }
+
+        public RelayCommand EquipmentButton
+        {
+            get { return _GoToCreateEquipment; }
+            set { _GoToCreateEquipment = value; }
+        }
+
+        public RelayCommand ErrorButton
+        {
+            get { return _GoToErrorPage; }
+            set { _GoToErrorPage = value; }
+        }
+
+        #endregion
+
+        #region Method
+
+        public void EquipmentMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(EquipmentPageAdmin));
+        }
+
+        public void ErrorMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(ErrorPageAdmin));
+        }
+
+        public void LogoutMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(MainPage));
+        }
+
+        public void EmployeeMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(EmployeePageAdmin));
+        }
+        #endregion
         //if (AdminMainpage(ErrorPageAdmin))
         //{
         //   Frame currentFrame = Window.Current.Content as Frame;
@@ -36,7 +99,7 @@ namespace ItManagement.ViewModel
         //   Frame currentFrame = Window.Current.Content as Frame;
         //   currentFrame.Navigate(typeof(EquipmentPage));
         //}
-        
+
 
     }
 }
