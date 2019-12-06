@@ -126,9 +126,7 @@
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\ErrorsCatalogSingleton.cs" />
-    <Compile Include="View\MainPage123.xaml.cs">
-      <DependentUpon>MainPage123.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\AdminMainpage.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -177,10 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\MainPage123.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

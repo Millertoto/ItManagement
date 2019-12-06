@@ -76,7 +76,7 @@ namespace ItManagement.ViewModel
                     if (AdminCheck(CurrentUser))
                     {
                         Frame currentFrame = Window.Current.Content as Frame;
-                        currentFrame.Navigate(typeof(ErrorPageAdmin));
+                        currentFrame.Navigate(typeof(AdminMainpage));
                     }
                     else
                     {

@@ -25,6 +25,15 @@ namespace ItManagement.View
         public AdminMainpage()
         {
             this.InitializeComponent();
+
+            this.GoToErrorPageAdmin.Click += GoToErrorPageAdmin_Click;
+        }
+
+
+        private void GoToErrorPageAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorPageAdmin epa = new ErrorPageAdmin();
+            this.Content = epa;
         }
     }
 }
