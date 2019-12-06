@@ -34,6 +34,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _deleteEquipment;
         private INotifyPropertyChanged _notifyPropertyChangedImplementation;
         private ObservableCollection<Equipment> _obsequipment;
+        private RelayCommand _editEquipment;
 
         #endregion
 
@@ -46,12 +47,20 @@ namespace ItManagement.ViewModel
             /*_getEquipmentOfType = new RelayCommand(GetEquipmentOfTypeMethod);*/
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
+            _editEquipment = new RelayCommand(EditMethod);
             ConvertToObs();
         }
 
         #endregion
 
         #region Properties
+
+
+        public bool IsWorking
+        {
+            get { return _isWorking; }
+            set { _isWorking = value; }
+        }
 
         public Equipment SelectedEquipment
         {
@@ -150,6 +159,18 @@ namespace ItManagement.ViewModel
             get { return _createEquipment; }
             set { _createEquipment = value; }
         }
+
+        public RelayCommand DeleteEquipment
+        {
+            get { return _deleteEquipment; }
+            set { _deleteEquipment = value; }
+        }
+
+        public RelayCommand EditEquipment
+        {
+            get { return _editEquipment; }
+            set { _editEquipment = value; }
+        }
         #endregion
 
         #region Methods
@@ -216,6 +237,13 @@ namespace ItManagement.ViewModel
                 {
                     await Singleton.Instance.ERP.DeleteError(SelectedEquipment.Uid);
                 }
+        }
+
+        public async void EditMethod()
+        {
+            SelectedEquipment.IsWorking = IsWorking;
+            await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
+
         }
 
         public void ConvertToObs()
