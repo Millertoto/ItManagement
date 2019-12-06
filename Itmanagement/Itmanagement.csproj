@@ -131,7 +131,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Persistencies\ComputerPersistency.cs" />
-     <Compile Include="Persistencies\AccesoryPersistency.cs" />
+    <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
     <Compile Include="Persistencies\EquipmentPersistency.cs" />
     <Compile Include="Persistencies\ErrorPersistency.cs" />
@@ -144,10 +144,14 @@
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
+    <Compile Include="ViewModel\AdminMainpage.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\AdminMainpage.xaml.cs">
+      <DependentUpon>AdminMainpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeePageAdmin.xaml.cs">
       <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
     </Compile>
@@ -190,6 +194,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AdminMainpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
