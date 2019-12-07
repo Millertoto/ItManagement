@@ -39,6 +39,7 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Error> _obsErrors;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
+        private RelayCommand _fixButton;
 
 
         #endregion
@@ -54,6 +55,7 @@ namespace ItManagement.ViewModel
             _allErrors = Singleton.Instance.ERP.GetErrors().Result;
             _obsErrors = new ObservableCollection<Error>();
             _goBack = new RelayCommand(GoBackMethod);
+            _fixButton = new RelayCommand(FixMethod);
 
             ConvertToObs();
 
@@ -65,7 +67,7 @@ namespace ItManagement.ViewModel
 
         #region Properties
 
-
+        
         public Error SelectedError
         {
             get { return _selected; }
@@ -172,6 +174,11 @@ namespace ItManagement.ViewModel
 
         #region RelayCommands
 
+        public RelayCommand Fixbutton
+        {
+            get { return _fixButton; }
+            set { _fixButton = value; }
+        }
         public RelayCommand EditButton
         {
             get { return _editButton; }
@@ -237,6 +244,17 @@ namespace ItManagement.ViewModel
 
         }
 
+        public async void FixMethod()
+        {
+            SelectedError.IsRepaired = true;
+            SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
+            SelectedError.Update = DateTime.Now;
+            await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+            ObsListOfErrors.Clear();
+            ConvertToObs();
+
+        }
+
         public async void DeleteMethod()
         {
             if (SelectedError != null)
@@ -280,6 +298,7 @@ namespace ItManagement.ViewModel
         }
 
         #endregion
+
         #region GoBack
         private RelayCommand _goBack;
 

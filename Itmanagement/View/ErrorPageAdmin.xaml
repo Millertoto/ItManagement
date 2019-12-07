@@ -62,7 +62,7 @@
                     <Button Content="Opret" Command="{Binding Path = AddErrorButton}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
                     <Button Content="Slet" Command="{Binding Path=DeleteDis}" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
                     <Button Content="Edit" Command="{Binding Path=EditButton}" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
-                    <Button Content="Løst" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
+                    <Button Content="Løst" Command="{Binding Path=FixButton}" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
                     <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
                       
                     </ComboBox>
@@ -80,6 +80,7 @@
                                     <TextBlock Text="{Binding Create}" Margin="10,10,0,0"/>
                                     <TextBlock Text="{Binding Update}" Margin="10,10,0,0"/>
                                     <TextBlock Text="{Binding IsRepairedStirng}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding WhoRepairedDis}" Margin="10,10,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

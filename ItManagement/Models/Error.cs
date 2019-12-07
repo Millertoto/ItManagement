@@ -14,6 +14,7 @@ namespace ItManagement
         private DateTime _create;
         private DateTime _update;
         private bool _isRepaired;
+        private string _whoRepairedDis;
         #endregion
 
         #region Constructor
@@ -27,6 +28,7 @@ namespace ItManagement
             _create = DateTime.Now;
             _update = DateTime.Now;
             _isRepaired = false;
+            _whoRepairedDis = "None";
 
 
         }
@@ -45,6 +47,12 @@ namespace ItManagement
             get { return _uid; }
             set { _uid = value; }
             
+        }
+
+        public string WhoRepairedDis
+        {
+            get { return _whoRepairedDis; }
+            set { _whoRepairedDis = value; }
         }
     
         public string ErrorMessage
