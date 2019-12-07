@@ -15,6 +15,11 @@ namespace ItManagement
             _roomID = 0;
         }
 
+        public SmartBoard()
+        {
+            _roomID = 0;
+        }
+
         public SmartBoard(int uid, int roomid)
         {
             _uid = uid;

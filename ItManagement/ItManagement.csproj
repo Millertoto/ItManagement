@@ -141,7 +141,7 @@
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
-    <Compile Include="ViewModel\AdminMainpage.cs" />
+    <Compile Include="ViewModel\AdminMainPageViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />

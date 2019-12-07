@@ -71,6 +71,10 @@ namespace ItManagement
             set { _isRepaired = value; }
         }
 
+        public string IsRepairedString
+        {
+            get { return IsRepaired.ToString(); }
+        }
         public virtual Employee CprNavigation { get; set; }
         public virtual Equipment U { get; set; }
     }

@@ -24,7 +24,7 @@ namespace ItManagement.View
     public sealed partial class AdminMainpage : Page
     {
 
-        AdminMainpage evm = new AdminMainpage();
+        AdminMainPageViewModel evm = new AdminMainPageViewModel();
 
         public AdminMainpage()
         {

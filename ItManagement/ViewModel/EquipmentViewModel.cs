@@ -10,9 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
-using Type = System.Type;
+using ItManagement.View;
 
 namespace ItManagement.ViewModel
 {
@@ -35,6 +37,7 @@ namespace ItManagement.ViewModel
         private INotifyPropertyChanged _notifyPropertyChangedImplementation;
         private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
+        private List<Error> _listOfErrors;
 
         #endregion
 
@@ -48,6 +51,8 @@ namespace ItManagement.ViewModel
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
             _editEquipment = new RelayCommand(EditMethod);
+            _obsequipment = new ObservableCollection<Equipment>();
+            _goBack = new RelayCommand(GoBackMethod);
             ConvertToObs();
         }
 
@@ -65,7 +70,11 @@ namespace ItManagement.ViewModel
         public Equipment SelectedEquipment
         {
             get { return _selectedEquipment; }
-            set { _selectedEquipment = value; }
+            set
+            {
+                _selectedEquipment = value; 
+                OnPropertyChanged();
+            }
         }
         public int Uid
         {
@@ -77,7 +86,11 @@ namespace ItManagement.ViewModel
         public string TypeOfEquipment
         {
             get { return _type; }
-            set { _type = value; }
+            set
+            {
+                _type = value; 
+                OnPropertyChanged();
+            }
         }
 
         public async void DeleteMethod()
@@ -103,6 +116,12 @@ namespace ItManagement.ViewModel
                 _obsequipment = value;
                 OnPropertyChanged();
             }
+        }
+
+        public List<Error> ListOfErrors
+        {
+            get { return _listOfErrors; }
+            set { _listOfErrors = value; }
         }
         #endregion
 
@@ -181,77 +200,54 @@ namespace ItManagement.ViewModel
                 || TypeOfEquipment == "Smartboard"
                 || TypeOfEquipment == "Smartphone"
                 || TypeOfEquipment == "Tablet")
-     {
+            {
                 Equipment e = new Equipment(TypeOfEquipment);
                 await Singleton.Instance.EQP.CreateEquipment(e);
 
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
-                Equipment newlyCreatedEquip = AllEquipment.Last();
 
-                switch (newlyCreatedEquip.Type)
-                {
-                    case "Computer":
-                        Computer pc = new Computer(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.COM.CreateComputer(pc);
-
-                        var messageDialogue1 = new MessageDialog($"A computer has been added");
-                        messageDialogue1.Commands.Add(new UICommand("Close"));
-                        await messageDialogue1.ShowAsync();
-                        break;
-                    case "Smartboard":
-                        SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.SB.CreateSmartboard(sb);
-
-                        var messageDialogue2 = new MessageDialog($"A smartboard has been added");
-                        messageDialogue2.Commands.Add(new UICommand("Close"));
-                        await messageDialogue2.ShowAsync();
-                        break;
-                    case "Smartphone":
-                        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.SP.CreateSmartphone(sp);
-
-                        var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
-                        messageDialogue3.Commands.Add(new UICommand("Close"));
-                        await messageDialogue3.ShowAsync();
-                        break;
-                    case "Tablet":
-                        Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.TAB.CreateTablet(tab);
-
-                        var messageDialogue4 = new MessageDialog($"A tablet has been added");
-                        messageDialogue4.Commands.Add(new UICommand("Close"));
-                        await messageDialogue4.ShowAsync();
-                        break;
-
-                    default:
-                        break;
-                    
-                }   
             }
+            ObsEquipment.Clear();
+            ConvertToObs();
 
         }
 
         public async void DeleteEquipMethod()
         {
             if (SelectedEquipment != null)
-                {
-                    await Singleton.Instance.ERP.DeleteError(SelectedEquipment.Uid);
-                }
+            {
+                ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+                    foreach (Error e in ListOfErrors)
+                    {
+                        if (SelectedEquipment.Uid == e.Uid)
+                        {
+                            await Singleton.Instance.ERP.DeleteError(e.Fid);
+                        }
+                    }
+                    await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+            }
+            ObsEquipment.Clear();
+            ConvertToObs();
         }
 
         public async void EditMethod()
         {
             SelectedEquipment.IsWorking = IsWorking;
             await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
+            ObsEquipment.Clear();
+            ConvertToObs();
 
         }
 
         public void ConvertToObs()
         {
-            foreach (Equipment e in AllEquipment)
-            {
-                ObsEquipment.Add(e);
-            }
+            AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            
+                foreach (Equipment e in AllEquipment)
+                {
+                    ObsEquipment.Add(e);
+                }
+            
         }
 
 
@@ -282,6 +278,68 @@ namespace ItManagement.ViewModel
                 PropertyChangedEventArgs(propertyName));
         }
 
+        #endregion
+
+        #region GoBack
+        private RelayCommand _goBack;
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
+
+        public void GoBackMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(AdminMainpage));
+        }
+        #endregion
+
+        #region WIP
+        /* Equipment newlyCreatedEquip = AllEquipment.Last();
+
+                 switch (TypeOfEquipment)
+                 {
+                     case "Computer":
+
+                         Computer pc = new Computer(e);
+         await Singleton.Instance.COM.CreateComputer(pc);
+
+         var messageDialogue1 = new MessageDialog($"A computer has been added");
+         messageDialogue1.Commands.Add(new UICommand("Close"));
+                         await messageDialogue1.ShowAsync();
+                         break;
+                     case "Smartboard":
+
+                         await Singleton.Instance.SB.CreateSmartboard(e.SmartBoard);
+
+         var messageDialogue2 = new MessageDialog($"A smartboard has been added");
+         messageDialogue2.Commands.Add(new UICommand("Close"));
+                         await messageDialogue2.ShowAsync();
+                         break;
+                     case "Smartphone":
+
+                         await Singleton.Instance.SP.CreateSmartphone(e.SmartPhone);
+
+         var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
+         messageDialogue3.Commands.Add(new UICommand("Close"));
+                         await messageDialogue3.ShowAsync();
+                         break;
+                     case "Tablet":
+
+                         await Singleton.Instance.TAB.CreateTablet(e.Tablet);
+
+         var messageDialogue4 = new MessageDialog($"A tablet has been added");
+         messageDialogue4.Commands.Add(new UICommand("Close"));
+                         await messageDialogue4.ShowAsync();
+                         break;
+
+                     default:
+                         break;
+
+
+                 }*/
         #endregion
     }
 

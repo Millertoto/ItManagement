@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 
 namespace ItManagement.ViewModel
 {
-    class AdminMainpage
+    class AdminMainPageViewModel
     {
         #region Instance Field
         /*private Employee _adminUser;*/
@@ -25,7 +25,7 @@ namespace ItManagement.ViewModel
             set { _adminUser = value; }
         }*/
         #region Constructor
-        public AdminMainpage()
+        public AdminMainPageViewModel()
         {
            _logoutButton = new RelayCommand(LogoutMethod);
            _GoToCreateEmployee = new RelayCommand(EmployeeMethod);
