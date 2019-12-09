@@ -1,7 +1,6 @@
 ﻿using ItManagement.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,7 +12,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
+using System.Collections.ObjectModel;
 using ItManagement.View;
+
 
 namespace ItManagement.ViewModel
 {
@@ -25,14 +26,11 @@ namespace ItManagement.ViewModel
         private string _password;
         private string _username;
         private int _cpr;
+        private string _selectedEmployee;
         private string _isAdmin;
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
-        private ObservableCollection<Employee> _obsEmps;
-        private Employee _selectedEmployee;
-        private RelayCommand _deleteEmp;
-        private RelayCommand _editButton;
         #endregion
 
         #region Constructor
@@ -41,26 +39,19 @@ namespace ItManagement.ViewModel
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
             _getEmployeeList = new RelayCommand(GetEmployeeList);
+
             _deleteEmp = new RelayCommand(DeleteEmpMethod);
             Employees = Singleton.Instance.EP.GetEmployees().Result;
             _editButton = new RelayCommand(EditMethod);
             _obsEmps = new ObservableCollection<Employee>();
             _goBack = new RelayCommand(GoBackMethod);
             ConvertToObs();
+
         }
         #endregion
 
         #region Properties
 
-        public Employee SelectedEmployee
-        {
-            get { return _selectedEmployee; }
-            set
-            {
-                _selectedEmployee = value;
-                OnPropertyChanged();
-            }
-        }
         public int CPR
         {
             get { return _cpr; }
@@ -101,7 +92,10 @@ namespace ItManagement.ViewModel
             }
         }
 
+
+
         public string IsAdmin
+
         {
             get { return _isAdmin; }
             set
@@ -109,23 +103,26 @@ namespace ItManagement.ViewModel
                 _isAdmin = value;
                 OnPropertyChanged();
             }
+
         }
+        public string SelectedEmployee
+        {
+            get
+            {
+                return _selectedEmployee; ;
+            }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+
+        }
+
 
         #endregion
 
         #region RelayCommands
-
-        public RelayCommand DeleteButton
-        {
-            get { return _deleteEmp; }
-            set { _deleteEmp = value; }
-        }
-
-        public RelayCommand EditButton
-        {
-            get { return _editButton; }
-            set { _editButton = value; }
-        }
         public RelayCommand AddEmployeeButton
         {
             get { return _addEmployeeButton; }
@@ -153,29 +150,19 @@ namespace ItManagement.ViewModel
             }
 
         }
-
-        public ObservableCollection<Employee> ObsEmployees
+        public ObservableCollection<string> IsAnAdmin
         {
-            get { return _obsEmps; }
-            set
-            {
-                _obsEmps = value;
-                OnPropertyChanged();
-            }
+            get { return new ObservableCollection<string>() { "True", "False" }; }
+
         }
 
         #endregion
-
+       
         #region Methods
 
-        public void GetEmployeeList()
+        public async void GetEmployeeList()
         {
             Employees = Singleton.Instance.EP.GetEmployees().Result;
-            ObsEmployees.Clear();
-            foreach (Employee e in Employees)
-            {
-                ObsEmployees.Add(e);
-            }
         }
 
         public async void AddEmployeeMethod()
@@ -205,6 +192,8 @@ namespace ItManagement.ViewModel
             GetEmployeeList();
 
         }
+
+
 
         public async void DeleteEmpMethod()
         {
@@ -240,6 +229,7 @@ namespace ItManagement.ViewModel
                 e.IsAdmin = false;
             }
         }
+
 
         public bool UsernameCheck(string username, List<Employee> list)
         {
@@ -301,6 +291,7 @@ namespace ItManagement.ViewModel
 
             return false;
         }
+
         #endregion
 
         public void ConvertToObs()
@@ -310,6 +301,7 @@ namespace ItManagement.ViewModel
                     ObsEmployees.Add(e);
             }
         }
+
 
         #endregion
 
