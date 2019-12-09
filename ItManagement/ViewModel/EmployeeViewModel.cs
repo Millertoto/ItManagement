@@ -8,9 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 using System.Collections.ObjectModel;
+using ItManagement.View;
+
 
 namespace ItManagement.ViewModel
 {
@@ -22,8 +26,8 @@ namespace ItManagement.ViewModel
         private string _password;
         private string _username;
         private int _cpr;
-        private bool _isAdmin;
         private string _selectedEmployee;
+        private string _isAdmin;
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
@@ -35,6 +39,14 @@ namespace ItManagement.ViewModel
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
             _getEmployeeList = new RelayCommand(GetEmployeeList);
+
+            _deleteEmp = new RelayCommand(DeleteEmpMethod);
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
+            _editButton = new RelayCommand(EditMethod);
+            _obsEmps = new ObservableCollection<Employee>();
+            _goBack = new RelayCommand(GoBackMethod);
+            ConvertToObs();
+
         }
         #endregion
 
@@ -79,7 +91,11 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        public bool IsAdmin
+
+
+
+        public string IsAdmin
+
         {
             get { return _isAdmin; }
             set
@@ -87,6 +103,7 @@ namespace ItManagement.ViewModel
                 _isAdmin = value;
                 OnPropertyChanged();
             }
+
         }
         public string SelectedEmployee
         {
@@ -99,6 +116,7 @@ namespace ItManagement.ViewModel
                 _selectedEmployee = value;
                 OnPropertyChanged();
             }
+
         }
 
 
@@ -137,6 +155,7 @@ namespace ItManagement.ViewModel
             get { return new ObservableCollection<string>() { "True", "False" }; }
 
         }
+
         #endregion
        
         #region Methods
@@ -155,7 +174,8 @@ namespace ItManagement.ViewModel
                 && PasswordCheck(Password)
                 && NameCheck(Name))
             {
-                Employee Emp = new Employee(Username, CPR, Password, Name, IsAdmin);
+                Employee Emp = new Employee(Username, CPR, Password, Name);
+                SetAdmin(IsAdmin, Emp);
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
                 var messageDialogue = new MessageDialog($"The Account, {Username}, has been created");
@@ -169,8 +189,47 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
             }
+            GetEmployeeList();
 
         }
+
+
+
+        public async void DeleteEmpMethod()
+        {
+            
+                if (SelectedEmployee != null)
+                {
+                    await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
+                }
+                GetEmployeeList();
+            
+        }
+
+        public async void EditMethod()
+        {
+            SelectedEmployee.Name = Name;
+            SelectedEmployee.Password = Password;
+            SelectedEmployee.Username = Username;
+            await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+            GetEmployeeList();
+
+        }
+
+        #region Checks
+
+        public void SetAdmin(string admincheck, Employee e)
+        {
+            if (admincheck == "true" || admincheck == "True")
+            {
+                e.IsAdmin = true;
+            }
+            else
+            {
+                e.IsAdmin = false;
+            }
+        }
+
 
         public bool UsernameCheck(string username, List<Employee> list)
         {
@@ -234,6 +293,33 @@ namespace ItManagement.ViewModel
         }
 
         #endregion
+
+        public void ConvertToObs()
+        {
+            foreach (Employee e in Employees)
+            {
+                    ObsEmployees.Add(e);
+            }
+        }
+
+
+        #endregion
+
+        #region GoBack
+        private RelayCommand _goBack;
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
+
+        public void GoBackMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(AdminMainpage));
+        }
+        #endregion 
 
         #region INotify
 

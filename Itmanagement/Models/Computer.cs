@@ -10,8 +10,13 @@ namespace ItManagement
         private bool _isBorrowed;
         public Computer(int uid)
         {
-            _uid = uid;
+            Uid = uid;
             _isBorrowed = false;
+        }
+
+        public Computer()
+        {
+            IsBorrowed = false;
         }
         public int Uid { get; set; }
         public bool IsBorrowed { get; set; }

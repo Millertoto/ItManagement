@@ -17,6 +17,7 @@
             <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
                 <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Udstyr" Margin="593,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
             </RelativePanel>
             <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,0,0" Height="840">
                 <SplitView.Pane>
@@ -34,13 +35,13 @@
                             <TextBlock Text="ID:" FontSize="30"></TextBlock>
                             <TextBox Height="30" Text="" Margin="0,0,0.8,0" FontSize="15"/>
                             <TextBlock Text="Hardware Type" FontSize="30"></TextBlock>
-                            <TextBox Height="30" Text="{Binding Path=TypeOfEquipment}" Margin="0,0,1.8,0" FontSize="15"/>
+                            <TextBox Height="30" Text="{Binding Path=TypeOfEquipment, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15"/>
                             <TextBlock Text="Funktionelt" FontSize="30"></TextBlock>
                             <TextBox Height="30" Text="" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-                            <Button Content="Opret" Background="CornflowerBlue" FontSize="20" Width="120" Margin="0,10"></Button>
-                            <Button Content="Slet" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
-                            <Button Content="Edit" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
+                            <Button Content="Opret" Command="{Binding Path=CreateEquipment}" Background="CornflowerBlue" FontSize="20" Width="120" Margin="0,10"></Button>
+                            <Button Content="Slet" Command="{Binding Path=DeleteEquipment}" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
+                            <Button Content="Edit" Command="{Binding Path=EditEquipment}" FontSize="20" Width="120" Margin="0,10" Background="CornflowerBlue"></Button>
                         </StackPanel>
                         <StackPanel Margin="300,-470,0,420" Orientation="Horizontal">
                             <TextBlock Text="ID" FontSize="30" Margin="0,0,260,0"></TextBlock>
@@ -49,17 +50,13 @@
 
                         </StackPanel>
                         <StackPanel Background="CornflowerBlue" Margin="300,-420,0,-50">
-                            <ListView Margin="0,0,0,0" >
+                            <ListView ItemsSource="{Binding ObsEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="ID:" Margin="0,0,10,0"/>
-                                            <TextBox />
-                                            <TextBlock Text="Hardware Type:"/>
-                                            <TextBox/>
-                                            <TextBlock Text="Funktionelitet:"/>
-                                            <TextBox/>
-
+                                                <TextBlock Text="{Binding Uid}" Margin="0,10,0,0"/>
+                                                <TextBlock Text="{Binding Type}" Margin="50,10,0,0"/>
+                                                <TextBlock Text="{Binding IsWorkingString}" Margin="50,10,0,0"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>

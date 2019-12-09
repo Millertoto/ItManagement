@@ -22,6 +22,7 @@
             <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
                 <Button Name="HamburgerButton" Click="HamburgerButton_OnClick" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
             </RelativePanel>
             <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
                 <SplitView.Pane>
@@ -61,25 +62,30 @@
 
                 </StackPanel>-->
                 <StackPanel Margin="0,66,560,20" Orientation="Vertical" Height="441" VerticalAlignment="Stretch">
-                    <Button Content="Opret" Command="{Binding Path = AddErrorButton, Mode=TwoWay}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
-                    <Button Content="Slet" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
-                    <Button Content="Edit" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
-                    <Button Content="Løst" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
-                   
+
+                    <Button Content="Opret" Command="{Binding Path = AddErrorButton}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
+                    <Button Content="Slet" Command="{Binding Path=DeleteDis}" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
+                    <Button Content="Edit" Command="{Binding Path=EditButton}" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
+                    <Button Content="Løst" Command="{Binding Path=FixButton}" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
+                    <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
+                      
+                    </ComboBox>
+
                 </StackPanel>
 
                 <StackPanel Margin="175,-520,0,50" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Margin="0,0,0,0" Background="CornflowerBlue" ItemsSource="{Binding ListofErrors}" Height="407" VerticalAlignment="Stretch">
-
-
+                    <ListView Background="CornflowerBlue" ItemsSource="{Binding ObsListOfErrors}" SelectedItem="{Binding SelectedError, Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Udstyrs ID:" Margin="0,0,10,0"></TextBlock>
-                                    <TextBox Text="{Binding Path= UidForCreation , Mode=TwoWay}"></TextBox>
-                                    <TextBlock Text="Beskrivelse"></TextBlock>
-                                    <TextBox Text="{Binding Path=  ErrorDescription, Mode=TwoWay}"></TextBox>
+                                    <TextBlock Text="{Binding Fid}" Margin="0,10,0,0"/>
+                                    <TextBlock Text="{Binding Cpr}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Uid}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Create}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Update}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding IsRepairedStirng}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding WhoRepairedDis}" Margin="10,10,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
