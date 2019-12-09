@@ -144,7 +144,7 @@ namespace ItManagement.ViewModel
 
         public ObservableCollection<string> IsWorking
         {
-            get { return new ObservableCollection<string>(){"true", "false"}; }
+            get { return new ObservableCollection<string>(){"True", "False"}; }
 
         }
         public List<Error> ListOfErrors
