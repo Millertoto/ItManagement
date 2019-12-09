@@ -1,6 +1,7 @@
 ﻿using ItManagement.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -30,7 +31,10 @@ namespace ItManagement.ViewModel
         private RelayCommand _getAllEquipment;
         private RelayCommand _createEquipment;
         private RelayCommand _getEquipmentOfType;
+        private RelayCommand _deleteEquipment;
         private INotifyPropertyChanged _notifyPropertyChangedImplementation;
+        private ObservableCollection<Equipment> _obsequipment;
+        private RelayCommand _editEquipment;
 
         #endregion
 
@@ -42,11 +46,21 @@ namespace ItManagement.ViewModel
             _createEquipment = new RelayCommand(AddEquipment);
             /*_getEquipmentOfType = new RelayCommand(GetEquipmentOfTypeMethod);*/
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            _deleteEquipment = new RelayCommand(DeleteEquipMethod);
+            _editEquipment = new RelayCommand(EditMethod);
+            ConvertToObs();
         }
 
         #endregion
 
         #region Properties
+
+
+        public bool IsWorking
+        {
+            get { return _isWorking; }
+            set { _isWorking = value; }
+        }
 
         public Equipment SelectedEquipment
         {
@@ -66,13 +80,33 @@ namespace ItManagement.ViewModel
             set { _type = value; }
         }
 
+        public async void DeleteMethod()
+        {
+            if (SelectedEquipment != null)
+            {
+                await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+            }
+        }
+
         #region Lists
         public List<Equipment> AllEquipment
         {
             get { return _listOfEquipment; }
             set { _listOfEquipment = value; }
         }
+
+        public ObservableCollection<Equipment> ObsEquipment
+        {
+            get { return _obsequipment; }
+            set
+            {
+                _obsequipment = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
+
+
 
 
         #region Computer Properties
@@ -125,6 +159,18 @@ namespace ItManagement.ViewModel
             get { return _createEquipment; }
             set { _createEquipment = value; }
         }
+
+        public RelayCommand DeleteEquipment
+        {
+            get { return _deleteEquipment; }
+            set { _deleteEquipment = value; }
+        }
+
+        public RelayCommand EditEquipment
+        {
+            get { return _editEquipment; }
+            set { _editEquipment = value; }
+        }
         #endregion
 
         #region Methods
@@ -135,7 +181,7 @@ namespace ItManagement.ViewModel
                 || TypeOfEquipment == "Smartboard"
                 || TypeOfEquipment == "Smartphone"
                 || TypeOfEquipment == "Tablet")
-            {
+     {
                 Equipment e = new Equipment(TypeOfEquipment);
                 await Singleton.Instance.EQP.CreateEquipment(e);
 
@@ -184,6 +230,31 @@ namespace ItManagement.ViewModel
             }
 
         }
+
+        public async void DeleteEquipMethod()
+        {
+            if (SelectedEquipment != null)
+                {
+                    await Singleton.Instance.ERP.DeleteError(SelectedEquipment.Uid);
+                }
+        }
+
+        public async void EditMethod()
+        {
+            SelectedEquipment.IsWorking = IsWorking;
+            await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
+
+        }
+
+        public void ConvertToObs()
+        {
+            foreach (Equipment e in AllEquipment)
+            {
+                ObsEquipment.Add(e);
+            }
+        }
+
+
         #region Computer Methods
 
         #endregion
