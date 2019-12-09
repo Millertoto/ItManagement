@@ -10,9 +10,12 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
+using ItManagement.View;
 
 
 namespace ItManagement.ViewModel
@@ -36,6 +39,7 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Error> _obsErrors;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
+        private RelayCommand _fixButton;
 
 
         #endregion
@@ -49,6 +53,9 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _allErrors = Singleton.Instance.ERP.GetErrors().Result;
+            _obsErrors = new ObservableCollection<Error>();
+            _goBack = new RelayCommand(GoBackMethod);
+            _fixButton = new RelayCommand(FixMethod);
 
             ConvertToObs();
 
@@ -60,7 +67,7 @@ namespace ItManagement.ViewModel
 
         #region Properties
 
-
+        
         public Error SelectedError
         {
             get { return _selected; }
@@ -167,6 +174,11 @@ namespace ItManagement.ViewModel
 
         #region RelayCommands
 
+        public RelayCommand Fixbutton
+        {
+            get { return _fixButton; }
+            set { _fixButton = value; }
+        }
         public RelayCommand EditButton
         {
             get { return _editButton; }
@@ -178,13 +190,14 @@ namespace ItManagement.ViewModel
             get { return _addErrorButton; }
             set { _addErrorButton = value; }
         }
-        #endregion
 
         public RelayCommand DeleteDis
         {
-            get { return _deleteButton;}
+            get { return _deleteButton; }
             set { _deleteButton = value; }
         }
+        #endregion
+
         
         #region Methods
 
@@ -195,17 +208,28 @@ namespace ItManagement.ViewModel
             int uid = UidForCreation;
             if (EquipmentCheck(uid) && uid != 0)
             {
-                _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
+                if (ErrorDescription == null)
+                {
+                    var messageDialogue = new MessageDialog($"You need to type in a description for the error");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
+                else
+                {
+                    _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
 
-                await Singleton.Instance.ERP.CreateError(_toBeCreated);
-                CurrentEquipment.IsWorking = false;
-                await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
-                var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
-                messageDialogue.Commands.Add(new UICommand("Close"));
-                await messageDialogue.ShowAsync();
+                    await Singleton.Instance.ERP.CreateError(_toBeCreated);
+                    CurrentEquipment.IsWorking = false;
+                    await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                    var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
+                
 
             }
-            
+            ObsListOfErrors.Clear();
+            ConvertToObs();
 
 
         }
@@ -215,6 +239,19 @@ namespace ItManagement.ViewModel
             SelectedError.ErrorMessage = ErrorDescription;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+            ObsListOfErrors.Clear();
+            ConvertToObs();
+
+        }
+
+        public async void FixMethod()
+        {
+            SelectedError.IsRepaired = true;
+            SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
+            SelectedError.Update = DateTime.Now;
+            await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+            ObsListOfErrors.Clear();
+            ConvertToObs();
 
         }
 
@@ -224,6 +261,8 @@ namespace ItManagement.ViewModel
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
             }
+            ObsListOfErrors.Clear();
+            ConvertToObs();
         }
 
         public bool EquipmentCheck(int uid)
@@ -250,13 +289,31 @@ namespace ItManagement.ViewModel
 
         public void ConvertToObs()
         {
-            foreach (Error e in ListOfErrors)
-            {
-                ObsListOfErrors.Add(e);
-            }
+            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+                foreach (Error e in ListOfErrors)
+                {
+                    ObsListOfErrors.Add(e);
+                }
+            
         }
 
         #endregion
+
+        #region GoBack
+        private RelayCommand _goBack;
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
+
+        public void GoBackMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(AdminMainpage));
+        }
+        #endregion 
 
         #region PropertyChanged
 

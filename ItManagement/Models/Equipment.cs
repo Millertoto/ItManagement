@@ -12,6 +12,7 @@ namespace ItManagement
             _type = Type;
             Errors = new HashSet<Error>();
             IsWorking = true;
+            /*createType();*/
         }
 
         public int Uid { get; set; }
@@ -22,6 +23,30 @@ namespace ItManagement
             set { _type = value; }
         }
         public bool IsWorking { get; set; }
+
+        public string IsWorkingString
+        {
+            get { return IsWorking.ToString(); }
+        }
+
+        public void createType()
+        {
+            switch (Type)
+            {
+                case "Computer":
+                    Computer = new Computer();
+                    break;
+                case "Smartboard":
+                    SmartBoard = new SmartBoard();
+                    break;
+                case "Smartphone":
+                    SmartPhone = new SmartPhone();
+                    break;
+                case "Tablet":
+                    Tablet = new Tablet();
+                    break;
+            }
+        }
 
         public virtual Computer Computer { get; set; }
         public virtual SmartBoard SmartBoard { get; set; }
