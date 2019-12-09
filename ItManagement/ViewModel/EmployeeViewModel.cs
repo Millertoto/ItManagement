@@ -26,11 +26,15 @@ namespace ItManagement.ViewModel
         private string _password;
         private string _username;
         private int _cpr;
-        private string _selectedEmployee;
+        private string _selectedEmployeeString;
         private string _isAdmin;
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
+        private ObservableCollection<Employee> _obsEmps;
+        private Employee _selectedEmployee;
+        private RelayCommand _deleteEmp;
+        private RelayCommand _editButton;
         #endregion
 
         #region Constructor
@@ -45,12 +49,23 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _obsEmps = new ObservableCollection<Employee>();
             _goBack = new RelayCommand(GoBackMethod);
+
             ConvertToObs();
 
         }
         #endregion
 
         #region Properties
+
+        public Employee SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int CPR
         {
@@ -105,15 +120,15 @@ namespace ItManagement.ViewModel
             }
 
         }
-        public string SelectedEmployee
+        public string SelectedEmployeeString
         {
             get
             {
-                return _selectedEmployee; ;
+                return _selectedEmployeeString; ;
             }
             set
             {
-                _selectedEmployee = value;
+                _selectedEmployeeString = value;
                 OnPropertyChanged();
             }
 
@@ -136,6 +151,18 @@ namespace ItManagement.ViewModel
             set { _getEmployeeList = value; }
 
         }
+
+        public RelayCommand DeleteButton
+        {
+            get { return _deleteEmp; }
+            set { _deleteEmp = value; }
+        }
+
+        public RelayCommand EditButton
+        {
+            get { return _editButton; }
+            set { _editButton = value; }
+        }
         #endregion
 
         #region Lists
@@ -156,13 +183,28 @@ namespace ItManagement.ViewModel
 
         }
 
+        public ObservableCollection<Employee> ObsEmployees
+        {
+            get { return _obsEmps; }
+            set
+            {
+                _obsEmps = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
-       
+
         #region Methods
 
         public async void GetEmployeeList()
         {
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+            ObsEmployees.Clear();
+            foreach (Employee e in Employees)
+            {
+                ObsEmployees.Add(e);
+            }
         }
 
         public async void AddEmployeeMethod()
