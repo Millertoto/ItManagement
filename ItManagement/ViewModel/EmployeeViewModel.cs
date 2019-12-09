@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
+using System.Collections.ObjectModel;
 
 namespace ItManagement.ViewModel
 {
@@ -22,6 +23,7 @@ namespace ItManagement.ViewModel
         private string _username;
         private int _cpr;
         private bool _isAdmin;
+        private string _selectedEmployee;
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
         private List<Employee> _employees;
@@ -77,12 +79,28 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public bool IsAdmin
         {
             get { return _isAdmin; }
-            set { _isAdmin = value; }
+            set
+            {
+                _isAdmin = value;
+                OnPropertyChanged();
+            }
         }
+        public string SelectedEmployee
+        {
+            get
+            {
+                return _selectedEmployee; ;
+            }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -114,8 +132,13 @@ namespace ItManagement.ViewModel
             }
 
         }
-        #endregion
+        public ObservableCollection<string> IsAnAdmin
+        {
+            get { return new ObservableCollection<string>() { "True", "False" }; }
 
+        }
+        #endregion
+       
         #region Methods
 
         public async void GetEmployeeList()
