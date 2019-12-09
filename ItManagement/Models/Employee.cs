@@ -13,17 +13,17 @@ namespace ItManagement
         private string _password;
         private string _name;
         private bool _isAdmin;
+        private string _isAdminString;
         #endregion
 
         #region Constructor
-        public Employee(string username, int cpr, string password, string name, bool isadmin )
+        public Employee(string username, int cpr, string password, string name )
         {
             Errors = new HashSet<Error>();
             _username = username;
             _cpr = cpr;
             _password = password;
             _name = name;
-            _isAdmin = isadmin;
         }
         #endregion
 
@@ -57,6 +57,11 @@ namespace ItManagement
         {
             get { return _isAdmin; }
             set { _isAdmin = value; }
+        }
+
+        public string IsAdminString
+        {
+            get { return _isAdmin.ToString(); }
         }
 
         public virtual ICollection<Error> Errors { get; set; }

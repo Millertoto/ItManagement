@@ -10,7 +10,7 @@ namespace ItManagement.Persistencies
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";
-        const string EmployeeUri = "Computers";
+        const string URI = "Computers";
         const string ApiPrefix = "api";
 
 
@@ -21,7 +21,7 @@ namespace ItManagement.Persistencies
         #region Constructor
         public ComputerPersistency()
         {
-            _webApi = new WebAPIAsync<Computer>(ServerUrl, ApiPrefix, EmployeeUri);
+            _webApi = new WebAPIAsync<Computer>(ServerUrl, ApiPrefix, URI);
         }
         #endregion
 

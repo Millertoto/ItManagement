@@ -13,6 +13,11 @@ namespace ItManagement
             _uid = uid;
             IsBorrowed = false;
         }
+
+        public SmartPhone()
+        {
+            IsBorrowed = false;
+        }
         public int Uid { get; set; }
         public bool IsBorrowed { get; set; }
 
