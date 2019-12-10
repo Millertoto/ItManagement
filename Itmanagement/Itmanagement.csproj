@@ -117,6 +117,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\RelayCommands.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Models\DatabaseSingleton.cs" />
+    <Compile Include="obj\ARM64\Debug\App.g.cs" />
+    <Compile Include="obj\ARM64\Release\App.g.cs" />
+    <Compile Include="obj\ARM\Debug\App.g.cs" />
+    <Compile Include="obj\x64\Debug\App.g.cs" />
+    <Compile Include="obj\x64\Release\App.g.cs" />
+    <Compile Include="obj\x86\Debug\App.g.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\x86\Release\App.g.cs" />
+    <Compile Include="Persistencies\WebApi.cs" />
+    <Compile Include="PersSingleton\IWebAPIAsync.cs" />
     <Compile Include="PersSingleton\Singleton.cs" />
     <Compile Include="Models\Accesory.cs" />
     <Compile Include="App.xaml.cs">
@@ -131,7 +145,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Persistencies\ComputerPersistency.cs" />
-     <Compile Include="Persistencies\AccesoryPersistency.cs" />
+    <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />
     <Compile Include="Persistencies\EquipmentPersistency.cs" />
     <Compile Include="Persistencies\ErrorPersistency.cs" />
@@ -140,14 +154,19 @@
     <Compile Include="Persistencies\SmartphonePersistency.cs" />
     <Compile Include="Persistencies\TabletPersistency.cs" />
     <Compile Include="Persistencies\WebAPIAsync.cs" />
+    <Compile Include="PersSingleton\WebAPIAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SmartBoard.cs" />
     <Compile Include="Models\SmartPhone.cs" />
     <Compile Include="Models\Tablet.cs" />
+    <Compile Include="ViewModel\AdminMainpage.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\ErrorViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\AdminMainpage.xaml.cs">
+      <DependentUpon>AdminMainpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmployeePageAdmin.xaml.cs">
       <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
     </Compile>
@@ -166,6 +185,9 @@
     <Compile Include="View\ErrorPageTeacher.xaml.cs">
       <DependentUpon>ErrorPageTeacher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -173,8 +195,18 @@
     </AppxManifest>
     <None Include="efpt.config.json" />
     <None Include="ItManagement_TemporaryKey.pfx" />
+    <None Include="obj\ARM\Debug\Itmanagement.csprojAssemblyReference.cache" />
+    <None Include="obj\ItManagement.csproj.nuget.cache" />
+    <None Include="obj\ItManagement.csproj.nuget.g.props" />
+    <None Include="obj\ItManagement.csproj.nuget.g.targets" />
+    <None Include="obj\project.assets.json" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\ItManagement.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x86\Debug\ItManagement.csprojAssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="obj\x86\Debug\ItManagement.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\XamlSaveStateFile.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -183,6 +215,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="SkoleDB.sql" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -190,6 +223,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AdminMainpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -217,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
@@ -235,7 +276,19 @@
       <Version>6.2.9</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\ARM\Debug\" />
+    <Folder Include="bin\x86\Debug\" />
+    <Folder Include="bin\x86\Release\" />
+    <Folder Include="obj\ARM64\Debug\intermediatexaml\" />
+    <Folder Include="obj\ARM64\Release\intermediatexaml\" />
+    <Folder Include="obj\ARM\Debug\intermediatexaml\" />
+    <Folder Include="obj\x64\Debug\intermediatexaml\" />
+    <Folder Include="obj\x64\Release\intermediatexaml\" />
+    <Folder Include="obj\x86\Debug\intermediatexaml\" />
+    <Folder Include="obj\x86\Debug\TempPE\" />
+    <Folder Include="obj\x86\Release\intermediatexaml\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
