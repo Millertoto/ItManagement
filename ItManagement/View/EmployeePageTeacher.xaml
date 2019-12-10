@@ -43,16 +43,11 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="ID:" Margin="0,0,10,0"/>
-                                            <TextBox Text="{Binding Path=CPR ,Mode=TwoWay}"/>
-                                            <TextBlock Text="Brugernavn:"/>
-                                            <TextBox Text="{Binding Path=UserName}"/>
-                                            <TextBlock Text="Password:"/>
-                                            <TextBox Text="{Binding Path=Password}"/>
-                                            <TextBlock Text="Navn"/>
-                                            <TextBox Text="{Binding Path=Name}"></TextBox>
-                                            <TextBlock Text="Admin"></TextBlock>
-                                            <TextBox Text="{Binding Path=IsAdmin}"></TextBox>
+                                            <TextBlock Text="{Binding Path=CPR ,Mode=TwoWay}"/>
+                                            <TextBlock Text="{Binding Path=UserName}"/>
+                                            <TextBlock Text="{Binding Path=Password}"/>
+                                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                                            <TextBlock Text="{Binding Path=IsAdmin}"></TextBlock>
                                         </StackPanel>
 
                                     </DataTemplate>
