@@ -22,18 +22,25 @@ namespace ItManagement.View
     /// </summary>
     public sealed partial class AdminMainpage : Page
     {
+        
+
         public AdminMainpage()
         {
             this.InitializeComponent();
 
-            this.GoToErrorPageAdmin.Click += GoToErrorPageAdmin_Click;
+           
+        }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
         }
 
 
         private void GoToErrorPageAdmin_Click(object sender, RoutedEventArgs e)
         {
-            ErrorPageAdmin epa = new ErrorPageAdmin();
-            this.Content = epa;
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(ErrorPageAdmin));
         }
     }
 }

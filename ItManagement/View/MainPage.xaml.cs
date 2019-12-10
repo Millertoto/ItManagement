@@ -32,6 +32,11 @@ namespace ItManagement
             this.DataContext = lvm;
         }
 
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
+
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
 

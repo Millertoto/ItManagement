@@ -27,8 +27,9 @@
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Content="Oversigt" Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Left" Margin="-2,100,0,100" VerticalAlignment="Stretch" Height="200" Width="207"/>
-                    <Button Name="GoToErrorPageAdmin" Content="Fejlmelding" Click="GoToErrorPageAdmin_Click" Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="200"/>
+                    <Button x:Name="ErrorPageAdmin" Content="Fejlmelding" Click="GoToErrorPageAdmin_Click" Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="200"/>
                 </StackPanel>
+                <Frame x:Name="GoToErrorPageAdmin" ></Frame>
 
             </StackPanel>
 

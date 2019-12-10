@@ -12,20 +12,20 @@ namespace ItManagement.ViewModel
 {
     class AdminMainpage
     {
-        private Employee _adminUser;
+        //private Employee _adminUser;
 
-        public Employee AdminUser
-        { 
-            get { return AdminUser; }
-            set { _adminUser = value; }
-        }
+        //public Employee AdminUser
+        //{ 
+        //    get { return AdminUser; }
+        //    set { _adminUser = value; }
+        //}
 
         //public AdminMainpage()
         //{
         //    RelayCommand GoTo = new RelayCommand(NextPageButtonMethod);
         //}
 
-       
+
         //if (AdminMainpage(ErrorPageAdmin))
         //{
         //   Frame currentFrame = Window.Current.Content as Frame;
@@ -36,7 +36,7 @@ namespace ItManagement.ViewModel
         //   Frame currentFrame = Window.Current.Content as Frame;
         //   currentFrame.Navigate(typeof(EquipmentPage));
         //}
-        
+
 
     }
 }
