@@ -55,7 +55,8 @@ namespace ItManagement.ViewModel
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
             _goBack = new RelayCommand(GoBackMethod);
-            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
+
+            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
             ConvertToObs();
         }
 
