@@ -313,12 +313,15 @@ namespace ItManagement.ViewModel
 
         public void ConvertToObs()
         {
-        List<Error> ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+        ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+        if (ListOfErrors != null)
+        {
+            foreach (Error e in ListOfErrors)
+            {
+                ObsListOfErrors.Add(e);
+            }
+        }
         //ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
-                foreach (Error e in ListOfErrors)
-                {
-                    ObsListOfErrors.Add(e);
-                }
             
         }
 
