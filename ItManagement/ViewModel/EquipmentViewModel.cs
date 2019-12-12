@@ -28,6 +28,7 @@ namespace ItManagement.ViewModel
         private List<Equipment> _listOfEquipment;
         private Equipment _selectedEquipment;
         private int _uid;
+        //private string _selectedEquipmentString;
         private string _type;
         private bool _isWorking;
         private RelayCommand _getAllEquipment;
@@ -76,6 +77,19 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        //public string SelectedEquipmentString
+        //{
+        //    get
+        //    {
+        //        return _selectedEquipmentString; ;
+        //    }
+        //    set
+        //    {
+        //        _selectedEquipmentString = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         public int Uid
         {
 
@@ -123,9 +137,25 @@ namespace ItManagement.ViewModel
             get { return _listOfErrors; }
             set { _listOfErrors = value; }
         }
+
+        
         #endregion
 
+        #region Check
+        //private void SetWorking(string Workingcheck, Equipment e)
+        //{
+        //    if (Workingcheck == "true" || Workingcheck == "True")
+        //    {
+        //        e.IsWorking = true;
+        //    }
+        //    else
+        //    {
+        //        e.IsWorking = false;
+        //    }
+        //}
 
+
+        #endregion
 
 
         #region Computer Properties
@@ -194,6 +224,12 @@ namespace ItManagement.ViewModel
 
         #region Methods
 
+        public ObservableCollection<string> IsItWorking
+        {
+            get { return new ObservableCollection<string>() { "True", "False" }; }
+
+        }
+
         public async void AddEquipment()
         {
             if (TypeOfEquipment == "Computer"
@@ -201,9 +237,10 @@ namespace ItManagement.ViewModel
                 || TypeOfEquipment == "Smartphone"
                 || TypeOfEquipment == "Tablet")
             {
-                Equipment e = new Equipment(TypeOfEquipment);
-                await Singleton.Instance.EQP.CreateEquipment(e);
-
+                Equipment eqm = new Equipment(TypeOfEquipment);
+                //SetWorking(SelectedEquipmentString,eqm);
+                await Singleton.Instance.EQP.CreateEquipment(eqm);
+                
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
                  Equipment newlyCreatedEquip = AllEquipment.Last();
