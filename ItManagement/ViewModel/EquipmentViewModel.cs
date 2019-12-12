@@ -39,6 +39,7 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
         private List<Error> _listOfErrors;
+        private ObservableCollection<string> _equipmentTypes;
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace ItManagement.ViewModel
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
             _goBack = new RelayCommand(GoBackMethod);
+            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
             ConvertToObs();
         }
 
@@ -224,9 +226,10 @@ namespace ItManagement.ViewModel
 
         #region Methods
 
-        public ObservableCollection<string> IsItWorking
+        public ObservableCollection<string> EquipmentTypes
         {
-            get { return new ObservableCollection<string>() { "True", "False" }; }
+            get { return _equipmentTypes; }
+            set { _equipmentTypes = value; }
 
         }
 
