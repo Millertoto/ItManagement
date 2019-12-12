@@ -1,7 +1,6 @@
 ﻿using ItManagement.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,7 +12,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
+using System.Collections.ObjectModel;
 using ItManagement.View;
+
 
 namespace ItManagement.ViewModel
 {
@@ -25,6 +26,7 @@ namespace ItManagement.ViewModel
         private string _password;
         private string _username;
         private int _cpr;
+        private string _selectedEmployeeString;
         private string _isAdmin;
         private RelayCommand _addEmployeeButton;
         private RelayCommand _getEmployeeList;
@@ -41,12 +43,15 @@ namespace ItManagement.ViewModel
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
             _getEmployeeList = new RelayCommand(GetEmployeeList);
+
             _deleteEmp = new RelayCommand(DeleteEmpMethod);
             Employees = Singleton.Instance.EP.GetEmployees().Result;
             _editButton = new RelayCommand(EditMethod);
             _obsEmps = new ObservableCollection<Employee>();
             _goBack = new RelayCommand(GoBackMethod);
+
             ConvertToObs();
+
         }
         #endregion
 
@@ -61,6 +66,7 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+
         public int CPR
         {
             get { return _cpr; }
@@ -101,7 +107,10 @@ namespace ItManagement.ViewModel
             }
         }
 
+
+
         public string IsAdmin
+
         {
             get { return _isAdmin; }
             set
@@ -109,23 +118,26 @@ namespace ItManagement.ViewModel
                 _isAdmin = value;
                 OnPropertyChanged();
             }
+
         }
+        public string SelectedEmployeeString
+        {
+            get
+            {
+                return _selectedEmployeeString; ;
+            }
+            set
+            {
+                _selectedEmployeeString = value;
+                OnPropertyChanged();
+            }
+
+        }
+
 
         #endregion
 
         #region RelayCommands
-
-        public RelayCommand DeleteButton
-        {
-            get { return _deleteEmp; }
-            set { _deleteEmp = value; }
-        }
-
-        public RelayCommand EditButton
-        {
-            get { return _editButton; }
-            set { _editButton = value; }
-        }
         public RelayCommand AddEmployeeButton
         {
             get { return _addEmployeeButton; }
@@ -139,6 +151,18 @@ namespace ItManagement.ViewModel
             set { _getEmployeeList = value; }
 
         }
+
+        public RelayCommand DeleteButton
+        {
+            get { return _deleteEmp; }
+            set { _deleteEmp = value; }
+        }
+
+        public RelayCommand EditButton
+        {
+            get { return _editButton; }
+            set { _editButton = value; }
+        }
         #endregion
 
         #region Lists
@@ -151,6 +175,11 @@ namespace ItManagement.ViewModel
                 _employees = value;
                 OnPropertyChanged();
             }
+
+        }
+        public ObservableCollection<string> IsAnAdmin
+        {
+            get { return new ObservableCollection<string>() { "True", "False" }; }
 
         }
 
@@ -168,7 +197,7 @@ namespace ItManagement.ViewModel
 
         #region Methods
 
-        public void GetEmployeeList()
+        public async void GetEmployeeList()
         {
             Employees = Singleton.Instance.EP.GetEmployees().Result;
             ObsEmployees.Clear();
@@ -206,6 +235,8 @@ namespace ItManagement.ViewModel
 
         }
 
+
+
         public async void DeleteEmpMethod()
         {
             
@@ -240,6 +271,7 @@ namespace ItManagement.ViewModel
                 e.IsAdmin = false;
             }
         }
+
 
         public bool UsernameCheck(string username, List<Employee> list)
         {
@@ -301,6 +333,7 @@ namespace ItManagement.ViewModel
 
             return false;
         }
+
         #endregion
 
         public void ConvertToObs()
@@ -310,6 +343,7 @@ namespace ItManagement.ViewModel
                     ObsEmployees.Add(e);
             }
         }
+
 
         #endregion
 
