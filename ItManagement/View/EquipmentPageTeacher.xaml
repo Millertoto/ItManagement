@@ -35,17 +35,13 @@
                             <TextBlock Text="Funktionelitet" FontSize="30" Margin="0,0,0,0"></TextBlock>
                         </StackPanel>
                         <StackPanel Background="CornflowerBlue" Margin="0,0,0,-530">
-                            <ListView Margin="0,0,0,0" >
+                            <ListView Margin="0,0,0,0" ItemsSource="{Binding ObsEquipment}" SelectedValue="{Binding SelectedEquipment}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="ID:" Margin="0,0,10,0"/>
-                                            <TextBox />
-                                            <TextBlock Text="Hardware Type:"/>
-                                            <TextBox/>
-                                            <TextBlock Text="Funktionelitet:"/>
-                                            <TextBox/>
-
+                                            <TextBox Text="{Binding Uid}"/>
+                                            <TextBox Text="{Binding Type}"/>
+                                            <TextBox Text="{Binding IsWorkingString}"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
