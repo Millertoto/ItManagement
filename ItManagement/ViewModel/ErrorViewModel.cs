@@ -271,7 +271,7 @@ namespace ItManagement.ViewModel
         public async void FixMethod()
         {
             SelectedError.IsRepaired = true;
-            SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
+            SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Name;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
             ObsListOfErrors.Clear();
