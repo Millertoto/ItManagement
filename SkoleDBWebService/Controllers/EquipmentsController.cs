@@ -17,16 +17,16 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Equipments
-        public IQueryable<Equipment> GetEquipment()
+        public IQueryable<Equipment> GetEquipments()
         {
-            return db.Equipment;
+            return db.Equipments;
         }
 
         // GET: api/Equipments/5
         [ResponseType(typeof(Equipment))]
         public IHttpActionResult GetEquipment(int id)
         {
-            Equipment equipment = db.Equipment.Find(id);
+            Equipment equipment = db.Equipments.Find(id);
             if (equipment == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace SkoleDBWebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Equipment.Add(equipment);
+            db.Equipments.Add(equipment);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = equipment.Uid }, equipment);
@@ -89,13 +89,13 @@ namespace SkoleDBWebService.Controllers
         [ResponseType(typeof(Equipment))]
         public IHttpActionResult DeleteEquipment(int id)
         {
-            Equipment equipment = db.Equipment.Find(id);
+            Equipment equipment = db.Equipments.Find(id);
             if (equipment == null)
             {
                 return NotFound();
             }
 
-            db.Equipment.Remove(equipment);
+            db.Equipments.Remove(equipment);
             db.SaveChanges();
 
             return Ok(equipment);
@@ -112,7 +112,7 @@ namespace SkoleDBWebService.Controllers
 
         private bool EquipmentExists(int id)
         {
-            return db.Equipment.Count(e => e.Uid == id) > 0;
+            return db.Equipments.Count(e => e.Uid == id) > 0;
         }
     }
 }
