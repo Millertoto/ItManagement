@@ -313,6 +313,9 @@ namespace ItManagement.ViewModel
 
         public void ConvertToObs()
         {
+
+            
+
             ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
             if (ListOfErrors != null)
             {
@@ -321,6 +324,7 @@ namespace ItManagement.ViewModel
                     ObsListOfErrors.Add(e);
                 }
             }
+
 
         }
 
