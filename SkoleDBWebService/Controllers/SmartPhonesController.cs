@@ -17,16 +17,16 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/SmartPhones
-        public IQueryable<SmartPhone> GetSmartPhone()
+        public IQueryable<SmartPhone> GetSmartPhones()
         {
-            return db.SmartPhone;
+            return db.SmartPhones;
         }
 
         // GET: api/SmartPhones/5
         [ResponseType(typeof(SmartPhone))]
         public IHttpActionResult GetSmartPhone(int id)
         {
-            SmartPhone smartPhone = db.SmartPhone.Find(id);
+            SmartPhone smartPhone = db.SmartPhones.Find(id);
             if (smartPhone == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace SkoleDBWebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.SmartPhone.Add(smartPhone);
+            db.SmartPhones.Add(smartPhone);
 
             try
             {
@@ -104,13 +104,13 @@ namespace SkoleDBWebService.Controllers
         [ResponseType(typeof(SmartPhone))]
         public IHttpActionResult DeleteSmartPhone(int id)
         {
-            SmartPhone smartPhone = db.SmartPhone.Find(id);
+            SmartPhone smartPhone = db.SmartPhones.Find(id);
             if (smartPhone == null)
             {
                 return NotFound();
             }
 
-            db.SmartPhone.Remove(smartPhone);
+            db.SmartPhones.Remove(smartPhone);
             db.SaveChanges();
 
             return Ok(smartPhone);
@@ -127,7 +127,7 @@ namespace SkoleDBWebService.Controllers
 
         private bool SmartPhoneExists(int id)
         {
-            return db.SmartPhone.Count(e => e.Uid == id) > 0;
+            return db.SmartPhones.Count(e => e.Uid == id) > 0;
         }
     }
 }
