@@ -29,7 +29,7 @@ namespace ItManagement
             get { return IsWorking.ToString(); }
         }
 
-        public void createType()
+        /*public void createType()
         {
             switch (Type)
             {
@@ -46,7 +46,7 @@ namespace ItManagement
                     Tablet = new Tablet();
                     break;
             }
-        }
+        }*/
 
         public virtual Computer Computer { get; set; }
         public virtual SmartBoard SmartBoard { get; set; }

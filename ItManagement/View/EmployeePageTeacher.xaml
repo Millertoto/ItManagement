@@ -39,7 +39,7 @@
                             <TextBlock Text="Admin" FontSize="30" Margin="0,0,0,0"></TextBlock>
                         </StackPanel>
                         <StackPanel Background="CornflowerBlue" Margin="0,0,0,-520">
-                            <ListView Margin="0,0,0,0" ItemsSource="{Binding Path=Employees}">
+                            <ListView Margin="0,0,0,0" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -48,6 +48,16 @@
                                             <TextBlock Text="{Binding Path=Password}"/>
                                             <TextBlock Text="{Binding Path=Name}"></TextBlock>
                                             <TextBlock Text="{Binding Path=IsAdmin}"></TextBlock>
+                                            <TextBlock Text="ID:" Margin="0,0,10,0"/>
+                                            <TextBox />
+                                            <TextBlock Text="Brugernavn:"/>
+                                            <TextBox/>
+                                            <TextBlock Text="Password:"/>
+                                            <TextBox/>
+                                            <TextBlock Text="Navn"/>
+                                            <TextBox></TextBox>
+                                            <TextBlock Text="Admin"></TextBlock>
+                                            <TextBox></TextBox>
                                         </StackPanel>
 
                                     </DataTemplate>

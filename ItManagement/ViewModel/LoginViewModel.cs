@@ -38,7 +38,8 @@ namespace ItManagement.ViewModel
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
-
+            /*Employee e = new Employee("AAA", 1307941500, "heyssa22", "Martin Holm", true);
+            Singleton.Instance.EP.CreateEmployee(e);*/
         }
 
         #endregion
