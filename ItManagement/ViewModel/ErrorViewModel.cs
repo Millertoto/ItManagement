@@ -31,17 +31,15 @@ namespace ItManagement.ViewModel
         private List<Equipment> _listOfEquipment;
         private int _uid;
         private string _errorText;
-        //private bool _isRepaired;
-        private int _cpr;
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
-        private List<Error> _allErrors;
         private Equipment _currentEquipment;
-        private ObservableCollection<Error> _obsErrors;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
+        private List<Error> _newListOfError;
+        private ObservableCollection<Error> _newObsErrors;
 
 
         #endregion
@@ -50,30 +48,24 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
+            _newListOfError = new List<Error>();
+            _newObsErrors = new ObservableCollection<Error>();
             _addErrorButton = new RelayCommand(AddError);
             _deleteButton = new RelayCommand(DeleteMethod);
             _editButton = new RelayCommand(EditMethod);
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
-            _allErrors = Singleton.Instance.ERP.GetErrors().Result;
-            _obsErrors = new ObservableCollection<Error>();
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
 
-            ConvertToObs();
-
-            _uid = default(int);
+            NewConvertToObs();
 
 
         }
         #endregion
 
         #region Properties
-        public int Cpr
-        {
-            get { return _cpr; }
-            set { _cpr = value; }
-        }
 
+        
         public Error SelectedError
         {
             get { return _selected; }
@@ -124,19 +116,19 @@ namespace ItManagement.ViewModel
             }
         }
 
-        //private string _selectedOption;
-        //public string SelectedOption
-        //{
-        //    get
-        //    {
-        //        return _selectedOption; ;
-        //    }
-        //    set
-        //    {
-        //        _selectedOption = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        private string _selectedOption;
+        public string SelectedOption
+        {
+            get
+            {
+                return _selectedOption; ;
+            }
+            set
+            {
+                _selectedOption = value;
+                OnPropertyChanged();
+            }
+        }
         #region Lists
         public List<Equipment> ListOfEquipment
         {
@@ -148,44 +140,25 @@ namespace ItManagement.ViewModel
             }
         }
 
-        public List<Error> ListOfErrors
+        public List<Error> NewErrorList
         {
-            get { return _allErrors; }
+            get { return _newListOfError; }
             set
             {
-                _allErrors = value;
-                OnPropertyChanged();
-            }
-
-        }
-
-        public ObservableCollection<Error> ObsListOfErrors
-        {
-            get { return _obsErrors; }
-            set
-            {
-                _obsErrors = value; 
+                _newListOfError = value;
                 OnPropertyChanged();
             }
         }
-        #endregion
+
+        public ObservableCollection<Error> NewObsErrors
+        {
+            get { return _newObsErrors; }
+            set { _newObsErrors = value; }
+        }
 
 
         #endregion
 
-        #region Checks
-
-        //private void SetRepair(string Repaircheck, Error e)
-        //{
-        //    if (Repaircheck == "true" || Repaircheck == "True")
-        //    {
-        //        e.IsRepaired = true;
-        //    }
-        //    else
-        //    {
-        //        e.IsRepaired = false;
-        //    }
-        //}
 
         #endregion
 
@@ -213,14 +186,9 @@ namespace ItManagement.ViewModel
             get { return _deleteButton; }
             set { _deleteButton = value; }
         }
-        //public ObservableCollection<string> IsItRepaired
-        //{
-        //    get { return new ObservableCollection<string>() { "True", "False" }; }
-
-        //}
         #endregion
 
-
+        
         #region Methods
 
 
@@ -232,8 +200,6 @@ namespace ItManagement.ViewModel
             {
                 if (ErrorDescription == null)
                 {
-                    //Error er = new Error(Cpr,UidForCreation,ErrorDescription);
-                    //SetRepair(SelectedOption,er);
                     var messageDialogue = new MessageDialog($"You need to type in a description for the error");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
@@ -252,8 +218,8 @@ namespace ItManagement.ViewModel
                 
 
             }
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
 
         }
@@ -263,19 +229,19 @@ namespace ItManagement.ViewModel
             SelectedError.ErrorMessage = ErrorDescription;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
         }
 
         public async void FixMethod()
         {
             SelectedError.IsRepaired = true;
-            SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Name;
+            SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
         }
 
@@ -285,8 +251,8 @@ namespace ItManagement.ViewModel
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
             }
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
         }
 
         public bool EquipmentCheck(int uid)
@@ -311,23 +277,22 @@ namespace ItManagement.ViewModel
 
         }
 
-        public void ConvertToObs()
+        public void NewConvertToObs()
         {
+            NewErrorList = Singleton.Instance.ERP.GetErrors().Result;
 
-            
-
-            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
-            if (ListOfErrors != null)
+            if (NewErrorList != null)
             {
-                foreach (Error e in ListOfErrors)
+                foreach (Error e in NewErrorList)
                 {
-                    ObsListOfErrors.Add(e);
+                    NewObsErrors.Add(e);
                 }
             }
+            else
+            {
 
-
+            }
         }
-
         #endregion
 
         #region GoBack

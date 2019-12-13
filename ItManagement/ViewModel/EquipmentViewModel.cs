@@ -21,6 +21,8 @@ namespace ItManagement.ViewModel
     class EquipmentViewModel : INotifyPropertyChanged
     {
         #region Instance Field
+
+        private Employee _repairMan;
         private Computer _computer;
         private SmartBoard _smartBoard;
         private Tablet _tablet;
@@ -28,7 +30,6 @@ namespace ItManagement.ViewModel
         private List<Equipment> _listOfEquipment;
         private Equipment _selectedEquipment;
         private int _uid;
-        //private string _selectedEquipmentString;
         private string _type;
         private bool _isWorking;
         private RelayCommand _getAllEquipment;
@@ -54,9 +55,9 @@ namespace ItManagement.ViewModel
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
+            _equipmentTypes = new ObservableCollection<string>() {"Computer", "Smartboard", "Tablet", "Smartphone"};
+            
             _goBack = new RelayCommand(GoBackMethod);
-
-            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
             ConvertToObs();
         }
 
@@ -81,18 +82,11 @@ namespace ItManagement.ViewModel
             }
         }
 
-        //public string SelectedEquipmentString
-        //{
-        //    get
-        //    {
-        //        return _selectedEquipmentString; ;
-        //    }
-        //    set
-        //    {
-        //        _selectedEquipmentString = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public Employee RepairMan
+        {
+            get { return _repairMan; }
+            set { _repairMan = value; }
+        }
         public int Uid
         {
 
@@ -141,24 +135,14 @@ namespace ItManagement.ViewModel
             set { _listOfErrors = value; }
         }
 
-        
+        public ObservableCollection<string> EquipmentTypes
+        {
+            get { return _equipmentTypes; }
+            set { _equipmentTypes = value; }
+        }
         #endregion
 
-        #region Check
-        //private void SetWorking(string Workingcheck, Equipment e)
-        //{
-        //    if (Workingcheck == "true" || Workingcheck == "True")
-        //    {
-        //        e.IsWorking = true;
-        //    }
-        //    else
-        //    {
-        //        e.IsWorking = false;
-        //    }
-        //}
 
-
-        #endregion
 
 
         #region Computer Properties
@@ -227,13 +211,6 @@ namespace ItManagement.ViewModel
 
         #region Methods
 
-        public ObservableCollection<string> EquipmentTypes
-        {
-            get { return _equipmentTypes; }
-            set { _equipmentTypes = value; }
-
-        }
-
         public async void AddEquipment()
         {
             if (TypeOfEquipment == "Computer"
@@ -241,55 +218,59 @@ namespace ItManagement.ViewModel
                 || TypeOfEquipment == "Smartphone"
                 || TypeOfEquipment == "Tablet")
             {
-                Equipment eqm = new Equipment(TypeOfEquipment);
-                //SetWorking(SelectedEquipmentString,eqm);
-                await Singleton.Instance.EQP.CreateEquipment(eqm);
-                
+                Equipment e = new Equipment(TypeOfEquipment);
+                await Singleton.Instance.EQP.CreateEquipment(e);
+
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
-                 Equipment newlyCreatedEquip = AllEquipment.Last();
+                Equipment newlyCreatedEquip = AllEquipment.Last();
+ 
+                 switch (TypeOfEquipment)
+                 {
+                     case "Computer":
+ 
+                         Computer pc = new Computer(newlyCreatedEquip.Uid);
+                         await Singleton.Instance.COM.CreateComputer(pc);
+ 
+                         var messageDialogue1 = new MessageDialog($"A computer has been added");
+                         messageDialogue1.Commands.Add(new UICommand("Close"));
+                         await messageDialogue1.ShowAsync();
+                         break;
 
-                 //switch (TypeOfEquipment)
-                 //{
-                 //    case "Computer":
+                     case "Smartboard":
 
-                 //        Computer pc = new Computer(newlyCreatedEquip.Uid);
-                 //    await Singleton.Instance.COM.CreateComputer(pc);
+                         SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.SB.CreateSmartboard(sb);
+ 
+                         var messageDialogue2 = new MessageDialog($"A smartboard has been added");
+                         messageDialogue2.Commands.Add(new UICommand("Close"));
+                         await messageDialogue2.ShowAsync();
+                         break;
 
-                 //    var messageDialogue1 = new MessageDialog($"A computer has been added");
-                 //    messageDialogue1.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue1.ShowAsync();
-                 //        break;
-                 //    case "Smartboard":
-                 //        SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.SB.CreateSmartboard(sb);
+                     case "Smartphone":
 
-                 //    var messageDialogue2 = new MessageDialog($"A smartboard has been added");
-                 //    messageDialogue2.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue2.ShowAsync();
-                 //        break;
-                 //    case "Smartphone":
-                 //        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.SP.CreateSmartphone(sp);
+                         SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.SP.CreateSmartphone(sp);
+ 
+                         var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
+                         messageDialogue3.Commands.Add(new UICommand("Close"));
+                         await messageDialogue3.ShowAsync();
+                         break;
 
-                 //   var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
-                 //   messageDialogue3.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue3.ShowAsync();
-                 //        break;
-                 //    case "Tablet":
-                 //        Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.TAB.CreateTablet(tab);
-
-                 //   var messageDialogue4 = new MessageDialog($"A tablet has been added");
-                 //   messageDialogue4.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue4.ShowAsync();
-                 //        break;
-
-                 //    default:
-                 //        break;
-
-
-                 //}
+                     case "Tablet":
+                         Tablet tab = new Tablet(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.TAB.CreateTablet(e.Tablet);
+ 
+                         var messageDialogue4 = new MessageDialog($"A tablet has been added");
+                         messageDialogue4.Commands.Add(new UICommand("Close"));
+                         await messageDialogue4.ShowAsync();
+                         break;
+ 
+                     default:
+                         break;
+ 
+ 
+                 }
 
             }
             ObsEquipment.Clear();
@@ -312,23 +293,46 @@ namespace ItManagement.ViewModel
 
                     switch (SelectedEquipment.Type)
                     {
-                    case "Computer":
-                        await Singleton.Instance.COM.DeleteComputer(SelectedEquipment.Uid);
-                        break;
-                    case "Smartboard":
-                        await Singleton.Instance.SB.DeleteSmartboard(SelectedEquipment.Uid);
-                        break;
-                    case "Smartphone":
-                        await Singleton.Instance.SP.DeleteSmartphone(SelectedEquipment.Uid);
-                        break;
-                    case "Tablet":
-                        await Singleton.Instance.TAB.DeleteTablet(SelectedEquipment.Uid);
-                        ;
-                        break;
+                        case "Computer":
+                            await Singleton.Instance.COM.DeleteComputer(SelectedEquipment.Uid);
+                            await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+
+                            var messageDialogue1 = new MessageDialog($"A computer has been removed");
+                            messageDialogue1.Commands.Add(new UICommand("Close"));
+                            await messageDialogue1.ShowAsync();
+                            break;
+
+                        case "Smartboard":
+
+                            await Singleton.Instance.SB.DeleteSmartboard(SelectedEquipment.Uid);
+                            await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+
+                            var messageDialogue2 = new MessageDialog($"A smartboard has been removed");
+                            messageDialogue2.Commands.Add(new UICommand("Close"));
+                            await messageDialogue2.ShowAsync();
+                            break;
+
+                        case "Smartphone":
+
+                            await Singleton.Instance.SP.DeleteSmartphone(SelectedEquipment.Uid);
+                            await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+
+                            var messageDialogue3 = new MessageDialog($"A Smartphone has been removed");
+                            messageDialogue3.Commands.Add(new UICommand("Close"));
+                            await messageDialogue3.ShowAsync();
+                            break;
+
+                        case "Tablet":
+                            await Singleton.Instance.TAB.DeleteTablet(SelectedEquipment.Uid);
+                            await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
+
+                            var messageDialogue4 = new MessageDialog($"A tablet has been removed");
+                            messageDialogue4.Commands.Add(new UICommand("Close"));
+                            await messageDialogue4.ShowAsync();
+                            break;
+
 
                     }
-                    
-                    await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
             }
             ObsEquipment.Clear();
             ConvertToObs();

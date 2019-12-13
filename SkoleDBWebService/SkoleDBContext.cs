@@ -41,25 +41,9 @@ namespace SkoleDBWebService
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Errors)
-                .WithRequired(e => e.Employee)
-                .HasForeignKey(e => e.Cpr)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Errors1)
-                .WithOptional(e => e.Employee1)
-                .HasForeignKey(e => e.HasRepaired);
-
             modelBuilder.Entity<Equipment>()
                 .HasOptional(e => e.Computer)
                 .WithRequired(e => e.Equipment);
-
-            modelBuilder.Entity<Equipment>()
-                .HasMany(e => e.Errors)
-                .WithRequired(e => e.Equipment)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Equipment>()
                 .HasOptional(e => e.SmartBoard)
