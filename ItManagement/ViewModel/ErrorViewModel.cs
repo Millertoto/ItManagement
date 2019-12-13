@@ -321,8 +321,12 @@ namespace ItManagement.ViewModel
 
         public void ConvertToObs()
         {
+<<<<<<< HEAD
         List<Error> ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
         //ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+=======
+            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+>>>>>>> parent of f85485b... Works, prolly
                 foreach (Error e in ListOfErrors)
                 {
                     ObsListOfErrors.Add(e);
