@@ -17,16 +17,16 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Computers
-        public IQueryable<Computer> GetComputers()
+        public IQueryable<Computer> GetComputer()
         {
-            return db.Computers;
+            return db.Computer;
         }
 
         // GET: api/Computers/5
         [ResponseType(typeof(Computer))]
         public IHttpActionResult GetComputer(int id)
         {
-            Computer computer = db.Computers.Find(id);
+            Computer computer = db.Computer.Find(id);
             if (computer == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace SkoleDBWebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Computers.Add(computer);
+            db.Computer.Add(computer);
 
             try
             {
@@ -104,13 +104,13 @@ namespace SkoleDBWebService.Controllers
         [ResponseType(typeof(Computer))]
         public IHttpActionResult DeleteComputer(int id)
         {
-            Computer computer = db.Computers.Find(id);
+            Computer computer = db.Computer.Find(id);
             if (computer == null)
             {
                 return NotFound();
             }
 
-            db.Computers.Remove(computer);
+            db.Computer.Remove(computer);
             db.SaveChanges();
 
             return Ok(computer);
@@ -127,7 +127,7 @@ namespace SkoleDBWebService.Controllers
 
         private bool ComputerExists(int id)
         {
-            return db.Computers.Count(e => e.Uid == id) > 0;
+            return db.Computer.Count(e => e.Uid == id) > 0;
         }
     }
 }

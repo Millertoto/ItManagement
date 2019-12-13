@@ -17,39 +17,39 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Employees
-        public IQueryable<Employee> GetEmployees()
+        public IQueryable<Employees> GetEmployees()
         {
             return db.Employees;
         }
 
         // GET: api/Employees/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult GetEmployee(int id)
+        [ResponseType(typeof(Employees))]
+        public IHttpActionResult GetEmployees(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Employees employees = db.Employees.Find(id);
+            if (employees == null)
             {
                 return NotFound();
             }
 
-            return Ok(employee);
+            return Ok(employees);
         }
 
         // PUT: api/Employees/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEmployee(int id, Employee employee)
+        public IHttpActionResult PutEmployees(int id, Employees employees)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != employee.Cpr)
+            if (id != employees.Cpr)
             {
                 return BadRequest();
             }
 
-            db.Entry(employee).State = EntityState.Modified;
+            db.Entry(employees).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace SkoleDBWebService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeExists(id))
+                if (!EmployeesExists(id))
                 {
                     return NotFound();
                 }
@@ -71,15 +71,15 @@ namespace SkoleDBWebService.Controllers
         }
 
         // POST: api/Employees
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult PostEmployee(Employee employee)
+        [ResponseType(typeof(Employees))]
+        public IHttpActionResult PostEmployees(Employees employees)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Employees.Add(employee);
+            db.Employees.Add(employees);
 
             try
             {
@@ -87,7 +87,7 @@ namespace SkoleDBWebService.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EmployeeExists(employee.Cpr))
+                if (EmployeesExists(employees.Cpr))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace SkoleDBWebService.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = employee.Cpr }, employee);
+            return CreatedAtRoute("DefaultApi", new { id = employees.Cpr }, employees);
         }
 
         // DELETE: api/Employees/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult DeleteEmployee(int id)
+        [ResponseType(typeof(Employees))]
+        public IHttpActionResult DeleteEmployees(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Employees employees = db.Employees.Find(id);
+            if (employees == null)
             {
                 return NotFound();
             }
 
-            db.Employees.Remove(employee);
+            db.Employees.Remove(employees);
             db.SaveChanges();
 
-            return Ok(employee);
+            return Ok(employees);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,7 +125,7 @@ namespace SkoleDBWebService.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmployeeExists(int id)
+        private bool EmployeesExists(int id)
         {
             return db.Employees.Count(e => e.Cpr == id) > 0;
         }

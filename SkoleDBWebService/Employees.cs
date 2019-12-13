@@ -6,13 +6,12 @@ namespace SkoleDBWebService
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Employee
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Employees()
         {
-            Errors = new HashSet<Error>();
-            Errors1 = new HashSet<Error>();
+            Errors = new HashSet<Errors>();
         }
 
         [Key]
@@ -34,9 +33,6 @@ namespace SkoleDBWebService
         public bool IsAdmin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Error> Errors { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Error> Errors1 { get; set; }
+        public virtual ICollection<Errors> Errors { get; set; }
     }
 }
