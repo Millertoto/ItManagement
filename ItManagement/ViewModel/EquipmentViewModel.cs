@@ -56,7 +56,11 @@ namespace ItManagement.ViewModel
             _obsequipment = new ObservableCollection<Equipment>();
             _goBack = new RelayCommand(GoBackMethod);
 <<<<<<< HEAD
+<<<<<<< HEAD
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
+=======
+            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
+>>>>>>> parent of 02c1b0c... Merge branch 'master' into Caspar
 =======
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
 >>>>>>> parent of 02c1b0c... Merge branch 'master' into Caspar
