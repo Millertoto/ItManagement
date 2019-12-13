@@ -10,7 +10,7 @@ namespace ItManagement
         private bool _isBorrowed;
         public Tablet(int uid)
         {
-            _uid = uid;
+            Uid = uid;
             _isBorrowed = false;
         }
 

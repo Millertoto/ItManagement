@@ -259,7 +259,7 @@ namespace ItManagement.ViewModel
 
                      case "Tablet":
                          Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.TAB.CreateTablet(e.Tablet);
+                        await Singleton.Instance.TAB.CreateTablet(tab);
  
                          var messageDialogue4 = new MessageDialog($"A tablet has been added");
                          messageDialogue4.Commands.Add(new UICommand("Close"));
