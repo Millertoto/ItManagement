@@ -28,10 +28,7 @@ namespace ItManagement
             _create = DateTime.Now;
             _update = DateTime.Now;
             _isRepaired = false;
-
-            _HasRepaired = null;
-
-
+            _HasRepaired = "None";
 
 
         }

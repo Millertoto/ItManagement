@@ -2,7 +2,7 @@
     x:Class="ItManagement.View.ErrorPageAdmin"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ItManagement"
+    xmlns:local="using:Itmanagement"
     xmlns:myviewmodel="using:ItManagement.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -80,13 +80,13 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Fid}" FontSize="8" Margin="0,10,0,0"/>
-                                    <TextBlock Text="{Binding Cpr}" FontSize="8" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Uid}" FontSize="8" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Create}" FontSize="8" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Update}" FontSize="8" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding IsRepairedStirng}" FontSize="8" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding WhoRepairedDis}" FontSize="8" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Fid}" Margin="0,10,0,0"/>
+                                    <TextBlock Text="{Binding Cpr}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Uid}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Create}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Update}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding IsRepairedStirng}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding WhoRepairedDis}" Margin="10,10,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

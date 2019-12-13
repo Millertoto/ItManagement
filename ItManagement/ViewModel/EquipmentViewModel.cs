@@ -55,7 +55,6 @@ namespace ItManagement.ViewModel
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
             _goBack = new RelayCommand(GoBackMethod);
-
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
             ConvertToObs();
         }
@@ -249,47 +248,47 @@ namespace ItManagement.ViewModel
 
                  Equipment newlyCreatedEquip = AllEquipment.Last();
 
-                 //switch (TypeOfEquipment)
-                 //{
-                 //    case "Computer":
+                 switch (TypeOfEquipment)
+                 {
+                     case "Computer":
 
-                 //        Computer pc = new Computer(newlyCreatedEquip.Uid);
-                 //    await Singleton.Instance.COM.CreateComputer(pc);
+                         Computer pc = new Computer(newlyCreatedEquip.Uid);
+                     await Singleton.Instance.COM.CreateComputer(pc);
 
-                 //    var messageDialogue1 = new MessageDialog($"A computer has been added");
-                 //    messageDialogue1.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue1.ShowAsync();
-                 //        break;
-                 //    case "Smartboard":
-                 //        SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.SB.CreateSmartboard(sb);
+                     var messageDialogue1 = new MessageDialog($"A computer has been added");
+                     messageDialogue1.Commands.Add(new UICommand("Close"));
+                         await messageDialogue1.ShowAsync();
+                         break;
+                     case "Smartboard":
+                         SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.SB.CreateSmartboard(sb);
 
-                 //    var messageDialogue2 = new MessageDialog($"A smartboard has been added");
-                 //    messageDialogue2.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue2.ShowAsync();
-                 //        break;
-                 //    case "Smartphone":
-                 //        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.SP.CreateSmartphone(sp);
+                     var messageDialogue2 = new MessageDialog($"A smartboard has been added");
+                     messageDialogue2.Commands.Add(new UICommand("Close"));
+                         await messageDialogue2.ShowAsync();
+                         break;
+                     case "Smartphone":
+                         SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.SP.CreateSmartphone(sp);
 
-                 //   var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
-                 //   messageDialogue3.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue3.ShowAsync();
-                 //        break;
-                 //    case "Tablet":
-                 //        Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                 //       await Singleton.Instance.TAB.CreateTablet(tab);
+                    var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
+                    messageDialogue3.Commands.Add(new UICommand("Close"));
+                         await messageDialogue3.ShowAsync();
+                         break;
+                     case "Tablet":
+                         Tablet tab = new Tablet(newlyCreatedEquip.Uid);
+                        await Singleton.Instance.TAB.CreateTablet(tab);
 
-                 //   var messageDialogue4 = new MessageDialog($"A tablet has been added");
-                 //   messageDialogue4.Commands.Add(new UICommand("Close"));
-                 //        await messageDialogue4.ShowAsync();
-                 //        break;
+                    var messageDialogue4 = new MessageDialog($"A tablet has been added");
+                    messageDialogue4.Commands.Add(new UICommand("Close"));
+                         await messageDialogue4.ShowAsync();
+                         break;
 
-                 //    default:
-                 //        break;
+                     default:
+                         break;
 
 
-                 //}
+                 }
 
             }
             ObsEquipment.Clear();
