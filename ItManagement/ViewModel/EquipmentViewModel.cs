@@ -39,7 +39,6 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
         private List<Error> _listOfErrors;
-        private ObservableCollection<string> _equipmentTypes;
 
         #endregion
 
@@ -57,6 +56,7 @@ namespace ItManagement.ViewModel
             _goBack = new RelayCommand(GoBackMethod);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
 =======
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
@@ -64,6 +64,8 @@ namespace ItManagement.ViewModel
 =======
             _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
 >>>>>>> parent of 02c1b0c... Merge branch 'master' into Caspar
+=======
+>>>>>>> parent of b3ac666... Merge pull request #44 from Millertoto/Fixmaybe
             ConvertToObs();
         }
 
@@ -234,10 +236,9 @@ namespace ItManagement.ViewModel
 
         #region Methods
 
-        public ObservableCollection<string> EquipmentTypes
+        public ObservableCollection<string> IsItWorking
         {
-            get { return _equipmentTypes; }
-            set { _equipmentTypes = value; }
+            get { return new ObservableCollection<string>() { "True", "False" }; }
 
         }
 
