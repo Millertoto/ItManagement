@@ -43,6 +43,7 @@
                         </StackPanel>
                         <StackPanel Margin="50,20,135,-155">
                             <TextBlock Text="Funktionitet" FontSize="44"></TextBlock>
+                            <ComboBox ItemsSource="{Binding }"
 
                         </StackPanel>
                     </StackPanel>

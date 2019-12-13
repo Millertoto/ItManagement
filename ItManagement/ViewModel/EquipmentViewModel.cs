@@ -21,6 +21,8 @@ namespace ItManagement.ViewModel
     class EquipmentViewModel : INotifyPropertyChanged
     {
         #region Instance Field
+
+        private Employee _repairMan;
         private Computer _computer;
         private SmartBoard _smartBoard;
         private Tablet _tablet;
@@ -38,6 +40,7 @@ namespace ItManagement.ViewModel
         private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
         private List<Error> _listOfErrors;
+        private ObservableCollection<string> _equipmentTypes;
 
         #endregion
 
@@ -52,6 +55,8 @@ namespace ItManagement.ViewModel
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
+            _equipmentTypes = new ObservableCollection<string>() {"Computer", "Smartboard", "Tablet", "Smartphone"};
+            
             _goBack = new RelayCommand(GoBackMethod);
             ConvertToObs();
         }
@@ -75,6 +80,12 @@ namespace ItManagement.ViewModel
                 _selectedEquipment = value; 
                 OnPropertyChanged();
             }
+        }
+
+        public Employee RepairMan
+        {
+            get { return _repairMan; }
+            set { _repairMan = value; }
         }
         public int Uid
         {
@@ -122,6 +133,12 @@ namespace ItManagement.ViewModel
         {
             get { return _listOfErrors; }
             set { _listOfErrors = value; }
+        }
+
+        public ObservableCollection<string> EquipmentTypes
+        {
+            get { return _equipmentTypes; }
+            set { _equipmentTypes = value; }
         }
         #endregion
 
