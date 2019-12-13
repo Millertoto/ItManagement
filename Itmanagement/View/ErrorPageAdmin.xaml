@@ -39,7 +39,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="52,0,130,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
                             <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="65,0,6.4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <TextBox MaxLength="60" Margin="65,0,0.4,0" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
+                            <TextBox MaxLength="60" Margin="65,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
                         </StackPanel>
                         <StackPanel Margin="50,20,135,-155">
                             <TextBlock Text="Funktionitet" FontSize="44"></TextBlock>

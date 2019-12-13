@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls;
 using ItManagement.PersSingleton;
 using ItManagement.Persistencies;
 using ItManagement.View;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ItManagement.ViewModel
 {
@@ -36,11 +37,20 @@ namespace ItManagement.ViewModel
         private RelayCommand _createEquipment;
         private RelayCommand _getEquipmentOfType;
         private RelayCommand _deleteEquipment;
+        private RelayCommand _searchEquipment;
         private INotifyPropertyChanged _notifyPropertyChangedImplementation;
         private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
         private List<Error> _listOfErrors;
         private ObservableCollection<string> _equipmentTypes;
+        private string _workingOrNot;
+        private List<Equipment> _temporaryList;
+        private List<Equipment> _temporaryList2;
+
+        private int _searchUid;
+        private ObservableCollection<string> _listBool;
+
+        private ObservableCollection<Equipment> _filteredEquipment;
 
         #endregion
 
@@ -54,9 +64,13 @@ namespace ItManagement.ViewModel
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
             _editEquipment = new RelayCommand(EditMethod);
+            _searchEquipment = new RelayCommand(SearchEquipmentMethod1);
             _obsequipment = new ObservableCollection<Equipment>();
             _equipmentTypes = new ObservableCollection<string>() {"Computer", "Smartboard", "Tablet", "Smartphone"};
-            
+            _listBool = new ObservableCollection<string>() {"True", "False"};
+            _temporaryList = new List<Equipment>();
+            _temporaryList2 = new List<Equipment>();
+            SearchUid = 0;
             _goBack = new RelayCommand(GoBackMethod);
             ConvertToObs();
         }
@@ -65,7 +79,17 @@ namespace ItManagement.ViewModel
 
         #region Properties
 
+        public int SearchUid
+        {
+            get { return _searchUid; }
+            set { _searchUid = value; }
+        }
 
+        public string WorkingOrNot
+        {
+            get { return _workingOrNot; }
+            set { _workingOrNot = value; }
+        }
         public bool IsWorking
         {
             get { return _isWorking; }
@@ -119,6 +143,19 @@ namespace ItManagement.ViewModel
             set { _listOfEquipment = value; }
         }
 
+        public List<Equipment> TemporaryList
+        {
+            get { return _temporaryList; }
+            set { _temporaryList = value; }
+        }
+
+        public List<Equipment> TemporaryList2
+        {
+            get { return _temporaryList2; }
+            set { _temporaryList2 = value; }
+        }
+
+
         public ObservableCollection<Equipment> ObsEquipment
         {
             get { return _obsequipment; }
@@ -140,6 +177,19 @@ namespace ItManagement.ViewModel
             get { return _equipmentTypes; }
             set { _equipmentTypes = value; }
         }
+
+        public ObservableCollection<Equipment> FiltedEquipment
+        {
+            get { return _filteredEquipment; }
+            set { _filteredEquipment = value; }
+        }
+
+        public ObservableCollection<string> ListBool
+        {
+            get { return _listBool; }
+            set { _listBool = value; }
+        }
+
         #endregion
 
 
@@ -206,6 +256,12 @@ namespace ItManagement.ViewModel
         {
             get { return _editEquipment; }
             set { _editEquipment = value; }
+        }
+
+        public RelayCommand SearchEquipment
+        {
+            get { return _searchEquipment; }
+            set { _searchEquipment = value; }
         }
         #endregion
 
@@ -340,11 +396,108 @@ namespace ItManagement.ViewModel
 
         public async void EditMethod()
         {
-            SelectedEquipment.IsWorking = IsWorking;
+            /*SelectedEquipment.IsWorking = IsWorking;*/
+            SelectedEquipment.Type = TypeOfEquipment;
             await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
             ObsEquipment.Clear();
             ConvertToObs();
 
+        }
+
+        public async void SearchEquipmentMethod1()
+        {
+            FiltedEquipment.Clear();
+            AllEquipment = await Singleton.Instance.EQP.GetEquipments();
+
+            if (TypeOfEquipment == null && WorkingOrNot == null && SearchUid == 0)
+            {
+                foreach (Equipment e in AllEquipment)
+                {
+                    FiltedEquipment.Add(e);
+                }
+            }
+            else if (TypeOfEquipment != null || WorkingOrNot != null)
+            {
+                TemporaryList.Clear();
+                TemporaryList2.Clear();
+                bool t = false;
+                bool w = false;
+
+                if (TypeOfEquipment != null)
+                {
+                    foreach (Equipment e in AllEquipment)
+                    {
+                        if (TypeOfEquipment == e.Type)
+                        {
+                            TemporaryList.Add(e);
+                            t = true;
+                        }
+                    }
+                }
+
+                if (WorkingOrNot != null)
+                {
+                    foreach (Equipment e in AllEquipment)
+                    {
+                        if (WorkingOrNot == e.IsWorkingString)
+                        {
+                            TemporaryList2.Add(e);
+                            w = true;
+                        }
+                    }
+                }
+
+                if (w && t)
+                {
+                    foreach (Equipment e in TemporaryList)
+                    {
+                        foreach (Equipment e2 in TemporaryList2)
+                        {
+                            if (e.Uid == e2.Uid)
+                            {
+                                FiltedEquipment.Add(e2);
+                                TemporaryList.Clear();
+                                TemporaryList2.Clear();
+                            }
+                        }
+                    }
+                }
+                else if (w || t)
+                {
+                    if (w)
+                    {
+                        foreach (Equipment e in TemporaryList2)
+                        {
+                            FiltedEquipment.Add(e);
+                            TemporaryList2.Clear();
+                        }
+                    }
+                    else
+                    {
+                        foreach (Equipment e in TemporaryList)
+                        {
+                            FiltedEquipment.Add(e);
+                            TemporaryList.Clear();
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Equipment e in AllEquipment)
+                {
+                    if (SearchUid == e.Uid)
+                    {
+                        FiltedEquipment.Add(e);
+                    }
+                }
+            }
+
+        }
+
+        public async void SearchEquipmentMethod2()
+        {
         }
 
         public void ConvertToObs()
