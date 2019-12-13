@@ -215,6 +215,13 @@ namespace ItManagement.ViewModel
             {
                 Equipment e = new Equipment(TypeOfEquipment);
                 await Singleton.Instance.EQP.CreateEquipment(e);
+<<<<<<< HEAD
+=======
+
+                AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+
+                 Equipment newlyCreatedEquip = AllEquipment.Last();
+>>>>>>> parent of de566b5... many changes
 
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 

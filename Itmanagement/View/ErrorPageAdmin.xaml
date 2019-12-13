@@ -43,6 +43,7 @@
                         </StackPanel>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <StackPanel Margin="50,20,135,-155">
                             <TextBlock Text="Funktionitet" FontSize="44"></TextBlock>
                             <ComboBox ItemsSource="{Binding IsItRepaired}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Margin="0,0,0,0" Height="62" Width="450"></ComboBox>
@@ -50,6 +51,10 @@
                         <StackPanel Margin="50,20,135,-125">
                             <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="82" Width="450"></ComboBox>
 >>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
+=======
+                        <StackPanel Margin="50,20,135,-125">
+                            <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="82" Width="450"></ComboBox>
+>>>>>>> parent of de566b5... many changes
                         </StackPanel>
 =======
 >>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
@@ -79,10 +84,14 @@
                       
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     </ComboBox>-->
 =======
                     </ComboBox>
 >>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
+=======
+                    </ComboBox>
+>>>>>>> parent of de566b5... many changes
 
 =======
                     </ComboBox>

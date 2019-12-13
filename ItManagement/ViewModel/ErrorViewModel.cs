@@ -144,6 +144,7 @@ namespace ItManagement.ViewModel
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         public ObservableCollection<string> IsWorking
         {
@@ -152,12 +153,17 @@ namespace ItManagement.ViewModel
         }
 >>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
 =======
+=======
+>>>>>>> parent of de566b5... many changes
         public ObservableCollection<string> IsWorking
         {
             get { return new ObservableCollection<string>(){"True", "False"}; }
 
         }
+<<<<<<< HEAD
 >>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
+=======
+>>>>>>> parent of de566b5... many changes
         public List<Error> ListOfErrors
         {
             get { return _allErrors; }
@@ -302,6 +308,7 @@ namespace ItManagement.ViewModel
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<Error> ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
         //ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
 =======
@@ -310,6 +317,9 @@ namespace ItManagement.ViewModel
 =======
             ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
 >>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
+=======
+            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+>>>>>>> parent of de566b5... many changes
                 foreach (Error e in ListOfErrors)
                 {
                     ObsListOfErrors.Add(e);
