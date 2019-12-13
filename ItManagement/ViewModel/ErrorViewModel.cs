@@ -31,8 +31,6 @@ namespace ItManagement.ViewModel
         private List<Equipment> _listOfEquipment;
         private int _uid;
         private string _errorText;
-        //private bool _isRepaired;
-        private int _cpr;
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
@@ -68,12 +66,8 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Properties
-        public int Cpr
-        {
-            get { return _cpr; }
-            set { _cpr = value; }
-        }
 
+        
         public Error SelectedError
         {
             get { return _selected; }
@@ -124,19 +118,19 @@ namespace ItManagement.ViewModel
             }
         }
 
-        //private string _selectedOption;
-        //public string SelectedOption
-        //{
-        //    get
-        //    {
-        //        return _selectedOption; ;
-        //    }
-        //    set
-        //    {
-        //        _selectedOption = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        private string _selectedOption;
+        public string SelectedOption
+        {
+            get
+            {
+                return _selectedOption; ;
+            }
+            set
+            {
+                _selectedOption = value;
+                OnPropertyChanged();
+            }
+        }
         #region Lists
         public List<Equipment> ListOfEquipment
         {
@@ -149,6 +143,7 @@ namespace ItManagement.ViewModel
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         public ObservableCollection<string> IsWorking
         {
@@ -156,6 +151,13 @@ namespace ItManagement.ViewModel
 
         }
 >>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
+=======
+        public ObservableCollection<string> IsWorking
+        {
+            get { return new ObservableCollection<string>(){"True", "False"}; }
+
+        }
+>>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
         public List<Error> ListOfErrors
         {
             get { return _allErrors; }
@@ -178,22 +180,6 @@ namespace ItManagement.ViewModel
         }
         #endregion
 
-
-        #endregion
-
-        #region Checks
-
-        //private void SetRepair(string Repaircheck, Error e)
-        //{
-        //    if (Repaircheck == "true" || Repaircheck == "True")
-        //    {
-        //        e.IsRepaired = true;
-        //    }
-        //    else
-        //    {
-        //        e.IsRepaired = false;
-        //    }
-        //}
 
         #endregion
 
@@ -221,14 +207,9 @@ namespace ItManagement.ViewModel
             get { return _deleteButton; }
             set { _deleteButton = value; }
         }
-        //public ObservableCollection<string> IsItRepaired
-        //{
-        //    get { return new ObservableCollection<string>() { "True", "False" }; }
-
-        //}
         #endregion
 
-
+        
         #region Methods
 
 
@@ -240,8 +221,6 @@ namespace ItManagement.ViewModel
             {
                 if (ErrorDescription == null)
                 {
-                    //Error er = new Error(Cpr,UidForCreation,ErrorDescription);
-                    //SetRepair(SelectedOption,er);
                     var messageDialogue = new MessageDialog($"You need to type in a description for the error");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
@@ -322,11 +301,15 @@ namespace ItManagement.ViewModel
         public void ConvertToObs()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<Error> ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
         //ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
 =======
             ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
 >>>>>>> parent of f85485b... Works, prolly
+=======
+            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
+>>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
                 foreach (Error e in ListOfErrors)
                 {
                     ObsListOfErrors.Add(e);

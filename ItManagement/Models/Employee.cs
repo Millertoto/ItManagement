@@ -24,7 +24,6 @@ namespace ItManagement
             _cpr = cpr;
             _password = password;
             _name = name;
-            
         }
         #endregion
 

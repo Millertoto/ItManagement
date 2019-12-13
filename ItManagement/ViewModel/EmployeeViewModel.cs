@@ -154,13 +154,6 @@ namespace ItManagement.ViewModel
 
         }
 
-        //private string _selectedType;
-        //private string SelectedType
-        //{
-        //    get { return _selectedType; }
-        //    set {  _selectedType}
-        //}
-
         public ObservableCollection<Employee> ObsEmployees
         {
             get { return _obsEmps; }
@@ -194,10 +187,8 @@ namespace ItManagement.ViewModel
                 && PasswordCheck(Password)
                 && NameCheck(Name))
             {
-                Employee Emp = new Employee(Username, CPR, Password, Name );
-                //SetAdmin(IsAdmin, Emp);
-                SetAdmin(SelectedEmployeeString, Emp);
-
+                Employee Emp = new Employee(Username, CPR, Password, Name);
+                SetAdmin(IsAdmin, Emp);
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
                 var messageDialogue = new MessageDialog($"The Account, {Username}, has been created");
@@ -238,7 +229,7 @@ namespace ItManagement.ViewModel
 
         #region Checks
 
-        private void SetAdmin(string admincheck, Employee e)
+        public void SetAdmin(string admincheck, Employee e)
         {
             if (admincheck == "true" || admincheck == "True")
             {
