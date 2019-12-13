@@ -19,11 +19,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _GoToCreateEquipment;
         private RelayCommand _GoToErrorPage;
         #endregion
-        /*public Employee AdminUser
-        { 
-            get { return AdminUser; }
-            set { _adminUser = value; }
-        }*/
+
         #region Constructor
         public AdminMainPageViewModel()
         {
@@ -34,6 +30,7 @@ namespace ItManagement.ViewModel
         }
 
         #endregion
+
         #region Properties
 
         public RelayCommand LogoutButton
@@ -89,16 +86,7 @@ namespace ItManagement.ViewModel
             currentFrame.Navigate(typeof(EmployeePageAdmin));
         }
         #endregion
-        //if (AdminMainpage(ErrorPageAdmin))
-        //{
-        //   Frame currentFrame = Window.Current.Content as Frame;
-        //   currentFrame.Navigate(typeof(ErrorPageAdmin));
-        //}
-        //else if()
-        //{
-        //   Frame currentFrame = Window.Current.Content as Frame;
-        //   currentFrame.Navigate(typeof(EquipmentPage));
-        //}
+
 
 
     }
