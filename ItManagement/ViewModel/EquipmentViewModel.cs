@@ -228,9 +228,9 @@ namespace ItManagement.ViewModel
                  switch (TypeOfEquipment)
                  {
                      case "Computer":
- 
                          Computer pc = new Computer(newlyCreatedEquip.Uid);
                          await Singleton.Instance.COM.CreateComputer(pc);
+                         
  
                          var messageDialogue1 = new MessageDialog($"A computer has been added");
                          messageDialogue1.Commands.Add(new UICommand("Close"));
@@ -249,7 +249,7 @@ namespace ItManagement.ViewModel
 
                      case "Smartphone":
 
-                         SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
+                        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
                         await Singleton.Instance.SP.CreateSmartphone(sp);
  
                          var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
@@ -259,7 +259,7 @@ namespace ItManagement.ViewModel
 
                      case "Tablet":
                          Tablet tab = new Tablet(newlyCreatedEquip.Uid);
-                        await Singleton.Instance.TAB.CreateTablet(e.Tablet);
+                        await Singleton.Instance.TAB.CreateTablet(tab);
  
                          var messageDialogue4 = new MessageDialog($"A tablet has been added");
                          messageDialogue4.Commands.Add(new UICommand("Close"));

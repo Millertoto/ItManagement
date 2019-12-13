@@ -10,7 +10,7 @@ namespace ItManagement
         private bool _isBorrowed;
         public SmartPhone(int uid)
         {
-            _uid = uid;
+            Uid = uid;
             IsBorrowed = false;
         }
 
