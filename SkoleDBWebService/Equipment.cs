@@ -12,7 +12,7 @@ namespace SkoleDBWebService
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipment()
         {
-            Errors = new HashSet<Errors>();
+            Errors = new HashSet<Error>();
         }
 
         [Key]
@@ -27,7 +27,7 @@ namespace SkoleDBWebService
         public virtual Computer Computer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Errors> Errors { get; set; }
+        public virtual ICollection<Error> Errors { get; set; }
 
         public virtual SmartBoard SmartBoard { get; set; }
 

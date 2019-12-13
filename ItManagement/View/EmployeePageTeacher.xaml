@@ -43,13 +43,11 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-<<<<<<< HEAD
                                             <TextBlock Text="{Binding Path=CPR ,Mode=TwoWay}"/>
                                             <TextBlock Text="{Binding Path=UserName}"/>
                                             <TextBlock Text="{Binding Path=Password}"/>
                                             <TextBlock Text="{Binding Path=Name}"></TextBlock>
                                             <TextBlock Text="{Binding Path=IsAdmin}"></TextBlock>
-=======
                                             <TextBlock Text="ID:" Margin="0,0,10,0"/>
                                             <TextBox />
                                             <TextBlock Text="Brugernavn:"/>
@@ -60,7 +58,6 @@
                                             <TextBox></TextBox>
                                             <TextBlock Text="Admin"></TextBlock>
                                             <TextBox></TextBox>
->>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
                                         </StackPanel>
 
                                     </DataTemplate>

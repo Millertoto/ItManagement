@@ -17,16 +17,16 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/SmartBoards
-        public IQueryable<SmartBoard> GetSmartBoard()
+        public IQueryable<SmartBoard> GetSmartBoards()
         {
-            return db.SmartBoard;
+            return db.SmartBoards;
         }
 
         // GET: api/SmartBoards/5
         [ResponseType(typeof(SmartBoard))]
         public IHttpActionResult GetSmartBoard(int id)
         {
-            SmartBoard smartBoard = db.SmartBoard.Find(id);
+            SmartBoard smartBoard = db.SmartBoards.Find(id);
             if (smartBoard == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace SkoleDBWebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.SmartBoard.Add(smartBoard);
+            db.SmartBoards.Add(smartBoard);
 
             try
             {
@@ -104,13 +104,13 @@ namespace SkoleDBWebService.Controllers
         [ResponseType(typeof(SmartBoard))]
         public IHttpActionResult DeleteSmartBoard(int id)
         {
-            SmartBoard smartBoard = db.SmartBoard.Find(id);
+            SmartBoard smartBoard = db.SmartBoards.Find(id);
             if (smartBoard == null)
             {
                 return NotFound();
             }
 
-            db.SmartBoard.Remove(smartBoard);
+            db.SmartBoards.Remove(smartBoard);
             db.SaveChanges();
 
             return Ok(smartBoard);
@@ -127,7 +127,7 @@ namespace SkoleDBWebService.Controllers
 
         private bool SmartBoardExists(int id)
         {
-            return db.SmartBoard.Count(e => e.Uid == id) > 0;
+            return db.SmartBoards.Count(e => e.Uid == id) > 0;
         }
     }
 }

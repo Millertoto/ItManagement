@@ -32,7 +32,7 @@
                   </StackPanel>
                 </SplitView.Pane>
                 <SplitView.Content>
-                    <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
                             <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
                             <TextBox Margin="0,0,0,0"   Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
@@ -41,31 +41,10 @@
                             <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="65,0,6.4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             <TextBox MaxLength="60" Margin="65,0,0.4,0" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
                         </StackPanel>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <StackPanel Margin="50,20,135,-155">
                             <TextBlock Text="Funktionitet" FontSize="44"></TextBlock>
-                            <ComboBox ItemsSource="{Binding IsItRepaired}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Margin="0,0,0,0" Height="62" Width="450"></ComboBox>
-=======
-                        <StackPanel Margin="50,20,135,-125">
-                            <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="82" Width="450"></ComboBox>
->>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
-=======
-                        <StackPanel Margin="50,20,135,-125">
-                            <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="82" Width="450"></ComboBox>
->>>>>>> parent of de566b5... many changes
+
                         </StackPanel>
-=======
->>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
-                        <!--<StackPanel Orientation="Vertical" Margin="50,0,130,10" >
-                            <TextBlock Text="Hardware Type:" FontSize="44" Margin="0,0,0,0"  HorizontalAlignment="Center" Width="448"/>
-                            <TextBox Margin="0,0,0,0" Text="{Binding Path = }" Height="71" FontSize="44"/>
-                        </StackPanel>-->
-                        <!--<StackPanel Orientation="Vertical" Margin="50,0,130,10">
-                            <TextBlock Text="Dato:" FontSize="53" Margin="0,0,32.2,0" />
-                            <CalendarDatePicker FontSize="44" Height="71" Margin="0,0,0,0"  Width="448" HorizontalAlignment="Center"  />
-                        </StackPanel>-->
                     </StackPanel>
                 </SplitView.Content>
             </SplitView>
@@ -80,27 +59,11 @@
                     <Button Content="Slet" Command="{Binding Path=DeleteDis}" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
                     <Button Content="Edit" Command="{Binding Path=EditButton}" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
                     <Button Content="Løst" Command="{Binding Path=FixButton}" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
-                    <ComboBox ItemsSource="{Binding  IsWorking}" SelectedItem="{Binding SelectedOption, Mode=TwoWay}" Description="Virker Hardwaren?"  Margin="0,20,0,0" Height="72" Width="144">
-                      
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    </ComboBox>-->
-=======
-                    </ComboBox>
->>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
-=======
-                    </ComboBox>
->>>>>>> parent of de566b5... many changes
-
-=======
-                    </ComboBox>
->>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
                 </StackPanel>
 
                 <StackPanel Margin="175,-520,0,50" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Background="CornflowerBlue" ItemsSource="{Binding ObsListOfErrors}" SelectedItem="{Binding SelectedError, Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
+                    <ListView Background="CornflowerBlue" ItemsSource="{Binding NewObsErrors}" SelectedItem="{Binding SelectedError, Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

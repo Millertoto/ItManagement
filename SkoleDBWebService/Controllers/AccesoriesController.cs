@@ -17,39 +17,39 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Accesories
-        public IQueryable<Accesories> GetAccesories()
+        public IQueryable<Accesory> GetAccesories()
         {
             return db.Accesories;
         }
 
         // GET: api/Accesories/5
-        [ResponseType(typeof(Accesories))]
-        public IHttpActionResult GetAccesories(int id)
+        [ResponseType(typeof(Accesory))]
+        public IHttpActionResult GetAccesory(int id)
         {
-            Accesories accesories = db.Accesories.Find(id);
-            if (accesories == null)
+            Accesory accesory = db.Accesories.Find(id);
+            if (accesory == null)
             {
                 return NotFound();
             }
 
-            return Ok(accesories);
+            return Ok(accesory);
         }
 
         // PUT: api/Accesories/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccesories(int id, Accesories accesories)
+        public IHttpActionResult PutAccesory(int id, Accesory accesory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accesories.Tid)
+            if (id != accesory.Tid)
             {
                 return BadRequest();
             }
 
-            db.Entry(accesories).State = EntityState.Modified;
+            db.Entry(accesory).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace SkoleDBWebService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccesoriesExists(id))
+                if (!AccesoryExists(id))
                 {
                     return NotFound();
                 }
@@ -71,34 +71,34 @@ namespace SkoleDBWebService.Controllers
         }
 
         // POST: api/Accesories
-        [ResponseType(typeof(Accesories))]
-        public IHttpActionResult PostAccesories(Accesories accesories)
+        [ResponseType(typeof(Accesory))]
+        public IHttpActionResult PostAccesory(Accesory accesory)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Accesories.Add(accesories);
+            db.Accesories.Add(accesory);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accesories.Tid }, accesories);
+            return CreatedAtRoute("DefaultApi", new { id = accesory.Tid }, accesory);
         }
 
         // DELETE: api/Accesories/5
-        [ResponseType(typeof(Accesories))]
-        public IHttpActionResult DeleteAccesories(int id)
+        [ResponseType(typeof(Accesory))]
+        public IHttpActionResult DeleteAccesory(int id)
         {
-            Accesories accesories = db.Accesories.Find(id);
-            if (accesories == null)
+            Accesory accesory = db.Accesories.Find(id);
+            if (accesory == null)
             {
                 return NotFound();
             }
 
-            db.Accesories.Remove(accesories);
+            db.Accesories.Remove(accesory);
             db.SaveChanges();
 
-            return Ok(accesories);
+            return Ok(accesory);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,7 +110,7 @@ namespace SkoleDBWebService.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccesoriesExists(int id)
+        private bool AccesoryExists(int id)
         {
             return db.Accesories.Count(e => e.Tid == id) > 0;
         }

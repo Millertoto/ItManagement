@@ -53,18 +53,6 @@ namespace ItManagement.ViewModel
             _editEquipment = new RelayCommand(EditMethod);
             _obsequipment = new ObservableCollection<Equipment>();
             _goBack = new RelayCommand(GoBackMethod);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" }; 
-=======
-            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
->>>>>>> parent of 02c1b0c... Merge branch 'master' into Caspar
-=======
-            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Tablet", "Smartboard", "Smartphone" };
->>>>>>> parent of 02c1b0c... Merge branch 'master' into Caspar
-=======
->>>>>>> parent of b3ac666... Merge pull request #44 from Millertoto/Fixmaybe
             ConvertToObs();
         }
 
@@ -215,15 +203,10 @@ namespace ItManagement.ViewModel
             {
                 Equipment e = new Equipment(TypeOfEquipment);
                 await Singleton.Instance.EQP.CreateEquipment(e);
-<<<<<<< HEAD
-=======
 
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
                  Equipment newlyCreatedEquip = AllEquipment.Last();
->>>>>>> parent of de566b5... many changes
-
-                AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
             }
             ObsEquipment.Clear();

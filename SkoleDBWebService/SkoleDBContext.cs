@@ -14,30 +14,30 @@ namespace SkoleDBWebService
             base.Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<Accesories> Accesories { get; set; }
-        public virtual DbSet<Computer> Computer { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Equipment> Equipment { get; set; }
-        public virtual DbSet<Errors> Errors { get; set; }
-        public virtual DbSet<SmartBoard> SmartBoard { get; set; }
-        public virtual DbSet<SmartPhone> SmartPhone { get; set; }
-        public virtual DbSet<Tablet> Tablet { get; set; }
+        public virtual DbSet<Accesory> Accesories { get; set; }
+        public virtual DbSet<Computer> Computers { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Equipment> Equipments { get; set; }
+        public virtual DbSet<Error> Errors { get; set; }
+        public virtual DbSet<SmartBoard> SmartBoards { get; set; }
+        public virtual DbSet<SmartPhone> SmartPhones { get; set; }
+        public virtual DbSet<Tablet> Tablets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Accesories>()
+            modelBuilder.Entity<Accesory>()
                 .Property(e => e.Type)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employees>()
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.Username)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employees>()
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employees>()
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
@@ -57,7 +57,7 @@ namespace SkoleDBWebService
                 .HasOptional(e => e.Tablet)
                 .WithRequired(e => e.Equipment);
 
-            modelBuilder.Entity<Errors>()
+            modelBuilder.Entity<Error>()
                 .Property(e => e.ErrorMessage)
                 .IsUnicode(false);
         }

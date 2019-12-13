@@ -34,12 +34,12 @@ namespace ItManagement.ViewModel
         private Employee _creatorOfError;
         private RelayCommand _addErrorButton;
         private RelayCommand _getErrors;
-        private List<Error> _allErrors;
         private Equipment _currentEquipment;
-        private ObservableCollection<Error> _obsErrors;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
+        private List<Error> _newListOfError;
+        private ObservableCollection<Error> _newObsErrors;
 
 
         #endregion
@@ -48,18 +48,16 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
+            _newListOfError = new List<Error>();
+            _newObsErrors = new ObservableCollection<Error>();
             _addErrorButton = new RelayCommand(AddError);
             _deleteButton = new RelayCommand(DeleteMethod);
             _editButton = new RelayCommand(EditMethod);
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
-            _allErrors = Singleton.Instance.ERP.GetErrors().Result;
-            _obsErrors = new ObservableCollection<Error>();
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
 
-            ConvertToObs();
-
-            _uid = default(int);
+            NewConvertToObs();
 
 
         }
@@ -142,48 +140,23 @@ namespace ItManagement.ViewModel
             }
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        public ObservableCollection<string> IsWorking
+        public List<Error> NewErrorList
         {
-            get { return new ObservableCollection<string>(){"true", "false"}; }
-
-        }
->>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
-=======
-=======
->>>>>>> parent of de566b5... many changes
-        public ObservableCollection<string> IsWorking
-        {
-            get { return new ObservableCollection<string>(){"True", "False"}; }
-
-        }
-<<<<<<< HEAD
->>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
-=======
->>>>>>> parent of de566b5... many changes
-        public List<Error> ListOfErrors
-        {
-            get { return _allErrors; }
+            get { return _newListOfError; }
             set
             {
-                _allErrors = value;
-                OnPropertyChanged();
-            }
-
-        }
-
-        public ObservableCollection<Error> ObsListOfErrors
-        {
-            get { return _obsErrors; }
-            set
-            {
-                _obsErrors = value; 
+                _newListOfError = value;
                 OnPropertyChanged();
             }
         }
+
+        public ObservableCollection<Error> NewObsErrors
+        {
+            get { return _newObsErrors; }
+            set { _newObsErrors = value; }
+        }
+
+
         #endregion
 
 
@@ -245,8 +218,8 @@ namespace ItManagement.ViewModel
                 
 
             }
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
 
         }
@@ -256,8 +229,8 @@ namespace ItManagement.ViewModel
             SelectedError.ErrorMessage = ErrorDescription;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
         }
 
@@ -267,8 +240,8 @@ namespace ItManagement.ViewModel
             SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
 
         }
 
@@ -278,8 +251,8 @@ namespace ItManagement.ViewModel
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
             }
-            ObsListOfErrors.Clear();
-            ConvertToObs();
+            NewObsErrors.Clear();
+            NewConvertToObs();
         }
 
         public bool EquipmentCheck(int uid)
@@ -304,29 +277,22 @@ namespace ItManagement.ViewModel
 
         }
 
-        public void ConvertToObs()
+        public void NewConvertToObs()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        List<Error> ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
-        //ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
-=======
-            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
->>>>>>> parent of f85485b... Works, prolly
-=======
-            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
->>>>>>> parent of de069aa... Merge pull request #41 from Millertoto/Caspar
-=======
-            ListOfErrors = Singleton.Instance.ERP.GetErrors().Result;
->>>>>>> parent of de566b5... many changes
-                foreach (Error e in ListOfErrors)
-                {
-                    ObsListOfErrors.Add(e);
-                }
-            
-        }
+            NewErrorList = Singleton.Instance.ERP.GetErrors().Result;
 
+            if (NewErrorList != null)
+            {
+                foreach (Error e in NewErrorList)
+                {
+                    NewObsErrors.Add(e);
+                }
+            }
+            else
+            {
+
+            }
+        }
         #endregion
 
         #region GoBack

@@ -17,39 +17,39 @@ namespace SkoleDBWebService.Controllers
         private SkoleDBContext db = new SkoleDBContext();
 
         // GET: api/Errors
-        public IQueryable<Errors> GetErrors()
+        public IQueryable<Error> GetErrors()
         {
             return db.Errors;
         }
 
         // GET: api/Errors/5
-        [ResponseType(typeof(Errors))]
-        public IHttpActionResult GetErrors(int id)
+        [ResponseType(typeof(Error))]
+        public IHttpActionResult GetError(int id)
         {
-            Errors errors = db.Errors.Find(id);
-            if (errors == null)
+            Error error = db.Errors.Find(id);
+            if (error == null)
             {
                 return NotFound();
             }
 
-            return Ok(errors);
+            return Ok(error);
         }
 
         // PUT: api/Errors/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutErrors(int id, Errors errors)
+        public IHttpActionResult PutError(int id, Error error)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != errors.Fid)
+            if (id != error.Fid)
             {
                 return BadRequest();
             }
 
-            db.Entry(errors).State = EntityState.Modified;
+            db.Entry(error).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace SkoleDBWebService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ErrorsExists(id))
+                if (!ErrorExists(id))
                 {
                     return NotFound();
                 }
@@ -71,34 +71,34 @@ namespace SkoleDBWebService.Controllers
         }
 
         // POST: api/Errors
-        [ResponseType(typeof(Errors))]
-        public IHttpActionResult PostErrors(Errors errors)
+        [ResponseType(typeof(Error))]
+        public IHttpActionResult PostError(Error error)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Errors.Add(errors);
+            db.Errors.Add(error);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = errors.Fid }, errors);
+            return CreatedAtRoute("DefaultApi", new { id = error.Fid }, error);
         }
 
         // DELETE: api/Errors/5
-        [ResponseType(typeof(Errors))]
-        public IHttpActionResult DeleteErrors(int id)
+        [ResponseType(typeof(Error))]
+        public IHttpActionResult DeleteError(int id)
         {
-            Errors errors = db.Errors.Find(id);
-            if (errors == null)
+            Error error = db.Errors.Find(id);
+            if (error == null)
             {
                 return NotFound();
             }
 
-            db.Errors.Remove(errors);
+            db.Errors.Remove(error);
             db.SaveChanges();
 
-            return Ok(errors);
+            return Ok(error);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,7 +110,7 @@ namespace SkoleDBWebService.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ErrorsExists(int id)
+        private bool ErrorExists(int id)
         {
             return db.Errors.Count(e => e.Fid == id) > 0;
         }

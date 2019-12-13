@@ -153,14 +153,11 @@ namespace ItManagement.ViewModel
             }
 
         }
-<<<<<<< HEAD
-=======
         public ObservableCollection<string> IsAnAdmin
         {
             get { return new ObservableCollection<string>() { "True", "False" }; }
 
         }
->>>>>>> parent of de566b5... many changes
 
         public ObservableCollection<Employee> ObsEmployees
         {
