@@ -148,6 +148,14 @@ namespace ItManagement.ViewModel
             }
         }
 
+<<<<<<< HEAD
+=======
+        public ObservableCollection<string> IsWorking
+        {
+            get { return new ObservableCollection<string>(){"true", "false"}; }
+
+        }
+>>>>>>> parent of ff57e40... Merge branch 'Fixmaybe' of https://github.com/Millertoto/ItManagement into Fixmaybe
         public List<Error> ListOfErrors
         {
             get { return _allErrors; }
