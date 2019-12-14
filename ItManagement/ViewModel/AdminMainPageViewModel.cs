@@ -18,6 +18,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _GoToCreateEmployee;
         private RelayCommand _GoToCreateEquipment;
         private RelayCommand _GoToErrorPage;
+        private RelayCommand _GoToOverviewPage;
         #endregion
 
         #region Constructor
@@ -27,6 +28,7 @@ namespace ItManagement.ViewModel
            _GoToCreateEmployee = new RelayCommand(EmployeeMethod);
            _GoToCreateEquipment = new RelayCommand(EquipmentMethod);
            _GoToErrorPage = new RelayCommand(ErrorMethod);
+           _GoToOverviewPage = new RelayCommand(OverviewMethod);
         }
 
         #endregion
@@ -58,6 +60,11 @@ namespace ItManagement.ViewModel
             set { _GoToErrorPage = value; }
         }
 
+        public RelayCommand OverviewButton
+        {
+            get { return _GoToOverviewPage; }
+            set { _GoToOverviewPage = value; }
+        }
         #endregion
 
         #region Method
@@ -66,6 +73,12 @@ namespace ItManagement.ViewModel
         {
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(EquipmentPageAdmin));
+        }
+
+        public void OverviewMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(OverviewAdmin));
         }
 
         public void ErrorMethod()

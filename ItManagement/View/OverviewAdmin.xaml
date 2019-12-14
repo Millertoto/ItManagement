@@ -25,33 +25,34 @@
                 <SplitView.Content>
                     <StackPanel Margin="130,90,130,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <StackPanel Margin="0,0,1000,-50" Orientation="Vertical" Height="524">
-                            <TextBlock Text="ID:" FontSize="30"></TextBlock>
+                            <TextBlock Text="ID:" FontSize="30"/>
                             <TextBox Height="30" Text="{Binding SearchUid, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15"/>
-                            <TextBlock Text="Hardware Type" FontSize="30"></TextBlock>
-                            <ComboBox Height="30" Width="240" ItemsSource="{Binding EquipmentTypes, Mode=TwoWay}" SelectedItem="{Binding TypeOfEquipment}" Margin="0,0,1.8,0" FontSize="15"/>
-                            <TextBlock Text="Funktionelt" FontSize="30"></TextBlock>
+                            <TextBlock Text="Hardware Type" FontSize="30"/>
+                            <ComboBox Height="30" Width="240" ItemsSource="{Binding EquipmentTypesOverview}" SelectedItem="{Binding TypeOfEquipment, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15"/>
+                            <TextBlock Text="Funktionelt" FontSize="30"/>
                             <ComboBox Height="30" ItemsSource="{Binding ListBool}" SelectedItem="{Binding WorkingOrNot, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                         </StackPanel>
-                        
+
                         <StackPanel Margin="710,-450,0,420" Orientation="Horizontal">
-                            <TextBlock Text="Udstyrs ID" FontSize="20" Margin="0,0,150,0"></TextBlock>
-                            <TextBlock Text="Type" FontSize="20" Margin="0,0,150,0"></TextBlock>
-                            <TextBlock Text="Virker den" FontSize="20"></TextBlock>
+                            <TextBlock Text="Udstyrs ID" FontSize="20" Margin="0,0,150,0"/>
+                            <TextBlock Text="Type" FontSize="20" Margin="0,0,150,0"/>
+                            <TextBlock Text="Virker den" FontSize="20"/>
                         </StackPanel>
-                        <StackPanel Background="CornflowerBlue" Margin="548,-420,0,-60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></StackPanel>
-                        <Button Content="Søg" Command="{Binding Search}" HorizontalAlignment="Left" Height="33" Width="170"/>
-                        <ListView ItemsSource="{Binding FilteredEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBox Text="{Binding Uid}" Margin="0,0,150,0"/>
-                                        <TextBox Text="{Binding Type}" Margin="0,0,150,0"/>
-                                        <TextBox Text="{Binding IsWorkingString}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <Frame x:Name="myFrame" Margin="0,0,0,0"/>
+                        <Button Content="Søg" Command="{Binding SearchEquipment}" HorizontalAlignment="Left" Height="33" Width="170"/>
+                        <StackPanel Background="CornflowerBlue" Margin="548,-420,0,-60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ListView ItemsSource="{Binding FilteredEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox Text="{Binding Uid}" Margin="0,0,150,0"/>
+                                            <TextBox Text="{Binding Type}" Margin="0,0,150,0"/>
+                                            <TextBox Text="{Binding IsWorkingString}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            </StackPanel>
+                            <Frame x:Name="myFrame" Margin="0,0,0,0"/>
                     </StackPanel>
                 </SplitView.Content>
             </SplitView>

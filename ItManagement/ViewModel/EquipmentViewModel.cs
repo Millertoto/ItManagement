@@ -43,6 +43,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _editEquipment;
         private List<Error> _listOfErrors;
         private ObservableCollection<string> _equipmentTypes;
+        private ObservableCollection<string> _equipmentTypesOverView;
         private string _workingOrNot;
         private List<Equipment> _temporaryList;
         private List<Equipment> _temporaryList2;
@@ -67,9 +68,12 @@ namespace ItManagement.ViewModel
             _searchEquipment = new RelayCommand(SearchEquipmentMethod1);
             _obsequipment = new ObservableCollection<Equipment>();
             _equipmentTypes = new ObservableCollection<string>() {"Computer", "Smartboard", "Tablet", "Smartphone"};
-            _listBool = new ObservableCollection<string>() {"True", "False"};
+            _equipmentTypesOverView = new ObservableCollection<string>() { "Computer", "Smartboard", "Tablet", "Smartphone", "---" };
+            _listBool = new ObservableCollection<string>() {"True", "False", "---"};
             _temporaryList = new List<Equipment>();
             _temporaryList2 = new List<Equipment>();
+            _filteredEquipment = new ObservableCollection<Equipment>();
+
             SearchUid = 0;
             _goBack = new RelayCommand(GoBackMethod);
             ConvertToObs();
@@ -178,7 +182,13 @@ namespace ItManagement.ViewModel
             set { _equipmentTypes = value; }
         }
 
-        public ObservableCollection<Equipment> FiltedEquipment
+        public ObservableCollection<string> EquipmentTypesOverview
+        {
+            get { return _equipmentTypesOverView; }
+            set { _equipmentTypesOverView = value; }
+        }
+
+        public ObservableCollection<Equipment> FilteredEquipment
         {
             get { return _filteredEquipment; }
             set { _filteredEquipment = value; }
@@ -406,17 +416,21 @@ namespace ItManagement.ViewModel
 
         public async void SearchEquipmentMethod1()
         {
-            FiltedEquipment.Clear();
+            if (FilteredEquipment != null)
+            {
+                FilteredEquipment.Clear();
+            }
+            
             AllEquipment = await Singleton.Instance.EQP.GetEquipments();
 
-            if (TypeOfEquipment == null && WorkingOrNot == null && SearchUid == 0)
+            if ((TypeOfEquipment == null || TypeOfEquipment == "---") && (WorkingOrNot == null || WorkingOrNot == "---") && (SearchUid == 0 || SearchUid == default(int)))
             {
                 foreach (Equipment e in AllEquipment)
                 {
-                    FiltedEquipment.Add(e);
+                    FilteredEquipment.Add(e);
                 }
             }
-            else if (TypeOfEquipment != null || WorkingOrNot != null)
+            else if ((TypeOfEquipment != null && TypeOfEquipment != "---") || (WorkingOrNot != null && WorkingOrNot != "---"))
             {
                 TemporaryList.Clear();
                 TemporaryList2.Clear();
@@ -455,42 +469,56 @@ namespace ItManagement.ViewModel
                         {
                             if (e.Uid == e2.Uid)
                             {
-                                FiltedEquipment.Add(e2);
-                                TemporaryList.Clear();
-                                TemporaryList2.Clear();
+                                FilteredEquipment.Add(e2);
+                                
                             }
                         }
                     }
+                    TemporaryList.Clear();
+                    TemporaryList2.Clear();
                 }
-                else if (w || t)
+                else if (w || t )
                 {
                     if (w)
                     {
                         foreach (Equipment e in TemporaryList2)
                         {
-                            FiltedEquipment.Add(e);
-                            TemporaryList2.Clear();
+                            FilteredEquipment.Add(e);
+                            
                         }
+                        TemporaryList2.Clear();
                     }
                     else
                     {
                         foreach (Equipment e in TemporaryList)
                         {
-                            FiltedEquipment.Add(e);
-                            TemporaryList.Clear();
+                            FilteredEquipment.Add(e);
+                            
 
                         }
+                        TemporaryList.Clear();
                     }
                 }
             }
             else
             {
+                bool c = false;
                 foreach (Equipment e in AllEquipment)
                 {
                     if (SearchUid == e.Uid)
                     {
-                        FiltedEquipment.Add(e);
+                        FilteredEquipment.Add(e);
+                        c = true;
+
                     }
+
+                }
+
+                if (c == false)
+                {
+                    var messageDialogue4 = new MessageDialog($"{SearchUid} is not a valid Uid");
+                    messageDialogue4.Commands.Add(new UICommand("Close"));
+                    await messageDialogue4.ShowAsync();
                 }
             }
 
