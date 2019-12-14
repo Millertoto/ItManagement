@@ -41,6 +41,16 @@ namespace SkoleDBWebService
                 .Property(e => e.Name)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Errors)
+                .WithOptional(e => e.Employee)
+                .HasForeignKey(e => e.Cpr);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Errors1)
+                .WithOptional(e => e.Employee1)
+                .HasForeignKey(e => e.HasRepaired);
+
             modelBuilder.Entity<Equipment>()
                 .HasOptional(e => e.Computer)
                 .WithRequired(e => e.Equipment);

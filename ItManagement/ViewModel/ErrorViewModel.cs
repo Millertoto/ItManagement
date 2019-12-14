@@ -58,6 +58,8 @@ namespace ItManagement.ViewModel
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
 
+
+
             NewConvertToObs();
 
 
@@ -81,12 +83,8 @@ namespace ItManagement.ViewModel
         /// </summary>
         public int UidForCreation
         {
-            get { return CurrentEquipment.Uid; }
-            set
-            {
-                CurrentEquipment.Uid = value;
-                OnPropertyChanged();
-            }
+            get { return _uid; }
+            set { _uid = value; }
         }
 
         public Equipment CurrentEquipment
@@ -110,10 +108,10 @@ namespace ItManagement.ViewModel
         /// </summary>
         public string ErrorDescription
         {
-            get { return SelectedError.ErrorMessage; }
+            get { return _selectedErrorDescription; }
             set
             {
-                SelectedError.ErrorMessage = value;
+                _selectedErrorDescription = value;
                 OnPropertyChanged();
             }
         }
@@ -166,7 +164,7 @@ namespace ItManagement.ViewModel
 
         #region RelayCommands
 
-        public RelayCommand Fixbutton
+        public RelayCommand FixButton
         {
             get { return _fixButton; }
             set { _fixButton = value; }
@@ -208,7 +206,7 @@ namespace ItManagement.ViewModel
                 }
                 else
                 {
-                    _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription);
+                    _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription, false, 1234567891);
 
                     await Singleton.Instance.ERP.CreateError(_toBeCreated);
                     CurrentEquipment.IsWorking = false;
@@ -221,6 +219,7 @@ namespace ItManagement.ViewModel
 
             }
 
+            UidForCreation = 0;
             CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
@@ -241,9 +240,15 @@ namespace ItManagement.ViewModel
         public async void FixMethod()
         {
             SelectedError.IsRepaired = true;
-            SelectedError.WhoRepairedDis = Singleton.Instance.CurrentUser.Name;
+            SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Cpr;
             SelectedError.Update = DateTime.Now;
             await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+
+            EquipmentCheck(SelectedError.Uid);
+            CurrentEquipment.IsWorking = true;
+            await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+
+            CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
 
