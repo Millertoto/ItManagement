@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class EquipmentPersistency
+    public class EquipmentPersistency
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";

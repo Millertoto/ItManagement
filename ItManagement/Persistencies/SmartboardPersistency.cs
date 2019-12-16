@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class SmartboardPersistency
+    public class SmartboardPersistency
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";

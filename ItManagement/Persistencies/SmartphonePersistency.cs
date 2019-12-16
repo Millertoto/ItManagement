@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class SmartphonePersistency
+    public class SmartphonePersistency
     {
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";

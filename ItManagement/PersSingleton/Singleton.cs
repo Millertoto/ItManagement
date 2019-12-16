@@ -7,7 +7,7 @@ using ItManagement.Persistencies;
 
 namespace ItManagement.PersSingleton
 {
-    class Singleton
+    public class Singleton
     {
         #region Instance Field
 
