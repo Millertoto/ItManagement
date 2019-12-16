@@ -10,30 +10,30 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="503*"/>
-            <RowDefinition Height="497*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
-            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            </RelativePanel>
+        <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
+            <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
+                <TextBlock Text="Fejlmeddelelse" Margin="493,75,300,-37.2" FontSize="95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </StackPanel>
 
-            <StackPanel Margin="32,50,860,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <StackPanel Orientation="Vertical" Margin="50,0,130.2,10">
+            <StackPanel Margin="60,250,860,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Orientation="Vertical" Margin="50,0,-110,10">
                     <TextBlock Text="Udstyrs ID:" FontSize="53" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                    <TextBox Text="{Binding Path = UidForCreation, Mode=TwoWay}"  Margin="0,0,0,0" Height="71" FontSize="44"   />
+                    <TextBox Text="{Binding Path = UidForCreation, Mode=TwoWay}"  Margin="0,0,0,0" Height="71" FontSize="44"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Margin="628,-460,160,220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <StackPanel Orientation="Vertical" Margin="0,0,170.4,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
+            <StackPanel Margin="638,240,138,220.2">
+                <StackPanel Orientation="Vertical" Margin="0,0,0,10" Height="312" HorizontalAlignment="Stretch">
                     <TextBlock Text="Beskrivelse af fejl" FontSize="53" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
                     <TextBox Margin="0,5,9.4,99" Text="{Binding Path=ErrorDescription,Mode=TwoWay}" Height="230" FontSize="20" HorizontalAlignment="Stretch" />
                 </StackPanel>
-                <StackPanel Margin="60,0,280,33" Orientation="Horizontal" Height="60" HorizontalAlignment="Stretch">
+                <StackPanel Margin="0,0,280,33" Orientation="Horizontal" Height="60" HorizontalAlignment="Stretch">
                     <Button Content="Opret" Command="{Binding Path=AddErrorButton, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Left" Height="52" FontSize="30" Width="180" Background="CornflowerBlue" VerticalAlignment="Top"></Button>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </RelativePanel>
     </Grid>
 </Page>
