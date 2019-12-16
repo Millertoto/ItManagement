@@ -14,13 +14,13 @@
             <RowDefinition MaxHeight="500"></RowDefinition>
 
         </Grid.RowDefinitions>
-        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1000" Width="1500" Grid.RowSpan="2">
-            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155">
-                <TextBlock Margin="510,0,-510.2,0" Text="Admin Forside" FontSize="72" TextWrapping="Wrap" Width="481"/>
-                <Button Content="Logout" Background="CadetBlue" Command="{Binding Path=LogoutButton}" FontSize="36" HorizontalAlignment="Left" Margin="1310,47,0,-47.4" VerticalAlignment="Stretch"/>
+        <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="1000" Width="1500" Grid.RowSpan="2">
+            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500">
+                <TextBlock Margin="425,75,-608,0" Text="Admin Forside" FontSize="102" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button Content="Logout" Background="CadetBlue" Command="{Binding Path=LogoutButton}" FontSize="36" Margin="1250,130,0,-47" VerticalAlignment="Stretch"/>
             </RelativePanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,200,0,0">
                 <StackPanel Orientation="Vertical" Margin="300,0,400,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Button Content="Opret ansatte" Background="CornflowerBlue" Command="{Binding Path=EmployeeButton}" FontSize="36" HorizontalAlignment="Left" Margin="0,100,0,100" VerticalAlignment="Stretch" Height="200"/>
                     <Button Content="Opret udstyr" Background="CornflowerBlue" Command="{Binding Path=EquipmentButton}" FontSize="36" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="200"/>
@@ -33,6 +33,6 @@
             </StackPanel>
 
 
-        </StackPanel>
+        </RelativePanel>
     </Grid>
 </Page>
