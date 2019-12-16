@@ -19,7 +19,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ItManagement.ViewModel
 {
-    class EquipmentViewModel : INotifyPropertyChanged
+     public class EquipmentViewModel : INotifyPropertyChanged
     {
         #region Instance Field
 
@@ -400,15 +400,34 @@ namespace ItManagement.ViewModel
 
                     }
             }
+            else
+            {
+                var messageDialogue = new MessageDialog($"Select an equipment you wish to remove");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
             ObsEquipment.Clear();
             ConvertToObs();
         }
 
         public async void EditMethod()
         {
-            /*SelectedEquipment.IsWorking = IsWorking;*/
-            SelectedEquipment.Type = TypeOfEquipment;
-            await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
+            if (SelectedEquipment != null)
+            {
+                SelectedEquipment.Type = TypeOfEquipment;
+                await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
+                var messageDialogue = new MessageDialog($"Equipment: {SelectedEquipment} has been updated");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"Select an equipment you wish to update");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
+            
             ObsEquipment.Clear();
             ConvertToObs();
 
@@ -429,6 +448,9 @@ namespace ItManagement.ViewModel
                 {
                     FilteredEquipment.Add(e);
                 }
+                var messageDialogue4 = new MessageDialog($"All Equipment");
+                messageDialogue4.Commands.Add(new UICommand("Close"));
+                await messageDialogue4.ShowAsync();
             }
             else if ((TypeOfEquipment != null && TypeOfEquipment != "---") || (WorkingOrNot != null && WorkingOrNot != "---"))
             {
@@ -474,6 +496,9 @@ namespace ItManagement.ViewModel
                             }
                         }
                     }
+                    var messageDialogue4 = new MessageDialog($"Current list is showing equipment with type: {TypeOfEquipment} and the working condition of the equipment is {IsWorking}");
+                    messageDialogue4.Commands.Add(new UICommand("Close"));
+                    await messageDialogue4.ShowAsync();
                     TemporaryList.Clear();
                     TemporaryList2.Clear();
                 }
@@ -486,6 +511,9 @@ namespace ItManagement.ViewModel
                             FilteredEquipment.Add(e);
                             
                         }
+                        var messageDialogue4 = new MessageDialog($"Current list is showing equipment with the working condition as {IsWorking}");
+                        messageDialogue4.Commands.Add(new UICommand("Close"));
+                        await messageDialogue4.ShowAsync();
                         TemporaryList2.Clear();
                     }
                     else
@@ -496,6 +524,10 @@ namespace ItManagement.ViewModel
                             
 
                         }
+                        var messageDialogue4 = new MessageDialog($"Current list is showing equipment of the type: {TypeOfEquipment}");
+                        messageDialogue4.Commands.Add(new UICommand("Close"));
+                        await messageDialogue4.ShowAsync();
+
                         TemporaryList.Clear();
                     }
                 }
@@ -524,9 +556,9 @@ namespace ItManagement.ViewModel
 
         }
 
-        public async void SearchEquipmentMethod2()
+        /*public async void SearchEquipmentMethod2()
         {
-        }
+        }*/
 
         public void ConvertToObs()
         {

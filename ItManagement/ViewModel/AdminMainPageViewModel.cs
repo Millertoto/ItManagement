@@ -10,7 +10,7 @@ using Windows.UI.Xaml;
 
 namespace ItManagement.ViewModel
 {
-    class AdminMainPageViewModel
+    public class AdminMainPageViewModel
     {
         #region Instance Field
         /*private Employee _adminUser;*/
