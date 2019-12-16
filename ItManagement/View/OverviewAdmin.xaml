@@ -9,55 +9,44 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
-            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <Button Name="HamburgerButton" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
-                <TextBlock Text="Oversigt" Margin="493,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
-            </RelativePanel>
-            <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,0,0" Height="840">
-                <SplitView.Pane>
-                    <StackPanel Margin="10,0,0,37" HorizontalAlignment="Left" Width="630" VerticalAlignment="Stretch" >
-                        <Button  Background="CornflowerBlue" FontSize="55" Margin="42,40,42,40" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
-                        <Button Background="CornflowerBlue" FontSize="55" Content="Fejlmelddelelse" Height="99" Margin="42,0,42,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ></Button>
-                    </StackPanel>
-                </SplitView.Pane>
-                <SplitView.Content>
-                    <StackPanel Margin="130,90,130,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <StackPanel Margin="10,50,1000,-90" Orientation="Vertical" Height="524">
-                            <TextBlock Text="ID:" FontSize="30"/>
-                            <TextBox Height="30" Text="{Binding SearchUid, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15"/>
-                            <TextBlock Text="Hardware Type" FontSize="30"/>
-                            <ComboBox Height="30" Width="240" ItemsSource="{Binding EquipmentTypesOverview}" SelectedItem="{Binding TypeOfEquipment, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15"/>
-                            <TextBlock Text="Funktionelt" FontSize="30"/>
-                            <ComboBox Height="30" ItemsSource="{Binding ListBool}" SelectedItem="{Binding WorkingOrNot, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <Button Content="Søg" Command="{Binding SearchEquipment}" HorizontalAlignment="Left" Height="33" Width="230" Margin="0,20"/>
-                        </StackPanel>
+        <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
+            <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
+                <TextBlock Text="Oversigt" Margin="493,75,600,0" FontSize="95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button Content="Return" Command="{Binding GoBack}" HorizontalAlignment="Stretch" Height="33" Margin="1293,-65,75,0" VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Margin="130,220,130,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Margin="10,50,1000,-90" Orientation="Vertical" Height="524">
+                    <TextBlock Text="ID:" FontSize="30"/>
+                    <TextBox Height="30" Text="{Binding SearchUid, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15"/>
+                    <TextBlock Text="Hardware Type" FontSize="30"/>
+                    <ComboBox Height="30" ItemsSource="{Binding EquipmentTypesOverview}" SelectedItem="{Binding TypeOfEquipment, Mode=TwoWay}" Margin="0,0,1.4,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    <TextBlock Text="Funktionelt" FontSize="30"/>
+                    <ComboBox Height="30" ItemsSource="{Binding ListBool}" SelectedItem="{Binding WorkingOrNot, Mode=TwoWay}" Margin="0,0,1.8,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Button Content="Søg" Command="{Binding SearchEquipment}" HorizontalAlignment="Left" Height="33" Width="230" Margin="0,20"/>
+                </StackPanel>
 
-                        <StackPanel Margin="710,-450,0,420" Orientation="Horizontal">
-                            <TextBlock Text="Udstyrs ID" FontSize="20" Margin="0,0,150,0"/>
-                            <TextBlock Text="Type" FontSize="20" Margin="0,0,150,0"/>
-                            <TextBlock Text="Virker den" FontSize="20"/>
-                        </StackPanel>
-                       
-                        <StackPanel Background="CornflowerBlue" Margin="548,-420,0,-60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <ListView ItemsSource="{Binding FilteredEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBox Text="{Binding Uid}" Margin="0,0,150,0"/>
-                                            <TextBox Text="{Binding Type}" Margin="0,0,150,0"/>
-                                            <TextBox Text="{Binding IsWorkingString}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            </StackPanel>
-                            <Frame x:Name="myFrame" Margin="0,0,0,0"/>
-                    </StackPanel>
-                </SplitView.Content>
-            </SplitView>
-        </StackPanel>
+                <StackPanel Margin="710,-450,0,420" Orientation="Horizontal">
+                    <TextBlock Text="Udstyrs ID" FontSize="20" Margin="0,0,150,0"/>
+                    <TextBlock Text="Type" FontSize="20" Margin="0,0,150,0"/>
+                    <TextBlock Text="Virker den" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Background="CornflowerBlue" Margin="548,-420,0,-60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ListView ItemsSource="{Binding FilteredEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Uid}" Margin="0,0,150,0"/>
+                                    <TextBox Text="{Binding Type}" Margin="0,0,150,0"/>
+                                    <TextBox Text="{Binding IsWorkingString}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+                <Frame x:Name="myFrame" Margin="0,0,0,0"/>
+            </StackPanel>
+        </RelativePanel>
 
     </Grid>
 </Page>
