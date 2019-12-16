@@ -35,7 +35,7 @@
                     <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
                             <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                            <TextBox Margin="0,0,0,0"   Text="{Binding  Path=UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
+                            <TextBox Margin="0,0,0,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="52,0,130,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
                             <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="65,0,6.4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -67,12 +67,12 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Fid}" Margin="0,10,0,0"/>
-                                    <TextBlock Text="{Binding Cpr}" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Uid}" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Create}" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding Update}" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding IsRepairedStirng}" Margin="10,10,0,0"/>
-                                    <TextBlock Text="{Binding WhoRepairedDis}" Margin="10,10,0,0"/>
+                                    <TextBlock Text="{Binding Cpr}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding Uid}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding Create}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding Update}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding IsRepairedString}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding HasRepairedString}" Margin="6,10,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

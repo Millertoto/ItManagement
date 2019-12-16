@@ -33,6 +33,7 @@ namespace ItManagement.ViewModel
         private Employee _selectedEmployee;
         private RelayCommand _deleteEmp;
         private RelayCommand _editButton;
+        private ObservableCollection<string> _adminObs;
         #endregion
 
         #region Constructor
@@ -46,6 +47,7 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _obsEmps = new ObservableCollection<Employee>();
             _goBack = new RelayCommand(GoBackMethod);
+            _adminObs = new ObservableCollection<string>() {"True", "False"};
             ConvertToObs();
         }
         #endregion
@@ -153,9 +155,10 @@ namespace ItManagement.ViewModel
             }
 
         }
-        public ObservableCollection<string> IsAnAdmin
+        public ObservableCollection<string> AdminObs
         {
-            get { return new ObservableCollection<string>() { "True", "False" }; }
+            get { return _adminObs; }
+            set { _adminObs = value; }
 
         }
 

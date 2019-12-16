@@ -23,7 +23,11 @@ namespace SkoleDBWebService
 
         public bool IsRepaired { get; set; }
 
+        public int? HasRepaired { get; set; }
+
         public virtual Employee Employee { get; set; }
+
+        public virtual Employee Employee1 { get; set; }
 
         public virtual Equipment Equipment { get; set; }
     }

@@ -14,21 +14,22 @@ namespace ItManagement
         private DateTime _create;
         private DateTime _update;
         private bool _isRepaired;
-        private string _whoRepairedDis;
+        private int _hasRepaired;
         #endregion
 
         #region Constructor
 
 
-        public Error(int cpr, int uid, string errorMessage)
+        public Error(int cpr, int uid, string errorMessage, bool isRepaired, int hasRepaired)
         {
             _cpr = cpr;
             _uid = uid;
             _errorMessage = errorMessage;
             _create = DateTime.Now;
             _update = DateTime.Now;
-            _isRepaired = false;
-            _whoRepairedDis = "None";
+            _isRepaired = isRepaired;
+            _hasRepaired = hasRepaired;
+
 
 
         }
@@ -49,12 +50,7 @@ namespace ItManagement
             
         }
 
-        public string WhoRepairedDis
-        {
-            get { return _whoRepairedDis; }
-            set { _whoRepairedDis = value; }
-        }
-    
+
         public string ErrorMessage
         {
             get { return _errorMessage; }
@@ -78,6 +74,28 @@ namespace ItManagement
             get { return _isRepaired; }
             set { _isRepaired = value; }
         }
+
+        public int HasRepaired
+        {
+            get { return _hasRepaired; }
+            set { _hasRepaired = value; }
+        }
+
+        public string HasRepairedString
+        {
+            get
+            {
+                if (HasRepaired == 123456789)
+                {
+                    return "None";
+                }
+                else
+                {
+                    return HasRepaired.ToString();
+                }
+            }
+        }
+
 
         public string IsRepairedString
         {

@@ -12,6 +12,7 @@ namespace SkoleDBWebService
         public Employee()
         {
             Errors = new HashSet<Error>();
+            Errors1 = new HashSet<Error>();
         }
 
         [Key]
@@ -34,5 +35,8 @@ namespace SkoleDBWebService
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Error> Errors { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Error> Errors1 { get; set; }
     }
 }
