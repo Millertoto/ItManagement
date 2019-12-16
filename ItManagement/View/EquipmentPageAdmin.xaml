@@ -13,13 +13,13 @@
             <RowDefinition Height="503*"/>
             <RowDefinition Height="497*"/>
         </Grid.RowDefinitions>
-        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
-            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <TextBlock Text="Udstyr" Margin="593,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
-            </RelativePanel>
+        <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
+            <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
+                <TextBlock Text="Udstyr" Margin="553,75,640,17" FontSize="95" VerticalAlignment="Stretch"/>
+                <Button Content="Return" Command="{Binding GoBack}" Height="33" Margin="1250,-85,75,0" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            </StackPanel>
 
-            <StackPanel Margin="130,110,130,200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="130,250,130,200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Frame x:Name="myFrame" Margin="0,0,0,0"/>
                 <StackPanel Margin="0,0,1000,-50" Orientation="Vertical" Height="524">
 
@@ -50,6 +50,6 @@
                     </ListView>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </RelativePanel>
     </Grid>
 </Page>

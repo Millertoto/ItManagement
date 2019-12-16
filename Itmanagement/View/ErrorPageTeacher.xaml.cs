@@ -31,10 +31,7 @@ namespace ItManagement
             this.DataContext = evm;
         }
 
-        private void HamburgerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.mySplitView.IsPaneOpen = !this.mySplitView.IsPaneOpen;
-        }
+
         private void Rum1_OnClick(object sender, RoutedEventArgs e)
         {
             
