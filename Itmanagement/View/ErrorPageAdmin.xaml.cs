@@ -35,10 +35,7 @@ namespace ItManagement.View
             //}
             //public ViewModel.ErrorViewModel evm = new ErrorViewModel();
         }
-        private void HamburgerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.mySplitView.IsPaneOpen = !this.mySplitView.IsPaneOpen;
-        }
+
         private void Rum1_OnClick(object sender, RoutedEventArgs e)
         {
 

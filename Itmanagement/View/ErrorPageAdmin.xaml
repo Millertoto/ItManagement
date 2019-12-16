@@ -2,7 +2,7 @@
     x:Class="ItManagement.View.ErrorPageAdmin"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Itmanagement"
+    xmlns:local="using:ItManagement"
     xmlns:myviewmodel="using:ItManagement.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -20,33 +20,23 @@
 
         <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <Button Name="HamburgerButton" Click="HamburgerButton_OnClick" Background="CadetBlue" FontFamily="Segoe MDL2 Assets" FontSize="120" Content="&#xE700;" Margin="10,10,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" ></Button>
                 <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
             </RelativePanel>
-            <SplitView x:Name="mySplitView" DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="660" Opacity="0.7" Margin="0,0,860,0" Height="840">
-                <SplitView.Pane>
-                  <StackPanel Margin="0,0,0,37" HorizontalAlignment="Left" Width="640" VerticalAlignment="Stretch" >
-                    <Button  Background="CornflowerBlue" Click="Rum1_OnClick" FontSize="55" Margin="42,40,42,0" VerticalAlignment="Top" Height="99" Content="Udstyr" HorizontalAlignment="Stretch"/>
+            <StackPanel Margin="30,50,5,300" >
+                <StackPanel Orientation="Vertical" Margin="50,0,920,10"  >
+                    <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
+                    <TextBox Margin="0,0,1.2,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="52,0,920,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
+                    <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="0,0,6.4,0"/>
+                    <TextBox MaxLength="60" Margin="0,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
+                </StackPanel>
+                <StackPanel Margin="50,30,920,-155">
+                    <TextBlock Text="Virker Den?" FontSize="44" Margin="0,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
 
-                  </StackPanel>
-                </SplitView.Pane>
-                <SplitView.Content>
-                    <StackPanel Margin="50,50,5,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <StackPanel Orientation="Vertical" Margin="50,0,130.2,10"  >
-                            <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                            <TextBox Margin="0,0,0,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44" TextChanged="TextBox_TextChanged"   />
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Margin="52,0,130,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
-                            <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="65,0,6.4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                            <TextBox MaxLength="60" Margin="65,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" VerticalAlignment="Stretch" />
-                        </StackPanel>
-                        <StackPanel Margin="50,20,135,-155">
-                            <TextBlock Text="Funktionitet" FontSize="44"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </SplitView.Content>
-            </SplitView>
             <StackPanel Margin="640,-800,125,220">
                 <!--<StackPanel Orientation="Vertical" Margin="0,0,170,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
                     <TextBlock Text="Beskrivelse af fejl" FontSize="43" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>

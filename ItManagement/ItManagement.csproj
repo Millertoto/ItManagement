@@ -152,14 +152,8 @@
     <Compile Include="View\EmployeePageAdmin.xaml.cs">
       <DependentUpon>EmployeePageAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EmployeePageTeacher.xaml.cs">
-      <DependentUpon>EmployeePageTeacher.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\EquipmentPageAdmin.xaml.cs">
       <DependentUpon>EquipmentPageAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EquipmentPageTeacher.xaml.cs">
-      <DependentUpon>EquipmentPageTeacher.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ErrorPageAdmin.xaml.cs">
       <DependentUpon>ErrorPageAdmin.xaml</DependentUpon>
@@ -204,15 +198,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EmployeePageTeacher.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\EquipmentPageAdmin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EquipmentPageTeacher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
