@@ -206,17 +206,34 @@ namespace ItManagement.ViewModel
                 }
                 else
                 {
-                    _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription, false, 1234567891);
+                    if (ErrorDescription.Length <= 255)
+                    {
+                        _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription, false, 1234567891);
 
-                    await Singleton.Instance.ERP.CreateError(_toBeCreated);
-                    CurrentEquipment.IsWorking = false;
-                    await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
-                    var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
-                    await messageDialogue.ShowAsync();
+                        await Singleton.Instance.ERP.CreateError(_toBeCreated);
+                        CurrentEquipment.IsWorking = false;
+                        await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                        var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
+                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        await messageDialogue.ShowAsync();
+                    }
+                    else
+                    {
+                        var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
+                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        await messageDialogue.ShowAsync();
+                    }
+                   
                 }
                 
 
+
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"The given uid, {UidForCreation}, does not exist");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
             }
 
             UidForCreation = 0;
@@ -229,9 +246,33 @@ namespace ItManagement.ViewModel
 
         public async void EditMethod()
         {
-            SelectedError.ErrorMessage = ErrorDescription;
-            SelectedError.Update = DateTime.Now;
-            await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+            if (SelectedError.IsRepaired == false)
+            {
+                if (SelectedError.ErrorMessage.Length <= 255)
+                {
+                    SelectedError.ErrorMessage = ErrorDescription;
+                    SelectedError.Update = DateTime.Now;
+                    await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+                    var messageDialogue = new MessageDialog($"Error: {SelectedError} has been updated");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+
+
+                }
+                else
+                {
+                    var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"Selected error has been marked as resolved and is no longer open for editing");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
+            
             NewObsErrors.Clear();
             NewConvertToObs();
 
@@ -239,14 +280,38 @@ namespace ItManagement.ViewModel
 
         public async void FixMethod()
         {
-            SelectedError.IsRepaired = true;
-            SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Cpr;
-            SelectedError.Update = DateTime.Now;
-            await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+            if (SelectedError.IsRepaired == false)
+            {
+                if (SelectedError != null)
+                {
+                    SelectedError.IsRepaired = true;
+                    SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Cpr;
+                    SelectedError.Update = DateTime.Now;
+                    await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
 
-            EquipmentCheck(SelectedError.Uid);
-            CurrentEquipment.IsWorking = true;
-            await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                    EquipmentCheck(SelectedError.Uid);
+                    CurrentEquipment.IsWorking = true;
+                    await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+
+                    var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been resolved");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
+                else
+                {
+                    var messageDialogue = new MessageDialog($"Select an error you wish to resolve");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+                }
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been marked as resolved and is no longer open for editing");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+            }
+            
+            
 
             CurrentEquipment = null;
             NewObsErrors.Clear();
@@ -259,6 +324,9 @@ namespace ItManagement.ViewModel
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
+                var messageDialogue = new MessageDialog($"Error report has been removed");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
             }
             NewObsErrors.Clear();
             NewConvertToObs();

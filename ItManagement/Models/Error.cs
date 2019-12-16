@@ -85,7 +85,7 @@ namespace ItManagement
         {
             get
             {
-                if (HasRepaired == 123456789)
+                if (HasRepaired == 1234567891)
                 {
                     return "None";
                 }
