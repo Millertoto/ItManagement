@@ -19,7 +19,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ItManagement.ViewModel
 {
-    class EquipmentViewModel : INotifyPropertyChanged
+     public class EquipmentViewModel : INotifyPropertyChanged
     {
         #region Instance Field
 

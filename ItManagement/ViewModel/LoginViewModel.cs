@@ -19,7 +19,7 @@ using ItManagement.Persistencies;
 
 namespace ItManagement.ViewModel
 {
-    class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : INotifyPropertyChanged
     {
 
         #region Instance Field
@@ -38,8 +38,7 @@ namespace ItManagement.ViewModel
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
-            /*Employee e = new Employee("AAA", 1307941500, "heyssa22", "Martin Holm", true);
-            Singleton.Instance.EP.CreateEmployee(e);*/
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
         }
 
         #endregion
