@@ -47,7 +47,7 @@ namespace ItManagement.ViewModel
         private string _workingOrNot;
         private List<Equipment> _temporaryList;
         private List<Equipment> _temporaryList2;
-
+        private Equipment _newlyCreatedEquipment;
         private int _searchUid;
         private ObservableCollection<string> _listBool;
 
@@ -83,6 +83,12 @@ namespace ItManagement.ViewModel
 
         #region Properties
 
+
+        public Equipment NewlyCreatedEquipment
+        {
+            get { return _newlyCreatedEquipment; }
+            set { _newlyCreatedEquipment = value; }
+        }
         public int SearchUid
         {
             get { return _searchUid; }
@@ -289,12 +295,12 @@ namespace ItManagement.ViewModel
 
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
-                Equipment newlyCreatedEquip = AllEquipment.Last();
+                Equipment NewlyCreatedEquip = AllEquipment.Last();
  
                  switch (TypeOfEquipment)
                  {
                      case "Computer":
-                         Computer pc = new Computer(newlyCreatedEquip.Uid);
+                         Computer pc = new Computer(NewlyCreatedEquip.Uid);
                          await Singleton.Instance.COM.CreateComputer(pc);
                          
  
@@ -305,7 +311,7 @@ namespace ItManagement.ViewModel
 
                      case "Smartboard":
 
-                         SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
+                         SmartBoard sb = new SmartBoard(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SB.CreateSmartboard(sb);
  
                          var messageDialogue2 = new MessageDialog($"A smartboard has been added");
@@ -315,7 +321,7 @@ namespace ItManagement.ViewModel
 
                      case "Smartphone":
 
-                        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
+                        SmartPhone sp = new SmartPhone(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SP.CreateSmartphone(sp);
  
                          var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
@@ -324,7 +330,7 @@ namespace ItManagement.ViewModel
                          break;
 
                      case "Tablet":
-                         Tablet tab = new Tablet(newlyCreatedEquip.Uid);
+                         Tablet tab = new Tablet(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.TAB.CreateTablet(tab);
  
                          var messageDialogue4 = new MessageDialog($"A tablet has been added");
@@ -556,9 +562,6 @@ namespace ItManagement.ViewModel
 
         }
 
-        /*public async void SearchEquipmentMethod2()
-        {
-        }*/
 
         public void ConvertToObs()
         {

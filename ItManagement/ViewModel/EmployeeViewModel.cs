@@ -237,6 +237,47 @@ namespace ItManagement.ViewModel
 
         #region Checks
 
+        public bool EmployeeExists(int cpr)
+        {
+            bool c = false;
+            Employee temp = Singleton.Instance.EP.GetEmployee(cpr).Result;
+            if (temp.Cpr == cpr)
+            {
+                c = true;
+            }
+
+            return c;
+        }
+
+        public bool CheckIfNameExists(int cpr, string name)
+        {
+            bool c = false;
+            Employee temp = Singleton.Instance.EP.GetEmployee(cpr).Result;
+            if ( temp.Cpr == cpr && temp.Name == name)
+            {
+                c = true;
+            }
+
+            return c;
+
+        }
+
+        public bool CheckIfDeleted(int cpr)
+        {
+            bool c = false;
+            List<Employee> templist = Singleton.Instance.EP.GetEmployees().Result;
+            foreach (Employee e in templist)
+            {
+                if (cpr == e.Cpr)
+                {
+                    c = true;
+                    break;
+                }
+            }
+
+            return c;
+        }
+
         public void SetAdmin(string admincheck, Employee e)
         {
             if (admincheck == "true" || admincheck == "True")

@@ -39,6 +39,9 @@ namespace ItManagement.ViewModel
         {
             _enter = new RelayCommand(LoginButtonMethod);
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+            /*Employee test = new Employee("heyhvaså", 1307941593, "heyhvaså", "Martin Holm");
+            test.IsAdmin = true;
+            Singleton.Instance.EP.CreateEmployee(test);*/
         }
 
         #endregion
