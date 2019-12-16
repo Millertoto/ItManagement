@@ -29,5 +29,6 @@ namespace ItManagement.View
             this.InitializeComponent();
             this.DataContext = evm;
         }
+
     }
 }

@@ -26,7 +26,7 @@
                     <Button Content="Opret udstyr" Background="CornflowerBlue" Command="{Binding Path=EquipmentButton}" FontSize="36" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Content="Oversigt" Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Left" Margin="-2,100,0,100" VerticalAlignment="Stretch" Height="200" Width="207"/>
+                    <Button Content="Oversigt" Command="{Binding Path=OverviewButton}"  Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Left" Margin="-2,100,0,100" VerticalAlignment="Stretch" Height="200" Width="207"/>
                     <Button Name="GoToErrorPageAdmin" Content="Fejlmelding" Command="{Binding Path=ErrorButton}" Background="CornflowerBlue" FontSize="36" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Stretch" Height="200"/>
                 </StackPanel>
 

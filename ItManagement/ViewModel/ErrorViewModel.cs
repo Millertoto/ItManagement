@@ -26,6 +26,7 @@ namespace ItManagement.ViewModel
 
         #region Instance Field
 
+        private string _selectedErrorDescription;
         private Error _selected;
         private Error _toBeCreated;
         private List<Equipment> _listOfEquipment;
@@ -64,8 +65,6 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Properties
-
-        
         public Error SelectedError
         {
             get { return _selected; }
@@ -77,12 +76,15 @@ namespace ItManagement.ViewModel
             }
         }
 
+        /// <summary>
+        /// Edited 13/12
+        /// </summary>
         public int UidForCreation
         {
-            get { return _uid; }
+            get { return CurrentEquipment.Uid; }
             set
             {
-                _uid = value;
+                CurrentEquipment.Uid = value;
                 OnPropertyChanged();
             }
         }
@@ -103,15 +105,15 @@ namespace ItManagement.ViewModel
             }
         }
 
+        /// <summary>
+        /// Edited 13/12
+        /// </summary>
         public string ErrorDescription
         {
-            get
-            {
-                return _errorText;
-            }
+            get { return SelectedError.ErrorMessage; }
             set
             {
-                _errorText = value;
+                SelectedError.ErrorMessage = value;
                 OnPropertyChanged();
             }
         }
@@ -218,6 +220,8 @@ namespace ItManagement.ViewModel
                 
 
             }
+
+            CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
 
