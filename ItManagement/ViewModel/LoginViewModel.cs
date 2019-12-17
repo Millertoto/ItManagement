@@ -125,6 +125,8 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog("Nah fam, no accses for u");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to login due to wrong info");
             }
 
         }

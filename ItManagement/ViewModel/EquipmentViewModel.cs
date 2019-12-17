@@ -343,8 +343,15 @@ namespace ItManagement.ViewModel
  
  
                  }
+                
+
 
             }
+            else
+            {
+                throw new ArgumentException("TypeOfEquipment is null");
+            }
+
             ObsEquipment.Clear();
             ConvertToObs();
 
@@ -405,12 +412,15 @@ namespace ItManagement.ViewModel
 
 
                     }
+
             }
             else
             {
                 var messageDialogue = new MessageDialog($"Select an equipment you wish to remove");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to delete Equipment");
             }
             ObsEquipment.Clear();
             ConvertToObs();
@@ -426,12 +436,15 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+
             }
             else
             {
                 var messageDialogue = new MessageDialog($"Select an equipment you wish to update");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to edit Equipment");
             }
             
             ObsEquipment.Clear();
@@ -457,6 +470,7 @@ namespace ItManagement.ViewModel
                 var messageDialogue4 = new MessageDialog($"All Equipment");
                 messageDialogue4.Commands.Add(new UICommand("Close"));
                 await messageDialogue4.ShowAsync();
+
             }
             else if ((TypeOfEquipment != null && TypeOfEquipment != "---") || (WorkingOrNot != null && WorkingOrNot != "---"))
             {
@@ -507,6 +521,7 @@ namespace ItManagement.ViewModel
                     await messageDialogue4.ShowAsync();
                     TemporaryList.Clear();
                     TemporaryList2.Clear();
+                    
                 }
                 else if (w || t )
                 {
@@ -557,11 +572,12 @@ namespace ItManagement.ViewModel
                     var messageDialogue4 = new MessageDialog($"{SearchUid} is not a valid Uid");
                     messageDialogue4.Commands.Add(new UICommand("Close"));
                     await messageDialogue4.ShowAsync();
+
+                    throw new ArgumentException("Failure to find UID");
                 }
             }
 
         }
-
 
         public void ConvertToObs()
         {

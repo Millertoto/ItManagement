@@ -17,7 +17,7 @@ namespace ItManagement
         #endregion
 
         #region Constructor
-        public Employee(string username, int cpr, string password, string name )
+        public Employee(string username, int cpr, string password, string name)
         {
             Errors = new HashSet<Error>();
             _username = username;

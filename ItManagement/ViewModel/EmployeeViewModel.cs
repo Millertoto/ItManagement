@@ -206,9 +206,11 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"Failure");
+                var messageDialogue = new MessageDialog($"Failure, Given values does not match requisites. Username and Password must be between 8-16");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to create Employee");
             }
             GetEmployeeList();
 
@@ -221,16 +223,38 @@ namespace ItManagement.ViewModel
                 {
                     await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
                 }
+                else
+                {
+                    var messageDialogue = new MessageDialog($"You must select the employee you wish to remove");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+
+                    throw new ArgumentException("Failure to delete Employee");
+                    
+                }
                 GetEmployeeList();
             
         }
 
         public async void EditMethod()
         {
-            SelectedEmployee.Name = Name;
-            SelectedEmployee.Password = Password;
-            SelectedEmployee.Username = Username;
-            await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+            if (SelectedEmployee != null)
+            {
+                SelectedEmployee.Name = Name;
+                SelectedEmployee.Password = Password;
+                SelectedEmployee.Username = Username;
+                SetAdmin(IsAdmin, SelectedEmployee);
+                await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"You must select the employee you wish to edit");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to edit Employee");
+            }
+            
             GetEmployeeList();
 
         }

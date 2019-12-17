@@ -203,6 +203,7 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"You need to type in a description for the error");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
                 else
                 {
@@ -216,12 +217,15 @@ namespace ItManagement.ViewModel
                         var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
                         messageDialogue.Commands.Add(new UICommand("Close"));
                         await messageDialogue.ShowAsync();
+
                     }
                     else
                     {
                         var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
                         messageDialogue.Commands.Add(new UICommand("Close"));
                         await messageDialogue.ShowAsync();
+
+                        throw new ArgumentException("Failure to add error due to description being too long");
                     }
                    
                 }
@@ -234,6 +238,8 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"The given uid, {UidForCreation}, does not exist");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to add error due to wrong UID");
             }
 
             UidForCreation = 0;
@@ -257,6 +263,7 @@ namespace ItManagement.ViewModel
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
+                    
 
                 }
                 else
@@ -264,6 +271,8 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
+                    throw new ArgumentException("Failure to edit error due to description being too long");
                 }
             }
             else
@@ -271,6 +280,8 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"Selected error has been marked as resolved and is no longer open for editing");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to edit error due to the error being closed for editing");
             }
             
             NewObsErrors.Clear();
@@ -296,12 +307,15 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been resolved");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
                 else
                 {
                     var messageDialogue = new MessageDialog($"Select an error you wish to resolve");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
+                    throw new ArgumentException("Failure to fix error due to not having selected the error");
                 }
             }
             else
@@ -309,6 +323,7 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been marked as resolved and is no longer open for editing");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+                throw new ArgumentException("Failure to fix error due to the error no longer being open for fixing");
             }
             
             
@@ -327,6 +342,15 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"Error report has been removed");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"You have to select an error you wish to remove");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
+                throw new ArgumentException("Failure to remove error due to the error not being selected");
             }
             NewObsErrors.Clear();
             NewConvertToObs();

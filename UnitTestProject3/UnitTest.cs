@@ -13,30 +13,29 @@ namespace UnitTestProject3
     [TestClass]
     public class UnitTest1
     {
-        private Employee _testEmployee;
-        private Employee _testEmployee2;
-        private Employee _testEmployee3;
-        private Employee _testEmployee4;
         private LoginViewModel _testLoginViewModel;
         private EmployeeViewModel _testEmployeeViewModel;
         private EquipmentViewModel _testEquipmentViewModel;
+        private ErrorViewModel _testErrorViewModel;
         
         public UnitTest1()
         {
-            _testEmployee = new Employee("heyhvaså", 1307949493, "heyhvaså", "huggabugga");
-            _testEmployee2 = new Employee("BBBBlmao", 1307941500, "heyssa22", "Martin Holm");
-            _testEmployee3 = new Employee("donesntExist", 1313131313, "heyhvaså", "Olaf");
-            _testEmployee4 = new Employee("donesntExist2", 1313131313, "heyhvaså", "Olaf");
+            
+            
 
             Employee EmployeeToBeAdded = new Employee("LmaoLmao22", 1307941588, "heyhvaså", "Olaf Den Tredje");
             _testLoginViewModel = new LoginViewModel();
             _testEmployeeViewModel = new EmployeeViewModel();
             _testEquipmentViewModel = new EquipmentViewModel();
-
+            _testErrorViewModel = new ErrorViewModel();
         }
         [TestMethod]
         public void TestLoginCheck()
         {
+
+            // Arrange
+
+            Employee _testEmployee = new Employee("heyhvaså", 1307949493, "heyhvaså", "huggabugga");
             // Act & Assert
 
             Assert.IsTrue(_testLoginViewModel.LoginCheck(_testEmployee.Username, _testEmployee.Password, _testLoginViewModel.Employees));
@@ -45,6 +44,9 @@ namespace UnitTestProject3
         [TestMethod]
         public void TestWrongLoginCheck()
         {
+            // Arrange
+            Employee _testEmployee4 = new Employee("donesntExist2", 1313131313, "heyhvaså", "Olaf");
+
             // Act & Assert
 
             Assert.IsFalse(_testLoginViewModel.LoginCheck(_testEmployee4.Username, _testEmployee4.Password,
@@ -56,7 +58,7 @@ namespace UnitTestProject3
         public void TestAdminCheck()
         {
             // Arrange
-
+            Employee _testEmployee = new Employee("heyhvaså", 1307949493, "heyhvaså", "huggabugga");
             _testEmployee.IsAdmin = true;
             // Act & Assert
 
@@ -69,7 +71,7 @@ namespace UnitTestProject3
         {
 
             //  Arrange
-
+            Employee _testEmployee2 = new Employee("BBBBlmao", 1307941500, "heyssa22", "Martin Holm");
             _testEmployee2.IsAdmin = false;
             // Act & Assert
 
@@ -83,12 +85,19 @@ namespace UnitTestProject3
         public void TestAddEmployee()
         {
             //Arrange
+            Employee _testEmployee3 = new Employee("donesntExist", 1313131313, "heyhvaså", "Olaf");
             _testEmployee3.IsAdmin = true;
             // Act & Assert
             Singleton.Instance.EP.CreateEmployee(_testEmployee3);
 
             Assert.IsTrue(_testEmployeeViewModel.EmployeeExists(_testEmployee3.Cpr));
-            
+
+
+        }
+
+        [TestMethod]
+        public void TestFailureAddEmployeeWrongPassword()
+        {
 
         }
 
@@ -96,12 +105,14 @@ namespace UnitTestProject3
         public void TestEditEmployee()
         {
             //Arrange
-            _testEmployee3.IsAdmin = true;
-            _testEmployee3.Name = "Gudrund";
+            Employee _testEmployee3 = new Employee("donesntExist", 1313131313, "heyhvaså", "Olaf");
+            _testEmployeeViewModel.IsAdmin = "False";
+            _testEmployeeViewModel.SetAdmin(_testEmployeeViewModel.IsAdmin, _testEmployee3);
+            _testEmployee3.Name = "Henrik";
             // Act & Assert
-            Singleton.Instance.EP.UpdateEmployee(_testEmployee3.Cpr, _testEmployee3);
+            
 
-            Assert.IsTrue(_testEmployeeViewModel.CheckIfNameExists(_testEmployee3.Cpr, _testEmployee3.Name));
+            Assert.IsNull(Singleton.Instance.EP.UpdateEmployee(_testEmployee3.Cpr, _testEmployee3).Exception);
 
         }
 
@@ -111,11 +122,11 @@ namespace UnitTestProject3
         public void TestDeleteEmployee()
         {
             //Arrange
-            
+            Employee _testEmployee3 = new Employee("donesntExist", 1313131313, "heyhvaså", "Olaf");
             // Act & Assert
-            Singleton.Instance.EP.DeleteEmployee(_testEmployee3.Cpr);
+            
 
-            Assert.IsFalse(_testEmployeeViewModel.CheckIfDeleted(_testEmployee3.Cpr));
+            Assert.IsNull(Singleton.Instance.EP.DeleteEmployee(_testEmployee3.Cpr).Exception);
 
 
         }
@@ -124,11 +135,11 @@ namespace UnitTestProject3
         public void TestAddEquipment()
         {
             //Arrange
-            _testEmployee3.IsAdmin = true;
-            // Act & Assert
-            Singleton.Instance.EP.CreateEmployee(_testEmployee3);
 
-            Assert.IsTrue(_testEmployeeViewModel.EmployeeExists(_testEmployee3.Cpr));
+            Equipment _testEquipment = new Equipment("Computer");
+            // Act & Assert
+
+            Assert.IsNull(Singleton.Instance.EQP.CreateEquipment(_testEquipment).Exception);
 
 
         }
@@ -137,12 +148,13 @@ namespace UnitTestProject3
         public void TestEditEquipment()
         {
             //Arrange
-            _testEmployee3.IsAdmin = true;
-            _testEmployee3.Name = "Gudrund";
+            List<Equipment> temp = Singleton.Instance.EQP.GetEquipments().Result;
+            Equipment _testEquipment = temp.Last();
+            _testEquipment.Type = "Tablet";
             // Act & Assert
-            Singleton.Instance.EP.UpdateEmployee(_testEmployee3.Cpr, _testEmployee3);
 
-            Assert.IsTrue(_testEmployeeViewModel.CheckIfNameExists(_testEmployee3.Cpr, _testEmployee3.Name));
+            Assert.IsNull(Singleton.Instance.EQP.UpdateEquipment(_testEquipment.Uid, _testEquipment).Exception);
+
 
         }
 
@@ -152,12 +164,11 @@ namespace UnitTestProject3
         public void TestDeleteEquipment()
         {
             //Arrange
-
+            List<Equipment> temp = Singleton.Instance.EQP.GetEquipments().Result;
+            Equipment _testEquipment = temp.Last();
             // Act & Assert
-            Singleton.Instance.EP.DeleteEmployee(_testEmployee3.Cpr);
 
-            Assert.IsFalse(_testEmployeeViewModel.CheckIfDeleted(_testEmployee3.Cpr));
-
+            Assert.IsNull(Singleton.Instance.EQP.DeleteEquipment(_testEquipment.Uid).Exception);
 
         }
 
@@ -165,11 +176,19 @@ namespace UnitTestProject3
         public void TestAddError()
         {
             //Arrange
-            _testEmployee3.IsAdmin = true;
-            // Act & Assert
-            Singleton.Instance.EP.CreateEmployee(_testEmployee3);
+            Equipment _testEquipment = new Equipment("Computer");
+            Singleton.Instance.EQP.CreateEquipment(_testEquipment);
+            List<Equipment> _temp = Singleton.Instance.EQP.GetEquipments().Result;
 
-            Assert.IsTrue(_testEmployeeViewModel.EmployeeExists(_testEmployee3.Cpr));
+            _testEquipment = _temp.Last();
+
+            Error tempError = new Error(1307949493, _testEquipment.Uid, "shit aint working", false, 1234567891);
+
+
+            // Act & Assert
+
+            Assert.IsNull(Singleton.Instance.ERP.CreateError(tempError).Exception);
+
 
 
         }
@@ -178,12 +197,12 @@ namespace UnitTestProject3
         public void TestEditError()
         {
             //Arrange
-            _testEmployee3.IsAdmin = true;
-            _testEmployee3.Name = "Gudrund";
+            List<Error> _temp = Singleton.Instance.ERP.GetErrors().Result;
+            Error tempError = _temp.Last();
+            tempError.ErrorMessage = "Changed";
             // Act & Assert
-            Singleton.Instance.EP.UpdateEmployee(_testEmployee3.Cpr, _testEmployee3);
 
-            Assert.IsTrue(_testEmployeeViewModel.CheckIfNameExists(_testEmployee3.Cpr, _testEmployee3.Name));
+            Assert.IsNull(Singleton.Instance.ERP.UpdateError(tempError.Uid, tempError).Exception);
 
         }
 
@@ -193,12 +212,11 @@ namespace UnitTestProject3
         public void TestDeleteError()
         {
             //Arrange
-
+            List<Error> _temp = Singleton.Instance.ERP.GetErrors().Result;
+            Error tempError = _temp.Last();
             // Act & Assert
-            Singleton.Instance.EP.DeleteEmployee(_testEmployee3.Cpr);
 
-            Assert.IsFalse(_testEmployeeViewModel.CheckIfDeleted(_testEmployee3.Cpr));
-
+            Assert.IsNull(Singleton.Instance.ERP.DeleteError(tempError.Fid).Exception);
 
         }
 
