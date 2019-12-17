@@ -245,6 +245,9 @@ namespace ItManagement.ViewModel
         #region Methods
 
         #region AddEquipment
+        /// <summary>
+        /// Tilføjer et udstyr
+        /// </summary>
         public async void AddEquipment()
         {
             if (TypeOfEquipment == "Computer"
@@ -321,6 +324,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region DeleteEquipment
+        /// <summary>
+        /// Fjerner et udstyr
+        /// </summary>
         public async void DeleteEquipMethod()
         {
             if (SelectedEquipment != null)
@@ -392,6 +398,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region EditEquipment
+        /// <summary>
+        /// Ændrer et udstyr
+        /// </summary>
         public async void EditMethod()
         {
             if (SelectedEquipment != null)
@@ -420,6 +429,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region SearchMethod
+        /// <summary>
+        /// Søæger efter et eller flere udstyr
+        /// </summary>
         public async void SearchEquipmentMethod1()
         {
             if (FilteredEquipment != null)

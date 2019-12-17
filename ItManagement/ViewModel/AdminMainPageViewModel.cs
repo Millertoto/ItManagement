@@ -16,7 +16,7 @@ namespace ItManagement.ViewModel
         // Skrevet af Martin
 
         #region Instance Field
-        /*private Employee _adminUser;*/
+
         private RelayCommand _logoutButton;
         private RelayCommand _goToCreateEmployee;
         private RelayCommand _goToCreateEquipment;

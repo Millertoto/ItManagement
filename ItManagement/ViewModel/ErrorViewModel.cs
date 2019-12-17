@@ -202,6 +202,9 @@ namespace ItManagement.ViewModel
         #region Methods
 
         #region AddError
+        /// <summary>
+        /// Tilføjer en fejl
+        /// </summary>
         public async void AddError()
         {
 
@@ -262,6 +265,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region EditError
+        /// <summary>
+        /// Ændrer en fejl
+        /// </summary>
         public async void EditMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -303,6 +309,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region FixError
+        /// <summary>
+        /// Fixer en fejl
+        /// </summary>
         public async void FixMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -350,6 +359,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region DeleteError
+        /// <summary>
+        /// Fjerner en fejl
+        /// </summary>
         public async void DeleteMethod()
         {
 
@@ -375,6 +387,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Checks
+        /// <summary>
+        /// Checker om et udstyr eksisterer
+        /// </summary>
         public bool EquipmentCheck(int uid)
         {
             

@@ -33,6 +33,7 @@ namespace UnitTestProject3
             _testErrorViewModel = new ErrorViewModel();
         }
         [TestMethod]
+        // Tester om en person kan logge ind med rigtig information
         public void TestLoginCheck()
         {
 
@@ -45,6 +46,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om en person kan logge ind med forkert information
         public void TestWrongLoginCheck()
         {
             // Arrange
@@ -58,6 +60,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om en person kan logge ind som admin
         public void TestAdminCheck()
         {
             // Arrange
@@ -70,6 +73,8 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+
+        // Tester om en person kan logge ind som lærer
         public void TestTeacherCheck()
         {
 
@@ -85,6 +90,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om der kan oprettes en ny ansat
         public void TestAddEmployee()
         {
             //Arrange
@@ -99,6 +105,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om en eksisterene ansat kan få ændret sin status og navn
         public void TestEditEmployee()
         {
             //Arrange
@@ -115,7 +122,7 @@ namespace UnitTestProject3
 
         
         [TestMethod]
-        
+        // Tester om en ansat kan slettes
         public void TestDeleteEmployee()
         {
             //Arrange
@@ -129,6 +136,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om et udstyr kan tilføjes
         public void TestAddEquipment()
         {
             //Arrange
@@ -142,6 +150,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om et udstyr kan ændres
         public void TestEditEquipment()
         {
             //Arrange
@@ -157,7 +166,7 @@ namespace UnitTestProject3
 
 
         [TestMethod]
-
+        // Tester om et udstyr kan fjernes
         public void TestDeleteEquipment()
         {
             //Arrange
@@ -170,6 +179,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om en fejl kan oprettes
         public void TestAddError()
         {
             //Arrange
@@ -191,6 +201,7 @@ namespace UnitTestProject3
         }
 
         [TestMethod]
+        // Tester om en fejl kan ændres
         public void TestEditError()
         {
             //Arrange
@@ -205,7 +216,7 @@ namespace UnitTestProject3
 
 
         [TestMethod]
-
+        // Tester om en fejl kan fjernes
         public void TestDeleteError()
         {
             //Arrange
