@@ -25,9 +25,9 @@
             </StackPanel>
             <StackPanel Margin="30,270,500,300" >
                 <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                <TextBox Margin="0,0,1.2,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44"/>
+                <TextBox Margin="0,0,1.2,0"   Text="{Binding SelectedError.Uid , Mode=TwoWay }" Height="71" FontSize="44"/>
                 <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="0,0,6.4,0"/>
-                <TextBox MaxLength="60" Margin="0,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
+                <TextBox MaxLength="255" Margin="0,0,0.4,0" Text="{Binding Path= SelectedError.ErrorMessage, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
             </StackPanel>
 
             <StackPanel Margin="650,275,32,220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -40,7 +40,7 @@
 
                 <StackPanel Margin="175,-525,0,50" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Background="CornflowerBlue" ItemsSource="{Binding NewObsErrors}" SelectedItem="{Binding SelectedError, Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
+                    <ListView Background="CornflowerBlue" ItemsSource="{Binding  NewObsErrors}" SelectedItem="{Binding  SelectedError , Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

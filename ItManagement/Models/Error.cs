@@ -18,7 +18,7 @@ namespace ItManagement
         #endregion
 
         #region Constructor
-
+        public Error() { }
 
         public Error(int cpr, int uid, string errorMessage, bool isRepaired, int hasRepaired)
         {
