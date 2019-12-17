@@ -14,20 +14,24 @@ using Windows.UI.Xaml.Controls;
 using ItManagement.Commands;
 using ItManagement.PersSingleton;
 using ItManagement.View;
-using ItManagement.Models;
+using ItManagement;
 using ItManagement.Persistencies;
 
 namespace ItManagement.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        // Skrevet af Martin
 
         #region Instance Field
 
         private string _userName;
         private string _password;
+
         private RelayCommand _enter;
+
         private Employee _currentUser;
+
         private List<Employee> _employees;
 
 
@@ -38,7 +42,9 @@ namespace ItManagement.ViewModel
         public LoginViewModel()
         {
             _enter = new RelayCommand(LoginButtonMethod);
+
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+
             /*Employee test = new Employee("heyhvaså", 1307941593, "heyhvaså", "Martin Holm");
             test.IsAdmin = true;
             Singleton.Instance.EP.CreateEmployee(test);*/
@@ -54,8 +60,9 @@ namespace ItManagement.ViewModel
             get { return _employees; }
             set { _employees = value; }
         }
-        #endregion 
+        #endregion
 
+        #region Employee Properties
         public string UserName
         {
             get { return _userName; }
@@ -86,8 +93,14 @@ namespace ItManagement.ViewModel
         }
         #endregion
 
+        #endregion
+
         #region Methods
 
+
+        #region LoginMethod
+        // Checker hvorvidt brugeren har indtastet eksisterene information og hvorvidt brugeren er admin eller ej.
+        // Sender derefter brugeren videre til enten lærer versionen eller admin versionen af programmet.
         public async void LoginButtonMethod()
         {
 
@@ -108,17 +121,17 @@ namespace ItManagement.ViewModel
 
                 else
                 {
-                        Frame currentFrame = Window.Current.Content as Frame;
-                        currentFrame.Navigate(typeof(ErrorPageTeacher));
+                    Frame currentFrame = Window.Current.Content as Frame;
+                    currentFrame.Navigate(typeof(ErrorPageTeacher));
 
-                        var messageDialogue = new MessageDialog($"Welcome, {Singleton.Instance.CurrentUser.Name}");
-                        messageDialogue.Commands.Add(new UICommand("Close"));
-                        await messageDialogue.ShowAsync();
+                    var messageDialogue = new MessageDialog($"Welcome, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
                 }
 
 
 
-                
+
             }
             else
             {
@@ -131,6 +144,10 @@ namespace ItManagement.ViewModel
 
         }
 
+        #endregion
+
+        #region Checks
+        // Checker hvorvidt brugeren er admin eller ej.
         public bool AdminCheck(Employee currentUser)
         {
             if (currentUser.IsAdmin)
@@ -141,27 +158,31 @@ namespace ItManagement.ViewModel
             {
                 return false;
             }
-                
-            
+
+
         }
 
+        // Checker hvorvidt brugeren har indtastet eksisterene information
         public bool LoginCheck(string username, string password, List<Employee> employees)
         {
             bool c = false;
 
-                foreach (Employee e in employees)
+            foreach (Employee e in employees)
+            {
+                if (username == e.Username && password == e.Password)
                 {
-                    if (username == e.Username && password == e.Password)
-                    {
-                        c = true;
-                        Singleton.Instance.CurrentUser = e;
-                        break;
-                    }
-                    
+                    c = true;
+                    Singleton.Instance.CurrentUser = e;
+                    break;
                 }
+
+            }
             return c;
 
         }
+
+
+        #endregion
 
         #endregion
 

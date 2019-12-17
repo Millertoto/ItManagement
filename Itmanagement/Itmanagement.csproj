@@ -126,7 +126,6 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Error.cs" />
-    <Compile Include="Models\ErrorsCatalogSingleton.cs" />
     <Compile Include="Persistencies\ComputerPersistency.cs" />
     <Compile Include="Persistencies\AccesoryPersistency.cs" />
     <Compile Include="Persistencies\EmployeePersistency.cs" />

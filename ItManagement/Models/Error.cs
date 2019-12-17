@@ -5,6 +5,7 @@ using System.Xml;
 
 namespace ItManagement
 {
+    // Genereret af EF
     public partial class Error
     {
         #region Instance Field

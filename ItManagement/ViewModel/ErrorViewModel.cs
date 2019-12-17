@@ -1,5 +1,5 @@
 ﻿using System;
-using ItManagement.Models;
+using ItManagement;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,25 +22,32 @@ namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
+        // Skrevet af Martin
 
 
         #region Instance Field
 
+        private List<Equipment> _listOfEquipment;
+        private List<Error> _newListOfError;
+
+        private ObservableCollection<Error> _newObsErrors;
+
+        private int _uid;
+
         private string _selectedErrorDescription;
+
+        private Employee _creatorOfError;
+
+        private Equipment _currentEquipment;
+
         private Error _selected;
         private Error _toBeCreated;
-        private List<Equipment> _listOfEquipment;
-        private int _uid;
-        private string _errorText;
-        private Employee _creatorOfError;
+
         private RelayCommand _addErrorButton;
-        private RelayCommand _getErrors;
-        private Equipment _currentEquipment;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
-        private List<Error> _newListOfError;
-        private ObservableCollection<Error> _newObsErrors;
+        private RelayCommand _goBack;
 
 
         #endregion
@@ -49,12 +56,15 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
+
             _newListOfError = new List<Error>();
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+
             _newObsErrors = new ObservableCollection<Error>();
+
             _addErrorButton = new RelayCommand(AddError);
             _deleteButton = new RelayCommand(DeleteMethod);
             _editButton = new RelayCommand(EditMethod);
-            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
 
@@ -67,6 +77,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Properties
+
+        #region ErrorProps
+
         public Error SelectedError
         {
             get { return _selected; }
@@ -78,9 +91,36 @@ namespace ItManagement.ViewModel
             }
         }
 
-        /// <summary>
-        /// Edited 13/12
-        /// </summary>
+        public string ErrorDescription
+        {
+            get { return _selectedErrorDescription; }
+            set
+            {
+                _selectedErrorDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+        #region EmployeeProps
+
+        public Employee CreatorOfError
+        {
+            get { return _creatorOfError; }
+            set
+            {
+                _creatorOfError = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+        #region EquipmentProps
+
         public int UidForCreation
         {
             get { return _uid; }
@@ -93,42 +133,8 @@ namespace ItManagement.ViewModel
             set { _currentEquipment = value; }
         }
 
-        public Employee CreatorOfError
-        {
-            get { return _creatorOfError; }
-            set
-            {
-                _creatorOfError = value;
-                OnPropertyChanged();
-            }
-        }
+        #endregion
 
-        /// <summary>
-        /// Edited 13/12
-        /// </summary>
-        public string ErrorDescription
-        {
-            get { return _selectedErrorDescription; }
-            set
-            {
-                _selectedErrorDescription = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _selectedOption;
-        public string SelectedOption
-        {
-            get
-            {
-                return _selectedOption; ;
-            }
-            set
-            {
-                _selectedOption = value;
-                OnPropertyChanged();
-            }
-        }
         #region Lists
         public List<Equipment> ListOfEquipment
         {
@@ -159,9 +165,6 @@ namespace ItManagement.ViewModel
 
         #endregion
 
-
-        #endregion
-
         #region RelayCommands
 
         public RelayCommand FixButton
@@ -186,12 +189,19 @@ namespace ItManagement.ViewModel
             get { return _deleteButton; }
             set { _deleteButton = value; }
         }
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
         #endregion
 
-        
+        #endregion
+
         #region Methods
 
-
+        #region AddError
         public async void AddError()
         {
 
@@ -249,7 +259,9 @@ namespace ItManagement.ViewModel
 
 
         }
+        #endregion
 
+        #region EditError
         public async void EditMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -288,7 +300,9 @@ namespace ItManagement.ViewModel
             NewConvertToObs();
 
         }
+        #endregion
 
+        #region FixError
         public async void FixMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -333,9 +347,12 @@ namespace ItManagement.ViewModel
             NewConvertToObs();
 
         }
+        #endregion
 
+        #region DeleteError
         public async void DeleteMethod()
         {
+
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
@@ -355,7 +372,9 @@ namespace ItManagement.ViewModel
             NewObsErrors.Clear();
             NewConvertToObs();
         }
+        #endregion
 
+        #region Checks
         public bool EquipmentCheck(int uid)
         {
             
@@ -377,7 +396,9 @@ namespace ItManagement.ViewModel
 
 
         }
+        #endregion
 
+        #region List/Obs Method
         public void NewConvertToObs()
         {
             NewErrorList = Singleton.Instance.ERP.GetErrors().Result;
@@ -397,13 +418,7 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region GoBack
-        private RelayCommand _goBack;
 
-        public RelayCommand GoBack
-        {
-            get { return _goBack; }
-            set { _goBack = value; }
-        }
 
         public void GoBackMethod()
         {
@@ -411,6 +426,8 @@ namespace ItManagement.ViewModel
             currentFrame.Navigate(typeof(AdminMainpage));
         }
         #endregion 
+
+        #endregion
 
         #region PropertyChanged
 

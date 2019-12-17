@@ -13,6 +13,9 @@ namespace UnitTestProject3
     [TestClass]
     public class UnitTest1
     {
+
+        //Skrevet af Martin
+
         private LoginViewModel _testLoginViewModel;
         private EmployeeViewModel _testEmployeeViewModel;
         private EquipmentViewModel _testEquipmentViewModel;
@@ -92,12 +95,6 @@ namespace UnitTestProject3
 
             Assert.IsTrue(_testEmployeeViewModel.EmployeeExists(_testEmployee3.Cpr));
 
-
-        }
-
-        [TestMethod]
-        public void TestFailureAddEmployeeWrongPassword()
-        {
 
         }
 
