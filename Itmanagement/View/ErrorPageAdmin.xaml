@@ -14,43 +14,31 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="503*"/>
-            <RowDefinition Height="497*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
-            <RelativePanel Margin="0,0,0,0" Background="CornflowerBlue" Height="155" >
-                <TextBlock Text="Fejlmeddelelse" Margin="293,-36,1.6,-37.2" FontSize="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Button Content="Button" Command="{Binding GoBack}" HorizontalAlignment="Left" Height="33" Margin="1293,55,0,0" VerticalAlignment="Top" Width="170"/>
-            </RelativePanel>
-            <StackPanel Margin="30,50,5,300" >
-                <StackPanel Orientation="Vertical" Margin="50,0,920,10"  >
-                    <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                    <TextBox Margin="0,0,1.2,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="52,0,920,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
-                    <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="0,0,6.4,0"/>
-                    <TextBox MaxLength="60" Margin="0,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
-                </StackPanel>
-                <StackPanel Margin="50,30,920,-155">
-                    <TextBlock Text="Virker Den?" FontSize="44" Margin="0,0,0,0"/>
-                </StackPanel>
+        <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
+            <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
+                <TextBlock Text="Fejlmeddelelse" Margin="420,80,300,0" FontSize="90"/>
+                <Button Content="Return" Command="{Binding GoBack}" Height="33" Margin="1250,-65,0,0" VerticalAlignment="Top" Width="170"/>
+            </StackPanel>
+            <StackPanel Margin="30,270,500,300" >
+                <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
+                <TextBox Margin="0,0,1.2,0"   Text="{Binding  UidForCreation , Mode=TwoWay }" Height="71" FontSize="44"/>
+                <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="0,0,6.4,0"/>
+                <TextBox MaxLength="60" Margin="0,0,0.4,0" Text="{Binding Path= ErrorDescription, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
             </StackPanel>
 
-            <StackPanel Margin="640,-800,125,220">
-                <!--<StackPanel Orientation="Vertical" Margin="0,0,170,10" Height="312" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="490">
-                    <TextBlock Text="Beskrivelse af fejl" FontSize="43" HorizontalAlignment="Stretch" Margin="0,0,-194.6,0" VerticalAlignment="Stretch"></TextBlock>
-                    <TextBox Margin="2,5,7.4,99" Text="{Binding Path= ErrorDescription , Mode=TwoWay}" Height="230" FontSize="20" VerticalAlignment="Stretch" />
-
-                </StackPanel>-->
-                <StackPanel Margin="0,66,560,20" Orientation="Vertical" Height="441" VerticalAlignment="Stretch">
+            <StackPanel Margin="650,275,32,220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Margin="0,60,560,20" Orientation="Vertical" Height="441" VerticalAlignment="Stretch">
                     <Button Content="Opret" Command="{Binding Path = AddErrorButton}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
                     <Button Content="Slet" Command="{Binding Path=DeleteDis}" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
                     <Button Content="Edit" Command="{Binding Path=EditButton}" Margin="0,20,20,0"  Height="52" FontSize="30" Width="142" Background="CornflowerBlue"></Button>
                     <Button Content="Løst" Command="{Binding Path=FixButton}" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
                 </StackPanel>
 
-                <StackPanel Margin="175,-520,0,50" Orientation="Vertical">
+                <StackPanel Margin="175,-525,0,50" Orientation="Vertical">
                     <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
                     <ListView Background="CornflowerBlue" ItemsSource="{Binding NewObsErrors}" SelectedItem="{Binding SelectedError, Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
@@ -70,6 +58,6 @@
                 </StackPanel>
 
             </StackPanel>
-        </StackPanel>
+        </RelativePanel>
     </Grid>
 </Page>
