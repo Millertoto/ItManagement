@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+
+    // Genereret af EF
     public partial class Computer
     {
         private int _uid;

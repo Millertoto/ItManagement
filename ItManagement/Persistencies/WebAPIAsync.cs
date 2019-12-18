@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 
 namespace ItManagement.Persistencies
 {
+    // Skrevet af David
+
     public class WebAPIAsync<T> : IwebAPIAsync<T> where T : class
 
     {
@@ -39,6 +41,7 @@ namespace ItManagement.Persistencies
 
         #region Tasks
 
+        // Gør det muligt for en metode at fjerne et objekt i databasen
         public async Task Delete(int key)
         {
             HttpClient client = new HttpClient();
@@ -47,6 +50,8 @@ namespace ItManagement.Persistencies
             response.EnsureSuccessStatusCode();
         }
 
+
+        // Gør det muligt for en metode at få en liste over all objekter af en slags fra databasen
         public async Task<List<T>> Load()
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
@@ -74,6 +79,7 @@ namespace ItManagement.Persistencies
             }
         }
 
+        // Gør det muligt for en metode at få et enkelt objekt af en slags fra databasen
         public async Task<T> Read(int key)
         {
             HttpClient client = new HttpClient();
@@ -83,6 +89,8 @@ namespace ItManagement.Persistencies
             return readobj;
         }
 
+
+        // Gør det muligt for en metode at ændre noget ved et objekt i databasen
         public async Task Update(int key, T obj)
         {
             HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true };
@@ -107,6 +115,8 @@ namespace ItManagement.Persistencies
             }
         }
 
+
+        // Gør det muligt for en metode at oprette et nyt objekt af en slags til databasen
         public async Task Create(T obj)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID;

@@ -7,8 +7,10 @@ using ItManagement.Persistencies;
 
 namespace ItManagement.PersSingleton
 {
-    class Singleton
+    public class Singleton
     {
+        // Skrevet af David og Martin
+
         #region Instance Field
 
         private Employee _currentUser;
@@ -35,6 +37,8 @@ namespace ItManagement.PersSingleton
             set { _currentUser = value; }
         }
 
+
+        // Laver en ny instance hvis der ikke eksistere en i forvejen
         public static Singleton Instance
         {
             get
@@ -47,7 +51,7 @@ namespace ItManagement.PersSingleton
         #endregion
 
         #region Methods
-
+        // Tager fat i en bruger, så den samme bruger kan benyttes igennem hele programmet
         public void SetCurrentUser(Employee setCurrentUser)
         {
             CurrentUser = setCurrentUser;

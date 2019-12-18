@@ -21,36 +21,37 @@ namespace ItManagement.ViewModel
 {
      public class EquipmentViewModel : INotifyPropertyChanged
     {
+
+        // Skrevet af Martin
+
         #region Instance Field
 
-        private Employee _repairMan;
-        private Computer _computer;
-        private SmartBoard _smartBoard;
-        private Tablet _tablet;
-        private SmartPhone _smartPhone;
-        private List<Equipment> _listOfEquipment;
-        private Equipment _selectedEquipment;
+        private int _searchUid;
         private int _uid;
+
+        private string _workingOrNot;
         private string _type;
+
         private bool _isWorking;
-        private RelayCommand _getAllEquipment;
+
         private RelayCommand _createEquipment;
-        private RelayCommand _getEquipmentOfType;
         private RelayCommand _deleteEquipment;
         private RelayCommand _searchEquipment;
-        private INotifyPropertyChanged _notifyPropertyChangedImplementation;
-        private ObservableCollection<Equipment> _obsequipment;
         private RelayCommand _editEquipment;
-        private List<Error> _listOfErrors;
-        private ObservableCollection<string> _equipmentTypes;
-        private ObservableCollection<string> _equipmentTypesOverView;
-        private string _workingOrNot;
+        private RelayCommand _goBack;
+
+        private Equipment _newlyCreatedEquipment;
+        private Equipment _selectedEquipment;
+
+        private List<Equipment> _listOfEquipment;
         private List<Equipment> _temporaryList;
         private List<Equipment> _temporaryList2;
+        private List<Error> _listOfErrors;
 
-        private int _searchUid;
         private ObservableCollection<string> _listBool;
-
+        private ObservableCollection<Equipment> _obsequipment;
+        private ObservableCollection<string> _equipmentTypes;
+        private ObservableCollection<string> _equipmentTypesOverView;
         private ObservableCollection<Equipment> _filteredEquipment;
 
         #endregion
@@ -59,23 +60,26 @@ namespace ItManagement.ViewModel
 
         public EquipmentViewModel()
         {
-            /*_getAllEquipment = new RelayCommand(GetAllEquipmentMethod);*/
-            _createEquipment = new RelayCommand(AddEquipment);
-            /*_getEquipmentOfType = new RelayCommand(GetEquipmentOfTypeMethod);*/
+            
+
             _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+            _temporaryList = new List<Equipment>();
+            _temporaryList2 = new List<Equipment>();
+
+            _obsequipment = new ObservableCollection<Equipment>();
+            _equipmentTypes = new ObservableCollection<string>() { "Computer", "Smartboard", "Tablet", "Smartphone" };
+            _equipmentTypesOverView = new ObservableCollection<string>() { "Computer", "Smartboard", "Tablet", "Smartphone", "---" };
+            _listBool = new ObservableCollection<string>() { "True", "False", "---" };
+            _filteredEquipment = new ObservableCollection<Equipment>();
+
+            _createEquipment = new RelayCommand(AddEquipment);
             _deleteEquipment = new RelayCommand(DeleteEquipMethod);
             _editEquipment = new RelayCommand(EditMethod);
             _searchEquipment = new RelayCommand(SearchEquipmentMethod1);
-            _obsequipment = new ObservableCollection<Equipment>();
-            _equipmentTypes = new ObservableCollection<string>() {"Computer", "Smartboard", "Tablet", "Smartphone"};
-            _equipmentTypesOverView = new ObservableCollection<string>() { "Computer", "Smartboard", "Tablet", "Smartphone", "---" };
-            _listBool = new ObservableCollection<string>() {"True", "False", "---"};
-            _temporaryList = new List<Equipment>();
-            _temporaryList2 = new List<Equipment>();
-            _filteredEquipment = new ObservableCollection<Equipment>();
+            _goBack = new RelayCommand(GoBackMethod);
 
             SearchUid = 0;
-            _goBack = new RelayCommand(GoBackMethod);
+
             ConvertToObs();
         }
 
@@ -83,10 +87,12 @@ namespace ItManagement.ViewModel
 
         #region Properties
 
-        public int SearchUid
+        #region EquipmentProps
+
+        public Equipment NewlyCreatedEquipment
         {
-            get { return _searchUid; }
-            set { _searchUid = value; }
+            get { return _newlyCreatedEquipment; }
+            set { _newlyCreatedEquipment = value; }
         }
 
         public string WorkingOrNot
@@ -94,6 +100,7 @@ namespace ItManagement.ViewModel
             get { return _workingOrNot; }
             set { _workingOrNot = value; }
         }
+
         public bool IsWorking
         {
             get { return _isWorking; }
@@ -105,16 +112,11 @@ namespace ItManagement.ViewModel
             get { return _selectedEquipment; }
             set
             {
-                _selectedEquipment = value; 
+                _selectedEquipment = value;
                 OnPropertyChanged();
             }
         }
 
-        public Employee RepairMan
-        {
-            get { return _repairMan; }
-            set { _repairMan = value; }
-        }
         public int Uid
         {
 
@@ -127,18 +129,54 @@ namespace ItManagement.ViewModel
             get { return _type; }
             set
             {
-                _type = value; 
+                _type = value;
                 OnPropertyChanged();
             }
         }
 
-        public async void DeleteMethod()
+
+        #endregion
+
+        #region SearchProps
+        public int SearchUid
         {
-            if (SelectedEquipment != null)
-            {
-                await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
-            }
+            get { return _searchUid; }
+            set { _searchUid = value; }
         }
+        #endregion
+
+        #region RelayCommands
+
+        public RelayCommand CreateEquipment
+        {
+            get { return _createEquipment; }
+            set { _createEquipment = value; }
+        }
+
+        public RelayCommand DeleteEquipment
+        {
+            get { return _deleteEquipment; }
+            set { _deleteEquipment = value; }
+        }
+
+        public RelayCommand EditEquipment
+        {
+            get { return _editEquipment; }
+            set { _editEquipment = value; }
+        }
+
+        public RelayCommand SearchEquipment
+        {
+            get { return _searchEquipment; }
+            set { _searchEquipment = value; }
+        }
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
+        #endregion
 
         #region Lists
         public List<Equipment> AllEquipment
@@ -202,81 +240,14 @@ namespace ItManagement.ViewModel
 
         #endregion
 
-
-
-
-        #region Computer Properties
-
-        public Computer SComputer
-        {
-            get { return _computer; }
-            set { _computer = value; }
-        }
-
-        #endregion
-
-        #region Smartboard Properties
-
-        public SmartBoard SSmartboard
-        {
-            get { return _smartBoard; }
-            set { _smartBoard = value; }
-        }
-
-        #endregion
-
-        #region Smartphone Properties
-
-        public SmartPhone SSmartphone
-        {
-            get { return _smartPhone; }
-            set { _smartPhone = value; }
-        }
-
-        #endregion
-
-
-        #region Tablet Properties
-
-        public Tablet STablet
-        {
-            get { return _tablet; }
-            set { _tablet = value; }
-        }
-
-        #endregion
-
-        #endregion
-
-        #region RelayCommands
-
-        public RelayCommand CreateEquipment
-        {
-            get { return _createEquipment; }
-            set { _createEquipment = value; }
-        }
-
-        public RelayCommand DeleteEquipment
-        {
-            get { return _deleteEquipment; }
-            set { _deleteEquipment = value; }
-        }
-
-        public RelayCommand EditEquipment
-        {
-            get { return _editEquipment; }
-            set { _editEquipment = value; }
-        }
-
-        public RelayCommand SearchEquipment
-        {
-            get { return _searchEquipment; }
-            set { _searchEquipment = value; }
-        }
         #endregion
 
         #region Methods
 
+        #region AddEquipment
+        /// <summary>
+        /// Tilføjer et udstyr
+        /// </summary>
         public async void AddEquipment()
         {
             if (TypeOfEquipment == "Computer"
@@ -289,12 +260,12 @@ namespace ItManagement.ViewModel
 
                 AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
 
-                Equipment newlyCreatedEquip = AllEquipment.Last();
+                Equipment NewlyCreatedEquip = AllEquipment.Last();
  
                  switch (TypeOfEquipment)
                  {
                      case "Computer":
-                         Computer pc = new Computer(newlyCreatedEquip.Uid);
+                         Computer pc = new Computer(NewlyCreatedEquip.Uid);
                          await Singleton.Instance.COM.CreateComputer(pc);
                          
  
@@ -305,7 +276,7 @@ namespace ItManagement.ViewModel
 
                      case "Smartboard":
 
-                         SmartBoard sb = new SmartBoard(newlyCreatedEquip.Uid);
+                         SmartBoard sb = new SmartBoard(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SB.CreateSmartboard(sb);
  
                          var messageDialogue2 = new MessageDialog($"A smartboard has been added");
@@ -315,7 +286,7 @@ namespace ItManagement.ViewModel
 
                      case "Smartphone":
 
-                        SmartPhone sp = new SmartPhone(newlyCreatedEquip.Uid);
+                        SmartPhone sp = new SmartPhone(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SP.CreateSmartphone(sp);
  
                          var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
@@ -324,7 +295,7 @@ namespace ItManagement.ViewModel
                          break;
 
                      case "Tablet":
-                         Tablet tab = new Tablet(newlyCreatedEquip.Uid);
+                         Tablet tab = new Tablet(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.TAB.CreateTablet(tab);
  
                          var messageDialogue4 = new MessageDialog($"A tablet has been added");
@@ -337,13 +308,25 @@ namespace ItManagement.ViewModel
  
  
                  }
+                
+
 
             }
+            else
+            {
+                throw new ArgumentException("TypeOfEquipment is null");
+            }
+
             ObsEquipment.Clear();
             ConvertToObs();
 
         }
+        #endregion
 
+        #region DeleteEquipment
+        /// <summary>
+        /// Fjerner et udstyr
+        /// </summary>
         public async void DeleteEquipMethod()
         {
             if (SelectedEquipment != null)
@@ -399,17 +382,24 @@ namespace ItManagement.ViewModel
 
 
                     }
+
             }
             else
             {
                 var messageDialogue = new MessageDialog($"Select an equipment you wish to remove");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
             }
             ObsEquipment.Clear();
             ConvertToObs();
         }
+        #endregion
 
+        #region EditEquipment
+        /// <summary>
+        /// Ændrer et udstyr
+        /// </summary>
         public async void EditMethod()
         {
             if (SelectedEquipment != null)
@@ -420,19 +410,26 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+
             }
             else
             {
                 var messageDialogue = new MessageDialog($"Select an equipment you wish to update");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
             }
             
             ObsEquipment.Clear();
             ConvertToObs();
 
         }
+        #endregion
 
+        #region SearchMethod
+        /// <summary>
+        /// Søæger efter et eller flere udstyr
+        /// </summary>
         public async void SearchEquipmentMethod1()
         {
             if (FilteredEquipment != null)
@@ -451,6 +448,7 @@ namespace ItManagement.ViewModel
                 var messageDialogue4 = new MessageDialog($"All Equipment");
                 messageDialogue4.Commands.Add(new UICommand("Close"));
                 await messageDialogue4.ShowAsync();
+
             }
             else if ((TypeOfEquipment != null && TypeOfEquipment != "---") || (WorkingOrNot != null && WorkingOrNot != "---"))
             {
@@ -501,6 +499,7 @@ namespace ItManagement.ViewModel
                     await messageDialogue4.ShowAsync();
                     TemporaryList.Clear();
                     TemporaryList2.Clear();
+                    
                 }
                 else if (w || t )
                 {
@@ -551,15 +550,14 @@ namespace ItManagement.ViewModel
                     var messageDialogue4 = new MessageDialog($"{SearchUid} is not a valid Uid");
                     messageDialogue4.Commands.Add(new UICommand("Close"));
                     await messageDialogue4.ShowAsync();
+
                 }
             }
 
         }
+        #endregion
 
-        /*public async void SearchEquipmentMethod2()
-        {
-        }*/
-
+        #region List/Obs Methods
         public void ConvertToObs()
         {
             AllEquipment = Singleton.Instance.EQP.GetEquipments().Result;
@@ -570,22 +568,15 @@ namespace ItManagement.ViewModel
                 }
             
         }
-
-
-        #region Computer Methods
-
         #endregion
 
-        #region Smartboard Methods
+        #region GoBack
 
-        #endregion
-
-        #region Smartphone Methods
-
-        #endregion
-
-        #region Tablet Methods
-
+        public void GoBackMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(AdminMainpage));
+        }
         #endregion
 
         #endregion
@@ -601,67 +592,6 @@ namespace ItManagement.ViewModel
 
         #endregion
 
-        #region GoBack
-        private RelayCommand _goBack;
-
-        public RelayCommand GoBack
-        {
-            get { return _goBack; }
-            set { _goBack = value; }
-        }
-
-        public void GoBackMethod()
-        {
-            Frame currentFrame = Window.Current.Content as Frame;
-            currentFrame.Navigate(typeof(AdminMainpage));
-        }
-        #endregion
-
-        #region WIP
-        /* Equipment newlyCreatedEquip = AllEquipment.Last();
-
-                 switch (TypeOfEquipment)
-                 {
-                     case "Computer":
-
-                         Computer pc = new Computer(e);
-         await Singleton.Instance.COM.CreateComputer(pc);
-
-         var messageDialogue1 = new MessageDialog($"A computer has been added");
-         messageDialogue1.Commands.Add(new UICommand("Close"));
-                         await messageDialogue1.ShowAsync();
-                         break;
-                     case "Smartboard":
-
-                         await Singleton.Instance.SB.CreateSmartboard(e.SmartBoard);
-
-         var messageDialogue2 = new MessageDialog($"A smartboard has been added");
-         messageDialogue2.Commands.Add(new UICommand("Close"));
-                         await messageDialogue2.ShowAsync();
-                         break;
-                     case "Smartphone":
-
-                         await Singleton.Instance.SP.CreateSmartphone(e.SmartPhone);
-
-         var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
-         messageDialogue3.Commands.Add(new UICommand("Close"));
-                         await messageDialogue3.ShowAsync();
-                         break;
-                     case "Tablet":
-
-                         await Singleton.Instance.TAB.CreateTablet(e.Tablet);
-
-         var messageDialogue4 = new MessageDialog($"A tablet has been added");
-         messageDialogue4.Commands.Add(new UICommand("Close"));
-                         await messageDialogue4.ShowAsync();
-                         break;
-
-                     default:
-                         break;
-
-
-                 }*/
-        #endregion
     }
 
 }

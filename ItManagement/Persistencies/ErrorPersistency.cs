@@ -8,9 +8,11 @@ namespace ItManagement.Persistencies
 {
     public class ErrorPersistency
     {
+        // Skrevet af David
+
         #region Instance Field
         const string _serverURL = "http://localhost:52667";
-        const string _employeeURI = "Errors";
+        const string errorURI = "Errors";
         const string _apiPrefix = "api";
 
         private WebAPIAsync<Error> _webApi;
@@ -20,7 +22,7 @@ namespace ItManagement.Persistencies
         #region Constructor
         public ErrorPersistency()
         {
-            _webApi = new WebAPIAsync<Error>(_serverURL, _apiPrefix, _employeeURI);
+            _webApi = new WebAPIAsync<Error>(_serverURL, _apiPrefix, errorURI);
         }
         #endregion
 

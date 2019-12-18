@@ -8,6 +8,8 @@ namespace ItManagement.Persistencies
 {
     class AccesoryPersistency
     {
+        // Skrevet af David
+
         const string _serverURL = "http://localhost:52667";
         const string _accesoryURI = "Accesories";
         const string _apiPrefix = "api";

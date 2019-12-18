@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+    // Genereret af EF
     public partial class Tablet
     {
         private int _uid;

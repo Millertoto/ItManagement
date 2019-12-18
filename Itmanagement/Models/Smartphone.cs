@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+    // Genereret af EF
     public partial class SmartPhone
     {
         private int _uid;

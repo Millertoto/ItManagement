@@ -1,5 +1,5 @@
 ﻿using System;
-using ItManagement.Models;
+using ItManagement;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,25 +22,32 @@ namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
+        // Skrevet af Martin og David
 
 
         #region Instance Field
 
+        private List<Equipment> _listOfEquipment;
+        private List<Error> _newListOfError;
+
+        private ObservableCollection<Error> _newObsErrors;
+
+        private int _uid;
+
         private string _selectedErrorDescription;
+
+        private Employee _creatorOfError;
+
+        private Equipment _currentEquipment;
+
         private Error _selected;
         private Error _toBeCreated;
-        private List<Equipment> _listOfEquipment;
-        private int _uid;
-        private string _errorText;
-        private Employee _creatorOfError;
+
         private RelayCommand _addErrorButton;
-        private RelayCommand _getErrors;
-        private Equipment _currentEquipment;
         private RelayCommand _deleteButton;
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
-        private List<Error> _newListOfError;
-        private ObservableCollection<Error> _newObsErrors;
+        private RelayCommand _goBack;
 
 
         #endregion
@@ -49,12 +56,15 @@ namespace ItManagement.ViewModel
         public ErrorViewModel()
         {
             _creatorOfError = Singleton.Instance.CurrentUser;
+
             _newListOfError = new List<Error>();
+            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
+
             _newObsErrors = new ObservableCollection<Error>();
+
             _addErrorButton = new RelayCommand(AddError);
             _deleteButton = new RelayCommand(DeleteMethod);
             _editButton = new RelayCommand(EditMethod);
-            _listOfEquipment = Singleton.Instance.EQP.GetEquipments().Result;
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
             _selected= new Error();
@@ -67,6 +77,9 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region Properties
+
+        #region ErrorProps
+
         public Error SelectedError
         {
             get { return _selected; }
@@ -78,9 +91,36 @@ namespace ItManagement.ViewModel
             }
         }
 
-        /// <summary>
-        /// Edited 13/12
-        /// </summary>
+        public string ErrorDescription
+        {
+            get { return _selectedErrorDescription; }
+            set
+            {
+                _selectedErrorDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+        #region EmployeeProps
+
+        public Employee CreatorOfError
+        {
+            get { return _creatorOfError; }
+            set
+            {
+                _creatorOfError = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
+
+        #region EquipmentProps
+
         public int UidForCreation
         {
             get { return _uid; }
@@ -93,42 +133,8 @@ namespace ItManagement.ViewModel
             set { _currentEquipment = value; }
         }
 
-        public Employee CreatorOfError
-        {
-            get { return _creatorOfError; }
-            set
-            {
-                _creatorOfError = value;
-                OnPropertyChanged();
-            }
-        }
+        #endregion
 
-        /// <summary>
-        /// Edited 13/12
-        /// </summary>
-        public string ErrorDescription
-        {
-            get { return _selectedErrorDescription; }
-            set
-            {
-                _selectedErrorDescription = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _selectedOption;
-        public string SelectedOption
-        {
-            get
-            {
-                return _selectedOption; ;
-            }
-            set
-            {
-                _selectedOption = value;
-                OnPropertyChanged();
-            }
-        }
         #region Lists
         public List<Equipment> ListOfEquipment
         {
@@ -159,9 +165,6 @@ namespace ItManagement.ViewModel
 
         #endregion
 
-
-        #endregion
-
         #region RelayCommands
 
         public RelayCommand FixButton
@@ -186,12 +189,22 @@ namespace ItManagement.ViewModel
             get { return _deleteButton; }
             set { _deleteButton = value; }
         }
+
+        public RelayCommand GoBack
+        {
+            get { return _goBack; }
+            set { _goBack = value; }
+        }
         #endregion
 
-        
+        #endregion
+
         #region Methods
 
-
+        #region AddError
+        /// <summary>
+        /// Tilføjer en fejl
+        /// </summary>
         public async void AddError()
         {
 
@@ -203,6 +216,7 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"You need to type in a description for the error");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
                 else
                 {
@@ -216,12 +230,14 @@ namespace ItManagement.ViewModel
                         var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
                         messageDialogue.Commands.Add(new UICommand("Close"));
                         await messageDialogue.ShowAsync();
+
                     }
                     else
                     {
                         var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
                         messageDialogue.Commands.Add(new UICommand("Close"));
                         await messageDialogue.ShowAsync();
+
                     }
                    
                 }
@@ -231,19 +247,24 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"The given uid, {UidForCreation}, does not exist");
+                var messageDialogue = new MessageDialog($"The given uid, {SelectedError.Uid}, does not exist");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
             }
 
-            UidForCreation = 0;
             CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
 
 
         }
+        #endregion
 
+        #region EditError
+        /// <summary>
+        /// Ændrer en fejl
+        /// </summary>
         public async void EditMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -256,6 +277,7 @@ namespace ItManagement.ViewModel
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
+                    
 
                 }
                 else
@@ -263,6 +285,7 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
             }
             else
@@ -270,13 +293,19 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"Selected error has been marked as resolved and is no longer open for editing");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
             }
             
             NewObsErrors.Clear();
             NewConvertToObs();
 
         }
+        #endregion
 
+        #region FixError
+        /// <summary>
+        /// Fixer en fejl
+        /// </summary>
         public async void FixMethod()
         {
             if (SelectedError.IsRepaired == false)
@@ -295,12 +324,14 @@ namespace ItManagement.ViewModel
                     var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been resolved");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
                 else
                 {
                     var messageDialogue = new MessageDialog($"Select an error you wish to resolve");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
+
                 }
             }
             else
@@ -317,20 +348,39 @@ namespace ItManagement.ViewModel
             NewConvertToObs();
 
         }
+        #endregion
 
+        #region DeleteError
+        /// <summary>
+        /// Fjerner en fejl
+        /// </summary>
         public async void DeleteMethod()
         {
+
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
                 var messageDialogue = new MessageDialog($"Error report has been removed");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"You have to select an error you wish to remove");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
             }
             NewObsErrors.Clear();
             NewConvertToObs();
         }
+        #endregion
 
+        #region Checks
+        /// <summary>
+        /// Checker om et udstyr eksisterer
+        /// </summary>
         public bool EquipmentCheck(int uid)
         {
             
@@ -352,7 +402,9 @@ namespace ItManagement.ViewModel
 
 
         }
+        #endregion
 
+        #region List/Obs Method
         public void NewConvertToObs()
         {
             NewErrorList = Singleton.Instance.ERP.GetErrors().Result;
@@ -372,13 +424,7 @@ namespace ItManagement.ViewModel
         #endregion
 
         #region GoBack
-        private RelayCommand _goBack;
 
-        public RelayCommand GoBack
-        {
-            get { return _goBack; }
-            set { _goBack = value; }
-        }
 
         public void GoBackMethod()
         {
@@ -386,6 +432,8 @@ namespace ItManagement.ViewModel
             currentFrame.Navigate(typeof(AdminMainpage));
         }
         #endregion 
+
+        #endregion
 
         #region PropertyChanged
 

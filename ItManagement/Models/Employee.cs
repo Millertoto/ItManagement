@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+    // Genereret af EF
     public partial class Employee
     {
         #region Instance Field
@@ -17,7 +18,7 @@ namespace ItManagement
         #endregion
 
         #region Constructor
-        public Employee(string username, int cpr, string password, string name )
+        public Employee(string username, int cpr, string password, string name)
         {
             Errors = new HashSet<Error>();
             _username = username;
