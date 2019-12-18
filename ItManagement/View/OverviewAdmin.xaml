@@ -19,7 +19,7 @@
             <StackPanel Margin="130,220,130,100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <StackPanel Margin="10,50,1000,-90" Orientation="Vertical" Height="524">
                     <TextBlock Text="ID:" FontSize="30"/>
-                    <TextBox Height="30" Text="{Binding SearchUid, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15"/>
+                    <TextBox Height="30" Text="{Binding SearchUid, Mode=TwoWay}" Margin="0,0,0.8,0" FontSize="15" MaxWidth="230"/>
                     <TextBlock Text="Hardware Type" FontSize="30"/>
                     <ComboBox Height="30" ItemsSource="{Binding EquipmentTypesOverview}" SelectedItem="{Binding TypeOfEquipment, Mode=TwoWay}" Margin="0,0,1.4,0" FontSize="15" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     <TextBlock Text="Funktionelt" FontSize="30"/>
@@ -27,26 +27,25 @@
                     <Button Content="Søg" Command="{Binding SearchEquipment}" HorizontalAlignment="Left" Height="33" Width="230" Margin="0,20"/>
                 </StackPanel>
 
-                <StackPanel Margin="710,-450,0,420" Orientation="Horizontal">
+                <StackPanel Margin="547,-450,0,420" Orientation="Horizontal">
                     <TextBlock Text="Udstyrs ID" FontSize="20" Margin="0,0,150,0"/>
                     <TextBlock Text="Type" FontSize="20" Margin="0,0,150,0"/>
                     <TextBlock Text="Virker den" FontSize="20"/>
                 </StackPanel>
 
-                <StackPanel Background="CornflowerBlue" Margin="548,-420,0,-60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel Background="CornflowerBlue" Margin="548,-420,160,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <ListView ItemsSource="{Binding FilteredEquipment}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Uid}" Margin="0,0,150,0"/>
-                                    <TextBox Text="{Binding Type}" Margin="0,0,150,0"/>
-                                    <TextBox Text="{Binding IsWorkingString}"/>
+                                    <TextBlock Text="{Binding Uid}" Margin="0,0,230,0"/>
+                                    <TextBlock Text="{Binding Type}" Margin="0,0,145,0"/>
+                                    <TextBlock Text="{Binding IsWorkingString}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
-                <Frame x:Name="myFrame" Margin="0,0,0,0"/>
             </StackPanel>
         </RelativePanel>
 

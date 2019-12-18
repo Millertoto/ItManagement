@@ -18,10 +18,10 @@
             <StackPanel Orientation="Horizontal" Margin="500,200,500,0" HorizontalAlignment="Stretch" Height="600" VerticalAlignment="Stretch" >
                 <TextBlock Text="Login" HorizontalAlignment="Left" FontWeight="Bold" Margin="160,0,0,0" Width="209" FontSize="72" VerticalAlignment="Top" Height="99"/>
                 <TextBlock Text="Brugernavn" FontSize="53" HorizontalAlignment="Center" Height="84" Margin="-250,-232,0,0" VerticalAlignment="Stretch"/>
-                <TextBox Margin="-328,220,-49,0" FontSize="43" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="70" Text="{Binding Path=UserName, Mode=TwoWay}"/>
+                <TextBox Margin="-328,220,-49,0" MaxWidth="380" FontSize="43" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="70" Text="{Binding Path=UserName, Mode=TwoWay}"/>
                 <TextBlock Text="Password" FontSize="53" Height="74" Margin="-250,0,0,227" VerticalAlignment="Bottom"/>
-                <PasswordBox Margin="-328,375,-49,0" FontSize="34" VerticalAlignment="Top" Height="70" Password="{Binding Path=Password, Mode=TwoWay}"/>
-                <Button Margin="-324,470,0,0" Command="{Binding Path=Enter}" FontSize="43" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" >CLogin</Button>
+                <PasswordBox Margin="-328,375,-49,0" FontSize="34" MaxWidth="380" VerticalAlignment="Top" Height="70" Password="{Binding Path=Password, Mode=TwoWay}"/>
+                <Button Margin="-324,470,0,0" Command="{Binding Path=Enter}" FontSize="43" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" >Login</Button>
 
             </StackPanel>
 
