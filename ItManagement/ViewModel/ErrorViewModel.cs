@@ -67,7 +67,7 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
-
+            _selected= new Error();
 
 
             NewConvertToObs();
@@ -87,7 +87,7 @@ namespace ItManagement.ViewModel
             set
             {
                 _selected = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedError));
             }
         }
 
@@ -208,10 +208,10 @@ namespace ItManagement.ViewModel
         public async void AddError()
         {
 
-            int uid = UidForCreation;
+            int uid = SelectedError.Uid;
             if (EquipmentCheck(uid) && uid != 0)
             {
-                if (ErrorDescription == null)
+                if (SelectedError.ErrorMessage == null)
                 {
                     var messageDialogue = new MessageDialog($"You need to type in a description for the error");
                     messageDialogue.Commands.Add(new UICommand("Close"));
@@ -220,9 +220,9 @@ namespace ItManagement.ViewModel
                 }
                 else
                 {
-                    if (ErrorDescription.Length <= 255)
+                    if (SelectedError.ErrorMessage.Length <= 255)
                     {
-                        _toBeCreated = new Error(CreatorOfError.Cpr, uid, ErrorDescription, false, 1234567891);
+                        _toBeCreated = new Error(CreatorOfError.Cpr, uid, SelectedError.ErrorMessage, false, 1234567891);
 
                         await Singleton.Instance.ERP.CreateError(_toBeCreated);
                         CurrentEquipment.IsWorking = false;
@@ -274,10 +274,9 @@ namespace ItManagement.ViewModel
             {
                 if (SelectedError.ErrorMessage.Length <= 255)
                 {
-                    SelectedError.ErrorMessage = ErrorDescription;
                     SelectedError.Update = DateTime.Now;
                     await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-                    var messageDialogue = new MessageDialog($"Error: {SelectedError} has been updated");
+                    var messageDialogue = new MessageDialog($"Error: {SelectedError.Fid} has been updated");
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
