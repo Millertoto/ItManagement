@@ -390,6 +390,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to delete Equipment");
             }
             ObsEquipment.Clear();
             ConvertToObs();
@@ -418,6 +419,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to edit Equipment");
             }
             
             ObsEquipment.Clear();
@@ -551,6 +553,7 @@ namespace ItManagement.ViewModel
                     messageDialogue4.Commands.Add(new UICommand("Close"));
                     await messageDialogue4.ShowAsync();
 
+                    throw new ArgumentException("Failure to find UID");
                 }
             }
 

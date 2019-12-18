@@ -212,6 +212,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to create Employee");
             }
             GetEmployeeList();
 
@@ -234,6 +235,7 @@ namespace ItManagement.ViewModel
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
+                    throw new ArgumentException("Failure to delete Employee");
                     
                 }
                 GetEmployeeList();
@@ -261,6 +263,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to edit Employee");
             }
             
             GetEmployeeList();

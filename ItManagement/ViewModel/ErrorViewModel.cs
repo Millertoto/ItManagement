@@ -22,7 +22,7 @@ namespace ItManagement.ViewModel
 {
     public class ErrorViewModel : INotifyPropertyChanged
     {
-        // Skrevet af Martin og David
+        // Skrevet af Martin
 
 
         #region Instance Field
@@ -238,6 +238,7 @@ namespace ItManagement.ViewModel
                         messageDialogue.Commands.Add(new UICommand("Close"));
                         await messageDialogue.ShowAsync();
 
+                        throw new ArgumentException("Failure to add error due to description being too long");
                     }
                    
                 }
@@ -247,12 +248,14 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"The given uid, {SelectedError.Uid}, does not exist");
+                var messageDialogue = new MessageDialog($"The given uid, {UidForCreation}, does not exist");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to add error due to wrong UID");
             }
 
+            UidForCreation = 0;
             CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
@@ -286,6 +289,7 @@ namespace ItManagement.ViewModel
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
+                    throw new ArgumentException("Failure to edit error due to description being too long");
                 }
             }
             else
@@ -294,6 +298,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to edit error due to the error being closed for editing");
             }
             
             NewObsErrors.Clear();
@@ -332,6 +337,7 @@ namespace ItManagement.ViewModel
                     messageDialogue.Commands.Add(new UICommand("Close"));
                     await messageDialogue.ShowAsync();
 
+                    throw new ArgumentException("Failure to fix error due to not having selected the error");
                 }
             }
             else
@@ -339,6 +345,7 @@ namespace ItManagement.ViewModel
                 var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been marked as resolved and is no longer open for editing");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+                throw new ArgumentException("Failure to fix error due to the error no longer being open for fixing");
             }
             
             
@@ -371,6 +378,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to remove error due to the error not being selected");
             }
             NewObsErrors.Clear();
             NewConvertToObs();

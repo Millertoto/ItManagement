@@ -139,6 +139,7 @@ namespace ItManagement.ViewModel
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
+                throw new ArgumentException("Failure to login due to wrong info");
             }
 
         }
