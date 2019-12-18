@@ -32,14 +32,5 @@ namespace ItManagement
         }
 
 
-        private void Rum1_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
