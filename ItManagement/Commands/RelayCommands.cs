@@ -7,8 +7,10 @@ using System.Windows.Input;
 
 namespace ItManagement.Commands
 {
-    
-        public class RelayCommand : ICommand
+
+    // Skrevet af Jesper
+
+    public class RelayCommand : ICommand
         {
         #region Instance Field
         private readonly Action _execute;

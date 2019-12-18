@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
+
+    // Genereret af EF
     public partial class Accesory
     {
         public int Tid { get; set; }

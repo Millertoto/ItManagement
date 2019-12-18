@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class TabletPersistency
+    public class TabletPersistency
     {
+        // Skrevet af David
+
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";
-        const string EmployeeUri = "Tablets";
+        const string tabletUri = "Tablets";
         const string ApiPrefix = "api";
 
         private WebAPIAsync<Tablet> _webApi;
@@ -19,7 +21,7 @@ namespace ItManagement.Persistencies
         #region Constructor
         public TabletPersistency()
         {
-            _webApi = new WebAPIAsync<Tablet>(ServerUrl, ApiPrefix, EmployeeUri);
+            _webApi = new WebAPIAsync<Tablet>(ServerUrl, ApiPrefix, tabletUri);
         }
 
         #endregion
