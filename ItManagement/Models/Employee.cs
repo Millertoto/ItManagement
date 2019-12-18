@@ -26,6 +26,11 @@ namespace ItManagement
             _password = password;
             _name = name;
         }
+
+        public Employee()
+        {
+
+        }
         #endregion
 
         #region Properties

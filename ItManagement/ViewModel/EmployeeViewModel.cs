@@ -192,12 +192,12 @@ namespace ItManagement.ViewModel
         {
 
             GetEmployeeList();
-            if (UsernameCheck(Username, Employees)
-                && CprCheck(CPR, Employees)
-                && PasswordCheck(Password)
-                && NameCheck(Name))
+            if (UsernameCheck(SelectedEmployee.Username, Employees)
+                && CprCheck(SelectedEmployee.Cpr, Employees)
+                && PasswordCheck(SelectedEmployee.Password)
+                && NameCheck(SelectedEmployee.Name))
             {
-                Employee Emp = new Employee(Username, CPR, Password, Name);
+                Employee Emp = new Employee(SelectedEmployee.Username, SelectedEmployee.Cpr, SelectedEmployee.Password, SelectedEmployee.Name);
                 SetAdmin(IsAdmin, Emp);
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
@@ -224,7 +224,7 @@ namespace ItManagement.ViewModel
         public async void DeleteEmpMethod()
         {
             
-                if (SelectedEmployee != null)
+                if (SelectedEmployee != null || SelectedEmployee.Cpr > 0)
                 {
                     await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
                 }
@@ -247,7 +247,7 @@ namespace ItManagement.ViewModel
         // Ændrer en ansat med given information
         public async void EditMethod()
         {
-            if (SelectedEmployee != null)
+            if (SelectedEmployee.Cpr != null || SelectedEmployee.Cpr > 0)
             {
                 SelectedEmployee.Name = Name;
                 SelectedEmployee.Password = Password;
