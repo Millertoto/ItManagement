@@ -402,7 +402,7 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void EditMethod()
         {
-            if (SelectedEquipment != null)
+            if (SelectedEquipment.Uid != null || SelectedEquipment.Uid > 0)
             {
                 SelectedEquipment.Type = TypeOfEquipment;
                 await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
