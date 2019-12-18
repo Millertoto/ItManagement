@@ -20,17 +20,17 @@
 
         <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
-                <TextBlock Text="Fejlmeddelelse" Margin="420,80,300,0" FontSize="90"/>
+                <TextBlock Text="Fejlmeddelelser" Margin="420,80,300,0" FontSize="90"/>
                 <Button Content="Return" Command="{Binding GoBack}" Height="33" Margin="1250,-65,0,0" VerticalAlignment="Top" Width="170"/>
             </StackPanel>
             <StackPanel Margin="30,270,500,300" >
-                <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="438" />
-                <TextBox Margin="0,0,1.2,0"   Text="{Binding SelectedError.Uid , Mode=TwoWay }" Height="71" FontSize="44"/>
-                <TextBlock Text="Beskrivelse af fejl" FontSize="43" Margin="0,0,6.4,0"/>
-                <TextBox MaxLength="255" Margin="0,0,0.4,0" Text="{Binding Path= SelectedError.ErrorMessage, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
+                <TextBlock Text="Udstyrs ID:" FontSize="44" Margin="1,0,0,0" HorizontalAlignment="Left" Width="440" />
+                <TextBox Margin="0,0,1.2,0"   Text="{Binding SelectedError.Uid , Mode=TwoWay }" Height="71" FontSize="44" MaxWidth="440"/>
+                <TextBlock Text="Beskrivelse af fejl" FontSize="44" Margin="0,0,6.4,0"/>
+                <TextBox MaxLength="255" Margin="0,0,0.4,0" MaxWidth="440" Text="{Binding Path= SelectedError.ErrorMessage, Mode=TwoWay}" Height="254" FontSize="20" HorizontalAlignment="Stretch" />
             </StackPanel>
 
-            <StackPanel Margin="650,275,32,220" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="640,275,0,220">
                 <StackPanel Margin="0,60,560,20" Orientation="Vertical" Height="441" VerticalAlignment="Stretch">
                     <Button Content="Opret" Command="{Binding Path = AddErrorButton}" Margin="0,0,0,0" Height="51" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Button_Click"/>
                     <Button Content="Slet" Command="{Binding Path=DeleteDis}" Margin="0,20,0,0"  Height="52" FontSize="30" Width="143" Background="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
@@ -38,25 +38,32 @@
                     <Button Content="Løst" Command="{Binding Path=FixButton}" Margin="0,20,0,0"  VerticalAlignment="Top" Height="52" Width="143" FontSize="30" Background="CornflowerBlue" HorizontalAlignment="Left"></Button>
                 </StackPanel>
 
-                <StackPanel Margin="175,-525,0,50" Orientation="Vertical">
-                    <TextBlock Text="Liste af Fejlmeddelelser" FontSize="44"></TextBlock>
-                    <ListView Background="CornflowerBlue" ItemsSource="{Binding  NewObsErrors}" SelectedItem="{Binding  SelectedError , Mode=TwoWay}" Height="407" VerticalAlignment="Stretch">
+                <StackPanel Margin="225,-505,43,50" Orientation="Vertical" Width="620">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <TextBlock Text="Fejl ID" FontSize="10" Margin="10,0,24,0"></TextBlock>
+                        <TextBlock Text="CPR" FontSize="10" Margin="0,0,48,0"></TextBlock>
+                        <TextBlock Text="UID" FontSize="10" Margin="0,0,40,0"></TextBlock>
+                        <TextBlock Text="Oprettet" FontSize="10" Margin="0,0,86,0"></TextBlock>
+                        <TextBlock Text="Opdateret" FontSize="10" Margin="0,0,110,0"></TextBlock>
+                        <TextBlock Text="Repareret" FontSize="10" Margin="0,0,20,0"></TextBlock>
+                        <TextBlock Text="Repareret af" FontSize="10"></TextBlock>
+                    </StackPanel>
+                    <ListView Background="CornflowerBlue" ItemsSource="{Binding  NewObsErrors}" SelectedItem="{Binding  SelectedError , Mode=TwoWay}" Height="417" Margin="0,0,0,0" VerticalAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Fid}" Margin="0,10,0,0"/>
-                                    <TextBlock Text="{Binding Cpr}" Margin="6,10,0,0"/>
-                                    <TextBlock Text="{Binding Uid}" Margin="6,10,0,0"/>
-                                    <TextBlock Text="{Binding Create}" Margin="6,10,0,0"/>
-                                    <TextBlock Text="{Binding Update}" Margin="6,10,0,0"/>
-                                    <TextBlock Text="{Binding IsRepairedString}" Margin="6,10,0,0"/>
-                                    <TextBlock Text="{Binding HasRepairedString}" Margin="6,10,0,0"/>
+                                    <TextBlock Text="{Binding Fid}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding Cpr}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding Uid}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding Create}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding Update}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding IsRepairedString}" Margin="0,0,12,0"/>
+                                    <TextBlock Text="{Binding HasRepairedString}" Margin="0,0,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackPanel>
-
             </StackPanel>
         </RelativePanel>
     </Grid>
