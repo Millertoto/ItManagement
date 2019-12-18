@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!--Skrevet af Caspar, Bindet af Caspar og Martin-->
+
     <Grid>
         <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >

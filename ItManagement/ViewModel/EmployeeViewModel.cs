@@ -1,39 +1,41 @@
 ﻿using ItManagement.Commands;
+using ItManagement.PersSingleton;
+using ItManagement.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using ItManagement.PersSingleton;
-using ItManagement.Persistencies;
-using ItManagement.View;
 
 namespace ItManagement.ViewModel
 {
     public class EmployeeViewModel : INotifyPropertyChanged
     {
+        // Skrevet af Martin
 
         #region Instance Field
         private string _name;
         private string _password;
         private string _username;
-        private int _cpr;
         private string _isAdmin;
-        private RelayCommand _addEmployeeButton;
-        private RelayCommand _getEmployeeList;
-        private List<Employee> _employees;
-        private ObservableCollection<Employee> _obsEmps;
+
         private Employee _selectedEmployee;
+
+        private int _cpr;
+
+        private List<Employee> _employees;
+
+        private ObservableCollection<Employee> _obsEmps;
+        private ObservableCollection<string> _adminObs;
+
+        private RelayCommand _addEmployeeButton;
         private RelayCommand _deleteEmp;
         private RelayCommand _editButton;
-        private ObservableCollection<string> _adminObs;
+        private RelayCommand _goBack;
+
         #endregion
 
         #region Constructor
@@ -41,18 +43,22 @@ namespace ItManagement.ViewModel
         public EmployeeViewModel()
         {
             _addEmployeeButton = new RelayCommand(AddEmployeeMethod);
-            _getEmployeeList = new RelayCommand(GetEmployeeList);
             _deleteEmp = new RelayCommand(DeleteEmpMethod);
-            Employees = Singleton.Instance.EP.GetEmployees().Result;
             _editButton = new RelayCommand(EditMethod);
-            _obsEmps = new ObservableCollection<Employee>();
             _goBack = new RelayCommand(GoBackMethod);
+
+            _obsEmps = new ObservableCollection<Employee>();
             _adminObs = new ObservableCollection<string>() {"True", "False"};
+
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
+
             ConvertToObs();
         }
         #endregion
 
         #region Properties
+
+        #region EmployeeProps
 
         public Employee SelectedEmployee
         {
@@ -63,6 +69,7 @@ namespace ItManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+
         public int CPR
         {
             get { return _cpr; }
@@ -135,15 +142,15 @@ namespace ItManagement.ViewModel
 
         }
 
-        public RelayCommand GetEmployeeCommand
+        public RelayCommand GoBack
         {
-            get { return _getEmployeeList; }
-            set { _getEmployeeList = value; }
-
+            get { return _goBack; }
+            set { _goBack = value; }
         }
+
         #endregion
 
-        #region Lists
+        #region Lists and Obs
 
         public List<Employee> Employees
         {
@@ -174,18 +181,13 @@ namespace ItManagement.ViewModel
 
         #endregion
 
+        #endregion
+
         #region Methods
 
-        public void GetEmployeeList()
-        {
-            Employees = Singleton.Instance.EP.GetEmployees().Result;
-            ObsEmployees.Clear();
-            foreach (Employee e in Employees)
-            {
-                ObsEmployees.Add(e);
-            }
-        }
+        #region AddEmployee
 
+        // Tilføjer en ansat med given information
         public async void AddEmployeeMethod()
         {
 
@@ -206,14 +208,19 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"Failure");
+                var messageDialogue = new MessageDialog($"Failure, Given values does not match requisites. Username and Password must be between 8-16");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
+
             }
             GetEmployeeList();
 
         }
+        #endregion
 
+        #region DeleteEmployee
+
+        // Fjerner en ansat med given information
         public async void DeleteEmpMethod()
         {
             
@@ -221,22 +228,93 @@ namespace ItManagement.ViewModel
                 {
                     await Singleton.Instance.EP.DeleteEmployee(SelectedEmployee.Cpr);
                 }
+                else
+                {
+                    var messageDialogue = new MessageDialog($"You must select the employee you wish to remove");
+                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    await messageDialogue.ShowAsync();
+
+                    
+                }
                 GetEmployeeList();
             
         }
 
+        #endregion
+
+        #region Edit Employee
+
+        // Ændrer en ansat med given information
         public async void EditMethod()
         {
-            SelectedEmployee.Name = Name;
-            SelectedEmployee.Password = Password;
-            SelectedEmployee.Username = Username;
-            await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+            if (SelectedEmployee != null)
+            {
+                SelectedEmployee.Name = Name;
+                SelectedEmployee.Password = Password;
+                SelectedEmployee.Username = Username;
+                SetAdmin(IsAdmin, SelectedEmployee);
+                await Singleton.Instance.EP.UpdateEmployee(SelectedEmployee.Cpr, SelectedEmployee);
+            }
+            else
+            {
+                var messageDialogue = new MessageDialog($"You must select the employee you wish to edit");
+                messageDialogue.Commands.Add(new UICommand("Close"));
+                await messageDialogue.ShowAsync();
+
+            }
+            
             GetEmployeeList();
 
         }
 
-        #region Checks
+        #endregion
 
+        #region Checks
+        // Checker om den ansatte eksisterer
+        public bool EmployeeExists(int cpr)
+        {
+            bool c = false;
+            Employee temp = Singleton.Instance.EP.GetEmployee(cpr).Result;
+            if (temp.Cpr == cpr)
+            {
+                c = true;
+            }
+
+            return c;
+        }
+
+        // Checker om navnet og cpr nummeret eksisterer og tilhører den samme person
+        public bool CheckIfNameExists(int cpr, string name)
+        {
+            bool c = false;
+            Employee temp = Singleton.Instance.EP.GetEmployee(cpr).Result;
+            if ( temp.Cpr == cpr && temp.Name == name)
+            {
+                c = true;
+            }
+
+            return c;
+
+        }
+
+        // Checker om den ansatte eksisterer
+        public bool CheckIfDeleted(int cpr)
+        {
+            bool c = false;
+            List<Employee> templist = Singleton.Instance.EP.GetEmployees().Result;
+            foreach (Employee e in templist)
+            {
+                if (cpr == e.Cpr)
+                {
+                    c = true;
+                    break;
+                }
+            }
+
+            return c;
+        }
+
+        // Sætter hvorvidt den ansatte er admin
         public void SetAdmin(string admincheck, Employee e)
         {
             if (admincheck == "true" || admincheck == "True")
@@ -249,6 +327,7 @@ namespace ItManagement.ViewModel
             }
         }
 
+        // Checker om brugernavnet eksisterer og om det er indefor de regler vi har sat
         public bool UsernameCheck(string username, List<Employee> list)
         {
             bool c = false;
@@ -269,6 +348,8 @@ namespace ItManagement.ViewModel
 
         }
 
+
+        // Checker om CPR nummeret eksisterer og om det er indefor de regler vi har sat
         public bool CprCheck(int cpr, List<Employee> list)
         {
             bool c = false;
@@ -288,6 +369,7 @@ namespace ItManagement.ViewModel
             return c;
         }
 
+        // Checker om kodeordet er indefor de regler vi har sat
         public bool PasswordCheck(string password)
         {
 
@@ -300,6 +382,7 @@ namespace ItManagement.ViewModel
 
         }
 
+        // Checker om navnet er indefor de regler vi har sat
         public bool NameCheck(string name)
         {
             if (name.Length <= 50)
@@ -311,6 +394,17 @@ namespace ItManagement.ViewModel
         }
         #endregion
 
+        #region List/Obs Methods
+        public void GetEmployeeList()
+        {
+            Employees = Singleton.Instance.EP.GetEmployees().Result;
+            ObsEmployees.Clear();
+            foreach (Employee e in Employees)
+            {
+                ObsEmployees.Add(e);
+            }
+        }
+
         public void ConvertToObs()
         {
             foreach (Employee e in Employees)
@@ -318,24 +412,17 @@ namespace ItManagement.ViewModel
                     ObsEmployees.Add(e);
             }
         }
-
         #endregion
 
         #region GoBack
-        private RelayCommand _goBack;
-
-        public RelayCommand GoBack
-        {
-            get { return _goBack; }
-            set { _goBack = value; }
-        }
-
         public void GoBackMethod()
         {
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(AdminMainpage));
         }
         #endregion 
+
+        #endregion
 
         #region INotify
 

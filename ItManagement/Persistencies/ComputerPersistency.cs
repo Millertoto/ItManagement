@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ItManagement.Persistencies
 {
-    class ComputerPersistency
+    public class ComputerPersistency
     {
+        // Skrevet af David
+
         #region Instance Field
         const string ServerUrl = "http://localhost:52667";
         const string URI = "Computers";

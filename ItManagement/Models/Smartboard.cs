@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ItManagement
 {
-    
+    // Genereret af EF
     public partial class SmartBoard
     {
         private int _uid;
