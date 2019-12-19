@@ -201,15 +201,15 @@ namespace ItManagement.ViewModel
                 SetAdmin(IsAdmin, Emp);
                 await Singleton.Instance.EP.CreateEmployee(Emp);
 
-                var messageDialogue = new MessageDialog($"The Account, {Username}, has been created");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Kontoen, {Username}, er blevet oprettet");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
             else
             {
-                var messageDialogue = new MessageDialog($"Failure, Given values does not match requisites. Username and Password must be between 8-16");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Fejl, brugernavn og kodeord skal være mellem 8-16 karaktere");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
@@ -230,8 +230,8 @@ namespace ItManagement.ViewModel
                 }
                 else
                 {
-                    var messageDialogue = new MessageDialog($"You must select the employee you wish to remove");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Vælg en fejl før du kan fjerne den");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
 
                     
@@ -247,7 +247,7 @@ namespace ItManagement.ViewModel
         // Ændrer en ansat med given information
         public async void EditMethod()
         {
-            if (SelectedEmployee.Cpr != null || SelectedEmployee.Cpr > 0)
+            if (SelectedEmployee != null || SelectedEmployee.Cpr > 0)
             {
                 SelectedEmployee.Name = Name;
                 SelectedEmployee.Password = Password;
@@ -257,8 +257,8 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"You must select the employee you wish to edit");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Vælg en konto før du kan ændre den");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }

@@ -269,8 +269,8 @@ namespace ItManagement.ViewModel
                          await Singleton.Instance.COM.CreateComputer(pc);
                          
  
-                         var messageDialogue1 = new MessageDialog($"A computer has been added");
-                         messageDialogue1.Commands.Add(new UICommand("Close"));
+                         var messageDialogue1 = new MessageDialog($"En computer er tilføjet");
+                         messageDialogue1.Commands.Add(new UICommand("Luk"));
                          await messageDialogue1.ShowAsync();
                          break;
 
@@ -279,8 +279,8 @@ namespace ItManagement.ViewModel
                          SmartBoard sb = new SmartBoard(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SB.CreateSmartboard(sb);
  
-                         var messageDialogue2 = new MessageDialog($"A smartboard has been added");
-                         messageDialogue2.Commands.Add(new UICommand("Close"));
+                         var messageDialogue2 = new MessageDialog($"Et smartboard er tilføjet");
+                         messageDialogue2.Commands.Add(new UICommand("Luk"));
                          await messageDialogue2.ShowAsync();
                          break;
 
@@ -289,8 +289,8 @@ namespace ItManagement.ViewModel
                         SmartPhone sp = new SmartPhone(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.SP.CreateSmartphone(sp);
  
-                         var messageDialogue3 = new MessageDialog($"A Smartphone has been added");
-                         messageDialogue3.Commands.Add(new UICommand("Close"));
+                         var messageDialogue3 = new MessageDialog($"En smartphone er tilføjet");
+                         messageDialogue3.Commands.Add(new UICommand("Luk"));
                          await messageDialogue3.ShowAsync();
                          break;
 
@@ -298,8 +298,8 @@ namespace ItManagement.ViewModel
                          Tablet tab = new Tablet(NewlyCreatedEquip.Uid);
                         await Singleton.Instance.TAB.CreateTablet(tab);
  
-                         var messageDialogue4 = new MessageDialog($"A tablet has been added");
-                         messageDialogue4.Commands.Add(new UICommand("Close"));
+                         var messageDialogue4 = new MessageDialog($"En tablet er tilføjet");
+                         messageDialogue4.Commands.Add(new UICommand("Luk"));
                          await messageDialogue4.ShowAsync();
                          break;
  
@@ -346,8 +346,8 @@ namespace ItManagement.ViewModel
                             await Singleton.Instance.COM.DeleteComputer(SelectedEquipment.Uid);
                             await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
 
-                            var messageDialogue1 = new MessageDialog($"A computer has been removed");
-                            messageDialogue1.Commands.Add(new UICommand("Close"));
+                            var messageDialogue1 = new MessageDialog($"En computer er blevet fjernet");
+                            messageDialogue1.Commands.Add(new UICommand("Luk"));
                             await messageDialogue1.ShowAsync();
                             break;
 
@@ -356,8 +356,8 @@ namespace ItManagement.ViewModel
                             await Singleton.Instance.SB.DeleteSmartboard(SelectedEquipment.Uid);
                             await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
 
-                            var messageDialogue2 = new MessageDialog($"A smartboard has been removed");
-                            messageDialogue2.Commands.Add(new UICommand("Close"));
+                            var messageDialogue2 = new MessageDialog($"Et smartboard er blevet fjernet");
+                            messageDialogue2.Commands.Add(new UICommand("Luk"));
                             await messageDialogue2.ShowAsync();
                             break;
 
@@ -366,8 +366,8 @@ namespace ItManagement.ViewModel
                             await Singleton.Instance.SP.DeleteSmartphone(SelectedEquipment.Uid);
                             await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
 
-                            var messageDialogue3 = new MessageDialog($"A Smartphone has been removed");
-                            messageDialogue3.Commands.Add(new UICommand("Close"));
+                            var messageDialogue3 = new MessageDialog($"En smartphone er blevet fjernet");
+                            messageDialogue3.Commands.Add(new UICommand("Luk"));
                             await messageDialogue3.ShowAsync();
                             break;
 
@@ -375,8 +375,8 @@ namespace ItManagement.ViewModel
                             await Singleton.Instance.TAB.DeleteTablet(SelectedEquipment.Uid);
                             await Singleton.Instance.EQP.DeleteEquipment(SelectedEquipment.Uid);
 
-                            var messageDialogue4 = new MessageDialog($"A tablet has been removed");
-                            messageDialogue4.Commands.Add(new UICommand("Close"));
+                            var messageDialogue4 = new MessageDialog($"En tablet er blevet fjernet");
+                            messageDialogue4.Commands.Add(new UICommand("Luk"));
                             await messageDialogue4.ShowAsync();
                             break;
 
@@ -386,8 +386,8 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"Select an equipment you wish to remove");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Vælg et udstyr før du kan fjerne det");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
@@ -402,19 +402,19 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void EditMethod()
         {
-            if (SelectedEquipment.Uid != null || SelectedEquipment.Uid > 0)
+            if (SelectedEquipment != null || SelectedEquipment.Uid > 0)
             {
                 SelectedEquipment.Type = TypeOfEquipment;
                 await Singleton.Instance.EQP.UpdateEquipment(SelectedEquipment.Uid, SelectedEquipment);
-                var messageDialogue = new MessageDialog($"Equipment: {SelectedEquipment} has been updated");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Udstyr: {SelectedEquipment} er blevet opdateret");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
 
             }
             else
             {
-                var messageDialogue = new MessageDialog($"Select an equipment you wish to update");
+                var messageDialogue = new MessageDialog($"Vælg et udstyr før du kan opdatere det");
                 messageDialogue.Commands.Add(new UICommand("Close"));
                 await messageDialogue.ShowAsync();
 
@@ -445,8 +445,8 @@ namespace ItManagement.ViewModel
                 {
                     FilteredEquipment.Add(e);
                 }
-                var messageDialogue4 = new MessageDialog($"All Equipment");
-                messageDialogue4.Commands.Add(new UICommand("Close"));
+                var messageDialogue4 = new MessageDialog($"Alt Udstyr");
+                messageDialogue4.Commands.Add(new UICommand("Luk"));
                 await messageDialogue4.ShowAsync();
 
             }
@@ -494,8 +494,8 @@ namespace ItManagement.ViewModel
                             }
                         }
                     }
-                    var messageDialogue4 = new MessageDialog($"Current list is showing equipment with type: {TypeOfEquipment} and the working condition of the equipment is {IsWorking}");
-                    messageDialogue4.Commands.Add(new UICommand("Close"));
+                    var messageDialogue4 = new MessageDialog($"Færdig!");
+                    messageDialogue4.Commands.Add(new UICommand("Luk"));
                     await messageDialogue4.ShowAsync();
                     TemporaryList.Clear();
                     TemporaryList2.Clear();
@@ -510,8 +510,8 @@ namespace ItManagement.ViewModel
                             FilteredEquipment.Add(e);
                             
                         }
-                        var messageDialogue4 = new MessageDialog($"Current list is showing equipment with the working condition as {IsWorking}");
-                        messageDialogue4.Commands.Add(new UICommand("Close"));
+                        var messageDialogue4 = new MessageDialog($"Færdig!");
+                        messageDialogue4.Commands.Add(new UICommand("Luk"));
                         await messageDialogue4.ShowAsync();
                         TemporaryList2.Clear();
                     }
@@ -523,8 +523,8 @@ namespace ItManagement.ViewModel
                             
 
                         }
-                        var messageDialogue4 = new MessageDialog($"Current list is showing equipment of the type: {TypeOfEquipment}");
-                        messageDialogue4.Commands.Add(new UICommand("Close"));
+                        var messageDialogue4 = new MessageDialog($"Færdig!");
+                        messageDialogue4.Commands.Add(new UICommand("Luk"));
                         await messageDialogue4.ShowAsync();
 
                         TemporaryList.Clear();
@@ -547,8 +547,8 @@ namespace ItManagement.ViewModel
 
                 if (c == false)
                 {
-                    var messageDialogue4 = new MessageDialog($"{SearchUid} is not a valid Uid");
-                    messageDialogue4.Commands.Add(new UICommand("Close"));
+                    var messageDialogue4 = new MessageDialog($"{SearchUid} eksisterer ikke");
+                    messageDialogue4.Commands.Add(new UICommand("Luk"));
                     await messageDialogue4.ShowAsync();
 
                 }

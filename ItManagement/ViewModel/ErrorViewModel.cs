@@ -213,8 +213,8 @@ namespace ItManagement.ViewModel
             {
                 if (SelectedError.ErrorMessage == null)
                 {
-                    var messageDialogue = new MessageDialog($"You need to type in a description for the error");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Du skal skrive en beskrivelse af fejlen");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
 
                 }
@@ -227,15 +227,15 @@ namespace ItManagement.ViewModel
                         await Singleton.Instance.ERP.CreateError(_toBeCreated);
                         CurrentEquipment.IsWorking = false;
                         await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
-                        var messageDialogue = new MessageDialog($"Error report has been created for the equipment with the following ID: {uid}");
-                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        var messageDialogue = new MessageDialog($"Fejlmeldingen angående udstyr: {uid}, er blevet oprettet");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
                         await messageDialogue.ShowAsync();
 
                     }
                     else
                     {
-                        var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
-                        messageDialogue.Commands.Add(new UICommand("Close"));
+                        var messageDialogue = new MessageDialog($"Fejlmbeskrivelsen er for lang, hold det inde for 255 karaktere");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
                         await messageDialogue.ShowAsync();
 
                     }
@@ -247,8 +247,8 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog($"The given uid, {SelectedError.Uid}, does not exist");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Det given uid, {SelectedError.Uid}, eksisterer ikke");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
@@ -267,34 +267,39 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void EditMethod()
         {
-            if (SelectedError.IsRepaired == false)
+            if (SelectedError != null || SelectedError.Fid != 0)
             {
-                if (SelectedError.ErrorMessage.Length <= 255)
+                if (SelectedError.IsRepaired == false)
                 {
-                    SelectedError.Update = DateTime.Now;
-                    await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
-                    var messageDialogue = new MessageDialog($"Error: {SelectedError.Fid} has been updated");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
-                    await messageDialogue.ShowAsync();
+                    if (SelectedError.ErrorMessage.Length <= 255)
+                    {
+                        SelectedError.Update = DateTime.Now;
+                        await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+                        var messageDialogue = new MessageDialog($"Fejl: {SelectedError.Fid} er blevet opdateret");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
+                        await messageDialogue.ShowAsync();
 
-                    
 
+
+                    }
+                    else
+                    {
+                        var messageDialogue = new MessageDialog($"Fejlbeskrivelsen er for lang, hold det inde for 255 karaktere");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
+                        await messageDialogue.ShowAsync();
+
+                    }
                 }
                 else
                 {
-                    var messageDialogue = new MessageDialog($"Error message is too long, keep it within 255 characters");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Valgte fejl er blevet fixet og er derfor ikke længere åben for redigering");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
 
                 }
-            }
-            else
-            {
-                var messageDialogue = new MessageDialog($"Selected error has been marked as resolved and is no longer open for editing");
-                messageDialogue.Commands.Add(new UICommand("Close"));
-                await messageDialogue.ShowAsync();
 
             }
+            
             
             NewObsErrors.Clear();
             NewConvertToObs();
@@ -308,38 +313,42 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void FixMethod()
         {
-            if (SelectedError.IsRepaired == false)
+            if (SelectedError != null || SelectedError.Fid != 0)
             {
-                if (SelectedError != null)
+                if (SelectedError.IsRepaired == false)
                 {
-                    SelectedError.IsRepaired = true;
-                    SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Cpr;
-                    SelectedError.Update = DateTime.Now;
-                    await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
+                    if (SelectedError != null)
+                    {
+                        SelectedError.IsRepaired = true;
+                        SelectedError.HasRepaired = Singleton.Instance.CurrentUser.Cpr;
+                        SelectedError.Update = DateTime.Now;
+                        await Singleton.Instance.ERP.UpdateError(SelectedError.Fid, SelectedError);
 
-                    EquipmentCheck(SelectedError.Uid);
-                    CurrentEquipment.IsWorking = true;
-                    await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
+                        EquipmentCheck(SelectedError.Uid);
+                        CurrentEquipment.IsWorking = true;
+                        await Singleton.Instance.EQP.UpdateEquipment(CurrentEquipment.Uid, CurrentEquipment);
 
-                    var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been resolved");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
-                    await messageDialogue.ShowAsync();
+                        var messageDialogue = new MessageDialog($"Fejlmelding: {SelectedError.Fid}, er blevet løst!");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
+                        await messageDialogue.ShowAsync();
 
+                    }
+                    else
+                    {
+                        var messageDialogue = new MessageDialog($"Vælg en fejl før du kan løse den");
+                        messageDialogue.Commands.Add(new UICommand("Luk"));
+                        await messageDialogue.ShowAsync();
+
+                    }
                 }
                 else
                 {
-                    var messageDialogue = new MessageDialog($"Select an error you wish to resolve");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Fejlmelding: {SelectedError.Fid}, er allerede løst");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
-
                 }
             }
-            else
-            {
-                var messageDialogue = new MessageDialog($"Error report: {SelectedError.Fid}, has been marked as resolved and is no longer open for editing");
-                messageDialogue.Commands.Add(new UICommand("Close"));
-                await messageDialogue.ShowAsync();
-            }
+            
             
             
 
@@ -360,15 +369,15 @@ namespace ItManagement.ViewModel
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
-                var messageDialogue = new MessageDialog($"Error report has been removed");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Fejlmelding fjernet");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
             else
             {
-                var messageDialogue = new MessageDialog($"You have to select an error you wish to remove");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog($"Vælg en fejl før du kan fjerne den");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
