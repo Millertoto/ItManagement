@@ -114,8 +114,8 @@ namespace ItManagement.ViewModel
                     Frame currentFrame = Window.Current.Content as Frame;
                     currentFrame.Navigate(typeof(AdminMainpage));
 
-                    var messageDialogue = new MessageDialog($"Welcome Back, {Singleton.Instance.CurrentUser.Name}");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Velkommen tilbage, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
                 }
 
@@ -124,8 +124,8 @@ namespace ItManagement.ViewModel
                     Frame currentFrame = Window.Current.Content as Frame;
                     currentFrame.Navigate(typeof(ErrorPageTeacher));
 
-                    var messageDialogue = new MessageDialog($"Welcome, {Singleton.Instance.CurrentUser.Name}");
-                    messageDialogue.Commands.Add(new UICommand("Close"));
+                    var messageDialogue = new MessageDialog($"Velkommen, {Singleton.Instance.CurrentUser.Name}");
+                    messageDialogue.Commands.Add(new UICommand("Luk"));
                     await messageDialogue.ShowAsync();
                 }
 
@@ -135,8 +135,8 @@ namespace ItManagement.ViewModel
             }
             else
             {
-                var messageDialogue = new MessageDialog("Nah fam, no accses for u");
-                messageDialogue.Commands.Add(new UICommand("Close"));
+                var messageDialogue = new MessageDialog("Brugernavnet og kodeordet passer ikke");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
                 await messageDialogue.ShowAsync();
 
             }
