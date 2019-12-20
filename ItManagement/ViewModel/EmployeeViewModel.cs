@@ -51,6 +51,7 @@ namespace ItManagement.ViewModel
             _adminObs = new ObservableCollection<string>() {"True", "False"};
 
             Employees = Singleton.Instance.EP.GetEmployees().Result;
+            _selectedEmployee = new Employee();
 
             ConvertToObs();
         }
