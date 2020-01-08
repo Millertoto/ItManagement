@@ -48,6 +48,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
         private RelayCommand _goBack;
+        private RelayCommand _goBackTeacher;
 
 
         #endregion
@@ -67,7 +68,8 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
-            _selected= new Error();
+            _goBackTeacher = new RelayCommand(GoBackTeacherMethod);
+            _selected = new Error();
 
 
             NewConvertToObs();
@@ -195,6 +197,13 @@ namespace ItManagement.ViewModel
             get { return _goBack; }
             set { _goBack = value; }
         }
+
+        public RelayCommand GoBackTeacher
+        {
+            get { return _goBackTeacher; }
+            set { _goBackTeacher = value; }
+        }
+
         #endregion
 
         #endregion
@@ -440,8 +449,12 @@ namespace ItManagement.ViewModel
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(AdminMainpage));
         }
-        #endregion 
 
+        public void GoBackTeacherMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(MainPage));
+        }
         #endregion
 
         #region PropertyChanged
@@ -453,6 +466,8 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
 
         #endregion
 

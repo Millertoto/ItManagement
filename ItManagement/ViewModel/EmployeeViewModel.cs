@@ -35,7 +35,6 @@ namespace ItManagement.ViewModel
         private RelayCommand _deleteEmp;
         private RelayCommand _editButton;
         private RelayCommand _goBack;
-        private RelayCommand _goBackTeacher;
 
         #endregion
 
@@ -47,7 +46,6 @@ namespace ItManagement.ViewModel
             _deleteEmp = new RelayCommand(DeleteEmpMethod);
             _editButton = new RelayCommand(EditMethod);
             _goBack = new RelayCommand(GoBackMethod);
-            _goBackTeacher = new RelayCommand(GoBackTeacherMethod);
 
             _obsEmps = new ObservableCollection<Employee>();
             _adminObs = new ObservableCollection<string>() {"True", "False"};
@@ -149,12 +147,6 @@ namespace ItManagement.ViewModel
         {
             get { return _goBack; }
             set { _goBack = value; }
-        }
-
-        public RelayCommand GoBackTeacher
-        {
-            get { return _goBackTeacher; }
-            set { _goBackTeacher = value; }
         }
 
 
@@ -430,14 +422,6 @@ namespace ItManagement.ViewModel
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(AdminMainpage));
         }
-
-        public void GoBackTeacherMethod()
-        {
-            Frame currentFrame = Window.Current.Content as Frame;
-            currentFrame.Navigate(typeof(MainPage));
-        }
-        #endregion 
-
         #endregion
 
         #region INotify
@@ -449,6 +433,7 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+        #endregion
         #endregion
     }
 }
