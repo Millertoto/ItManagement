@@ -207,7 +207,8 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void AddError()
         {
-
+            try
+            {
             int uid = SelectedError.Uid;
             if (EquipmentCheck(uid) && uid != 0)
             {
@@ -254,8 +255,18 @@ namespace ItManagement.ViewModel
             }
 
             CurrentEquipment = null;
+            _selected = new Error();
             NewObsErrors.Clear();
             NewConvertToObs();
+
+
+            }
+            catch (Exception e)
+            {
+                var messageDialogue = new MessageDialog($"{e}");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
+                await messageDialogue.ShowAsync();
+            }
 
 
         }
@@ -348,11 +359,11 @@ namespace ItManagement.ViewModel
                     await messageDialogue.ShowAsync();
                 }
             }
-            
-            
-            
 
-            CurrentEquipment = null;
+
+
+
+            _selected = new Error();
             NewObsErrors.Clear();
             NewConvertToObs();
 
@@ -365,7 +376,8 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void DeleteMethod()
         {
-
+            try
+            {
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
@@ -381,8 +393,20 @@ namespace ItManagement.ViewModel
                 await messageDialogue.ShowAsync();
 
             }
+
+            CurrentEquipment = null;
+            _selected = new Error();
             NewObsErrors.Clear();
             NewConvertToObs();
+
+            }
+            catch (Exception e)
+            {
+                var messageDialogue = new MessageDialog($"{e}");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
+                await messageDialogue.ShowAsync();
+
+            }
         }
         #endregion
 
