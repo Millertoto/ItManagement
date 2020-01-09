@@ -254,6 +254,7 @@ namespace ItManagement.ViewModel
 
             }
 
+            CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
 
@@ -361,7 +362,7 @@ namespace ItManagement.ViewModel
 
 
 
-            _selected = new Error();
+            CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
 
