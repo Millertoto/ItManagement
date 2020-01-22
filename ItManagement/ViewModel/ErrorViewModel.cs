@@ -48,6 +48,7 @@ namespace ItManagement.ViewModel
         private RelayCommand _editButton;
         private RelayCommand _fixButton;
         private RelayCommand _goBack;
+        private RelayCommand _goBackTeacher;
 
 
         #endregion
@@ -67,7 +68,8 @@ namespace ItManagement.ViewModel
             _editButton = new RelayCommand(EditMethod);
             _goBack = new RelayCommand(GoBackMethod);
             _fixButton = new RelayCommand(FixMethod);
-            _selected= new Error();
+            _goBackTeacher = new RelayCommand(GoBackTeacherMethod);
+            _selected = new Error();
 
 
             NewConvertToObs();
@@ -195,6 +197,13 @@ namespace ItManagement.ViewModel
             get { return _goBack; }
             set { _goBack = value; }
         }
+
+        public RelayCommand GoBackTeacher
+        {
+            get { return _goBackTeacher; }
+            set { _goBackTeacher = value; }
+        }
+
         #endregion
 
         #endregion
@@ -207,7 +216,8 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void AddError()
         {
-
+            try
+            {
             int uid = SelectedError.Uid;
             if (EquipmentCheck(uid) && uid != 0)
             {
@@ -256,6 +266,15 @@ namespace ItManagement.ViewModel
             CurrentEquipment = null;
             NewObsErrors.Clear();
             NewConvertToObs();
+
+
+            }
+            catch (Exception e)
+            {
+                var messageDialogue = new MessageDialog($"{e}");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
+                await messageDialogue.ShowAsync();
+            }
 
 
         }
@@ -348,9 +367,9 @@ namespace ItManagement.ViewModel
                     await messageDialogue.ShowAsync();
                 }
             }
-            
-            
-            
+
+
+
 
             CurrentEquipment = null;
             NewObsErrors.Clear();
@@ -365,7 +384,8 @@ namespace ItManagement.ViewModel
         /// </summary>
         public async void DeleteMethod()
         {
-
+            try
+            {
             if (SelectedError != null)
             {
                 await Singleton.Instance.ERP.DeleteError(SelectedError.Fid);
@@ -381,8 +401,18 @@ namespace ItManagement.ViewModel
                 await messageDialogue.ShowAsync();
 
             }
+
             NewObsErrors.Clear();
             NewConvertToObs();
+
+            }
+            catch (Exception e)
+            {
+                var messageDialogue = new MessageDialog($"{e}");
+                messageDialogue.Commands.Add(new UICommand("Luk"));
+                await messageDialogue.ShowAsync();
+
+            }
         }
         #endregion
 
@@ -440,8 +470,12 @@ namespace ItManagement.ViewModel
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(AdminMainpage));
         }
-        #endregion 
 
+        public void GoBackTeacherMethod()
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(MainPage));
+        }
         #endregion
 
         #region PropertyChanged
@@ -453,6 +487,8 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
 
         #endregion
 

@@ -18,6 +18,7 @@
         <RelativePanel Background="CadetBlue" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1500" Height="1000" Grid.RowSpan="2">
             <StackPanel Margin="0,0,0,0" Background="CornflowerBlue" Height="200" Width="1500" >
                 <TextBlock Text="Fejlmeddelelse" Margin="493,75,300,-37.2" FontSize="95" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Button Content="Log Ud" Command="{Binding GoBackTeacher}" HorizontalAlignment="Left" Height="39" Margin="88,0,0,0" VerticalAlignment="Center" Width="113"/>
             </StackPanel>
 
             <StackPanel Margin="60,250,860,300" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

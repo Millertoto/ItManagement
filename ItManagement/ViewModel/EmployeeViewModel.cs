@@ -149,6 +149,7 @@ namespace ItManagement.ViewModel
             set { _goBack = value; }
         }
 
+
         #endregion
 
         #region Lists and Obs
@@ -421,8 +422,6 @@ namespace ItManagement.ViewModel
             Frame currentFrame = Window.Current.Content as Frame;
             currentFrame.Navigate(typeof(AdminMainpage));
         }
-        #endregion 
-
         #endregion
 
         #region INotify
@@ -434,6 +433,7 @@ namespace ItManagement.ViewModel
             PropertyChanged?.Invoke(this, new
                 PropertyChangedEventArgs(propertyName));
         }
+        #endregion
         #endregion
     }
 }
